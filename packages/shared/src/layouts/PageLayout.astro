@@ -1,0 +1,55 @@
+---
+import type { BrandConfig, Locale } from "../types.js";
+import SEO from "../components/SEO.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  locale: Locale;
+  path: string;
+  config: BrandConfig;
+  structuredData?: Record<string, unknown>;
+}
+
+const props = Astro.props;
+const { config, locale } = props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <SEO {...props} />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${config.analytics.gtag}`}
+    ></script>
+    <script define:vars={{ gtagId: config.analytics.gtag }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", gtagId);
+    </script>
+
+    <style is:global>
+      @import "@algarve-tourism/shared/styles/tokens.css";
+      @import "@algarve-tourism/shared/styles/base.css";
+      @import "@algarve-tourism/shared/styles/utilities.css";
+    </style>
+  </head>
+  <body>
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
