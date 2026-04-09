@@ -1,6 +1,7 @@
 import { createFHClient, normalizeItem } from "../packages/shared/src/lib/fareharbor.js";
 import { writeFileSync, mkdirSync } from "node:fs";
-import { resolve } from "node:path";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const appKey = process.env.FH_APP_KEY;
 const userKey = process.env.FH_USER_KEY;
@@ -13,7 +14,8 @@ if (!appKey || !userKey) {
 }
 
 const client = createFHClient({ appKey, userKey });
-const dataDir = resolve(import.meta.dirname, "../packages/shared/data");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const dataDir = resolve(__dirname, "../packages/shared/data");
 
 async function fetchAndSave(shortname: string, defaultCategory: string) {
   console.log(`Fetching items for ${shortname}...`);

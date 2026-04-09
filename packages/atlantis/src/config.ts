@@ -5,15 +5,15 @@ export const config: BrandConfig = {
   domain: "atlantistours.pt",
   tagline: "Discover the Algarve Coast",
   fh: {
-    shortname: "atlantis-tours",
+    shortname: "atlantistours",
     categories: ["boats"],
   },
-  logo: "/logo-atlantis.svg",
+  logo: "/logo-atlantis.png",
   social: {
-    instagram: "https://www.instagram.com/atlantistours.pt/",
-    facebook: "https://www.facebook.com/atlantistours.pt/",
-    whatsapp: "+351000000000",
-    youtube: "https://www.youtube.com/@atlantistours",
+    instagram: "https://www.instagram.com/atlantis.tours/",
+    facebook: "https://www.facebook.com/atlantistoursbap/",
+    whatsapp: "+351969703185",
+    youtube: "https://www.youtube.com/@atlantistours9867",
   },
   analytics: {
     gtag: "G-7MKYTWY07D",

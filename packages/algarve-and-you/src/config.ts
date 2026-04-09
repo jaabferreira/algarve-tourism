@@ -8,11 +8,11 @@ export const config: BrandConfig = {
     shortname: "algarve-and-you",
     categories: ["boats", "gastronomy", "land-tours", "transfers", "spa"],
   },
-  logo: "/logo-ay.svg",
+  logo: "/logo-ay.png",
   social: {
     instagram: "https://www.instagram.com/algarveandyou/",
     facebook: "https://www.facebook.com/algarveandyou/",
-    whatsapp: "+351000000000",
+    whatsapp: "+351964332489",
   },
   analytics: {
     gtag: "G-GZJJYPE72L",
