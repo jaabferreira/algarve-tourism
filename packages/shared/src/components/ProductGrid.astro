@@ -1,0 +1,31 @@
+---
+import type { NormalizedItem, Locale } from "../types.js";
+import ProductCard from "./ProductCard.astro";
+
+interface Props {
+  items: NormalizedItem[];
+  locale: Locale;
+}
+
+const { items, locale } = Astro.props;
+---
+
+<div class="product-grid">
+  {items.map((item) => (
+    <ProductCard item={item} locale={locale} />
+  ))}
+</div>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 640px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

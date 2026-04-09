@@ -1,0 +1,43 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { formatPrice } from "../lib/prices.js";
+
+interface Props {
+  cents: number;
+  locale: Locale;
+  size?: "sm" | "md" | "lg";
+}
+
+const { cents, locale, size = "md" } = Astro.props;
+---
+
+<span class:list={["price", `price--${size}`]}>
+  <span class="price__from">{t(locale, "product.from")}</span>
+  <span class="price__amount">{formatPrice(cents)}</span>
+</span>
+
+<style>
+  .price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-1);
+  }
+
+  .price__from {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .price__amount {
+    font-weight: var(--font-weight-extrabold);
+    color: var(--text-primary);
+  }
+
+  .price--sm .price__amount { font-size: var(--font-size-base); }
+  .price--md .price__amount { font-size: var(--font-size-xl); }
+  .price--lg .price__amount { font-size: var(--font-size-3xl); }
+</style>
