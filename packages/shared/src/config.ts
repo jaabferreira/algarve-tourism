@@ -7,7 +7,7 @@ export function getLocalePath(locale: Locale, path: string): string {
 
 export function getAlternateLocales(
   config: BrandConfig,
-  currentLocale: Locale,
+  _currentLocale: Locale,
   path: string,
 ): { locale: Locale; href: string }[] {
   return config.locales.map((locale) => ({
