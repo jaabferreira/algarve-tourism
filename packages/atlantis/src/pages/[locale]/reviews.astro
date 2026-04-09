@@ -1,0 +1,35 @@
+---
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../config.js";
+import manualReviews from "../../content/reviews/manual.json";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+---
+
+<PageLayout
+  title={t(locale, "nav.reviews")}
+  description={t(locale, "reviews.title")}
+  locale={locale}
+  path="/reviews/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/reviews/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "reviews.title")}</h1>
+    <ReviewsGrid reviews={manualReviews} />
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>

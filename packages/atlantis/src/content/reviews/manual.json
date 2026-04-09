@@ -1,0 +1,23 @@
+[
+  {
+    "author": "Sarah M.",
+    "origin": "London, UK",
+    "rating": 5,
+    "text": "The Benagil cave tour was absolutely breathtaking. Our guide knew all the best spots and the timing was perfect with the light.",
+    "date": "2026-03-15"
+  },
+  {
+    "author": "Hans K.",
+    "origin": "Berlin, Germany",
+    "rating": 5,
+    "text": "Best boat tour we've ever done. The yacht cruise at sunset was pure magic.",
+    "date": "2026-02-20"
+  },
+  {
+    "author": "Ana R.",
+    "origin": "Lisboa, Portugal",
+    "rating": 4,
+    "text": "Excelente passeio! A tripulação foi muito profissional e simpática.",
+    "date": "2026-01-10"
+  }
+]

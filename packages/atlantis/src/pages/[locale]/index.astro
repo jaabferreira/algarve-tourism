@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import HeroSection from "@algarve-tourism/shared/components/HeroSection.astro";
+import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
+import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../config.js";
+import { getLocalePath } from "@algarve-tourism/shared";
+import manualReviews from "../../content/reviews/manual.json";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const path = "/";
+
+let items: NormalizedItem[] = [];
+try {
+  const data = await import(`@algarve-tourism/shared/data/${config.fh.shortname}.json`);
+  items = data.default ?? data;
+} catch {}
+
+const featuredItems = items.slice(0, 6);
+const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
+
+let heroTitle = config.tagline;
+let heroSubtitle = "";
+try {
+  const page = await getCollection("pages");
+  const homePage = page.find((p) => p.id === `${locale}/homepage`);
+  if (homePage) {
+    heroTitle = homePage.data.title;
+    heroSubtitle = homePage.data.description ?? "";
+  }
+} catch {}
+---
+
+<PageLayout
+  title={heroTitle}
+  description={heroSubtitle || config.tagline}
+  locale={locale}
+  path={path}
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}${path}`} />
+
+  <HeroSection
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    ctaText={t(locale, "hero.cta")}
+    ctaHref={getLocalePath(locale, "/tours/")}
+  />
+
+  {featuredItems.length > 0 && (
+    <section class="section container">
+      <h2>{t(locale, "nav.tours")}</h2>
+      <ProductGrid items={featuredItems} locale={locale} />
+    </section>
+  )}
+
+  {topReviews.length > 0 && (
+    <section class="section container">
+      <h2>{t(locale, "reviews.title")}</h2>
+      <ReviewsGrid reviews={topReviews} />
+    </section>
+  )}
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>

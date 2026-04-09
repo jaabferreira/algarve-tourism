@@ -1,0 +1,37 @@
+---
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+---
+
+<PageLayout
+  title={t(locale, "footer.cancellation_policy")}
+  description={`${t(locale, "footer.cancellation_policy")} — ${config.name}`}
+  locale={locale}
+  path="/cancellation-policy/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/cancellation-policy/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "footer.cancellation_policy")}</h1>
+    <div class="page-content">
+      <p>Cancellation policy content to be added.</p>
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+</PageLayout>
+
+<style>
+  .page-content { max-width: 680px; margin-top: var(--space-8); line-height: var(--line-height-relaxed); color: var(--text-secondary); }
+</style>

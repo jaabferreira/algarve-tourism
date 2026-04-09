@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+
+let title = t(locale, "nav.about");
+let content = "";
+try {
+  const pages = await getCollection("pages");
+  const aboutPage = pages.find((p) => p.id === `${locale}/about`);
+  if (aboutPage) {
+    title = aboutPage.data.title;
+    const { Content } = await aboutPage.render();
+  }
+} catch {}
+---
+
+<PageLayout
+  title={title}
+  description={`${t(locale, "nav.about")} — ${config.name}`}
+  locale={locale}
+  path="/about/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/about/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{title}</h1>
+    <div class="page-content">
+      <slot />
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>
+
+<style>
+  .page-content {
+    max-width: 680px;
+    margin-top: var(--space-8);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+  }
+</style>

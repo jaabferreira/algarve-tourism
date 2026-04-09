@@ -1,0 +1,40 @@
+---
+import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+
+let items: NormalizedItem[] = [];
+try {
+  const data = await import(`@algarve-tourism/shared/data/${config.fh.shortname}.json`);
+  items = data.default ?? data;
+} catch {}
+---
+
+<PageLayout
+  title={t(locale, "nav.tours")}
+  description={`${config.name} — ${t(locale, "category.boats")}`}
+  locale={locale}
+  path="/tours/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "category.boats")}</h1>
+    <ProductGrid items={items} locale={locale} />
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>
