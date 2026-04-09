@@ -1,0 +1,19 @@
+{
+  "name": "algarve-tourism",
+  "private": true,
+  "scripts": {
+    "dev:atlantis": "turbo run dev --filter=@algarve-tourism/atlantis",
+    "dev:ay": "turbo run dev --filter=@algarve-tourism/algarve-and-you",
+    "build": "turbo run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "fetch-data": "tsx scripts/fetch-fh.ts",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "devDependencies": {
+    "turbo": "^2",
+    "typescript": "^5",
+    "vitest": "^3",
+    "tsx": "^4"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@algarve-tourism/atlantis",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4321",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@algarve-tourism/shared": "workspace:*",
+    "astro": "^5",
+    "@astrojs/sitemap": "^3"
+  }
+}
