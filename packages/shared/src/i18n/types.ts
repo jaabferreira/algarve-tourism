@@ -1,0 +1,40 @@
+export interface TranslationStrings {
+  "nav.tours": string;
+  "nav.about": string;
+  "nav.contact": string;
+  "nav.book_now": string;
+  "nav.explore": string;
+  "nav.blog": string;
+  "nav.faq": string;
+  "nav.reviews": string;
+  "hero.cta": string;
+  "product.from": string;
+  "product.duration": string;
+  "product.minutes": string;
+  "product.book_now": string;
+  "product.related": string;
+  "product.highlights": string;
+  "product.cancellation": string;
+  "product.location": string;
+  "category.boats": string;
+  "category.gastronomy": string;
+  "category.land-tours": string;
+  "category.transfers": string;
+  "category.spa": string;
+  "category.all": string;
+  "reviews.title": string;
+  "reviews.from_google": string;
+  "contact.name": string;
+  "contact.email": string;
+  "contact.message": string;
+  "contact.send": string;
+  "footer.terms": string;
+  "footer.cancellation_policy": string;
+  "footer.follow_us": string;
+  "blog.read_more": string;
+  "blog.published": string;
+  "common.loading": string;
+  "common.all": string;
+}
+
+export type TranslationKey = keyof TranslationStrings;
