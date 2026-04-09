@@ -1,6 +1,7 @@
 {
   "name": "algarve-tourism",
   "private": true,
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "dev:atlantis": "turbo run dev --filter=@algarve-tourism/atlantis",
     "dev:ay": "turbo run dev --filter=@algarve-tourism/algarve-and-you",
