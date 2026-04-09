@@ -1,0 +1,35 @@
+---
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+---
+
+<PageLayout
+  title={t(locale, "category.transfers")}
+  description={`${t(locale, "category.transfers")} — ${config.name}`}
+  locale={locale}
+  path="/transfers/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/transfers/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "category.transfers")}</h1>
+    <p class="text-muted" style="margin-top: var(--space-4); max-width: 600px; line-height: var(--line-height-relaxed);">
+      Airport transfers from Faro and Lisbon. Contact us via WhatsApp to arrange your transfer.
+    </p>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>

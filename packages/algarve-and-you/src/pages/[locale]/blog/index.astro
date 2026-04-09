@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const allPosts = await getCollection("blog");
+const posts = allPosts
+  .filter((post) => post.data.locale === locale)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<PageLayout
+  title={t(locale, "nav.blog")}
+  description={`${t(locale, "nav.blog")} — ${config.name}`}
+  locale={locale}
+  path="/blog/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "nav.blog")}</h1>
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          excerpt={post.data.excerpt}
+          slug={post.slug.replace(`${locale}/`, "")}
+          image={post.data.image}
+          date={post.data.date}
+          locale={locale}
+        />
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>
+
+<style>
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+</style>

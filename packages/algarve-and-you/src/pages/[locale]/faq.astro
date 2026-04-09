@@ -1,0 +1,44 @@
+---
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t } from "@algarve-tourism/shared";
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import FAQ from "@algarve-tourism/shared/components/FAQ.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+
+const faqItems = [
+  { question: "What should I bring?", answer: "Sunscreen, a hat, a towel, and a camera. We provide life jackets and all safety equipment." },
+  { question: "Can I cancel my booking?", answer: "Yes, free cancellation is available up to 24 hours before departure. Check each tour's specific policy for details." },
+  { question: "Are the tours suitable for children?", answer: "Most tours welcome children. Each tour listing specifies age requirements and suitability." },
+  { question: "Where do tours depart from?", answer: "Most tours depart from Marina de Portimão. Specific meeting points are shown on each tour page." },
+  { question: "What happens in bad weather?", answer: "Safety is our priority. If conditions are unsafe, we'll reschedule or offer a full refund." },
+];
+---
+
+<PageLayout
+  title={t(locale, "nav.faq")}
+  description={`FAQ — ${config.name}`}
+  locale={locale}
+  path="/faq/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/faq/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{t(locale, "nav.faq")}</h1>
+    <div style="margin-top: var(--space-8); max-width: 720px;">
+      <FAQ items={faqItems} />
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
+</PageLayout>

@@ -1,0 +1,23 @@
+[
+  {
+    "author": "Maria L.",
+    "origin": "Madrid, Spain",
+    "rating": 5,
+    "text": "The fado dinner was an incredible experience. Amazing food and music in a beautiful setting.",
+    "date": "2026-03-20"
+  },
+  {
+    "author": "John P.",
+    "origin": "Dublin, Ireland",
+    "rating": 5,
+    "text": "Booked the Seville day trip — perfectly organized from start to finish.",
+    "date": "2026-02-15"
+  },
+  {
+    "author": "Sophie D.",
+    "origin": "Paris, France",
+    "rating": 4,
+    "text": "Excellent service overall. The transfer from Faro was smooth and the driver was very friendly.",
+    "date": "2026-01-25"
+  }
+]
