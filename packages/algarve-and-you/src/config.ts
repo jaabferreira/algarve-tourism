@@ -5,7 +5,7 @@ export const config: BrandConfig = {
   domain: "algarveandyou.com",
   tagline: "Your Algarve Experience",
   fh: {
-    shortname: "algarve-and-you",
+    shortname: "atlantistours",
     categories: ["boats", "gastronomy", "land-tours", "transfers", "spa"],
   },
   logo: "/logo-ay.png",
