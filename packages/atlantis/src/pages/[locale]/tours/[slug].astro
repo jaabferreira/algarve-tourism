@@ -9,13 +9,10 @@ import BookingWidget from "@algarve-tourism/shared/components/BookingWidget.astr
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config } from "../../../config.js";
+import { loadItems } from "../../../data.js";
 
-export async function getStaticPaths() {
-  let items: NormalizedItem[] = [];
-  try {
-    const data = await import(`@algarve-tourism/shared/data/${config.fh.shortname}.json`);
-    items = data.default ?? data;
-  } catch {}
+export function getStaticPaths() {
+  const items = loadItems();
 
   return LOCALES.flatMap((locale) =>
     items.map((item) => ({
@@ -28,11 +25,7 @@ export async function getStaticPaths() {
 const { item } = Astro.props as { item: NormalizedItem };
 const locale = Astro.params.locale as Locale;
 
-let allItems: NormalizedItem[] = [];
-try {
-  const data = await import(`@algarve-tourism/shared/data/${config.fh.shortname}.json`);
-  allItems = data.default ?? data;
-} catch {}
+const allItems = loadItems();
 const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 
 const structuredData = {

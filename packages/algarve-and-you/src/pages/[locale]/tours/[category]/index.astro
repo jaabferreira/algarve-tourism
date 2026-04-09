@@ -1,5 +1,5 @@
 ---
-import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
+import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t, getLocalePath } from "@algarve-tourism/shared";
 import type { TranslationKey } from "@algarve-tourism/shared";
 import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
@@ -9,6 +9,7 @@ import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import CategoryNav from "@algarve-tourism/shared/components/CategoryNav.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config } from "../../../../config.js";
+import { loadItems } from "../../../../data.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) =>
@@ -22,12 +23,7 @@ const locale = Astro.params.locale as Locale;
 const category = Astro.params.category as string;
 const categoryLabel = t(locale, `category.${category}` as TranslationKey);
 
-let items: NormalizedItem[] = [];
-try {
-  const data = await import(`@algarve-tourism/shared/data/${config.fh.shortname}.json`);
-  const allItems: NormalizedItem[] = data.default ?? data;
-  items = allItems.filter((item) => item.category === category);
-} catch {}
+const items = loadItems().filter((item) => item.category === category);
 ---
 
 <PageLayout
