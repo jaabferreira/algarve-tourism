@@ -1,0 +1,137 @@
+---
+import type { BrandConfig, Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface Props {
+  config: BrandConfig;
+  locale: Locale;
+}
+
+const { config, locale } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__logo">{config.name}</span>
+      <p class="footer__tagline">{config.tagline}</p>
+    </div>
+
+    <nav class="footer__links">
+      <a href={getLocalePath(locale, "/tours/")}>{t(locale, "nav.tours")}</a>
+      <a href={getLocalePath(locale, "/about/")}>{t(locale, "nav.about")}</a>
+      <a href={getLocalePath(locale, "/contact/")}>{t(locale, "nav.contact")}</a>
+      <a href={getLocalePath(locale, "/blog/")}>{t(locale, "nav.blog")}</a>
+      <a href={getLocalePath(locale, "/faq/")}>{t(locale, "nav.faq")}</a>
+      <a href={getLocalePath(locale, "/reviews/")}>{t(locale, "nav.reviews")}</a>
+    </nav>
+
+    <nav class="footer__legal">
+      <a href={getLocalePath(locale, "/terms/")}>{t(locale, "footer.terms")}</a>
+      <a href={getLocalePath(locale, "/cancellation-policy/")}>{t(locale, "footer.cancellation_policy")}</a>
+    </nav>
+
+    <div class="footer__social">
+      <span class="footer__social-label">{t(locale, "footer.follow_us")}</span>
+      <div class="footer__social-links">
+        <a href={config.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+        <a href={config.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+        {config.social.youtube && (
+          <a href={config.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
+        )}
+      </div>
+    </div>
+
+    <p class="footer__copy">&copy; {year} {config.name}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-16) 0 var(--space-8);
+    margin-top: var(--space-20);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer__logo {
+    font-weight: var(--font-weight-extrabold);
+    font-size: var(--font-size-base);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .footer__tagline {
+    margin-top: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+
+  .footer__links,
+  .footer__legal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__links a,
+  .footer__legal a {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__links a:hover,
+  .footer__legal a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer__social-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .footer__social-links {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .footer__social-links a {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .footer__social-links a:hover {
+    color: var(--accent);
+  }
+
+  .footer__copy {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

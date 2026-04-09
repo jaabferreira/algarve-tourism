@@ -1,0 +1,58 @@
+---
+import type { Locale, BrandConfig } from "../types.js";
+import { getPathInLocale } from "../i18n/index.js";
+
+interface Props {
+  locale: Locale;
+  path: string;
+  config: BrandConfig;
+}
+
+const { locale, path, config } = Astro.props;
+const localeLabels: Record<Locale, string> = {
+  en: "EN",
+  pt: "PT",
+  es: "ES",
+  fr: "FR",
+};
+---
+
+<nav class="lang-switcher" aria-label="Language selector">
+  {config.locales.map((loc) => (
+    <a
+      href={getPathInLocale(path, loc)}
+      class:list={["lang-switcher__item", { active: loc === locale }]}
+      aria-current={loc === locale ? "page" : undefined}
+    >
+      {localeLabels[loc]}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .lang-switcher__item {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .lang-switcher__item:hover {
+    color: var(--text-primary);
+    background: var(--surface);
+  }
+
+  .lang-switcher__item.active {
+    color: var(--accent);
+    background: var(--accent-muted);
+  }
+</style>

@@ -1,0 +1,199 @@
+---
+import type { BrandConfig, Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+interface Props {
+  config: BrandConfig;
+  locale: Locale;
+  path: string;
+}
+
+const { config, locale, path } = Astro.props;
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: t(locale, "nav.tours"), href: getLocalePath(locale, "/tours/") },
+  { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
+  { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
+];
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href={getLocalePath(locale, "/")} class="header__logo">
+      {config.name}
+    </a>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      {navItems.map((item) => (
+        <a href={item.href} class="header__nav-link">{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="header__actions">
+      <LanguageSwitcher locale={locale} path={path} config={config} />
+      <a href={getLocalePath(locale, "/tours/")} class="btn btn-primary header__cta">
+        {t(locale, "nav.book_now")}
+      </a>
+    </div>
+
+    <button class="header__hamburger" aria-label="Open menu" data-mobile-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" data-mobile-nav>
+    <nav class="mobile-nav__links">
+      {navItems.map((item) => (
+        <a href={item.href} class="mobile-nav__link">{item.label}</a>
+      ))}
+      <a href={getLocalePath(locale, "/tours/")} class="btn btn-primary mobile-nav__cta">
+        {t(locale, "nav.book_now")}
+      </a>
+    </nav>
+    <LanguageSwitcher locale={locale} path={path} config={config} />
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: rgba(10, 37, 64, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-8);
+  }
+
+  .header__logo {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .header__nav {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .header__nav-link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  .header__nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .header__cta {
+    text-decoration: none;
+  }
+
+  .header__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: var(--space-2);
+    cursor: pointer;
+  }
+
+  .header__hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all var(--transition-base);
+  }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-primary);
+    padding: var(--space-8) var(--space-6);
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .mobile-nav.open {
+    display: flex;
+  }
+
+  .mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .mobile-nav__link {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .mobile-nav__cta {
+    margin-top: var(--space-4);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .header__nav,
+    .header__actions {
+      display: none;
+    }
+
+    .header__hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector("[data-mobile-toggle]");
+  const nav = document.querySelector("[data-mobile-nav]");
+  toggle?.addEventListener("click", () => {
+    nav?.classList.toggle("open");
+  });
+</script>
