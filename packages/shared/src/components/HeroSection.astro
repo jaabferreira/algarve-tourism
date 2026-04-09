@@ -1,0 +1,82 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const { title, subtitle, ctaText, ctaHref } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <h1 class="hero__title">{title}</h1>
+    {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+    {ctaText && ctaHref && (
+      <a href={ctaHref} class="btn btn-primary hero__cta">{ctaText}</a>
+    )}
+  </div>
+  <div class="hero__decoration" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-20);
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-tight);
+    max-width: 700px;
+  }
+
+  .hero__subtitle {
+    margin-top: var(--space-6);
+    font-size: var(--font-size-lg);
+    color: var(--text-muted);
+    line-height: var(--line-height-relaxed);
+    max-width: 500px;
+  }
+
+  .hero__cta {
+    margin-top: var(--space-8);
+    text-decoration: none;
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-base);
+  }
+
+  .hero__decoration {
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    opacity: 0.5;
+  }
+
+  .hero__decoration::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    opacity: 0.5;
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<form class="contact-form" action="#" method="POST">
+  <div class="contact-form__field">
+    <label for="name">{t(locale, "contact.name")}</label>
+    <input type="text" id="name" name="name" required class="mock-input" />
+  </div>
+  <div class="contact-form__field">
+    <label for="email">{t(locale, "contact.email")}</label>
+    <input type="email" id="email" name="email" required class="mock-input" />
+  </div>
+  <div class="contact-form__field">
+    <label for="message">{t(locale, "contact.message")}</label>
+    <textarea id="message" name="message" rows="5" required class="mock-input"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">{t(locale, "contact.send")}</button>
+</form>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    max-width: 560px;
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-form__field label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+  }
+
+  .mock-input {
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-fast);
+  }
+
+  .mock-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  textarea.mock-input {
+    resize: vertical;
+  }
+</style>

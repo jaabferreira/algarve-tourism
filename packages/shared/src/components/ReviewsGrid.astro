@@ -1,0 +1,24 @@
+---
+import type { ManualReview } from "../types.js";
+import ReviewCard from "./ReviewCard.astro";
+
+interface Props {
+  reviews: ManualReview[];
+}
+
+const { reviews } = Astro.props;
+---
+
+<div class="reviews-grid">
+  {reviews.map((review) => (
+    <ReviewCard review={review} />
+  ))}
+</div>
+
+<style>
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+</style>

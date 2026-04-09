@@ -1,0 +1,97 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface Props {
+  title: string;
+  excerpt: string;
+  slug: string;
+  image?: string;
+  date: string;
+  locale: Locale;
+}
+
+const { title, excerpt, slug, image, date, locale } = Astro.props;
+const href = getLocalePath(locale, `/blog/${slug}/`);
+const formattedDate = new Date(date).toLocaleDateString(locale, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<a href={href} class="blog-card">
+  {image && (
+    <div class="blog-card__image">
+      <img src={image} alt={title} loading="lazy" width="400" height="250" />
+    </div>
+  )}
+  <div class="blog-card__body">
+    <time class="blog-card__date">{formattedDate}</time>
+    <h3 class="blog-card__title">{title}</h3>
+    <p class="blog-card__excerpt">{excerpt}</p>
+    <span class="blog-card__link">{t(locale, "blog.read_more")} →</span>
+  </div>
+</a>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .blog-card__image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .blog-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-card__body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .blog-card__date {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .blog-card__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .blog-card__excerpt {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .blog-card__link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--accent);
+    margin-top: var(--space-2);
+  }
+</style>
