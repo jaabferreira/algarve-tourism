@@ -25,7 +25,7 @@ const path = "/";
 
 const structuredData = buildLocalBusiness(config);
 
-const items = loadItems();
+const items = loadItems(locale);
 
 const featuredItems = items.slice(0, 6);
 const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);

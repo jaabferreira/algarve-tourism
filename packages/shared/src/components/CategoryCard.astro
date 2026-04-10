@@ -1,0 +1,87 @@
+---
+import type { Locale } from "../types.js";
+
+interface Props {
+  name: string;
+  href: string;
+  image: string;
+  locale: Locale;
+  featured?: boolean;
+}
+
+const { name, href, image, featured = false } = Astro.props;
+---
+
+<a href={href} class:list={["cat-card", { "cat-card--featured": featured }]}>
+  <div class="cat-card__image">
+    <img src={image} alt={name} loading="lazy" width="600" height="400" />
+    <div class="cat-card__scrim">
+      <h3 class="cat-card__title">{name}</h3>
+    </div>
+  </div>
+</a>
+
+<style>
+  .cat-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .cat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cat-card__image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    overflow: hidden;
+  }
+
+  .cat-card--featured .cat-card__image {
+    min-height: 100%;
+  }
+
+  .cat-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 600ms ease;
+  }
+
+  .cat-card:hover .cat-card__image img {
+    transform: scale(1.04);
+  }
+
+  .cat-card__scrim {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .cat-card__title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: #fff;
+    line-height: var(--leading-snug);
+  }
+
+  .cat-card--featured .cat-card__title {
+    font-size: 28px;
+  }
+</style>

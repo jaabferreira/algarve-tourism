@@ -22,7 +22,7 @@ const locale = Astro.params.locale as Locale;
 const category = Astro.params.category as string;
 const categoryLabel = t(locale, `category.${category}` as TranslationKey);
 
-const items = loadItems().filter((item) => item.category === category);
+const items = loadItems(locale).filter((item) => item.category === category);
 ---
 
 <Layout
