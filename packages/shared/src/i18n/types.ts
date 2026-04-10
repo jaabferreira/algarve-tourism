@@ -32,6 +32,7 @@ export interface TranslationStrings {
   "contact.send": string;
   "footer.terms": string;
   "footer.cancellation_policy": string;
+  "footer.privacy": string;
   "footer.follow_us": string;
   "blog.read_more": string;
   "blog.published": string;
