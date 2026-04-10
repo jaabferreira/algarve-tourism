@@ -1,5 +1,5 @@
 ---
-import type { Locale } from "../types.js";
+import type { Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
 import { getLocalePath } from "../config.js";
 
@@ -10,9 +10,10 @@ interface Props {
   image?: string;
   date: string;
   locale: Locale;
+  brand: Brand;
 }
 
-const { title, excerpt, slug, image, date, locale } = Astro.props;
+const { title, excerpt, slug, image, date, locale, brand } = Astro.props;
 const href = getLocalePath(locale, `/blog/${slug}/`);
 const formattedDate = new Date(date).toLocaleDateString(locale, {
   year: "numeric",
@@ -21,7 +22,7 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
 });
 ---
 
-<a href={href} class="blog-card">
+<a href={href} class="blog-card" data-brand={brand}>
   {image && (
     <div class="blog-card__image">
       <img src={image} alt={title} loading="lazy" width="400" height="250" />
@@ -31,7 +32,11 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
     <time class="blog-card__date">{formattedDate}</time>
     <h3 class="blog-card__title">{title}</h3>
     <p class="blog-card__excerpt">{excerpt}</p>
-    <span class="blog-card__link">{t(locale, "blog.read_more")} →</span>
+    <span class="blog-card__link">
+      {brand === "algarve-and-you"
+        ? `${t(locale, "blog.read_more")} \u2192`
+        : `${t(locale, "blog.read_more")} \u2192`}
+    </span>
   </div>
 </a>
 
@@ -39,17 +44,25 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
   .blog-card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     text-decoration: none;
-    transition: all var(--transition-base);
+    transition: border-color var(--transition-base);
   }
 
   .blog-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-text-muted);
+  }
+
+  /* Atlantis: rounded card */
+  .blog-card[data-brand="atlantis"] {
+    border-radius: var(--radius-card);
+  }
+
+  /* A&Y: sharp card */
+  .blog-card[data-brand="algarve-and-you"] {
+    border-radius: 0;
   }
 
   .blog-card__image {
@@ -61,6 +74,11 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .blog-card:hover .blog-card__image img {
+    transform: scale(1.04);
   }
 
   .blog-card__body {
@@ -70,28 +88,59 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
     gap: var(--space-2);
   }
 
-  .blog-card__date {
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wide);
+  /* === Atlantis date === */
+  [data-brand="atlantis"] .blog-card__date {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: var(--tracking-wide);
   }
 
-  .blog-card__title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
+  /* === A&Y date: editorial uppercase === */
+  [data-brand="algarve-and-you"] .blog-card__date {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+
+  /* === Atlantis title === */
+  [data-brand="atlantis"] .blog-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+  }
+
+  /* === A&Y title: italic serif === */
+  [data-brand="algarve-and-you"] .blog-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-text);
   }
 
   .blog-card__excerpt {
-    font-size: var(--font-size-sm);
-    color: var(--text-muted);
-    line-height: var(--line-height-relaxed);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
   }
 
-  .blog-card__link {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--accent);
+  /* === Atlantis link === */
+  [data-brand="atlantis"] .blog-card__link {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary);
+    margin-top: var(--space-2);
+  }
+
+  /* === A&Y link: uppercase, xs === */
+  [data-brand="algarve-and-you"] .blog-card__link {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-primary);
     margin-top: var(--space-2);
   }
 </style>

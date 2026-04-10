@@ -1,31 +1,101 @@
 ---
-import type { NormalizedItem, Locale } from "../types.js";
+import type { NormalizedItem, Brand, Locale } from "../types.js";
 import ProductCard from "./ProductCard.astro";
 
 interface Props {
   items: NormalizedItem[];
+  brand: Brand;
   locale: Locale;
 }
 
-const { items, locale } = Astro.props;
+const { items, brand, locale } = Astro.props;
 ---
 
-<div class="product-grid">
-  {items.map((item) => (
-    <ProductCard item={item} locale={locale} />
+<div
+  class:list={["product-grid", `product-grid--${brand}`]}
+  data-brand={brand}
+  data-reveal-stagger
+>
+  {items.map((item, i) => (
+    <div
+      class:list={[
+        "product-grid__item",
+        { "product-grid__item--featured": brand === "algarve-and-you" && i === 0 },
+      ]}
+      data-reveal
+      style={`--reveal-delay: ${i * 40}ms`}
+    >
+      <ProductCard
+        item={item}
+        brand={brand}
+        locale={locale}
+        featured={brand === "algarve-and-you" && i === 0}
+      />
+    </div>
   ))}
 </div>
 
 <style>
+  /* ===========================
+     Shared base
+     =========================== */
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--space-6);
   }
 
+  .product-grid__item[data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .product-grid__item[data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===========================
+     Atlantis — Symmetric grid
+     =========================== */
+  .product-grid--atlantis {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
   @media (max-width: 640px) {
-    .product-grid {
+    .product-grid--atlantis {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===========================
+     Algarve & You — Asymmetric grid
+     =========================== */
+  .product-grid--algarve-and-you {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: var(--space-6);
+  }
+
+  .product-grid--algarve-and-you .product-grid__item--featured {
+    grid-row: span 2;
+  }
+
+  @media (max-width: 960px) {
+    .product-grid--algarve-and-you {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .product-grid--algarve-and-you {
+      grid-template-columns: 1fr;
+    }
+
+    .product-grid--algarve-and-you .product-grid__item--featured {
+      grid-row: span 1;
     }
   }
 </style>

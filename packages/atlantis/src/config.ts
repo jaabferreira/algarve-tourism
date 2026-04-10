@@ -1,12 +1,14 @@
 import type { BrandConfig } from "@algarve-tourism/shared";
 
 export const config: BrandConfig = {
+  brand: "atlantis",
   name: "Atlantis Tours",
   domain: "atlantistours.pt",
   tagline: "Discover the Algarve Coast",
   fh: {
     shortname: "atlantistours",
     categories: ["boats"],
+    itemPks: [717720, 717754, 718016, 717728, 718024],
   },
   logo: "/logo-atlantis.png",
   social: {

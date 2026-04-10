@@ -2,13 +2,15 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import HeroSection from "@algarve-tourism/shared/components/HeroSection.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import Marquee from "@algarve-tourism/shared/components/Marquee.astro";
+import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
 import { config } from "../../config.js";
 import { getLocalePath } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
@@ -26,6 +28,9 @@ const items = loadItems();
 const featuredItems = items.slice(0, 6);
 const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
 
+// Speedboat Benagil caves — high-res (2.1MB source)
+const heroImage = "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/bT14MOwPTli7XyXt79eR";
+
 let heroTitle = config.tagline;
 let heroSubtitle = "";
 try {
@@ -36,9 +41,34 @@ try {
     heroSubtitle = homePage.data.description ?? "";
   }
 } catch {}
+
+const marqueeText = "Benagil Caves · Yacht Cruises · Deep Sea Fishing · Coastline Circuit · Private Charters · Sunset Tours";
+
+const trustItems = [
+  {
+    icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    title: 'Licensed & Insured',
+    subtitle: 'Full maritime certification',
+  },
+  {
+    icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+    title: '4.9 on TripAdvisor',
+    subtitle: '2,400+ verified reviews',
+  },
+  {
+    icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>',
+    title: 'Free Cancellation',
+    subtitle: 'Up to 24h before departure',
+  },
+  {
+    icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
+    title: 'Small Groups',
+    subtitle: 'Intimate, personal experience',
+  },
+];
 ---
 
-<PageLayout
+<Layout
   title={heroTitle}
   description={heroSubtitle || config.tagline}
   locale={locale}
@@ -48,26 +78,85 @@ try {
   <Header slot="header" config={config} locale={locale} path={`/${locale}${path}`} />
 
   <HeroSection
-    title={heroTitle}
+    config={config}
+    locale={locale}
+    title="Discover the Algarve coastline"
     subtitle={heroSubtitle}
     ctaText={t(locale, "hero.cta")}
-    ctaHref={getLocalePath(locale, "/tours/")}
+    ctaLink={getLocalePath(locale, "/tours/")}
+    image={heroImage}
   />
 
+  <Marquee text={marqueeText} />
+
   {featuredItems.length > 0 && (
-    <section class="section container">
-      <h2>{t(locale, "nav.tours")}</h2>
-      <ProductGrid items={featuredItems} locale={locale} />
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Our Experiences</p>
+            <h2 class="section-title">Popular <em>tours</em></h2>
+          </div>
+          <a href={`/${locale}/tours/`} class="see-all">View all tours &rarr;</a>
+        </div>
+        <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
+      </div>
     </section>
   )}
 
+  <TrustBar items={trustItems} />
+
   {topReviews.length > 0 && (
-    <section class="section container">
-      <h2>{t(locale, "reviews.title")}</h2>
-      <ReviewsGrid reviews={topReviews} />
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">What People Say</p>
+            <h2 class="section-title">Guest <em>reviews</em></h2>
+          </div>
+          <a href={`/${locale}/reviews/`} class="see-all">All reviews &rarr;</a>
+        </div>
+        <ReviewsGrid reviews={topReviews} brand={config.brand} locale={locale} />
+      </div>
     </section>
   )}
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-10);
+  }
+  .section-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .section-title {
+    font-family: var(--font-accent);
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .see-all {
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+  .see-all:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,10 +1,14 @@
+export type Brand = "atlantis" | "algarve-and-you";
+
 export interface BrandConfig {
+  brand: Brand;
   name: string;
   domain: string;
   tagline: string;
   fh: {
     shortname: string;
     categories: string[];
+    itemPks?: number[];
   };
   logo: string;
   social: {

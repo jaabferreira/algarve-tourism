@@ -1,5 +1,6 @@
 ---
 import type { BrandConfig, Locale } from "../types.js";
+import type { TranslationKey } from "../i18n/types.js";
 import { t } from "../i18n/index.js";
 import { getLocalePath } from "../config.js";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
@@ -11,39 +12,61 @@ interface Props {
 }
 
 const { config, locale, path } = Astro.props;
+const brand = config.brand;
 
 interface NavItem {
   label: string;
   href: string;
 }
 
-const navItems: NavItem[] = [
-  { label: t(locale, "nav.tours"), href: getLocalePath(locale, "/tours/") },
-  { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
-  { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
-];
+const navItems: NavItem[] =
+  brand === "atlantis"
+    ? [
+        { label: t(locale, "nav.tours"), href: getLocalePath(locale, "/tours/") },
+        { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
+        { label: t(locale, "nav.reviews"), href: getLocalePath(locale, "/reviews/") },
+        { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
+      ]
+    : [
+        { label: t(locale, "nav.experiences"), href: getLocalePath(locale, "/tours/") },
+        { label: t(locale, "nav.journal"), href: getLocalePath(locale, "/blog/") },
+        { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
+        { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
+      ];
+
+const ctaLabel = t(locale, "nav.book_now");
+const ctaHref = getLocalePath(locale, "/tours/");
 ---
 
-<header class="header">
-  <div class="container header__inner">
-    <a href={getLocalePath(locale, "/")} class="header__logo">
-      {config.name}
+<header class="header" data-brand={brand}>
+  <div class="header__inner">
+    <a href={getLocalePath(locale, "/")} class="logo" aria-label={config.name}>
+      {brand === "atlantis" ? (
+        <span class="logo__icon" aria-hidden="true">A</span>
+        <span class="logo__text">
+          atlantis<span class="logo__text--accent">tours</span>
+        </span>
+      ) : (
+        <span class="logo__text">
+          Algarve<span class="logo__ampersand">&</span>You
+        </span>
+      )}
     </a>
 
-    <nav class="header__nav" aria-label="Main navigation">
+    <nav class="nav" aria-label="Main navigation">
       {navItems.map((item) => (
-        <a href={item.href} class="header__nav-link">{item.label}</a>
+        <a href={item.href} class="nav-link">{item.label}</a>
       ))}
     </nav>
 
     <div class="header__actions">
       <LanguageSwitcher locale={locale} path={path} config={config} />
-      <a href={getLocalePath(locale, "/tours/")} class="btn btn-primary header__cta">
-        {t(locale, "nav.book_now")}
+      <a href={ctaHref} class="nav-cta">
+        {ctaLabel}
       </a>
     </div>
 
-    <button class="header__hamburger" aria-label="Open menu" data-mobile-toggle>
+    <button class="mobile-toggle" aria-label="Open menu" data-mobile-toggle>
       <span></span>
       <span></span>
       <span></span>
@@ -51,13 +74,13 @@ const navItems: NavItem[] = [
   </div>
 
   <!-- Mobile nav overlay -->
-  <div class="mobile-nav" data-mobile-nav>
-    <nav class="mobile-nav__links">
+  <div class="mobile-menu" data-mobile-nav>
+    <nav class="mobile-menu__links">
       {navItems.map((item) => (
-        <a href={item.href} class="mobile-nav__link">{item.label}</a>
+        <a href={item.href} class="mobile-menu__link">{item.label}</a>
       ))}
-      <a href={getLocalePath(locale, "/tours/")} class="btn btn-primary mobile-nav__cta">
-        {t(locale, "nav.book_now")}
+      <a href={ctaHref} class="nav-cta mobile-menu__cta">
+        {ctaLabel}
       </a>
     </nav>
     <LanguageSwitcher locale={locale} path={path} config={config} />
@@ -65,6 +88,9 @@ const navItems: NavItem[] = [
 </header>
 
 <style>
+  /* ===========================
+     Shared header styles
+     =========================== */
   .header {
     position: fixed;
     top: 0;
@@ -72,12 +98,14 @@ const navItems: NavItem[] = [
     right: 0;
     z-index: 100;
     height: var(--header-height);
-    background: rgba(10, 37, 64, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-base);
   }
 
   .header__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -85,46 +113,58 @@ const navItems: NavItem[] = [
     gap: var(--space-8);
   }
 
-  .header__logo {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    color: var(--accent);
+  /* Logo — shared */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .header__nav {
+  .logo__text {
+    font-family: var(--font-display);
+    color: var(--color-text);
+  }
+
+  /* Nav — shared */
+  .nav {
     display: flex;
+    align-items: center;
     gap: var(--space-6);
   }
 
-  .header__nav-link {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-muted);
+  .nav-link {
     text-decoration: none;
     transition: color var(--transition-fast);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
   }
 
-  .header__nav-link:hover {
-    color: var(--text-primary);
-  }
-
+  /* Actions — shared */
   .header__actions {
     display: flex;
     align-items: center;
     gap: var(--space-4);
   }
 
-  .header__cta {
+  /* CTA — shared */
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    white-space: nowrap;
   }
 
-  .header__hamburger {
+  .nav-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* Hamburger — shared */
+  .mobile-toggle {
     display: none;
     flex-direction: column;
     gap: 5px;
@@ -134,59 +174,167 @@ const navItems: NavItem[] = [
     cursor: pointer;
   }
 
-  .header__hamburger span {
+  .mobile-toggle span {
     display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--text-primary);
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-text);
     transition: all var(--transition-base);
   }
 
-  .mobile-nav {
+  /* Mobile menu — shared */
+  .mobile-menu {
     display: none;
     position: fixed;
     top: var(--header-height);
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--bg-primary);
     padding: var(--space-8) var(--space-6);
     flex-direction: column;
     gap: var(--space-8);
   }
 
-  .mobile-nav.open {
+  .mobile-menu.open {
     display: flex;
   }
 
-  .mobile-nav__links {
+  .mobile-menu__links {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
 
-  .mobile-nav__link {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-primary);
+  .mobile-menu__link {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
     text-decoration: none;
   }
 
-  .mobile-nav__cta {
+  .mobile-menu__cta {
     margin-top: var(--space-4);
     text-align: center;
-    text-decoration: none;
   }
 
   @media (max-width: 768px) {
-    .header__nav,
+    .nav,
     .header__actions {
       display: none;
     }
 
-    .header__hamburger {
+    .mobile-toggle {
       display: flex;
     }
+  }
+
+  /* ===========================
+     Atlantis — Coastal Modern
+     =========================== */
+  .header[data-brand="atlantis"] {
+    background: rgba(247, 250, 251, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .header[data-brand="atlantis"] .logo__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .header[data-brand="atlantis"] .logo__text {
+    font-size: 17px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .header[data-brand="atlantis"] .logo__text--accent {
+    color: var(--color-primary);
+  }
+
+  .header[data-brand="atlantis"] .nav-link {
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+  }
+
+  .header[data-brand="atlantis"] .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .header[data-brand="atlantis"] .nav-cta {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: #fff;
+    border-radius: 8px;
+    padding: var(--space-2) var(--space-5);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+  }
+
+  .header[data-brand="atlantis"] .mobile-menu {
+    background: var(--color-bg);
+  }
+
+  /* ===========================
+     Algarve & You — Mediterranean Editorial
+     =========================== */
+  .header[data-brand="algarve-and-you"] {
+    background: rgba(250, 246, 240, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .header[data-brand="algarve-and-you"] .logo__text {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .header[data-brand="algarve-and-you"] .logo__ampersand {
+    font-style: italic;
+    color: var(--color-primary);
+    padding: 0 0.1em;
+  }
+
+  .header[data-brand="algarve-and-you"] .nav-link {
+    font-size: 12px;
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .header[data-brand="algarve-and-you"] .nav-link:hover {
+    color: var(--color-text);
+  }
+
+  .header[data-brand="algarve-and-you"] .nav-cta {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-radius: 0px;
+    padding: var(--space-2) var(--space-5);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .header[data-brand="algarve-and-you"] .mobile-menu {
+    background: var(--color-bg);
   }
 </style>
 

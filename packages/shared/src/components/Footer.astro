@@ -9,129 +9,316 @@ interface Props {
 }
 
 const { config, locale } = Astro.props;
+const brand = config.brand;
 const year = new Date().getFullYear();
+
+interface FooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface FooterColumn {
+  heading: string;
+  links: FooterLink[];
+}
+
+const columns: FooterColumn[] =
+  brand === "atlantis"
+    ? [
+        {
+          heading: t(locale, "nav.tours"),
+          links: [
+            { label: "Cave Circuits", href: getLocalePath(locale, "/tours/") },
+            { label: "Yacht Cruises", href: getLocalePath(locale, "/tours/") },
+            { label: "Fishing Trips", href: getLocalePath(locale, "/tours/") },
+            { label: "Private Charters", href: getLocalePath(locale, "/tours/") },
+          ],
+        },
+        {
+          heading: "Company",
+          links: [
+            { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
+            { label: t(locale, "nav.reviews"), href: getLocalePath(locale, "/reviews/") },
+            { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
+            { label: t(locale, "nav.faq"), href: getLocalePath(locale, "/faq/") },
+          ],
+        },
+        {
+          heading: "Legal",
+          links: [
+            { label: t(locale, "footer.terms"), href: getLocalePath(locale, "/terms/") },
+            { label: t(locale, "footer.cancellation_policy"), href: getLocalePath(locale, "/cancellation-policy/") },
+            { label: t(locale, "footer.privacy"), href: getLocalePath(locale, "/privacy/") },
+          ],
+        },
+      ]
+    : [
+        {
+          heading: t(locale, "nav.experiences"),
+          links: [
+            { label: t(locale, "category.boats"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.gastronomy"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.spa"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.land-tours"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.transfers"), href: getLocalePath(locale, "/tours/") },
+          ],
+        },
+        {
+          heading: "Discover",
+          links: [
+            { label: t(locale, "nav.journal"), href: getLocalePath(locale, "/blog/") },
+            { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
+            { label: t(locale, "nav.reviews"), href: getLocalePath(locale, "/reviews/") },
+            { label: t(locale, "nav.contact"), href: getLocalePath(locale, "/contact/") },
+            { label: t(locale, "nav.faq"), href: getLocalePath(locale, "/faq/") },
+          ],
+        },
+        {
+          heading: "Legal",
+          links: [
+            { label: t(locale, "footer.terms"), href: getLocalePath(locale, "/terms/") },
+            { label: t(locale, "footer.cancellation_policy"), href: getLocalePath(locale, "/cancellation-policy/") },
+            { label: t(locale, "footer.privacy"), href: getLocalePath(locale, "/privacy/") },
+          ],
+        },
+      ];
+
+const description =
+  brand === "atlantis"
+    ? "Algarve boat tours, cave circuits, and yacht cruises departing daily from Albufeira Marina."
+    : "Curated experiences across the Algarve — from coastal adventures to gastronomy, wellness, and cultural discovery.";
 ---
 
-<footer class="footer">
+<footer class="footer" data-brand={brand}>
   <div class="container footer__inner">
     <div class="footer__brand">
-      <span class="footer__logo">{config.name}</span>
-      <p class="footer__tagline">{config.tagline}</p>
-    </div>
+      {brand === "atlantis" ? (
+        <a href={getLocalePath(locale, "/")} class="footer__logo" aria-label={config.name}>
+          <span class="footer__logo-main">atlantis</span><span class="footer__logo-accent">tours</span>
+        </a>
+      ) : (
+        <a href={getLocalePath(locale, "/")} class="footer__logo" aria-label={config.name}>
+          <span class="footer__logo-main">Algarve</span>
+          <span class="footer__logo-ampersand">&</span>
+          <span class="footer__logo-main">You</span>
+        </a>
+      )}
+      <p class="footer__description">{description}</p>
 
-    <nav class="footer__links">
-      <a href={getLocalePath(locale, "/tours/")}>{t(locale, "nav.tours")}</a>
-      <a href={getLocalePath(locale, "/about/")}>{t(locale, "nav.about")}</a>
-      <a href={getLocalePath(locale, "/contact/")}>{t(locale, "nav.contact")}</a>
-      <a href={getLocalePath(locale, "/blog/")}>{t(locale, "nav.blog")}</a>
-      <a href={getLocalePath(locale, "/faq/")}>{t(locale, "nav.faq")}</a>
-      <a href={getLocalePath(locale, "/reviews/")}>{t(locale, "nav.reviews")}</a>
-    </nav>
-
-    <nav class="footer__legal">
-      <a href={getLocalePath(locale, "/terms/")}>{t(locale, "footer.terms")}</a>
-      <a href={getLocalePath(locale, "/cancellation-policy/")}>{t(locale, "footer.cancellation_policy")}</a>
-    </nav>
-
-    <div class="footer__social">
-      <span class="footer__social-label">{t(locale, "footer.follow_us")}</span>
-      <div class="footer__social-links">
-        <a href={config.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-        <a href={config.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+      <div class="footer__social">
+        <a href={config.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href={config.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
         {config.social.youtube && (
-          <a href={config.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
+          <a href={config.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+          </a>
         )}
       </div>
     </div>
 
+    {columns.map((col) => (
+      <nav class="footer__column">
+        <span class="footer__heading">{col.heading}</span>
+        {col.links.map((link) => (
+          <a
+            href={link.href}
+            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    ))}
+  </div>
+
+  <div class="container footer__bottom">
     <p class="footer__copy">&copy; {year} {config.name}. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
+  /* ===========================
+     Base Footer
+     =========================== */
   .footer {
-    border-top: 1px solid var(--border-subtle);
-    padding: var(--space-16) 0 var(--space-8);
     margin-top: var(--space-20);
+    padding: var(--space-16) 0 var(--space-8);
+    background: var(--color-bg-dark);
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .footer__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: var(--space-8);
   }
 
+  /* Brand column */
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
   .footer__logo {
-    font-weight: var(--font-weight-extrabold);
-    font-size: var(--font-size-base);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    color: var(--accent);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.15em;
+    text-decoration: none;
+    color: #fff;
   }
 
-  .footer__tagline {
+  .footer__description {
+    line-height: 1.6;
+    max-width: 28ch;
+  }
+
+  /* Social icons */
+  .footer__social {
+    display: flex;
+    gap: var(--space-3);
     margin-top: var(--space-2);
-    font-size: var(--font-size-sm);
-    color: var(--text-muted);
   }
 
-  .footer__links,
-  .footer__legal {
+  .footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .footer__social a:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Nav columns */
+  .footer__column {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
   }
 
-  .footer__links a,
-  .footer__legal a {
-    font-size: var(--font-size-sm);
-    color: var(--text-muted);
+  .footer__heading {
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer__column a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
-  .footer__links a:hover,
-  .footer__legal a:hover {
-    color: var(--text-primary);
+  .footer__column a:hover {
+    color: #fff;
   }
 
-  .footer__social-label {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    letter-spacing: var(--letter-spacing-wider);
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .footer__social-links {
-    display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-2);
-  }
-
-  .footer__social-links a {
-    font-size: var(--font-size-sm);
-    color: var(--text-muted);
-    text-decoration: none;
-  }
-
-  .footer__social-links a:hover {
-    color: var(--accent);
+  /* Bottom bar */
+  .footer__bottom {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .footer__copy {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
-    margin-top: var(--space-8);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--border-subtle);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: var(--tracking-wide);
   }
 
+  /* ===========================
+     Atlantis — Coastal Modern
+     =========================== */
+  .footer[data-brand="atlantis"] .footer__logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .footer[data-brand="atlantis"] .footer__logo-main {
+    color: #fff;
+  }
+
+  .footer[data-brand="atlantis"] .footer__logo-accent {
+    color: var(--color-primary-light);
+  }
+
+  .footer[data-brand="atlantis"] .footer__description {
+    font-size: 13px;
+  }
+
+  .footer[data-brand="atlantis"] .footer__heading {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ===========================
+     Algarve & You — Mediterranean Editorial
+     =========================== */
+  .footer[data-brand="algarve-and-you"] .footer__logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .footer[data-brand="algarve-and-you"] .footer__logo-main {
+    color: #fff;
+  }
+
+  .footer[data-brand="algarve-and-you"] .footer__logo-ampersand {
+    font-style: italic;
+    color: var(--color-primary-light);
+  }
+
+  .footer[data-brand="algarve-and-you"] .footer__description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .footer[data-brand="algarve-and-you"] .footer__heading {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ===========================
+     Responsive
+     =========================== */
   @media (max-width: 768px) {
     .footer__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8) var(--space-6);
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: var(--space-12) 0 var(--space-6);
+    }
+
+    .footer__inner {
       grid-template-columns: 1fr;
+      gap: var(--space-8);
     }
   }
 </style>

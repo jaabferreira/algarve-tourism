@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import { config } from "../../config.js";
@@ -13,7 +13,7 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "footer.cancellation_policy")}
   description={`${t(locale, "footer.cancellation_policy")} — ${config.name}`}
   locale={locale}
@@ -46,8 +46,8 @@ const locale = Astro.params.locale as Locale;
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
-</PageLayout>
+</Layout>
 
 <style>
-  .page-content { max-width: 680px; margin-top: var(--space-8); line-height: var(--line-height-relaxed); color: var(--text-secondary); }
+  .page-content { max-width: 680px; margin-top: var(--space-8); line-height: var(--leading-relaxed); color: var(--color-text-body); }
 </style>

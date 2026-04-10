@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
@@ -16,7 +16,7 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "nav.reviews")}
   description={t(locale, "reviews.title")}
   locale={locale}
@@ -27,9 +27,9 @@ const locale = Astro.params.locale as Locale;
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "reviews.title")}</h1>
-    <ReviewsGrid reviews={manualReviews} />
+    <ReviewsGrid reviews={manualReviews} brand={config.brand} locale={locale} />
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>

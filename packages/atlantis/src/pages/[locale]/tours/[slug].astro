@@ -1,7 +1,7 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import ProductHero from "@algarve-tourism/shared/components/ProductHero.astro";
@@ -37,7 +37,7 @@ const structuredData = {
   offers: {
     "@type": "Offer",
     priceCurrency: "EUR",
-    price: (item.price_from / 100).toFixed(2),
+    price: (item.price_from_including_tax / 100).toFixed(2),
     availability: "https://schema.org/InStock",
   },
   ...(item.location && {
@@ -54,7 +54,7 @@ const structuredData = {
 };
 ---
 
-<PageLayout
+<Layout
   title={item.name}
   description={item.description_text.slice(0, 160)}
   image={item.image_url}
@@ -66,7 +66,7 @@ const structuredData = {
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} />
 
   <div class="container product-detail">
-    <ProductHero item={item} locale={locale} />
+    <ProductHero item={item} locale={locale} brand={config.brand} />
 
     <div class="product-detail__content">
       <div class="product-detail__body">
@@ -105,14 +105,14 @@ const structuredData = {
     {relatedItems.length > 0 && (
       <section class="section">
         <h2>{t(locale, "product.related")}</h2>
-        <ProductGrid items={relatedItems} locale={locale} />
+        <ProductGrid items={relatedItems} brand={config.brand} locale={locale} />
       </section>
     )}
   </div>
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
 
 <style>
   .product-detail {
@@ -147,14 +147,14 @@ const structuredData = {
 
   .product-detail__bullets li::before {
     content: "\2713 ";
-    color: var(--accent);
-    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-weight: var(--weight-bold);
   }
 
   .product-detail__description {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--text-secondary);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
   }
 
   @media (max-width: 768px) {

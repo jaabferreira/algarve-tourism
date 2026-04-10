@@ -1,6 +1,7 @@
 import type { BrandConfig } from "@algarve-tourism/shared";
 
 export const config: BrandConfig = {
+  brand: "algarve-and-you",
   name: "Algarve & You",
   domain: "algarveandyou.com",
   tagline: "Your Algarve Experience",

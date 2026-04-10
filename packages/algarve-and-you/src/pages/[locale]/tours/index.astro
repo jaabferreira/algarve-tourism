@@ -1,11 +1,11 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
+import type { TranslationKey } from "@algarve-tourism/shared";
 import { LOCALES, t, getLocalePath } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
-import CategoryNav from "@algarve-tourism/shared/components/CategoryNav.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config } from "../../../config.js";
 import { loadItems } from "../../../data.js";
@@ -17,9 +17,10 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 
 const items = loadItems();
+const categories = config.fh.categories;
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "category.all")}
   description={`${config.name} — ${t(locale, "category.all")}`}
   locale={locale}
@@ -30,14 +31,31 @@ const items = loadItems();
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "category.all")}</h1>
-    <CategoryNav
-      categories={config.fh.categories}
-      locale={locale}
-      basePath={getLocalePath(locale, "/tours/")}
-    />
-    <ProductGrid items={items} locale={locale} />
+
+    <nav class="category-pills" aria-label="Categories">
+      <a href={getLocalePath(locale, "/tours/")} class="chip active">
+        {t(locale, "category.all")}
+      </a>
+      {categories.map((cat) => (
+        <a href={getLocalePath(locale, `/tours/${cat}/`)} class="chip">
+          {t(locale, `category.${cat}` as TranslationKey)}
+        </a>
+      ))}
+    </nav>
+
+    <ProductGrid items={items} brand={config.brand} locale={locale} />
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
+
+<style>
+  .category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+</style>

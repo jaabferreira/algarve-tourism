@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
@@ -24,7 +24,7 @@ const locale = Astro.params.locale as Locale;
 const { Content } = await post.render();
 ---
 
-<PageLayout
+<Layout
   title={post.data.title}
   description={post.data.excerpt}
   image={post.data.image}
@@ -45,15 +45,15 @@ const { Content } = await post.render();
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
 
 <style>
   article { display: flex; flex-direction: column; gap: var(--space-4); }
   .page-content {
     max-width: 680px;
     margin-top: var(--space-6);
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
   }
 </style>

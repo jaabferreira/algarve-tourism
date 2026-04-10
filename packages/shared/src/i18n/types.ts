@@ -7,11 +7,14 @@ export interface TranslationStrings {
   "nav.blog": string;
   "nav.faq": string;
   "nav.reviews": string;
+  "nav.experiences": string;
+  "nav.journal": string;
   "hero.cta": string;
   "product.from": string;
   "product.duration": string;
   "product.minutes": string;
   "product.book_now": string;
+  "product.discover": string;
   "product.related": string;
   "product.highlights": string;
   "product.cancellation": string;
@@ -30,6 +33,7 @@ export interface TranslationStrings {
   "contact.send": string;
   "footer.terms": string;
   "footer.cancellation_policy": string;
+  "footer.privacy": string;
   "footer.follow_us": string;
   "blog.read_more": string;
   "blog.published": string;

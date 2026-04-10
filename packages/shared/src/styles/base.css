@@ -1,60 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+/* packages/shared/src/styles/base.css */
+/* Base styles — uses semantic tokens from brand-specific tokens.css */
 
+/* Reset */
 *, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-secondary);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-normal);
-  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-weight: var(--font-weight-extrabold);
-  line-height: var(--line-height-tight);
+/* Headings */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
 }
 
-h1 { font-size: var(--font-size-5xl); }
-h2 { font-size: var(--font-size-4xl); }
-h3 { font-size: var(--font-size-2xl); }
-h4 { font-size: var(--font-size-xl); }
+h4, h5, h6 {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
 
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+
+/* Links */
 a {
-  color: var(--accent);
+  color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-
 a:hover {
-  color: var(--accent-hover);
+  color: var(--color-primary-dark);
 }
 
+/* Images */
 img {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
+/* Selection */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--bg-primary);
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }

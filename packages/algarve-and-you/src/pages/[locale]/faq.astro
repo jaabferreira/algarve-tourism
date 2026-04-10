@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import FAQ from "@algarve-tourism/shared/components/FAQ.astro";
@@ -23,7 +23,7 @@ const faqItems = [
 ];
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "nav.faq")}
   description={`FAQ — ${config.name}`}
   locale={locale}
@@ -41,4 +41,4 @@ const faqItems = [
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
