@@ -1,10 +1,12 @@
 ---
-import type { BrandConfig } from "../types.js";
+import type { BrandConfig, Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import type { TranslationKey } from "../i18n/types.js";
 import HeroFloatCard from "./HeroFloatCard.astro";
 
 interface Props {
   config: BrandConfig;
-  locale: string;
+  locale: Locale;
   title: string;
   subtitle?: string;
   image?: string;
@@ -35,10 +37,6 @@ const brand = config.brand;
 const isAtlantis = brand === "atlantis";
 const isAY = brand === "algarve-and-you";
 
-const categories = config.fh.categories.map(
-  (c) => c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
-);
-
 const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
 ---
 
@@ -47,7 +45,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     <div class="at-hero">
       {image ? (
         <div class="at-hero__bg-image" aria-hidden="true">
-          <img src={image} alt="" width="1920" height="1080" loading="eager" />
+          <img src={image} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
           <div class="at-hero__overlay"></div>
         </div>
       ) : (
@@ -59,7 +57,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
       <div class="container at-hero__inner">
         <div class="at-hero__badge">
           <span class="at-hero__badge-dot" aria-hidden="true"></span>
-          Departing daily from Portimão Marina
+          {t(locale, "hero.departing_daily")}
         </div>
 
         <h1 class="at-hero__title" set:html={title} />
@@ -70,7 +68,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
           {ctaText && ctaLink && (
             <a href={ctaLink} class="at-hero__cta-primary">{ctaText}</a>
           )}
-          <a href={`/${locale}/tours/`} class="at-hero__cta-secondary">View All Tours</a>
+          <a href={`/${locale}/tours/`} class="at-hero__cta-secondary">{t(locale, "hero.view_all_tours")}</a>
         </div>
       </div>
 
@@ -78,15 +76,15 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
         <div class="container at-hero__stats-inner">
           <div class="at-hero__stat">
             <span class="at-hero__stat-number">14+</span>
-            <span class="at-hero__stat-label">Years experience</span>
+            <span class="at-hero__stat-label">{t(locale, "hero.years_exp")}</span>
           </div>
           <div class="at-hero__stat">
             <span class="at-hero__stat-number">50k+</span>
-            <span class="at-hero__stat-label">Happy explorers</span>
+            <span class="at-hero__stat-label">{t(locale, "hero.happy_explorers")}</span>
           </div>
           <div class="at-hero__stat">
             <span class="at-hero__stat-number">4.9</span>
-            <span class="at-hero__stat-label">Average rating</span>
+            <span class="at-hero__stat-label">{t(locale, "hero.avg_rating")}</span>
           </div>
         </div>
       </div>
@@ -95,50 +93,55 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
 
   {isAY && (
     <div class="ay-hero">
-      <div class="ay-hero__content">
-        <div class="ay-hero__content-inner">
-          <div class="ay-hero__gold-line" aria-hidden="true"></div>
-          <p class="ay-hero__overtitle">{config.name}</p>
-          <h1 class="ay-hero__title" set:html={title} />
-          {subtitle && <p class="ay-hero__subtitle">{subtitle}</p>}
+      <div class="ay-hero__bg">
+        {image ? (
+          <img src={image} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
+        ) : (
+          <div class="ay-hero__bg-placeholder" aria-hidden="true"></div>
+        )}
+        <div class="ay-hero__overlay" aria-hidden="true"></div>
+        <div class="ay-hero__bottom-fade" aria-hidden="true"></div>
+      </div>
 
-          {categories.length > 0 && (
-            <div class="ay-hero__chips">
-              {categories.map((cat, i) => (
-                <span class:list={["ay-hero__chip", { active: i === 0 }]}>{cat}</span>
+      <div class="container ay-hero__inner">
+        <div class="ay-hero__content">
+          <div class="ay-hero__gold-line ay-hero__reveal" style="--reveal-delay: 0ms" aria-hidden="true"></div>
+          <p class="ay-hero__overtitle ay-hero__reveal" style="--reveal-delay: 100ms">{config.name}</p>
+          <h1 class="ay-hero__title ay-hero__reveal" style="--reveal-delay: 200ms" set:html={title} />
+          {subtitle && <p class="ay-hero__subtitle ay-hero__reveal" style="--reveal-delay: 300ms">{subtitle}</p>}
+
+          {config.fh.categories.length > 0 && (
+            <div class="ay-hero__chips ay-hero__reveal" style="--reveal-delay: 400ms">
+              <a href={`/${locale}/tours/`} class="ay-hero__chip active">{t(locale, "common.all")}</a>
+              {config.fh.categories.map((slug) => (
+                <a href={`/${locale}/tours/${slug}/`} class="ay-hero__chip">
+                  {t(locale, `category.${slug}` as TranslationKey)}
+                </a>
               ))}
             </div>
           )}
 
-          <div class="ay-hero__ctas">
+          <div class="ay-hero__ctas ay-hero__reveal" style="--reveal-delay: 500ms">
             {ctaText && ctaLink && (
               <a href={ctaLink} class="ay-hero__cta-primary">{ctaText}</a>
             )}
             <a href={`/${locale}/tours/`} class="ay-hero__cta-link">
-              Browse collection <span aria-hidden="true">&rarr;</span>
+              {t(locale, "hero.browse_collection")} <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="ay-hero__image">
-        {image ? (
-          <img src={image} alt="" width="960" height="1080" loading="eager" />
-        ) : (
-          <div class="ay-hero__image-placeholder" aria-hidden="true"></div>
-        )}
-        <div class="ay-hero__image-edge" aria-hidden="true"></div>
-        <div class="ay-hero__image-bottom" aria-hidden="true"></div>
-
-        {showFloatCard && (
+      {showFloatCard && (
+        <div class="ay-hero__float-wrap">
           <HeroFloatCard
             label={floatLabel!}
             title={floatTitle!}
             meta={floatMeta!}
             href={floatHref}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )}
 </section>
@@ -371,25 +374,70 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
   }
 
   /* ===========================
-     ALGARVE & YOU — Split layout
+     ALGARVE & YOU — Full-bleed image
      =========================== */
   .ay-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 92vh;
-  }
-
-  /* Left — content */
-  .ay-hero__content {
+    position: relative;
+    min-height: 85vh;
     display: flex;
     align-items: center;
-    padding: calc(var(--header-height) + var(--space-12)) var(--space-10) var(--space-12);
   }
 
-  .ay-hero__content-inner {
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: var(--space-12);
+  /* Background image */
+  .ay-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .ay-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ay-hero__bg-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%);
+  }
+
+  .ay-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(250, 248, 246, 0.95) 0%,
+      rgba(250, 248, 246, 0.85) 30%,
+      rgba(250, 248, 246, 0.4) 55%,
+      transparent 75%
+    );
+  }
+
+  .ay-hero__bottom-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--color-bg), transparent);
+    z-index: 1;
+  }
+
+  /* Content */
+  .ay-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-top: calc(var(--header-height) + var(--space-12));
+    padding-bottom: var(--space-12);
+    max-width: none;
+    margin: 0;
+    padding-left: var(--space-12);
+    padding-right: var(--space-12);
+  }
+
+  .ay-hero__content {
+    max-width: 480px;
   }
 
   .ay-hero__gold-line {
@@ -397,6 +445,31 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     height: 1px;
     background: var(--color-accent);
     margin-bottom: 20px;
+  }
+
+  /* Staggered entrance */
+  @keyframes ay-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ay-hero__reveal {
+    opacity: 0;
+    animation: ay-reveal 600ms ease-out forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ay-hero__reveal {
+      opacity: 1;
+      animation: none;
+    }
   }
 
   .ay-hero__overtitle {
@@ -419,6 +492,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
 
   .ay-hero__title :global(em) {
     font-style: italic;
+    font-weight: 600;
     color: var(--color-primary);
   }
 
@@ -443,17 +517,30 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     font-size: 12px;
     letter-spacing: 0.06em;
     padding: 6px 16px;
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     color: var(--color-text-muted);
-    background: transparent;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    text-decoration: none;
     transition: all var(--transition-base);
-    cursor: default;
+    cursor: pointer;
+  }
+
+  .ay-hero__chip:hover {
+    border-color: var(--color-text);
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.7);
   }
 
   .ay-hero__chip.active {
     background: var(--color-primary);
     color: #fff;
     border-color: var(--color-primary);
+  }
+
+  .ay-hero__chip.active:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
   }
 
   /* CTAs */
@@ -508,85 +595,68 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     transform: translateX(3px);
   }
 
-  /* Right — image */
-  .ay-hero__image {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ay-hero__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ay-hero__image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%);
-  }
-
-  .ay-hero__image-edge {
+  /* Float card */
+  .ay-hero__float-wrap {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--color-bg) 0%, transparent 8%);
-    pointer-events: none;
-  }
-
-  .ay-hero__image-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
-    pointer-events: none;
+    bottom: var(--space-10);
+    right: var(--space-10);
+    z-index: 3;
   }
 
   /* A&Y mobile */
   @media (max-width: 768px) {
     .ay-hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
+      min-height: 75vh;
     }
 
-    .ay-hero__image {
-      order: -1;
-      height: 50vh;
+    .ay-hero__overlay {
+      background: linear-gradient(
+        to top,
+        rgba(250, 248, 246, 0.95) 0%,
+        rgba(250, 248, 246, 0.8) 50%,
+        rgba(250, 248, 246, 0.3) 100%
+      );
+    }
+
+    .ay-hero__inner {
+      padding-top: calc(var(--header-height) + 30vh);
     }
 
     .ay-hero__content {
-      padding: var(--space-8) var(--space-5) var(--space-12);
-    }
-
-    .ay-hero__content-inner {
-      margin-left: 0;
-      margin-right: 0;
       max-width: none;
     }
 
     .ay-hero__title {
       font-size: clamp(32px, 7vw, 42px);
     }
+
+    .ay-hero__float-wrap {
+      display: none;
+    }
   }
 </style>
 
 <script>
-  // Parallax for Atlantis hero image
-  const heroImg = document.querySelector('.at-hero__bg-image') as HTMLElement | null;
-  if (heroImg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          if (scrollY < window.innerHeight) {
-            heroImg.style.transform = `translateY(${scrollY * 0.25}px)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+  // Parallax for hero images
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reducedMotion) {
+    const atImg = document.querySelector('.at-hero__bg-image') as HTMLElement | null;
+    const ayImg = document.querySelector('.ay-hero__bg') as HTMLElement | null;
+    const target = atImg || ayImg;
+    if (target) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (scrollY < window.innerHeight) {
+              target.style.transform = `translateY(${scrollY * 0.25}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
   }
 </script>

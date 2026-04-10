@@ -1,0 +1,77 @@
+---
+import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import { config } from "../config.js";
+
+const locale = "en";
+---
+
+<PageLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist."
+  locale={locale}
+  path="/404/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path="/404/" />
+
+  <section class="not-found container">
+    <h1>404</h1>
+    <p>The page you're looking for doesn't exist or has been moved.</p>
+    <div class="not-found__links">
+      <a href={`/${locale}/`}>Home</a>
+      <a href={`/${locale}/tours/`}>Tours</a>
+      <a href={`/${locale}/contact/`}>Contact</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+</PageLayout>
+
+<style>
+  .not-found {
+    padding-top: calc(var(--header-height) + var(--space-20));
+    padding-bottom: var(--space-20);
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  .not-found h1 {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 120px);
+    font-weight: 300;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .not-found p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 400px;
+  }
+  .not-found__links {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .not-found__links a {
+    padding: 10px 24px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+  .not-found__links a:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+</style>
+
+<style is:global>
+  @import "../styles/tokens.css";
+</style>

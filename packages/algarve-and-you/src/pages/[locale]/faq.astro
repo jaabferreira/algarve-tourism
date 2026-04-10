@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t } from "@algarve-tourism/shared";
+import { LOCALES, t, buildFAQPage } from "@algarve-tourism/shared";
 import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -14,13 +14,38 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 
-const faqItems = [
-  { question: "What should I bring?", answer: "Sunscreen, a hat, a towel, and a camera. We provide life jackets and all safety equipment." },
-  { question: "Can I cancel my booking?", answer: "Yes, free cancellation is available up to 24 hours before departure. Check each tour's specific policy for details." },
-  { question: "Are the tours suitable for children?", answer: "Most tours welcome children. Each tour listing specifies age requirements and suitability." },
-  { question: "Where do tours depart from?", answer: "Most tours depart from Marina de Portimão. Specific meeting points are shown on each tour page." },
-  { question: "What happens in bad weather?", answer: "Safety is our priority. If conditions are unsafe, we'll reschedule or offer a full refund." },
-];
+const faqByLocale: Record<string, { question: string; answer: string }[]> = {
+  en: [
+    { question: "What should I bring?", answer: "Sunscreen, a hat, a towel, and a camera. We provide life jackets and all safety equipment." },
+    { question: "Can I cancel my booking?", answer: "Yes, free cancellation is available up to 24 hours before departure. Check each tour's specific policy for details." },
+    { question: "Are the tours suitable for children?", answer: "Most tours welcome children. Each tour listing specifies age requirements and suitability." },
+    { question: "Where do tours depart from?", answer: "Most tours depart from Marina de Portimão. Specific meeting points are shown on each tour page." },
+    { question: "What happens in bad weather?", answer: "Safety is our priority. If conditions are unsafe, we'll reschedule or offer a full refund." },
+  ],
+  pt: [
+    { question: "O que devo trazer?", answer: "Protetor solar, chapéu, toalha e máquina fotográfica. Nós fornecemos coletes salva-vidas e todo o equipamento de segurança." },
+    { question: "Posso cancelar a minha reserva?", answer: "Sim, o cancelamento gratuito está disponível até 24 horas antes da partida. Consulte a política específica de cada passeio para mais detalhes." },
+    { question: "Os passeios são adequados para crianças?", answer: "A maioria dos passeios aceita crianças. Cada passeio indica os requisitos de idade e adequação." },
+    { question: "De onde partem os passeios?", answer: "A maioria dos passeios parte da Marina de Portimão. Os pontos de encontro específicos são indicados na página de cada passeio." },
+    { question: "O que acontece em caso de mau tempo?", answer: "A segurança é a nossa prioridade. Se as condições não forem seguras, reagendamos o passeio ou oferecemos reembolso total." },
+  ],
+  es: [
+    { question: "¿Qué debo traer?", answer: "Protector solar, sombrero, toalla y cámara de fotos. Nosotros proporcionamos chalecos salvavidas y todo el equipo de seguridad." },
+    { question: "¿Puedo cancelar mi reserva?", answer: "Sí, la cancelación gratuita está disponible hasta 24 horas antes de la salida. Consulta la política específica de cada tour para más detalles." },
+    { question: "¿Los tours son adecuados para niños?", answer: "La mayoría de los tours admiten niños. Cada tour indica los requisitos de edad y la idoneidad." },
+    { question: "¿Desde dónde salen los tours?", answer: "La mayoría de los tours salen desde la Marina de Portimão. Los puntos de encuentro específicos se indican en la página de cada tour." },
+    { question: "¿Qué ocurre en caso de mal tiempo?", answer: "La seguridad es nuestra prioridad. Si las condiciones no son seguras, reprogramamos el tour u ofrecemos un reembolso completo." },
+  ],
+  fr: [
+    { question: "Que dois-je apporter ?", answer: "De la crème solaire, un chapeau, une serviette et un appareil photo. Nous fournissons les gilets de sauvetage et tout l'équipement de sécurité." },
+    { question: "Puis-je annuler ma réservation ?", answer: "Oui, l'annulation gratuite est possible jusqu'à 24 heures avant le départ. Consultez les conditions spécifiques de chaque excursion pour plus de détails." },
+    { question: "Les excursions conviennent-elles aux enfants ?", answer: "La plupart des excursions accueillent les enfants. Chaque excursion précise les conditions d'âge et d'aptitude requises." },
+    { question: "D'où partent les excursions ?", answer: "La plupart des excursions partent de la Marina de Portimão. Les points de rendez-vous sont indiqués sur la page de chaque excursion." },
+    { question: "Que se passe-t-il en cas de mauvais temps ?", answer: "La sécurité est notre priorité. Si les conditions ne sont pas sûres, nous reprogrammons l'excursion ou proposons un remboursement intégral." },
+  ],
+};
+const faqItems = faqByLocale[locale] ?? faqByLocale.en;
+const structuredData = buildFAQPage(faqItems);
 ---
 
 <Layout
@@ -29,6 +54,7 @@ const faqItems = [
   locale={locale}
   path="/faq/"
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/faq/`} />
 
@@ -40,5 +66,5 @@ const faqItems = [
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>

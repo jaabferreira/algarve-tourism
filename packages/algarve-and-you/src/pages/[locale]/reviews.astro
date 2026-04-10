@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t } from "@algarve-tourism/shared";
+import { LOCALES, t, buildLocalBusiness, buildAggregateRating, buildReviewList } from "@algarve-tourism/shared";
 import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -14,6 +14,12 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+
+const structuredData = {
+  ...buildLocalBusiness(config),
+  aggregateRating: buildAggregateRating(manualReviews),
+  review: buildReviewList(manualReviews),
+};
 ---
 
 <Layout
@@ -22,6 +28,7 @@ const locale = Astro.params.locale as Locale;
   locale={locale}
   path="/reviews/"
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/reviews/`} />
 
@@ -31,5 +38,5 @@ const locale = Astro.params.locale as Locale;
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
