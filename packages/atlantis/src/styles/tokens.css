@@ -2,7 +2,7 @@
 /* Atlantis Tours — "Coastal Modern" */
 /* Overrides shared token defaults */
 
-:root {
+:root:root {
   /* === Colors — Algarve coast palette === */
   --color-bg: #F7FAFB;
   --color-bg-alt: #F2E6D4;
