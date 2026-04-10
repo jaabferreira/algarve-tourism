@@ -7,6 +7,8 @@ export interface TranslationStrings {
   "nav.blog": string;
   "nav.faq": string;
   "nav.reviews": string;
+  "nav.experiences": string;
+  "nav.journal": string;
   "hero.cta": string;
   "product.from": string;
   "product.duration": string;
