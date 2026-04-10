@@ -1,0 +1,27 @@
+---
+import PageLayout from '@algarve-tourism/shared/layouts/PageLayout.astro';
+import type { BrandConfig } from '@algarve-tourism/shared/types';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  locale: string;
+  path: string;
+  config: BrandConfig;
+  structuredData?: Record<string, unknown>;
+}
+
+const props = Astro.props;
+---
+
+<PageLayout {...props}>
+  <slot name="header" slot="header" />
+  <slot />
+  <slot name="footer" slot="footer" />
+</PageLayout>
+
+<style is:global>
+  @import "../styles/tokens.css";
+</style>

@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import HeroSection from "@algarve-tourism/shared/components/HeroSection.astro";
@@ -26,6 +26,9 @@ const items = loadItems();
 const featuredItems = items.slice(0, 6);
 const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
 
+// Luxury sailing yacht — high-res (2MB source)
+const heroImage = "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/ryLJLgeKQx2uUuGL5I9x";
+
 let heroTitle = config.tagline;
 let heroSubtitle = "";
 try {
@@ -38,7 +41,7 @@ try {
 } catch {}
 ---
 
-<PageLayout
+<Layout
   title={heroTitle}
   description={heroSubtitle || config.tagline}
   locale={locale}
@@ -52,22 +55,27 @@ try {
     subtitle={heroSubtitle}
     ctaText={t(locale, "hero.cta")}
     ctaHref={getLocalePath(locale, "/tours/")}
+    image={heroImage}
   />
 
   {featuredItems.length > 0 && (
     <section class="section container">
       <h2>{t(locale, "nav.tours")}</h2>
-      <ProductGrid items={featuredItems} locale={locale} />
+      <div style="margin-top: var(--space-8);">
+        <ProductGrid items={featuredItems} locale={locale} />
+      </div>
     </section>
   )}
 
   {topReviews.length > 0 && (
     <section class="section container">
       <h2>{t(locale, "reviews.title")}</h2>
-      <ReviewsGrid reviews={topReviews} />
+      <div style="margin-top: var(--space-8);">
+        <ReviewsGrid reviews={topReviews} />
+      </div>
     </section>
   )}
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>

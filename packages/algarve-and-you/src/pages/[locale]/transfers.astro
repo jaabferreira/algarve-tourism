@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "category.transfers")}
   description={`${t(locale, "category.transfers")} — ${config.name}`}
   locale={locale}
@@ -32,4 +32,4 @@ const locale = Astro.params.locale as Locale;
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>

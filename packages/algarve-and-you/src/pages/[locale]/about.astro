@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
@@ -26,7 +26,7 @@ try {
 } catch {}
 ---
 
-<PageLayout
+<Layout
   title={title}
   description={`${t(locale, "nav.about")} — ${config.name}`}
   locale={locale}
@@ -44,7 +44,7 @@ try {
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
 
 <style>
   .page-content {

@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t } from "@algarve-tourism/shared";
-import PageLayout from "@algarve-tourism/shared/layouts/PageLayout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
@@ -20,7 +20,7 @@ const posts = allPosts
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<PageLayout
+<Layout
   title={t(locale, "nav.blog")}
   description={`${t(locale, "nav.blog")} — ${config.name}`}
   locale={locale}
@@ -47,7 +47,7 @@ const posts = allPosts
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
-</PageLayout>
+</Layout>
 
 <style>
   .blog-grid {

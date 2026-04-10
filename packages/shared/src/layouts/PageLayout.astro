@@ -1,55 +1,93 @@
 ---
-import type { BrandConfig, Locale } from "../types.js";
-import SEO from "../components/SEO.astro";
+import SEO from '../components/SEO.astro';
+import type { BrandConfig } from '../types';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
-  type?: "website" | "article";
-  locale: Locale;
+  type?: 'website' | 'article';
+  locale: string;
   path: string;
   config: BrandConfig;
   structuredData?: Record<string, unknown>;
 }
 
-const props = Astro.props;
-const { config, locale } = props;
+const { title, description, image, type = 'website', locale, path, config, structuredData } = Astro.props;
+const brand = config.brand;
+
+const fontUrls: Record<string, string> = {
+  'atlantis': 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap',
+  'algarve-and-you': 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap',
+};
+const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang={locale}>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <SEO {...props} />
-
-    <!-- Google Analytics -->
-    <script
-      async
-      src={`https://www.googletagmanager.com/gtag/js?id=${config.analytics.gtag}`}
-    ></script>
-    <script define:vars={{ gtagId: config.analytics.gtag }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", gtagId);
-    </script>
-
-    <style is:global>
-      @import "@algarve-tourism/shared/styles/tokens.css";
-      @import "@algarve-tourism/shared/styles/base.css";
-      @import "@algarve-tourism/shared/styles/utilities.css";
-    </style>
-  </head>
-  <body>
-    <slot name="header" />
-    <main>
-      <slot />
-    </main>
-    <slot name="footer" />
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fontUrl} rel="stylesheet" />
+  <SEO
+    title={title}
+    description={description}
+    image={image}
+    type={type}
+    locale={locale}
+    path={path}
+    config={config}
+    structuredData={structuredData}
+  />
+  {config.analytics.gtag && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${config.analytics.gtag}`}></script>
+      <script define:vars={{ gtagId: config.analytics.gtag }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gtagId);
+      </script>
+    </>
+  )}
+</head>
+<body>
+  <slot name="header" />
+  <main>
+    <slot />
+  </main>
+  <slot name="footer" />
+</body>
 </html>
+
+<style is:global>
+  @import "@algarve-tourism/shared/styles/tokens.css";
+  @import "@algarve-tourism/shared/styles/base.css";
+  @import "@algarve-tourism/shared/styles/utilities.css";
+</style>
+
+<script>
+  // Scroll reveal
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.opacity = '1';
+            (entry.target as HTMLElement).style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      (el as HTMLElement).style.opacity = '0';
+      (el as HTMLElement).style.transform = 'translateY(20px)';
+      (el as HTMLElement).style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  }
+</script>
