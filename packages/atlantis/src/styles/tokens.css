@@ -1,0 +1,42 @@
+/* packages/atlantis/src/styles/tokens.css */
+/* Atlantis Tours — "Coastal Modern" */
+/* Overrides shared token defaults */
+
+:root {
+  /* === Colors — Algarve coast palette === */
+  --color-bg: #F7FAFB;
+  --color-bg-alt: #F2E6D4;
+  --color-bg-dark: #0A1A2A;
+  --color-surface: #FFFFFF;
+  --color-primary: #0C7C8C;
+  --color-primary-dark: #064E5C;
+  --color-primary-light: #1AABB8;
+  --color-accent: #D4854A;
+  --color-accent-light: #E8A76E;
+  --color-accent-hover: #B87038;
+  --color-text: #0F2027;
+  --color-text-body: #5E7A85;
+  --color-text-muted: #8A96A3;
+  --color-border: #D6E5EA;
+  --color-gold: #F59E0B;
+  --color-danger: #DC2626;
+  --color-success: #0C7C8C;
+
+  /* === Typography === */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-accent: 'Instrument Serif', Georgia, serif;
+
+  /* === Shape — Rounded, modern === */
+  --radius-card: 14px;
+  --radius-button: 8px;
+
+  /* === Shadows — Blue-tinted === */
+  --shadow-sm: 0 1px 4px rgba(12, 124, 140, 0.06);
+  --shadow-md: 0 2px 12px rgba(12, 124, 140, 0.08);
+  --shadow-lg: 0 12px 32px rgba(12, 124, 140, 0.12);
+
+  /* === Transitions — Snappy === */
+  --transition-base: 200ms ease-out;
+  --transition-slow: 250ms ease;
+}

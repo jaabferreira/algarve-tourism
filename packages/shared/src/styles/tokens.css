@@ -1,50 +1,65 @@
+/* packages/shared/src/styles/tokens.css */
+/* Base design tokens — overridden by brand-specific tokens.css */
+
 :root {
-  /* Color tokens — Neo-Coastal */
-  --bg-primary: #0A2540;
-  --bg-secondary: #0D2E4A;
-  --bg-surface: #112F4E;
-  --accent: #00D2BE;
-  --accent-hover: #00E8D2;
-  --accent-muted: rgba(0, 210, 190, 0.15);
-  --text-primary: #FFFFFF;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.35);
-  --surface: rgba(0, 210, 190, 0.06);
-  --border: rgba(0, 210, 190, 0.1);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --danger: #E85D44;
-  --success: #00D2BE;
+  /* === Colors === */
+  --color-bg: #F7FAFB;
+  --color-bg-alt: #FFFFFF;
+  --color-bg-dark: #0A1A2A;
+  --color-surface: #FFFFFF;
+  --color-primary: #0C7C8C;
+  --color-primary-dark: #064E5C;
+  --color-primary-light: #1AABB8;
+  --color-accent: #D4854A;
+  --color-accent-light: #E8A76E;
+  --color-accent-hover: #B85C38;
+  --color-text: #0F2027;
+  --color-text-body: #5E7A85;
+  --color-text-muted: #8A96A3;
+  --color-border: #D6E5EA;
+  --color-gold: #F59E0B;
+  --color-danger: #DC2626;
+  --color-success: #0C7C8C;
+  --color-secondary: #5E7A85;
+  --color-secondary-light: #8A96A3;
 
-  /* Typography */
-  --font-family: 'Manrope', system-ui, sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --font-size-5xl: 3.5rem;
+  /* === Typography === */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-accent: 'Instrument Serif', Georgia, serif;
 
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.75rem;
+  --text-4xl: 2rem;
+  --text-5xl: 2.25rem;
+  --text-hero: clamp(2.5rem, 6vw, 4rem);
 
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.3;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.7;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 
-  --letter-spacing-tight: -0.02em;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.05em;
-  --letter-spacing-wider: 0.1em;
+  --leading-none: 1;
+  --leading-tight: 1.08;
+  --leading-snug: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.75;
 
-  /* Spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.14em;
+
+  /* === Spacing === */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -56,27 +71,29 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
-  --space-24: 6rem;
 
-  /* Border radius */
-  --radius-sm: 4px;
-  --radius-md: 6px;
+  /* === Shape === */
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
   --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-xl: 14px;
+  --radius-pill: 20px;
   --radius-full: 9999px;
+  --radius-card: 14px;
+  --radius-button: 8px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.5);
+  /* === Shadows === */
+  --shadow-sm: 0 1px 4px rgba(12, 124, 140, 0.06);
+  --shadow-md: 0 2px 12px rgba(12, 124, 140, 0.08);
+  --shadow-lg: 0 12px 32px rgba(12, 124, 140, 0.12);
 
-  /* Layout */
-  --max-width: 1200px;
-  --header-height: 72px;
+  /* === Layout === */
+  --max-width: 1320px;
+  --header-height: 64px;
 
-  /* Transitions */
+  /* === Transitions === */
   --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
+  --transition-base: 200ms ease-out;
+  --transition-slow: 350ms ease;
 }
