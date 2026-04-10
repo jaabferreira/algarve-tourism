@@ -9,6 +9,10 @@ import HeroSection from "@algarve-tourism/shared/components/HeroSection.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import Marquee from "@algarve-tourism/shared/components/Marquee.astro";
+import EditorialQuote from "@algarve-tourism/shared/components/EditorialQuote.astro";
+import SectionDivider from "@algarve-tourism/shared/components/SectionDivider.astro";
+import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
 import { config } from "../../config.js";
 import { getLocalePath } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
@@ -39,6 +43,35 @@ try {
     heroSubtitle = homePage.data.description ?? "";
   }
 } catch {}
+
+// Float card data from first featured item
+const firstItem = featuredItems[0];
+const floatLabel = firstItem?.category
+  ? firstItem.category.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
+  : undefined;
+const floatTitle = firstItem?.name;
+const floatMeta = firstItem?.price_from
+  ? `From €${firstItem.price_from}`
+  : undefined;
+const floatHref = firstItem?.slug
+  ? getLocalePath(locale, `/tours/${firstItem.slug}/`)
+  : undefined;
+
+// Editorial quote — pick best review (5-star first, fallback to first)
+const quoteReview =
+  manualReviews.find((r) => r.rating >= 5) || manualReviews[0];
+
+// Blog posts
+const marqueeText = "Boat Tours · Wine Tastings · Hammam Rituals · Coastal Walks · Private Transfers · Sunset Cruises · Olive Oil Journeys";
+
+let blogPosts: Awaited<ReturnType<typeof getCollection<"blog">>> = [];
+try {
+  const allPosts = await getCollection("blog");
+  blogPosts = allPosts
+    .filter((post) => post.data.locale === locale)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .slice(0, 3);
+} catch {}
 ---
 
 <Layout
@@ -58,22 +91,77 @@ try {
     ctaText={t(locale, "hero.cta")}
     ctaLink={getLocalePath(locale, "/tours/")}
     image={heroImage}
+    floatLabel={floatLabel}
+    floatTitle={floatTitle}
+    floatMeta={floatMeta}
+    floatHref={floatHref}
   />
 
+  <Marquee text={marqueeText} />
+
   {featuredItems.length > 0 && (
-    <section class="section container">
-      <h2>{t(locale, "nav.tours")}</h2>
-      <div style="margin-top: var(--space-8);">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Curated Experiences</p>
+            <h2 class="section-title">A Taste of <em>What Awaits</em></h2>
+          </div>
+          <a href={getLocalePath(locale, "/tours/")} class="see-all">View all experiences &rarr;</a>
+        </div>
         <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
       </div>
     </section>
   )}
 
+  <SectionDivider text="Where the coastline tells its own story" />
+
+  {quoteReview && (
+    <EditorialQuote
+      text={quoteReview.text}
+      author={quoteReview.author}
+      origin={quoteReview.origin}
+    />
+  )}
+
   {topReviews.length > 0 && (
-    <section class="section container">
-      <h2>{t(locale, "reviews.title")}</h2>
-      <div style="margin-top: var(--space-8);">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Guest Voices</p>
+            <h2 class="section-title">What They <em>Remember</em></h2>
+          </div>
+          <a href={getLocalePath(locale, "/reviews/")} class="see-all">All reviews &rarr;</a>
+        </div>
         <ReviewsGrid reviews={topReviews} brand={config.brand} locale={locale} />
+      </div>
+    </section>
+  )}
+
+  {blogPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">From the Journal</p>
+            <h2 class="section-title">Stories from <em>the Coast</em></h2>
+          </div>
+          <a href={getLocalePath(locale, "/blog/")} class="see-all">Read more &rarr;</a>
+        </div>
+        <div class="journal-grid">
+          {blogPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              slug={post.slug.replace(`${locale}/`, "")}
+              image={post.data.image}
+              date={post.data.date}
+              locale={locale}
+              brand={config.brand}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )}
@@ -81,3 +169,62 @@ try {
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} />
 </Layout>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-10);
+  }
+  .section-label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-light);
+    color: var(--color-text);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .see-all {
+    font-size: var(--text-xs);
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+  }
+  .see-all:hover {
+    color: var(--color-primary);
+  }
+  .journal-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: var(--space-5);
+  }
+  @media (max-width: 960px) {
+    .journal-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .journal-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+  }
+</style>
