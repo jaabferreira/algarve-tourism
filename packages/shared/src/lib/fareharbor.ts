@@ -18,7 +18,7 @@ export function createFHClient(config: FHClientConfig) {
 
   return {
     async getItems(shortname: string, lang?: string): Promise<FHItem[]> {
-      const params = lang ? `?lang=${lang}` : "";
+      const params = lang ? `?language=${lang}` : "";
       const url = `${FH_BASE_URL}/companies/${shortname}/items/${params}`;
       const response = await fetch(url, { headers });
       if (!response.ok) {
