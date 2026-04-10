@@ -11,6 +11,71 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+
+const COMPLAINTS_LINK = `<a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener noreferrer">Livro de Reclama\u00e7\u00f5es</a>`;
+
+const COMPANY_INFO = `P4Y Services - Mediacao Imobiliaria, Lda<br/>Rua Sophia Mello Breyner, Lote 43, Fraccao C, 8200-084 Albufeira<br/>`;
+
+const termsByLocale: Record<string, { title: string; body: string }[]> = {
+  en: [
+    { title: "1. Company Information", body: `${COMPANY_INFO}RNAAT Licence: 847/2020 | Tax Number: 516 094 464` },
+    { title: "2. Booking Process", body: "Full payment is required at the time of booking. Upon confirmation, you will receive an email confirmation which serves as your voucher. Please present this voucher on the day of your experience." },
+    { title: "3. Conditions of Access", body: "Our maritime experiences are not suitable for individuals with back problems, pregnant women, persons with heart conditions, or wheelchair users. Participants must be in adequate physical condition. Children must be accompanied by a responsible adult at all times." },
+    { title: "4. Clothing and Preparation", body: "Please arrive at the meeting point at least 30 minutes before the scheduled departure. Wear comfortable clothing and bring sunscreen, a hat, and a towel. We provide life jackets and all required safety equipment." },
+    { title: "5. Liability and Risks", body: "Maritime activities carry inherent risks. By booking, you acknowledge these risks and agree that P4Y Services shall not be liable for any injury, loss, or damage arising from participation, except where caused by our negligence. Participants engage in all activities at their own risk." },
+    { title: "6. Insurance and Safety", body: "All our vessels carry Civil Liability Insurance as required by Portuguese maritime law. Life jackets are provided and must be worn when instructed by the crew. Failure to return a life jacket will result in a charge of \u20ac70." },
+    { title: "7. Pets", body: "Only certified service animals are permitted on our vessels. No other pets are allowed." },
+    { title: "8. Data Protection", body: "We process personal data in accordance with the General Data Protection Regulation (GDPR). Your data is used solely for booking management, communication regarding your experience, and legal compliance. You may request access to, correction of, or deletion of your personal data at any time." },
+    { title: "9. Image Capture", body: "In accordance with Article 79 of the Portuguese Civil Code, photographs and videos may be taken during experiences for promotional purposes. If you do not wish to appear in promotional materials, please inform the crew before departure." },
+    { title: "10. Customer Conduct", body: "The captain and crew reserve the right to refuse boarding or remove any passenger who is intoxicated, disruptive, or poses a safety risk to themselves or others. No refund will be provided in such cases." },
+    { title: "11. Governing Law", body: "These terms are governed by Portuguese law. Any disputes shall be resolved in the competent Portuguese courts." },
+    { title: "12. Complaints", body: `Complaints will be acknowledged within 5 business days and resolved within 30 days. You may also submit complaints via the official ${COMPLAINTS_LINK}.` },
+  ],
+  pt: [
+    { title: "1. Informa\u00e7\u00e3o da Empresa", body: `${COMPANY_INFO}Licen\u00e7a RNAAT: 847/2020 | NIF: 516 094 464` },
+    { title: "2. Processo de Reserva", body: "O pagamento integral \u00e9 exigido no momento da reserva. Ap\u00f3s confirma\u00e7\u00e3o, receber\u00e1 um e-mail de confirma\u00e7\u00e3o que serve como voucher. Por favor, apresente este voucher no dia da sua experi\u00eancia." },
+    { title: "3. Condi\u00e7\u00f5es de Acesso", body: "As nossas experi\u00eancias mar\u00edtimas n\u00e3o s\u00e3o adequadas para pessoas com problemas de costas, gr\u00e1vidas, pessoas com problemas card\u00edacos ou utilizadores de cadeira de rodas. Os participantes devem encontrar-se em condi\u00e7\u00f5es f\u00edsicas adequadas. As crian\u00e7as devem ser sempre acompanhadas por um adulto respons\u00e1vel." },
+    { title: "4. Vestu\u00e1rio e Prepara\u00e7\u00e3o", body: "Por favor, chegue ao ponto de encontro pelo menos 30 minutos antes da partida prevista. Use roupa confort\u00e1vel e traga protetor solar, chap\u00e9u e toalha. N\u00f3s fornecemos coletes salva-vidas e todo o equipamento de seguran\u00e7a necess\u00e1rio." },
+    { title: "5. Responsabilidade e Riscos", body: "As atividades mar\u00edtimas acarretam riscos inerentes. Ao efetuar a reserva, reconhece estes riscos e concorda que a P4Y Services n\u00e3o ser\u00e1 respons\u00e1vel por quaisquer les\u00f5es, perdas ou danos resultantes da participa\u00e7\u00e3o, exceto quando causados por neglig\u00eancia nossa. Os participantes participam em todas as atividades por sua conta e risco." },
+    { title: "6. Seguro e Seguran\u00e7a", body: "Todas as nossas embarca\u00e7\u00f5es possuem Seguro de Responsabilidade Civil conforme exigido pela legisla\u00e7\u00e3o mar\u00edtima portuguesa. Os coletes salva-vidas s\u00e3o fornecidos e devem ser usados quando instru\u00eddo pela tripula\u00e7\u00e3o. A n\u00e3o devolu\u00e7\u00e3o de um colete salva-vidas resultar\u00e1 numa cobran\u00e7a de \u20ac70." },
+    { title: "7. Animais de Estima\u00e7\u00e3o", body: "Apenas animais de assist\u00eancia certificados s\u00e3o permitidos nas nossas embarca\u00e7\u00f5es. N\u00e3o s\u00e3o permitidos outros animais." },
+    { title: "8. Prote\u00e7\u00e3o de Dados", body: "Processamos dados pessoais em conformidade com o Regulamento Geral de Prote\u00e7\u00e3o de Dados (RGPD). Os seus dados s\u00e3o utilizados exclusivamente para gest\u00e3o de reservas, comunica\u00e7\u00e3o relativa \u00e0 sua experi\u00eancia e cumprimento legal. Pode solicitar o acesso, a corre\u00e7\u00e3o ou a elimina\u00e7\u00e3o dos seus dados pessoais a qualquer momento." },
+    { title: "9. Captura de Imagem", body: "Nos termos do Artigo 79.\u00ba do C\u00f3digo Civil Portugu\u00eas, podem ser tiradas fotografias e v\u00eddeos durante as experi\u00eancias para fins promocionais. Se n\u00e3o desejar aparecer em materiais promocionais, informe a tripula\u00e7\u00e3o antes da partida." },
+    { title: "10. Conduta do Cliente", body: "O capit\u00e3o e a tripula\u00e7\u00e3o reservam-se o direito de recusar o embarque ou remover qualquer passageiro que se encontre embriagado, perturbador ou que represente um risco de seguran\u00e7a para si ou para os outros. N\u00e3o ser\u00e1 efetuado qualquer reembolso nestes casos." },
+    { title: "11. Lei Aplic\u00e1vel", body: "Estes termos s\u00e3o regidos pela legisla\u00e7\u00e3o portuguesa. Quaisquer lit\u00edgios ser\u00e3o resolvidos nos tribunais portugueses competentes." },
+    { title: "12. Reclama\u00e7\u00f5es", body: `As reclama\u00e7\u00f5es ser\u00e3o reconhecidas no prazo de 5 dias \u00fateis e resolvidas no prazo de 30 dias. Pode tamb\u00e9m submeter reclama\u00e7\u00f5es atrav\u00e9s do ${COMPLAINTS_LINK} oficial.` },
+  ],
+  es: [
+    { title: "1. Informaci\u00f3n de la Empresa", body: `${COMPANY_INFO}Licencia RNAAT: 847/2020 | NIF: 516 094 464` },
+    { title: "2. Proceso de Reserva", body: "El pago \u00edntegro es requerido en el momento de la reserva. Tras la confirmaci\u00f3n, recibir\u00e1 un correo electr\u00f3nico de confirmaci\u00f3n que servir\u00e1 como su voucher. Por favor, presente este voucher el d\u00eda de su experiencia." },
+    { title: "3. Condiciones de Acceso", body: "Nuestras experiencias mar\u00edtimas no son adecuadas para personas con problemas de espalda, mujeres embarazadas, personas con problemas card\u00edacos o usuarios de silla de ruedas. Los participantes deben encontrarse en condiciones f\u00edsicas adecuadas. Los menores deben estar acompa\u00f1ados por un adulto responsable en todo momento." },
+    { title: "4. Vestimenta y Preparaci\u00f3n", body: "Por favor, llegue al punto de encuentro al menos 30 minutos antes de la salida programada. Use ropa c\u00f3moda y traiga protector solar, sombrero y toalla. Nosotros proporcionamos chalecos salvavidas y todo el equipo de seguridad necesario." },
+    { title: "5. Responsabilidad y Riesgos", body: "Las actividades mar\u00edtimas conllevan riesgos inherentes. Al realizar la reserva, usted reconoce estos riesgos y acepta que P4Y Services no ser\u00e1 responsable de ninguna lesi\u00f3n, p\u00e9rdida o da\u00f1o derivado de la participaci\u00f3n, excepto cuando sea causado por nuestra negligencia. Los participantes realizan todas las actividades bajo su propia responsabilidad." },
+    { title: "6. Seguro y Seguridad", body: "Todas nuestras embarcaciones cuentan con Seguro de Responsabilidad Civil conforme a la legislaci\u00f3n mar\u00edtima portuguesa. Los chalecos salvavidas son proporcionados y deben ser usados cuando lo indique la tripulaci\u00f3n. La no devoluci\u00f3n de un chaleco salvavidas resultar\u00e1 en un cargo de \u20ac70." },
+    { title: "7. Mascotas", body: "Solo se permiten animales de asistencia certificados en nuestras embarcaciones. No se permiten otras mascotas." },
+    { title: "8. Protecci\u00f3n de Datos", body: "Procesamos datos personales de acuerdo con el Reglamento General de Protecci\u00f3n de Datos (RGPD). Sus datos se utilizan exclusivamente para la gesti\u00f3n de reservas, comunicaci\u00f3n relativa a su experiencia y cumplimiento legal. Puede solicitar el acceso, la correcci\u00f3n o la eliminaci\u00f3n de sus datos personales en cualquier momento." },
+    { title: "9. Captura de Im\u00e1genes", body: "De conformidad con el Art\u00edculo 79 del C\u00f3digo Civil Portugu\u00e9s, se pueden tomar fotograf\u00edas y v\u00eddeos durante las experiencias con fines promocionales. Si no desea aparecer en materiales promocionales, informe a la tripulaci\u00f3n antes de la salida." },
+    { title: "10. Conducta del Cliente", body: "El capit\u00e1n y la tripulaci\u00f3n se reservan el derecho de rechazar el embarque o retirar a cualquier pasajero que se encuentre en estado de ebriedad, sea perturbador o suponga un riesgo de seguridad para s\u00ed mismo o para los dem\u00e1s. No se realizar\u00e1 ning\u00fan reembolso en dichos casos." },
+    { title: "11. Ley Aplicable", body: "Estos t\u00e9rminos se rigen por la legislaci\u00f3n portuguesa. Cualquier disputa ser\u00e1 resuelta en los tribunales portugueses competentes." },
+    { title: "12. Reclamaciones", body: `Las reclamaciones ser\u00e1n reconocidas en un plazo de 5 d\u00edas h\u00e1biles y resueltas en un plazo de 30 d\u00edas. Tambi\u00e9n puede presentar reclamaciones a trav\u00e9s del ${COMPLAINTS_LINK} oficial.` },
+  ],
+  fr: [
+    { title: "1. Informations sur l\u2019Entreprise", body: `${COMPANY_INFO}Licence RNAAT\u00a0: 847/2020 | NIF\u00a0: 516 094 464` },
+    { title: "2. Processus de R\u00e9servation", body: "Le paiement int\u00e9gral est exig\u00e9 au moment de la r\u00e9servation. Apr\u00e8s confirmation, vous recevrez un e-mail de confirmation faisant office de voucher. Veuillez pr\u00e9senter ce voucher le jour de votre exp\u00e9rience." },
+    { title: "3. Conditions d\u2019Acc\u00e8s", body: "Nos exp\u00e9riences maritimes ne sont pas adapt\u00e9es aux personnes souffrant de probl\u00e8mes de dos, aux femmes enceintes, aux personnes atteintes de troubles cardiaques ou aux utilisateurs de fauteuil roulant. Les participants doivent \u00eatre en condition physique ad\u00e9quate. Les enfants doivent \u00eatre accompagn\u00e9s d\u2019un adulte responsable \u00e0 tout moment." },
+    { title: "4. Tenue et Pr\u00e9paration", body: "Veuillez arriver au point de rencontre au moins 30 minutes avant le d\u00e9part pr\u00e9vu. Portez des v\u00eatements confortables et apportez de la cr\u00e8me solaire, un chapeau et une serviette. Nous fournissons les gilets de sauvetage et tout l\u2019\u00e9quipement de s\u00e9curit\u00e9 n\u00e9cessaire." },
+    { title: "5. Responsabilit\u00e9 et Risques", body: "Les activit\u00e9s maritimes comportent des risques inh\u00e9rents. En effectuant votre r\u00e9servation, vous reconnaissez ces risques et acceptez que P4Y Services ne puisse \u00eatre tenue responsable de toute blessure, perte ou dommage r\u00e9sultant de la participation, sauf en cas de n\u00e9gligence de notre part. Les participants s\u2019engagent dans toutes les activit\u00e9s \u00e0 leurs propres risques." },
+    { title: "6. Assurance et S\u00e9curit\u00e9", body: "Toutes nos embarcations disposent d\u2019une Assurance Responsabilit\u00e9 Civile conform\u00e9ment \u00e0 la l\u00e9gislation maritime portugaise. Les gilets de sauvetage sont fournis et doivent \u00eatre port\u00e9s lorsque l\u2019\u00e9quipage le demande. La non-restitution d\u2019un gilet de sauvetage entra\u00eenera une facturation de \u20ac70." },
+    { title: "7. Animaux de Compagnie", body: "Seuls les animaux d\u2019assistance certifi\u00e9s sont autoris\u00e9s \u00e0 bord de nos embarcations. Aucun autre animal n\u2019est admis." },
+    { title: "8. Protection des Donn\u00e9es", body: "Nous traitons les donn\u00e9es personnelles conform\u00e9ment au R\u00e8glement G\u00e9n\u00e9ral sur la Protection des Donn\u00e9es (RGPD). Vos donn\u00e9es sont utilis\u00e9es exclusivement pour la gestion des r\u00e9servations, la communication relative \u00e0 votre exp\u00e9rience et le respect des obligations l\u00e9gales. Vous pouvez demander l\u2019acc\u00e8s, la rectification ou la suppression de vos donn\u00e9es personnelles \u00e0 tout moment." },
+    { title: "9. Capture d\u2019Images", body: "Conform\u00e9ment \u00e0 l\u2019Article 79 du Code Civil Portugais, des photographies et vid\u00e9os peuvent \u00eatre prises lors des exp\u00e9riences \u00e0 des fins promotionnelles. Si vous ne souhaitez pas appara\u00eetre dans les supports promotionnels, veuillez en informer l\u2019\u00e9quipage avant le d\u00e9part." },
+    { title: "10. Conduite du Client", body: "Le capitaine et l\u2019\u00e9quipage se r\u00e9servent le droit de refuser l\u2019embarquement ou de d\u00e9barquer tout passager en \u00e9tat d\u2019\u00e9bri\u00e9t\u00e9, perturbateur ou pr\u00e9sentant un risque pour la s\u00e9curit\u00e9 de lui-m\u00eame ou d\u2019autrui. Aucun remboursement ne sera effectu\u00e9 dans ces cas." },
+    { title: "11. Droit Applicable", body: "Les pr\u00e9sentes conditions sont r\u00e9gies par le droit portugais. Tout litige sera r\u00e9solu devant les tribunaux portugais comp\u00e9tents." },
+    { title: "12. R\u00e9clamations", body: `Les r\u00e9clamations seront accus\u00e9es de r\u00e9ception dans un d\u00e9lai de 5 jours ouvrables et r\u00e9solues dans un d\u00e9lai de 30 jours. Vous pouvez \u00e9galement soumettre des r\u00e9clamations via le ${COMPLAINTS_LINK} officiel.` },
+  ],
+};
+
+const sections = termsByLocale[locale] ?? termsByLocale.en;
 ---
 
 <Layout
@@ -25,43 +90,12 @@ const locale = Astro.params.locale as Locale;
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "footer.terms")}</h1>
     <div class="page-content">
-      <h2>1. Company Information</h2>
-      <p>P4Y Services - Mediacao Imobiliaria, Lda<br/>
-      Rua Sophia Mello Breyner, Lote 43, Fraccao C, 8200-084 Albufeira<br/>
-      RNAAT Licence: 847/2020 | Tax Number: 516 094 464</p>
-
-      <h2>2. Booking Process</h2>
-      <p>Full payment is required at the time of booking. Upon confirmation, you will receive an email confirmation which serves as your voucher. Please present this voucher on the day of your experience.</p>
-
-      <h2>3. Conditions of Access</h2>
-      <p>Our maritime experiences are not suitable for individuals with back problems, pregnant women, persons with heart conditions, or wheelchair users. Participants must be in adequate physical condition. Children must be accompanied by a responsible adult at all times.</p>
-
-      <h2>4. Clothing and Preparation</h2>
-      <p>Please arrive at the meeting point at least 30 minutes before the scheduled departure. Wear comfortable clothing and bring sunscreen, a hat, and a towel. We provide life jackets and all required safety equipment.</p>
-
-      <h2>5. Liability and Risks</h2>
-      <p>Maritime activities carry inherent risks. By booking, you acknowledge these risks and agree that P4Y Services shall not be liable for any injury, loss, or damage arising from participation, except where caused by our negligence. Participants engage in all activities at their own risk.</p>
-
-      <h2>6. Insurance and Safety</h2>
-      <p>All our vessels carry Civil Liability Insurance as required by Portuguese maritime law. Life jackets are provided and must be worn when instructed by the crew. Failure to return a life jacket will result in a charge of €70.</p>
-
-      <h2>7. Pets</h2>
-      <p>Only certified service animals are permitted on our vessels. No other pets are allowed.</p>
-
-      <h2>8. Data Protection</h2>
-      <p>We process personal data in accordance with the General Data Protection Regulation (GDPR). Your data is used solely for booking management, communication regarding your experience, and legal compliance. You may request access to, correction of, or deletion of your personal data at any time.</p>
-
-      <h2>9. Image Capture</h2>
-      <p>In accordance with Article 79 of the Portuguese Civil Code, photographs and videos may be taken during experiences for promotional purposes. If you do not wish to appear in promotional materials, please inform the crew before departure.</p>
-
-      <h2>10. Customer Conduct</h2>
-      <p>The captain and crew reserve the right to refuse boarding or remove any passenger who is intoxicated, disruptive, or poses a safety risk to themselves or others. No refund will be provided in such cases.</p>
-
-      <h2>11. Governing Law</h2>
-      <p>These terms are governed by Portuguese law. Any disputes shall be resolved in the competent Portuguese courts.</p>
-
-      <h2>12. Complaints</h2>
-      <p>Complaints will be acknowledged within 5 business days and resolved within 30 days. You may also submit complaints via the official <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener noreferrer">Livro de Reclamações</a>.</p>
+      {sections.map((section) => (
+        <Fragment>
+          <h2>{section.title}</h2>
+          <p set:html={section.body} />
+        </Fragment>
+      ))}
     </div>
   </section>
 

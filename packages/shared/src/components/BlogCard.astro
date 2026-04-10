@@ -33,9 +33,7 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
     <h3 class="blog-card__title">{title}</h3>
     <p class="blog-card__excerpt">{excerpt}</p>
     <span class="blog-card__link">
-      {brand === "algarve-and-you"
-        ? `${t(locale, "blog.read_more")} \u2192`
-        : `${t(locale, "blog.read_more")} \u2192`}
+      {`${t(locale, "blog.read_more")} \u2192`}
     </span>
   </div>
 </a>

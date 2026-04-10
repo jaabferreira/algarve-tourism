@@ -31,7 +31,24 @@ export function createFHClient(config: FHClientConfig) {
   };
 }
 
-export function normalizeItem(item: FHItem, category: string): NormalizedItem {
+const CATEGORY_OVERRIDES: Record<number, string> = {};
+
+const CATEGORY_RULES: [RegExp, string][] = [
+  [/Transfer/i, "transfers"],
+  [/Passeio de (?:dia inteiro|meio dia)|Dia inteiro O Melhor/i, "land-tours"],
+  [/Restaurante|Noite (?:de Fado|Árabe|Espanhola)|Chef em Casa/i, "gastronomy"],
+  [/Centro de Check|Check-in Centre|Massagens|Ginásio|Guardar Bagagem|BEM ESTAR/i, "spa"],
+];
+
+function categorizeItem(item: FHItem): string {
+  if (CATEGORY_OVERRIDES[item.pk]) return CATEGORY_OVERRIDES[item.pk];
+  for (const [pattern, category] of CATEGORY_RULES) {
+    if (pattern.test(item.name)) return category;
+  }
+  return "boats";
+}
+
+export function normalizeItem(item: FHItem, category?: string): NormalizedItem {
   const firstLocation = item.locations[0] ?? null;
 
   return {
@@ -64,6 +81,6 @@ export function normalizeItem(item: FHItem, category: string): NormalizedItem {
       price: p.total,
     })),
     cancellation_policy_html: item.cancellation_policy_safe_html,
-    category,
+    category: category ?? categorizeItem(item),
   };
 }

@@ -9,6 +9,7 @@ export interface BrandConfig {
     shortname: string;
     categories: string[];
     itemPks?: number[];
+    flow: string;
   };
   logo: string;
   social: {

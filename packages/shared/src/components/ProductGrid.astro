@@ -30,6 +30,7 @@ const { items, brand, locale } = Astro.props;
         brand={brand}
         locale={locale}
         featured={brand === "algarve-and-you" && i === 0}
+        imageIndex={i % Math.max(item.images?.length || 1, 1)}
       />
     </div>
   ))}
@@ -81,6 +82,12 @@ const { items, brand, locale } = Astro.props;
 
   .product-grid--algarve-and-you .product-grid__item--featured {
     grid-row: span 2;
+    display: flex;
+  }
+
+  .product-grid--algarve-and-you .product-grid__item--featured > :global(*) {
+    flex: 1;
+    min-height: 0;
   }
 
   @media (max-width: 960px) {

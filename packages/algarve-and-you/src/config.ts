@@ -8,6 +8,7 @@ export const config: BrandConfig = {
   fh: {
     shortname: "atlantistours",
     categories: ["boats", "gastronomy", "land-tours", "transfers", "spa"],
+    flow: "1602637",
   },
   logo: "/logo-ay.png",
   social: {

@@ -29,14 +29,14 @@ const columns: FooterColumn[] =
         {
           heading: t(locale, "nav.tours"),
           links: [
-            { label: "Cave Circuits", href: getLocalePath(locale, "/tours/") },
-            { label: "Yacht Cruises", href: getLocalePath(locale, "/tours/") },
-            { label: "Fishing Trips", href: getLocalePath(locale, "/tours/") },
-            { label: "Private Charters", href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "footer.cave_circuits"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "footer.yacht_cruises"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "footer.fishing_trips"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "footer.private_charters"), href: getLocalePath(locale, "/tours/") },
           ],
         },
         {
-          heading: "Company",
+          heading: t(locale, "footer.company"),
           links: [
             { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
             { label: t(locale, "nav.reviews"), href: getLocalePath(locale, "/reviews/") },
@@ -45,7 +45,7 @@ const columns: FooterColumn[] =
           ],
         },
         {
-          heading: "Legal",
+          heading: t(locale, "footer.legal"),
           links: [
             { label: t(locale, "footer.terms"), href: getLocalePath(locale, "/terms/") },
             { label: t(locale, "footer.cancellation_policy"), href: getLocalePath(locale, "/cancellation-policy/") },
@@ -65,7 +65,7 @@ const columns: FooterColumn[] =
           ],
         },
         {
-          heading: "Discover",
+          heading: t(locale, "footer.discover"),
           links: [
             { label: t(locale, "nav.journal"), href: getLocalePath(locale, "/blog/") },
             { label: t(locale, "nav.about"), href: getLocalePath(locale, "/about/") },
@@ -75,7 +75,7 @@ const columns: FooterColumn[] =
           ],
         },
         {
-          heading: "Legal",
+          heading: t(locale, "footer.legal"),
           links: [
             { label: t(locale, "footer.terms"), href: getLocalePath(locale, "/terms/") },
             { label: t(locale, "footer.cancellation_policy"), href: getLocalePath(locale, "/cancellation-policy/") },
@@ -86,8 +86,8 @@ const columns: FooterColumn[] =
 
 const description =
   brand === "atlantis"
-    ? "Algarve boat tours, cave circuits, and yacht cruises departing daily from Albufeira Marina."
-    : "Curated experiences across the Algarve — from coastal adventures to gastronomy, wellness, and cultural discovery.";
+    ? t(locale, "footer.desc_atlantis")
+    : t(locale, "footer.desc_ay");
 ---
 
 <footer class="footer" data-brand={brand}>
@@ -137,7 +137,7 @@ const description =
   </div>
 
   <div class="container footer__bottom">
-    <p class="footer__copy">&copy; {year} {config.name}. All rights reserved.</p>
+    <p class="footer__copy">&copy; {year} {config.name}. {t(locale, "footer.rights")}</p>
   </div>
 </footer>
 

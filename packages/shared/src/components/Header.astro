@@ -35,7 +35,7 @@ const navItems: NavItem[] =
       ];
 
 const ctaLabel = t(locale, "nav.book_now");
-const ctaHref = getLocalePath(locale, "/tours/");
+const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full-items=yes&flow=${config.fh.flow}`;
 ---
 
 <header class="header" data-brand={brand}>
