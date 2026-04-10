@@ -2,7 +2,7 @@
 /* Algarve & You — "Mediterranean Editorial" */
 /* Overrides shared token defaults */
 
-:root {
+:root:root {
   /* === Colors — Warm Algarve landscape === */
   --color-bg: #FAF6F0;
   --color-bg-alt: #F2EBE0;
