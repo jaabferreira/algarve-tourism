@@ -51,10 +51,12 @@ try {
   <Header slot="header" config={config} locale={locale} path={`/${locale}${path}`} />
 
   <HeroSection
+    config={config}
+    locale={locale}
     title={heroTitle}
     subtitle={heroSubtitle}
     ctaText={t(locale, "hero.cta")}
-    ctaHref={getLocalePath(locale, "/tours/")}
+    ctaLink={getLocalePath(locale, "/tours/")}
     image={heroImage}
   />
 
