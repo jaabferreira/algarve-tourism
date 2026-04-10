@@ -9,6 +9,7 @@ export const config: BrandConfig = {
     shortname: "atlantistours",
     categories: ["boats"],
     itemPks: [717720, 717754, 718016, 717728, 718024],
+    flow: "1602637",
   },
   logo: "/logo-atlantis.png",
   social: {

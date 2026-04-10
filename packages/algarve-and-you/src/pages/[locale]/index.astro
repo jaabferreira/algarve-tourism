@@ -14,7 +14,7 @@ import EditorialQuote from "@algarve-tourism/shared/components/EditorialQuote.as
 import SectionDivider from "@algarve-tourism/shared/components/SectionDivider.astro";
 import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
 import { config } from "../../config.js";
-import { getLocalePath } from "@algarve-tourism/shared";
+import { getLocalePath, buildLocalBusiness } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
 import { loadItems } from "../../data.js";
 
@@ -25,13 +25,40 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const path = "/";
 
+const structuredData = buildLocalBusiness(config);
+
 const items = loadItems();
 
-const featuredItems = items.slice(0, 6);
+// Pick one item per category first, then fill remaining slots
+const categories = config.fh.categories;
+const pickedPks = new Set<number>();
+const diverseItems: typeof items = [];
+
+for (const cat of categories) {
+  const match = items.find((item) => item.category === cat && !pickedPks.has(item.pk));
+  if (match) {
+    diverseItems.push(match);
+    pickedPks.add(match.pk);
+  }
+}
+// Fill remaining slots up to 6 with items not yet picked
+for (const item of items) {
+  if (diverseItems.length >= 6) break;
+  if (!pickedPks.has(item.pk)) {
+    diverseItems.push(item);
+    pickedPks.add(item.pk);
+  }
+}
+const featuredItems = diverseItems;
 const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
 
-// Luxury sailing yacht — high-res (2MB source)
-const heroImage = "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/ryLJLgeKQx2uUuGL5I9x";
+// Hero image candidates — uncomment to try:
+// 1. Benagil cave gallery: "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/r5ANbJiiTTUEF7dC8OAn"
+// 2. Benagil cave gallery: "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/BKMaJdWRcCnfS00Ch4As"
+// 3. Benagil full caves: "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/jMaP9WzHS4Gak31H6yia"
+// 4. Benagil full caves: "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/DlXwGycPTSuGCB8qYiHE"
+// 5. Speedboat Benagil: "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/bT14MOwPTli7XyXt79eR"
+const heroImage = "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/bT14MOwPTli7XyXt79eR";
 
 let heroTitle = config.tagline;
 let heroSubtitle = "";
@@ -62,7 +89,7 @@ const quoteReview =
   manualReviews.find((r) => r.rating >= 5) || manualReviews[0];
 
 // Blog posts
-const marqueeText = "Boat Tours · Wine Tastings · Hammam Rituals · Coastal Walks · Private Transfers · Sunset Cruises · Olive Oil Journeys";
+const marqueeText = t(locale, "marquee.ay");
 
 let blogPosts: Awaited<ReturnType<typeof getCollection<"blog">>> = [];
 try {
@@ -80,6 +107,7 @@ try {
   locale={locale}
   path={path}
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}${path}`} />
 
@@ -104,17 +132,17 @@ try {
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-label">Curated Experiences</p>
-            <h2 class="section-title">A Taste of <em>What Awaits</em></h2>
+            <p class="section-label">{t(locale, "home.curated_label")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.curated_title")} />
           </div>
-          <a href={getLocalePath(locale, "/tours/")} class="see-all">View all experiences &rarr;</a>
+          <a href={getLocalePath(locale, "/tours/")} class="see-all">{t(locale, "home.view_all_experiences")} &rarr;</a>
         </div>
         <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
       </div>
     </section>
   )}
 
-  <SectionDivider text="Where the coastline tells its own story" />
+  <SectionDivider text={t(locale, "home.divider_text")} />
 
   {quoteReview && (
     <EditorialQuote
@@ -129,10 +157,10 @@ try {
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-label">Guest Voices</p>
-            <h2 class="section-title">What They <em>Remember</em></h2>
+            <p class="section-label">{t(locale, "home.guest_voices")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.guest_voices_title")} />
           </div>
-          <a href={getLocalePath(locale, "/reviews/")} class="see-all">All reviews &rarr;</a>
+          <a href={getLocalePath(locale, "/reviews/")} class="see-all">{t(locale, "home.all_reviews")} &rarr;</a>
         </div>
         <ReviewsGrid reviews={topReviews} brand={config.brand} locale={locale} />
       </div>
@@ -144,10 +172,10 @@ try {
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-label">From the Journal</p>
-            <h2 class="section-title">Stories from <em>the Coast</em></h2>
+            <p class="section-label">{t(locale, "home.journal_label")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.journal_title")} />
           </div>
-          <a href={getLocalePath(locale, "/blog/")} class="see-all">Read more &rarr;</a>
+          <a href={getLocalePath(locale, "/blog/")} class="see-all">{t(locale, "blog.read_more")} &rarr;</a>
         </div>
         <div class="journal-grid">
           {blogPosts.map((post) => (
@@ -167,7 +195,7 @@ try {
   )}
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
 
 <style>

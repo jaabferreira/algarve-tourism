@@ -17,10 +17,10 @@ const client = createFHClient({ appKey, userKey });
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(__dirname, "../packages/shared/data");
 
-async function fetchAndSave(shortname: string, defaultCategory: string) {
+async function fetchAndSave(shortname: string) {
   console.log(`Fetching items for ${shortname}...`);
   const items = await client.getItems(shortname);
-  const normalized = items.map((item) => normalizeItem(item, defaultCategory));
+  const normalized = items.map((item) => normalizeItem(item));
   const outPath = resolve(dataDir, `${shortname}.json`);
   mkdirSync(dataDir, { recursive: true });
   writeFileSync(outPath, JSON.stringify(normalized, null, 2));
@@ -29,10 +29,10 @@ async function fetchAndSave(shortname: string, defaultCategory: string) {
 
 async function main() {
   if (atlantisShortname) {
-    await fetchAndSave(atlantisShortname, "boats");
+    await fetchAndSave(atlantisShortname);
   }
   if (ayShortname) {
-    await fetchAndSave(ayShortname, "boats");
+    await fetchAndSave(ayShortname);
   }
   console.log("Done.");
 }

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES } from "@algarve-tourism/shared";
+import { LOCALES, buildBlogPosting } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -22,6 +22,15 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const locale = Astro.params.locale as Locale;
 const { Content } = await post.render();
+
+const structuredData = buildBlogPosting(config, {
+  title: post.data.title,
+  excerpt: post.data.excerpt,
+  date: post.data.date,
+  author: post.data.author,
+  image: post.data.image,
+  slug: Astro.params.slug as string,
+}, locale);
 ---
 
 <Layout
@@ -32,6 +41,8 @@ const { Content } = await post.render();
   locale={locale}
   path={`/blog/${Astro.params.slug}/`}
   config={config}
+  structuredData={structuredData}
+  publishedDate={post.data.date}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/${Astro.params.slug}/`} />
 
@@ -44,7 +55,7 @@ const { Content } = await post.render();
   </article>
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
 
 <style>

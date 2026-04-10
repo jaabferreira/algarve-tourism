@@ -11,6 +11,101 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+
+const email = "atlantistours@buyalgarveproperties.com";
+
+const cancelByLocale: Record<string, { title: string; body: string }[]> = {
+  en: [
+    {
+      title: "Company Cancellations",
+      body: "P4Y Services may cancel any experience due to adverse weather conditions, safety concerns, or operational requirements. In such cases, you will be offered the choice of rescheduling to another available date or receiving a full refund.",
+    },
+    {
+      title: "Captain's Authority",
+      body: "The captain has full authority to cancel or modify any trip at their own discretion for safety reasons. The captain's decision is final.",
+    },
+    {
+      title: "Customer Cancellations",
+      body: `To cancel your booking, please email <a href="mailto:${email}">${email}</a>. Your cancellation is only valid upon receiving a confirmation response from our team.`,
+    },
+    {
+      title: "Cancellation Timeline",
+      body: `Cancellations, refunds, and rescheduling are available up until the scheduled tour time, with the following exception:<ul><li><strong>Reef Fishing tours:</strong> Cancellations require a minimum of 24 hours notice before the scheduled departure.</li></ul>`,
+    },
+    {
+      title: "Refund Process",
+      body: "Approved refunds will be processed to the original payment method within 5–10 business days.",
+    },
+  ],
+  pt: [
+    {
+      title: "Cancelamentos pela Empresa",
+      body: "A P4Y Services pode cancelar qualquer experiência devido a condições meteorológicas adversas, questões de segurança ou requisitos operacionais. Nesses casos, ser-lhe-á oferecida a opção de reagendar para outra data disponível ou receber um reembolso total.",
+    },
+    {
+      title: "Autoridade do Capitão",
+      body: "O capitão tem plena autoridade para cancelar ou modificar qualquer passeio, a seu critério, por motivos de segurança. A decisão do capitão é final.",
+    },
+    {
+      title: "Cancelamentos pelo Cliente",
+      body: `Para cancelar a sua reserva, envie um e-mail para <a href="mailto:${email}">${email}</a>. O seu cancelamento só é válido após receber uma resposta de confirmação da nossa equipa.`,
+    },
+    {
+      title: "Prazos de Cancelamento",
+      body: `Os cancelamentos, reembolsos e reagendamentos estão disponíveis até à hora programada do passeio, com a seguinte exceção:<ul><li><strong>Passeios de Pesca ao Reef (Reef Fishing):</strong> Os cancelamentos requerem um aviso mínimo de 24 horas antes da partida programada.</li></ul>`,
+    },
+    {
+      title: "Processo de Reembolso",
+      body: "Os reembolsos aprovados serão processados para o método de pagamento original no prazo de 5 a 10 dias úteis.",
+    },
+  ],
+  es: [
+    {
+      title: "Cancelaciones por la Empresa",
+      body: "P4Y Services puede cancelar cualquier experiencia debido a condiciones meteorológicas adversas, motivos de seguridad o requisitos operativos. En tales casos, se le ofrecerá la opción de reprogramar a otra fecha disponible o recibir un reembolso completo.",
+    },
+    {
+      title: "Autoridad del Capitán",
+      body: "El capitán tiene plena autoridad para cancelar o modificar cualquier excursión a su criterio por motivos de seguridad. La decisión del capitán es definitiva.",
+    },
+    {
+      title: "Cancelaciones por el Cliente",
+      body: `Para cancelar su reserva, envíe un correo electrónico a <a href="mailto:${email}">${email}</a>. Su cancelación solo será válida tras recibir una respuesta de confirmación de nuestro equipo.`,
+    },
+    {
+      title: "Plazos de Cancelación",
+      body: `Las cancelaciones, reembolsos y reprogramaciones están disponibles hasta la hora programada de la excursión, con la siguiente excepción:<ul><li><strong>Excursiones de Reef Fishing (pesca en arrecife):</strong> Las cancelaciones requieren un aviso mínimo de 24 horas antes de la salida programada.</li></ul>`,
+    },
+    {
+      title: "Proceso de Reembolso",
+      body: "Los reembolsos aprobados se procesarán en el método de pago original en un plazo de 5 a 10 días hábiles.",
+    },
+  ],
+  fr: [
+    {
+      title: "Annulations par l'Entreprise",
+      body: "P4Y Services peut annuler toute expérience en raison de conditions météorologiques défavorables, de préoccupations de sécurité ou d'exigences opérationnelles. Dans ce cas, vous aurez le choix entre reprogrammer à une autre date disponible ou recevoir un remboursement intégral.",
+    },
+    {
+      title: "Autorité du Capitaine",
+      body: "Le capitaine a toute autorité pour annuler ou modifier toute excursion à sa discrétion pour des raisons de sécurité. La décision du capitaine est définitive.",
+    },
+    {
+      title: "Annulations par le Client",
+      body: `Pour annuler votre réservation, veuillez envoyer un e-mail à <a href="mailto:${email}">${email}</a>. Votre annulation n'est valide qu'après réception d'une réponse de confirmation de notre équipe.`,
+    },
+    {
+      title: "Délais d'Annulation",
+      body: `Les annulations, remboursements et reprogrammations sont possibles jusqu'à l'heure prévue de l'excursion, à l'exception suivante :<ul><li><strong>Excursions Reef Fishing (pêche sur récif) :</strong> Les annulations nécessitent un préavis minimum de 24 heures avant le départ prévu.</li></ul>`,
+    },
+    {
+      title: "Processus de Remboursement",
+      body: "Les remboursements approuvés seront traités sur le mode de paiement d'origine dans un délai de 5 à 10 jours ouvrables.",
+    },
+  ],
+};
+
+const sections = cancelByLocale[locale] ?? cancelByLocale.en;
 ---
 
 <Layout
@@ -25,23 +120,12 @@ const locale = Astro.params.locale as Locale;
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "footer.cancellation_policy")}</h1>
     <div class="page-content">
-      <h2>Company Cancellations</h2>
-      <p>P4Y Services may cancel any experience due to adverse weather conditions, safety concerns, or operational requirements. In such cases, you will be offered the choice of rescheduling to another available date or receiving a full refund.</p>
-
-      <h2>Captain's Authority</h2>
-      <p>The captain has full authority to cancel or modify any trip at their own discretion for safety reasons. The captain's decision is final.</p>
-
-      <h2>Customer Cancellations</h2>
-      <p>To cancel your booking, please email <a href="mailto:atlantistours@buyalgarveproperties.com">atlantistours@buyalgarveproperties.com</a>. Your cancellation is only valid upon receiving a confirmation response from our team.</p>
-
-      <h2>Cancellation Timeline</h2>
-      <p>Cancellations, refunds, and rescheduling are available up until the scheduled tour time, with the following exception:</p>
-      <ul>
-        <li><strong>Reef Fishing tours:</strong> Cancellations require a minimum of 24 hours notice before the scheduled departure.</li>
-      </ul>
-
-      <h2>Refund Process</h2>
-      <p>Approved refunds will be processed to the original payment method within 5–10 business days.</p>
+      {sections.map((section) => (
+        <Fragment>
+          <h2>{section.title}</h2>
+          <p set:html={section.body} />
+        </Fragment>
+      ))}
     </div>
   </section>
 

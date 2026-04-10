@@ -25,12 +25,12 @@ const { item, locale, brand } = Astro.props;
         />
       </div>
     ) : (
-      <div class="product-hero__placeholder">No image</div>
+      <div class="product-hero__placeholder">{t(locale, "common.no_image")}</div>
     )}
     {item.images.length > 1 && (
       <div class="product-hero__thumbs">
-        {item.images.slice(1, 5).map((img) => (
-          <img src={img.url} alt="" loading="lazy" width="200" height="150" />
+        {item.images.slice(1, 5).map((img, i) => (
+          <img src={img.url} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" />
         ))}
       </div>
     )}

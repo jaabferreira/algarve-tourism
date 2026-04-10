@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@algarve-tourism/shared": "workspace:*",
-    "astro": "^5",
-    "@astrojs/sitemap": "^3"
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3",
+    "astro": "^5"
   }
 }

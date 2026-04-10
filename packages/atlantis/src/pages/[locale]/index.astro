@@ -12,7 +12,7 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import Marquee from "@algarve-tourism/shared/components/Marquee.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
 import { config } from "../../config.js";
-import { getLocalePath } from "@algarve-tourism/shared";
+import { getLocalePath, buildLocalBusiness } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
 import { loadItems } from "../../data.js";
 
@@ -22,6 +22,8 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const path = "/";
+
+const structuredData = buildLocalBusiness(config);
 
 const items = loadItems();
 
@@ -42,28 +44,28 @@ try {
   }
 } catch {}
 
-const marqueeText = "Benagil Caves · Yacht Cruises · Deep Sea Fishing · Coastline Circuit · Private Charters · Sunset Tours";
+const marqueeText = t(locale, "marquee.atlantis");
 
 const trustItems = [
   {
     icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    title: 'Licensed & Insured',
-    subtitle: 'Full maritime certification',
+    title: t(locale, "trust.licensed"),
+    subtitle: t(locale, "trust.licensed_sub"),
   },
   {
     icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
-    title: '4.9 on TripAdvisor',
-    subtitle: '2,400+ verified reviews',
+    title: t(locale, "trust.tripadvisor"),
+    subtitle: t(locale, "trust.tripadvisor_sub"),
   },
   {
     icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>',
-    title: 'Free Cancellation',
-    subtitle: 'Up to 24h before departure',
+    title: t(locale, "trust.free_cancel"),
+    subtitle: t(locale, "trust.free_cancel_sub"),
   },
   {
     icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
-    title: 'Small Groups',
-    subtitle: 'Intimate, personal experience',
+    title: t(locale, "trust.small_groups"),
+    subtitle: t(locale, "trust.small_groups_sub"),
   },
 ];
 ---
@@ -74,6 +76,7 @@ const trustItems = [
   locale={locale}
   path={path}
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}${path}`} />
 
@@ -94,10 +97,10 @@ const trustItems = [
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-label">Our Experiences</p>
-            <h2 class="section-title">Popular <em>tours</em></h2>
+            <p class="section-label">{t(locale, "home.our_experiences")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.popular_tours")} />
           </div>
-          <a href={`/${locale}/tours/`} class="see-all">View all tours &rarr;</a>
+          <a href={`/${locale}/tours/`} class="see-all">{t(locale, "home.view_all_tours")} &rarr;</a>
         </div>
         <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
       </div>
@@ -111,10 +114,10 @@ const trustItems = [
       <div class="container">
         <div class="section-header">
           <div>
-            <p class="section-label">What People Say</p>
-            <h2 class="section-title">Guest <em>reviews</em></h2>
+            <p class="section-label">{t(locale, "home.what_people_say")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.guest_reviews")} />
           </div>
-          <a href={`/${locale}/reviews/`} class="see-all">All reviews &rarr;</a>
+          <a href={`/${locale}/reviews/`} class="see-all">{t(locale, "home.all_reviews")} &rarr;</a>
         </div>
         <ReviewsGrid reviews={topReviews} brand={config.brand} locale={locale} />
       </div>
@@ -122,7 +125,7 @@ const trustItems = [
   )}
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
 
 <style>

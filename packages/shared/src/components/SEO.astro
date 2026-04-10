@@ -10,7 +10,8 @@ interface Props {
   locale: Locale;
   path: string;
   config: BrandConfig;
-  structuredData?: Record<string, unknown>;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  publishedDate?: string;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   path,
   config,
   structuredData,
+  publishedDate,
 } = Astro.props;
 
 const siteName = config.name;
@@ -43,6 +45,9 @@ const alternates = getAlternateLocales(config, locale, path);
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={locale} />
+{type === "article" && publishedDate && (
+  <meta property="article:published_time" content={publishedDate} />
+)}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -56,7 +61,13 @@ const alternates = getAlternateLocales(config, locale, path);
 ))}
 <link rel="alternate" hreflang="x-default" href={`https://www.${config.domain}/en${path}`} />
 
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" title={siteName} href={`https://www.${config.domain}/rss.xml`} />
+
 <!-- Structured data -->
-{structuredData && (
+{structuredData && !Array.isArray(structuredData) && (
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 )}
+{Array.isArray(structuredData) && structuredData.map((sd) => (
+  <script type="application/ld+json" set:html={JSON.stringify(sd)} />
+))}
