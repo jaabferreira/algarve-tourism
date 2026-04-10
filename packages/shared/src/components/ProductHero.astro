@@ -20,6 +20,7 @@ const { item, locale, brand } = Astro.props;
           src={item.images[0].url}
           alt={item.name}
           class="product-hero__main-image"
+          data-gallery-index="0"
           width="800"
           height="500"
         />
@@ -30,11 +31,28 @@ const { item, locale, brand } = Astro.props;
     {item.images.length > 1 && (
       <div class="product-hero__thumbs">
         {item.images.slice(1, 5).map((img, i) => (
-          <img src={img.url} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" />
+          <img src={img.url} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" data-gallery-index={i + 1} />
         ))}
       </div>
     )}
   </div>
+
+  {/* Lightbox overlay */}
+  {item.images.length > 0 && (
+    <div class="lightbox" id="gallery-lightbox" aria-hidden="true">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      {item.images.length > 1 && (
+        <>
+          <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous">&lsaquo;</button>
+          <button class="lightbox__nav lightbox__nav--next" aria-label="Next">&rsaquo;</button>
+        </>
+      )}
+      <div class="lightbox__content">
+        <img class="lightbox__image" src="" alt="" />
+      </div>
+      <div class="lightbox__counter"></div>
+    </div>
+  )}
 
   <div class="product-hero__info">
     <span class="product-hero__category">{item.category}</span>
@@ -142,9 +160,155 @@ const { item, locale, brand } = Astro.props;
     color: var(--color-text-muted);
   }
 
+  .product-hero__main-image,
+  .product-hero__thumbs img {
+    cursor: zoom-in;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .lightbox[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lightbox__content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    z-index: 1;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+
+  .lightbox__close:hover {
+    opacity: 1;
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 48px;
+    cursor: pointer;
+    padding: 8px 16px;
+    z-index: 1;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+
+  .lightbox__nav:hover {
+    opacity: 1;
+  }
+
+  .lightbox__nav--prev {
+    left: 12px;
+  }
+
+  .lightbox__nav--next {
+    right: 12px;
+  }
+
+  .lightbox__counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+  }
+
   @media (max-width: 768px) {
     .product-hero {
       grid-template-columns: 1fr;
     }
   }
 </style>
+
+<script define:vars={{ images: item.images.map(img => ({ url: img.url })), itemName: item.name }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('gallery-lightbox');
+    if (!lightbox || !images.length) return;
+
+    const lbImage = lightbox.querySelector('.lightbox__image');
+    const counter = lightbox.querySelector('.lightbox__counter');
+    const closeBtn = lightbox.querySelector('.lightbox__close');
+    const prevBtn = lightbox.querySelector('.lightbox__nav--prev');
+    const nextBtn = lightbox.querySelector('.lightbox__nav--next');
+    let current = 0;
+
+    function show(index) {
+      current = (index + images.length) % images.length;
+      lbImage.src = images[current].url;
+      lbImage.alt = `${itemName} - photo ${current + 1}`;
+      if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hide() {
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Open on image click
+    document.querySelectorAll('[data-gallery-index]').forEach(el => {
+      el.addEventListener('click', () => show(parseInt(el.dataset.galleryIndex)));
+    });
+
+    // Controls
+    closeBtn?.addEventListener('click', hide);
+    prevBtn?.addEventListener('click', () => show(current - 1));
+    nextBtn?.addEventListener('click', () => show(current + 1));
+
+    // Close on backdrop click
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightbox.querySelector('.lightbox__content')) hide();
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.getAttribute('aria-hidden') !== 'false') return;
+      if (e.key === 'Escape') hide();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  });
+</script>

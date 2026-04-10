@@ -12,20 +12,19 @@ import { config } from "../../../config.js";
 import { loadItems } from "../../../data.js";
 
 export function getStaticPaths() {
-  const items = loadItems();
-
-  return LOCALES.flatMap((locale) =>
-    items.map((item) => ({
+  return LOCALES.flatMap((locale) => {
+    const items = loadItems(locale);
+    return items.map((item) => ({
       params: { locale, slug: item.slug },
-      props: { item },
-    })),
-  );
+      props: { item, locale },
+    }));
+  });
 }
 
 const { item } = Astro.props as { item: NormalizedItem };
 const locale = Astro.params.locale as Locale;
 
-const allItems = loadItems();
+const allItems = loadItems(locale);
 const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 
 const productData = {

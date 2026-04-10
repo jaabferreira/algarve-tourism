@@ -17,8 +17,9 @@ export function createFHClient(config: FHClientConfig) {
   };
 
   return {
-    async getItems(shortname: string): Promise<FHItem[]> {
-      const url = `${FH_BASE_URL}/companies/${shortname}/items/`;
+    async getItems(shortname: string, lang?: string): Promise<FHItem[]> {
+      const params = lang ? `?lang=${lang}` : "";
+      const url = `${FH_BASE_URL}/companies/${shortname}/items/${params}`;
       const response = await fetch(url, { headers });
       if (!response.ok) {
         throw new Error(
@@ -48,14 +49,17 @@ function categorizeItem(item: FHItem): string {
   return "boats";
 }
 
-export function normalizeItem(item: FHItem, category?: string): NormalizedItem {
+export function normalizeItem(
+  item: FHItem,
+  overrides?: { category?: string; slug?: string },
+): NormalizedItem {
   const firstLocation = item.locations[0] ?? null;
 
   return {
     pk: item.pk,
     name: item.name,
     headline: item.headline,
-    slug: slugify(item.name),
+    slug: overrides?.slug ?? slugify(item.name),
     description_html: item.description_safe_html,
     description_text: item.description_text,
     description_bullets: item.description_bullets,
@@ -81,6 +85,6 @@ export function normalizeItem(item: FHItem, category?: string): NormalizedItem {
       price: p.total,
     })),
     cancellation_policy_html: item.cancellation_policy_safe_html,
-    category: category ?? categorizeItem(item),
+    category: overrides?.category ?? categorizeItem(item),
   };
 }
