@@ -14,6 +14,7 @@ export interface TranslationStrings {
   "product.duration": string;
   "product.minutes": string;
   "product.book_now": string;
+  "product.discover": string;
   "product.related": string;
   "product.highlights": string;
   "product.cancellation": string;

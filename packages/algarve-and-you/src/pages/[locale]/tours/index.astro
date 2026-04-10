@@ -35,7 +35,7 @@ const items = loadItems();
       locale={locale}
       basePath={getLocalePath(locale, "/tours/")}
     />
-    <ProductGrid items={items} locale={locale} />
+    <ProductGrid items={items} brand={config.brand} locale={locale} />
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />

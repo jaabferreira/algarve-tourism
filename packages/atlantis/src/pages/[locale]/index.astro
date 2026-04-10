@@ -62,7 +62,7 @@ try {
     <section class="section container">
       <h2>{t(locale, "nav.tours")}</h2>
       <div style="margin-top: var(--space-8);">
-        <ProductGrid items={featuredItems} locale={locale} />
+        <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
       </div>
     </section>
   )}

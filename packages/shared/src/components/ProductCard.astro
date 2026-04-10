@@ -1,103 +1,365 @@
 ---
-import type { NormalizedItem, Locale } from "../types.js";
+import type { NormalizedItem, Brand, Locale } from "../types.js";
 import { getLocalePath } from "../config.js";
-import PriceDisplay from "./PriceDisplay.astro";
+import { t } from "../i18n/index.js";
+import { formatPrice } from "../lib/prices.js";
 
 interface Props {
   item: NormalizedItem;
+  brand: Brand;
   locale: Locale;
+  featured?: boolean;
 }
 
-const { item, locale } = Astro.props;
+const { item, brand, locale, featured = false } = Astro.props;
 const href = getLocalePath(locale, `/tours/${item.slug}/`);
+const priceLabel = `${t(locale, "product.from")} ${formatPrice(item.price_from_including_tax)}`;
 ---
 
-<a href={href} class="product-card">
-  <div class="product-card__image">
-    <img
-      src={item.image_url}
-      alt={item.name}
-      loading="lazy"
-      width="400"
-      height="300"
-    />
-    <span class="chip product-card__category">{item.category}</span>
-  </div>
-  <div class="product-card__body">
-    <h3 class="product-card__title">{item.name}</h3>
-    {item.headline && (
-      <p class="product-card__headline">{item.headline}</p>
-    )}
-    <div class="product-card__footer">
-      <PriceDisplay cents={item.price_from} locale={locale} size="sm" />
+{brand === "atlantis" ? (
+  <!-- Atlantis — Coastal Modern card -->
+  <a href={href} class="card card--atlantis" data-brand="atlantis" data-reveal>
+    <div class="card__image">
+      <img
+        src={item.image_url}
+        alt={item.name}
+        loading="lazy"
+        width="400"
+        height="200"
+      />
+      {item.category && (
+        <span class="card__badge">{item.category}</span>
+      )}
     </div>
-  </div>
-</a>
+    <div class="card__body">
+      <h3 class="card__title">{item.name}</h3>
+      {item.headline && (
+        <p class="card__desc">{item.headline}</p>
+      )}
+      <div class="card__footer">
+        <span class="card__price">{priceLabel}</span>
+        <span class="card__cta">{t(locale, "product.book_now")}</span>
+      </div>
+    </div>
+  </a>
+) : featured ? (
+  <!-- Algarve & You — Featured card (overlay variant) -->
+  <a href={href} class="card card--ay card--featured" data-brand="algarve-and-you" data-reveal>
+    <div class="card__image card__image--featured">
+      <img
+        src={item.image_url}
+        alt={item.name}
+        loading="lazy"
+        width="600"
+        height="460"
+      />
+      <div class="card__scrim">
+        {item.category && (
+          <span class="card__label">{item.category}</span>
+        )}
+        <h3 class="card__title card__title--featured">{item.name}</h3>
+        <span class="card__price card__price--featured">{priceLabel}</span>
+      </div>
+    </div>
+  </a>
+) : (
+  <!-- Algarve & You — Standard card -->
+  <a href={href} class="card card--ay" data-brand="algarve-and-you" data-reveal>
+    <div class="card__image">
+      <img
+        src={item.image_url}
+        alt={item.name}
+        loading="lazy"
+        width="400"
+        height="220"
+      />
+      {item.category && (
+        <span class="card__label">{item.category}</span>
+      )}
+    </div>
+    <div class="card__body">
+      <h3 class="card__title">{item.name}</h3>
+      {item.headline && (
+        <p class="card__desc">{item.headline}</p>
+      )}
+      <div class="card__footer">
+        <span class="card__price">{priceLabel}</span>
+        <span class="card__cta">{t(locale, "product.discover")} &rarr;</span>
+      </div>
+    </div>
+  </a>
+)}
 
 <style>
-  .product-card {
+  /* ===========================
+     Shared base
+     =========================== */
+  .card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
     text-decoration: none;
-    transition: all var(--transition-base);
+    color: inherit;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border);
-  }
-
-  .product-card__image {
+  .card__image {
     position: relative;
-    aspect-ratio: 4 / 3;
     overflow: hidden;
   }
 
-  .product-card__image img {
+  .card__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    display: block;
   }
 
-  .product-card:hover .product-card__image img {
-    transform: scale(1.05);
-  }
-
-  .product-card__category {
-    position: absolute;
-    top: var(--space-3);
-    left: var(--space-3);
-  }
-
-  .product-card__body {
-    padding: var(--space-4) var(--space-4) var(--space-5);
+  .card__body {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
     flex: 1;
   }
 
-  .product-card__title {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-snug);
+  .card__desc {
+    font-size: 13px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .product-card__headline {
-    font-size: var(--font-size-sm);
-    color: var(--text-muted);
-    line-height: var(--line-height-relaxed);
-  }
-
-  .product-card__footer {
+  .card__footer {
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  /* ===========================
+     Atlantis — Coastal Modern
+     =========================== */
+  .card--atlantis {
+    border-radius: var(--radius-card);
+    background: #fff;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card--atlantis:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card--atlantis .card__image {
+    height: 200px;
+  }
+
+  .card--atlantis .card__image img {
+    transition: transform var(--transition-slow);
+  }
+
+  .card--atlantis:hover .card__image img {
+    transform: scale(1.05);
+  }
+
+  .card--atlantis .card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+  }
+
+  .card--atlantis .card__body {
+    padding: var(--space-5);
+  }
+
+  .card--atlantis .card__title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    line-height: var(--leading-snug);
+  }
+
+  .card--atlantis .card__desc {
+    color: var(--color-text-muted);
+  }
+
+  .card--atlantis .card__footer {
     padding-top: var(--space-3);
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card--atlantis .card__price {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+  }
+
+  .card--atlantis .card__cta {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border-radius: var(--radius-pill);
+    transition: background var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .card--atlantis:hover .card__cta {
+    background: var(--color-primary-dark);
+  }
+
+  /* ===========================
+     Algarve & You — Mediterranean Editorial
+     =========================== */
+  .card--ay {
+    border-radius: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .card--ay:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card--ay .card__image {
+    height: 220px;
+  }
+
+  .card--ay .card__image img {
+    transition: transform 600ms ease;
+  }
+
+  .card--ay:hover .card__image img {
+    transform: scale(1.04);
+  }
+
+  .card--ay .card__label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: rgba(61, 43, 31, 0.7);
+    color: #fff;
+    font-size: 10px;
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+
+  .card--ay .card__body {
+    padding: var(--space-5);
+  }
+
+  .card--ay .card__title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-text);
+    line-height: var(--leading-snug);
+  }
+
+  .card--ay .card__desc {
+    color: var(--color-text-body);
+    line-height: 1.6;
+  }
+
+  .card--ay .card__footer {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card--ay .card__price {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .card--ay .card__cta {
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+  }
+
+  .card--ay:hover .card__cta {
+    color: var(--color-primary-dark);
+  }
+
+  /* ===========================
+     A&Y — Featured card (overlay)
+     =========================== */
+  .card--featured {
+    border: none;
+    grid-row: span 2;
+  }
+
+  .card--featured .card__image--featured {
+    height: 100%;
+    min-height: 460px;
+  }
+
+  .card--featured .card__scrim {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .card--featured .card__label {
+    position: static;
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    color: #fff;
+  }
+
+  .card--featured .card__title--featured {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: #fff;
+    line-height: var(--leading-snug);
+  }
+
+  .card--featured .card__price--featured {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .card--featured:hover {
+    box-shadow: var(--shadow-lg);
   }
 </style>
