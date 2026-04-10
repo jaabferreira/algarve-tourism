@@ -1,0 +1,62 @@
+---
+interface Props {
+  text: string;
+  author: string;
+  origin?: string;
+}
+
+const { text, author, origin } = Astro.props;
+---
+
+<section class="editorial-quote">
+  <div class="quote-mark">&ldquo;</div>
+  <blockquote class="quote-text">{text}</blockquote>
+  <div class="quote-attr">
+    <strong>{author}</strong>
+    {origin && <span> — {origin}</span>}
+  </div>
+</section>
+
+<style>
+  .editorial-quote {
+    padding: var(--space-20) var(--space-12);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .quote-mark {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: var(--color-primary-light);
+    line-height: 0.5;
+    margin-bottom: var(--space-4);
+    opacity: 0.5;
+  }
+  .quote-text {
+    font-family: var(--font-accent);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-light);
+    font-style: italic;
+    color: var(--color-text);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+  .quote-attr {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .quote-attr strong {
+    color: var(--color-text-body);
+    font-weight: var(--weight-semibold);
+  }
+  @media (max-width: 768px) {
+    .editorial-quote {
+      padding: var(--space-16) var(--space-5);
+    }
+    .quote-text {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

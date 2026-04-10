@@ -1,0 +1,42 @@
+---
+interface Props {
+  text?: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="section-divider">
+  <div class="divider-line"></div>
+  {text && <div class="divider-text">{text}</div>}
+  {text && <div class="divider-line"></div>}
+</div>
+
+<style>
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 0 var(--space-12);
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+  .divider-text {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  @media (max-width: 768px) {
+    .section-divider {
+      padding: 0 var(--space-5);
+    }
+    .divider-text {
+      font-size: var(--text-sm);
+    }
+  }
+</style>
