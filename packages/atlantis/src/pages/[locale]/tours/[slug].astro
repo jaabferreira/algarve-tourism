@@ -66,7 +66,7 @@ const structuredData = {
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} />
 
   <div class="container product-detail">
-    <ProductHero item={item} locale={locale} />
+    <ProductHero item={item} locale={locale} brand={config.brand} />
 
     <div class="product-detail__content">
       <div class="product-detail__body">
@@ -147,14 +147,14 @@ const structuredData = {
 
   .product-detail__bullets li::before {
     content: "\2713 ";
-    color: var(--accent);
-    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    font-weight: var(--weight-bold);
   }
 
   .product-detail__description {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--text-secondary);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
   }
 
   @media (max-width: 768px) {

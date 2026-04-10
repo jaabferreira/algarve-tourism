@@ -1,19 +1,23 @@
 ---
-import type { ManualReview } from "../types.js";
+import type { ManualReview, Brand } from "../types.js";
 
 interface Props {
   review: ManualReview;
+  brand: Brand;
 }
 
-const { review } = Astro.props;
+const { review, brand } = Astro.props;
 const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
 ---
 
-<div class="review-card">
+<div class="review-card" data-brand={brand}>
   <div class="review-card__rating" aria-label={`${review.rating} out of 5 stars`}>
     {stars}
   </div>
-  <p class="review-card__text">{review.text}</p>
+  <p class="review-card__text">&ldquo;{review.text}&rdquo;</p>
+  {brand === "algarve-and-you" && (
+    <div class="review-card__divider" />
+  )}
   <div class="review-card__author">
     <span class="review-card__name">{review.author}</span>
     <span class="review-card__origin">{review.origin}</span>
@@ -23,25 +27,51 @@ const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
 <style>
   .review-card {
     padding: var(--space-6);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
 
+  /* Atlantis: rounded card */
+  .review-card[data-brand="atlantis"] {
+    border-radius: var(--radius-card);
+  }
+
+  /* A&Y: sharp card */
+  .review-card[data-brand="algarve-and-you"] {
+    border-radius: 0;
+  }
+
   .review-card__rating {
-    color: var(--accent);
-    font-size: var(--font-size-lg);
+    font-size: var(--text-base);
     letter-spacing: 2px;
   }
 
+  /* Atlantis: amber stars */
+  [data-brand="atlantis"] .review-card__rating {
+    color: var(--color-gold);
+  }
+
+  /* A&Y: gold-wire stars */
+  [data-brand="algarve-and-you"] .review-card__rating {
+    color: var(--color-gold);
+  }
+
   .review-card__text {
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-    line-height: var(--line-height-relaxed);
+    font-family: var(--font-accent);
+    font-size: var(--text-lg);
+    font-style: italic;
+    color: var(--color-text);
+    line-height: var(--leading-relaxed);
     flex: 1;
+  }
+
+  .review-card__divider {
+    width: 24px;
+    height: 1px;
+    background: var(--color-accent);
   }
 
   .review-card__author {
@@ -49,17 +79,22 @@ const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
     justify-content: space-between;
     align-items: center;
     padding-top: var(--space-3);
-    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* Atlantis: border separator above author */
+  [data-brand="atlantis"] .review-card__author {
+    border-top: 1px solid var(--color-border);
   }
 
   .review-card__name {
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-sm);
-    color: var(--text-primary);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-sm);
+    color: var(--color-text);
   }
 
   .review-card__origin {
-    font-size: var(--font-size-xs);
-    color: var(--text-muted);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: var(--tracking-wide);
   }
 </style>

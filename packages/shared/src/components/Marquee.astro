@@ -1,0 +1,68 @@
+---
+interface Props {
+  text: string;
+  separator?: string;
+}
+
+const { text, separator = "~" } = Astro.props;
+const repeated = Array(6).fill(text);
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {repeated.map((t) => (
+      <span class="marquee__item">
+        <span class="marquee__text">{t}</span>
+        <span class="marquee__sep">{separator}</span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    padding: var(--space-8) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .marquee__track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee-scroll 30s linear infinite;
+  }
+
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding-right: var(--space-8);
+    flex-shrink: 0;
+  }
+
+  .marquee__text {
+    font-family: var(--font-accent);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-primary);
+  }
+
+  .marquee__sep {
+    font-family: var(--font-accent);
+    font-size: var(--text-2xl);
+    color: var(--color-primary-light);
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+    }
+  }
+</style>

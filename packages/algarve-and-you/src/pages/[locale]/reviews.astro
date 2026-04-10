@@ -27,7 +27,7 @@ const locale = Astro.params.locale as Locale;
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "reviews.title")}</h1>
-    <ReviewsGrid reviews={manualReviews} />
+    <ReviewsGrid reviews={manualReviews} brand={config.brand} locale={locale} />
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />

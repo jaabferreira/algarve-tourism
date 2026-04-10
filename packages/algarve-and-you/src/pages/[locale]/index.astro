@@ -73,7 +73,7 @@ try {
     <section class="section container">
       <h2>{t(locale, "reviews.title")}</h2>
       <div style="margin-top: var(--space-8);">
-        <ReviewsGrid reviews={topReviews} />
+        <ReviewsGrid reviews={topReviews} brand={config.brand} locale={locale} />
       </div>
     </section>
   )}
