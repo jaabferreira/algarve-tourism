@@ -272,13 +272,15 @@ try {
     grid-auto-rows: auto;
     gap: var(--space-6);
   }
-  .category-grid__item--featured {
-    grid-row: span 2;
+  .category-grid__item {
     display: flex;
   }
-  .category-grid__item--featured > :global(*) {
+  .category-grid__item > :global(*) {
     flex: 1;
     min-height: 0;
+  }
+  .category-grid__item--featured {
+    grid-row: span 2;
   }
   .category-grid__item[data-reveal] {
     opacity: 0;
