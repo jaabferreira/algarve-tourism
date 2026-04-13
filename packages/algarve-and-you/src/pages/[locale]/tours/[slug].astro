@@ -1,6 +1,6 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -27,11 +27,13 @@ const locale = Astro.params.locale as Locale;
 const allItems = loadItems(locale);
 const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 
+const parsed = parseDescription(item.description_html);
+
 const productData = {
   "@context": "https://schema.org",
   "@type": ["Product", "TouristTrip"],
   name: item.name,
-  description: item.description_text,
+  description: parsed.description?.slice(0, 160) ?? item.description_text,
   image: item.images.map((img) => img.url),
   offers: {
     "@type": "Offer",
@@ -63,7 +65,7 @@ const structuredData = [productData, breadcrumbData];
 
 <Layout
   title={item.name}
-  description={item.description_text.slice(0, 160)}
+  description={(parsed.description ?? item.description_text).slice(0, 160)}
   image={item.image_url}
   locale={locale}
   path={`/tours/${item.slug}/`}
@@ -88,9 +90,61 @@ const structuredData = [productData, breadcrumbData];
           </section>
         )}
 
-        <section>
-          <div class="product-detail__description" set:html={item.description_html} />
-        </section>
+        {(parsed.duration || parsed.accessibility) && (
+          <div class="product-detail__info-row">
+            {parsed.duration && (
+              <span class="product-detail__info-item">
+                <strong>{t(locale, "product.duration")}:</strong> {parsed.duration}
+              </span>
+            )}
+            {parsed.accessibility && (
+              <span class="product-detail__info-item product-detail__info-item--access">
+                {parsed.accessibility}
+              </span>
+            )}
+          </div>
+        )}
+
+        {parsed.description && (
+          <section>
+            <div class="product-detail__description">
+              {parsed.description.split(/\n\n+/).filter(Boolean).map((para) => (
+                <p>{para.replace(/\n/g, " ").trim()}</p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {parsed.itinerary && parsed.itinerary.length > 0 && (
+          <section>
+            <h3>{t(locale, "product.itinerary")}</h3>
+            <ol class="product-detail__list">
+              {parsed.itinerary.map((stop) => <li>{stop}</li>)}
+            </ol>
+          </section>
+        )}
+
+        {parsed.restrictions && parsed.restrictions.length > 0 && (
+          <section>
+            <h3>{t(locale, "product.restrictions")}</h3>
+            <ul class="product-detail__list">
+              {parsed.restrictions.map((r) => <li>{r}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {parsed.extras && parsed.extras.length > 0 && (
+          <section>
+            <h3>{t(locale, "product.extras")}</h3>
+            <ul class="product-detail__list">
+              {parsed.extras.map((line) => <li>{line}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {parsed.disclaimers && (
+          <p class="product-detail__disclaimer">{parsed.disclaimers}</p>
+        )}
 
         {item.cancellation_policy_html && (
           <section>
@@ -159,10 +213,54 @@ const structuredData = [productData, breadcrumbData];
     font-weight: var(--weight-bold);
   }
 
+  .product-detail__info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .product-detail__info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .product-detail__info-item strong {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
   .product-detail__description {
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     color: var(--color-text-body);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .product-detail__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
+  }
+
+  .product-detail__disclaimer {
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--color-text-muted);
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--color-border);
   }
 
   @media (max-width: 768px) {
