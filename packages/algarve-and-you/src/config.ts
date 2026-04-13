@@ -10,7 +10,7 @@ export const config: BrandConfig = {
     categories: ["boats", "gastronomy", "land-tours", "transfers", "spa"],
     flow: "1602637",
     itemPks: [
-      717720, 717728, 717754, 718007, 718013,
+      717720, 717754, 718007, 718013,
       720028, 720080, 720086,
       718016, 718024,
       718031, 718047, 718048, 718071, 718072,
