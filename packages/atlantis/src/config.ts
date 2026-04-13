@@ -8,7 +8,7 @@ export const config: BrandConfig = {
   fh: {
     shortname: "atlantistours",
     categories: ["boats"],
-    itemPks: [717720, 717754, 718016, 717728, 718024],
+    itemPks: [717720, 717754, 718007, 718013, 718016, 717728, 718024, 720028, 720080, 720086],
     flow: "1602637",
   },
   logo: "/logo-atlantis.png",
