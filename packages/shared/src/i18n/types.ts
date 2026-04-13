@@ -25,6 +25,7 @@ export interface TranslationStrings {
   "product.highlights": string;
   "product.cancellation": string;
   "product.location": string;
+  "product.choose_option": string;
   "category.boats": string;
   "category.gastronomy": string;
   "category.land-tours": string;

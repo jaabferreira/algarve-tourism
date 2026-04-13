@@ -10,6 +10,7 @@ export interface BrandConfig {
     categories: string[];
     itemPks?: number[];
     flow: string;
+    productGroups?: Array<{ primary: number; variants: number[] }>;
   };
   logo: string;
   social: {
