@@ -9,7 +9,7 @@ import BookingWidget from "@algarve-tourism/shared/components/BookingWidget.astr
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config } from "../../../config.js";
-import { loadItems } from "../../../data.js";
+import { loadItems, getVariants } from "../../../data.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -102,9 +102,10 @@ const structuredData = [productData, breadcrumbData];
 
       <aside class="product-detail__sidebar">
         <BookingWidget
-          itemPk={item.pk}
+          item={item}
           companyShortname={config.fh.shortname}
           locale={locale}
+          variants={getVariants(item.pk, locale)}
         />
       </aside>
     </div>
