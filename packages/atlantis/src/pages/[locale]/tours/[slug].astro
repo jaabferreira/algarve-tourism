@@ -1,6 +1,6 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -27,11 +27,13 @@ const locale = Astro.params.locale as Locale;
 const allItems = loadItems(locale);
 const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 
+const parsed = parseDescription(item.description_html);
+
 const productData = {
   "@context": "https://schema.org",
   "@type": ["Product", "TouristTrip"],
   name: item.name,
-  description: item.description_text,
+  description: parsed.description?.slice(0, 160) ?? item.description_text,
   image: item.images.map((img) => img.url),
   offers: {
     "@type": "Offer",
@@ -63,7 +65,7 @@ const structuredData = [productData, breadcrumbData];
 
 <Layout
   title={item.name}
-  description={item.description_text.slice(0, 160)}
+  description={(parsed.description ?? item.description_text).slice(0, 160)}
   image={item.image_url}
   locale={locale}
   path={`/tours/${item.slug}/`}
