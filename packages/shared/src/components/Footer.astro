@@ -29,10 +29,7 @@ const columns: FooterColumn[] =
         {
           heading: t(locale, "nav.tours"),
           links: [
-            { label: t(locale, "footer.cave_circuits"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "footer.yacht_cruises"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "footer.fishing_trips"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "footer.private_charters"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.boats"), href: getLocalePath(locale, "/tours/boats/") },
           ],
         },
         {
@@ -57,11 +54,11 @@ const columns: FooterColumn[] =
         {
           heading: t(locale, "nav.experiences"),
           links: [
-            { label: t(locale, "category.boats"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "category.gastronomy"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "category.spa"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "category.land-tours"), href: getLocalePath(locale, "/tours/") },
-            { label: t(locale, "category.transfers"), href: getLocalePath(locale, "/tours/") },
+            { label: t(locale, "category.boats"), href: getLocalePath(locale, "/tours/boats/") },
+            { label: t(locale, "category.gastronomy"), href: getLocalePath(locale, "/tours/gastronomy/") },
+            { label: t(locale, "category.spa"), href: getLocalePath(locale, "/tours/spa/") },
+            { label: t(locale, "category.land-tours"), href: getLocalePath(locale, "/tours/land-tours/") },
+            { label: t(locale, "category.transfers"), href: getLocalePath(locale, "/tours/transfers/") },
           ],
         },
         {
