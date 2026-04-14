@@ -1,7 +1,7 @@
 # Atlantis Tours — Mobile UX Fixes
 
 **Date:** 2026-04-14
-**Scope:** Mobile-only CSS/JS fixes for atlantistours.pt. No desktop changes.
+**Scope:** Mobile-only CSS/JS fixes. No desktop changes. Shared component fixes apply to both brands intentionally — both sites benefit from the same mobile improvements. Brand-specific additions (sticky booking bar) are scoped to Atlantis page files.
 **Approach:** Targeted per-component fixes (Approach A). No design system refactor.
 **Breakpoint:** 768px primary, 480px secondary where noted.
 
@@ -15,7 +15,7 @@ This is a sales website for a tourism business where mobile is the primary devic
 
 ## Files Affected
 
-All components live in `packages/shared/src/components/` (shared between both brands). Changes are scoped via existing `@media` queries and `data-brand` selectors where needed.
+Most components live in `packages/shared/src/components/` and are shared between both brands. Mobile fixes to shared components (menu, touch targets, overflow, typography, spacing) intentionally apply to both sites — these are universally correct improvements. Only the sticky booking bar and its related WhatsApp offset are Atlantis-specific, living in Atlantis page files.
 
 - `Header.astro` — mobile menu fixes
 - `BookingWidget.astro` — sticky position fix
@@ -99,29 +99,34 @@ Note: Atlantis config currently has no `productGroups`, so `variants` will alway
 
 Add a new element at the bottom of the page, visible only below 768px. Structure:
 
-```html
+Compute values from existing helpers:
+- Price text: `${t(locale, "product.from")} ${formatPrice(item.price_from_including_tax)}`
+- Booking URL: `` `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/?full-items=yes` ``
+- CTA text: `t(locale, "product.book_now")`
+
+```astro
 <div class="mobile-booking-bar">
   <div class="mobile-booking-bar__price">
-    From {price}
+    {t(locale, "product.from")} {formatPrice(item.price_from_including_tax)}
   </div>
-  <a href={bookingUrl} class="mobile-booking-bar__cta">
-    Book Now
+  <a href={fhUrl} class="mobile-booking-bar__cta">
+    {t(locale, "product.book_now")}
   </a>
 </div>
 ```
 
-Behavior:
-- **Single option (current Atlantis state):** CTA links directly to FareHarbor URL for that item
-- **Multiple variants (future, when `productGroups` added to Atlantis config):** CTA scrolls to the inline `BookingWidget` (using `scrollIntoView` with smooth behavior) so the user can pick their variant. Determine variant count by checking if `variants` prop is non-empty.
+Behavior: CTA always links directly to the FareHarbor URL for the current item. No variant logic — Atlantis has no `productGroups`. If variants are added to Atlantis in the future, the booking bar will be updated in that spec.
 
 Styling:
 - `position: fixed; bottom: 0; left: 0; right: 0`
 - Background: `rgba(247, 250, 251, 0.95)` with `backdrop-filter: blur(16px)` (matches header)
 - Border-top: `1px solid var(--color-border)`
-- `z-index: 90` (same level as WhatsApp button)
-- Padding: `var(--space-3) var(--space-5)`
+- `z-index: 91` (above WhatsApp button at 90)
+- Padding: `var(--space-3) var(--space-5)`, plus `padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom))` for iOS home indicator
 - Flex row: price left, CTA button right
 - `display: none` above 768px
+
+Content coverage: Add `padding-bottom` to the tour detail page body at 768px (matching the bar height ~60px + safe area) so the last footer row remains visible and tappable above the bar.
 
 ### 2d. WhatsApp button offset on tour pages
 
@@ -214,7 +219,17 @@ Add a 480px breakpoint for the thumbnail grid:
 }
 ```
 
-This gives thumbnails adequate size for touch on small screens. The 768px breakpoint already collapses the hero to single column. The `h1` size reduction is handled by Fix 3a pattern (add to existing 768px block or the page's scoped styles).
+This gives thumbnails adequate size for touch on small screens. The 768px breakpoint already collapses the hero to single column.
+
+Also add a mobile size reduction for the product hero title in the existing 768px block:
+
+```css
+@media (max-width: 768px) {
+  .product-hero__info h1 {
+    font-size: var(--text-2xl);
+  }
+}
+```
 
 ---
 
@@ -243,6 +258,9 @@ In the existing 768px media query, add:
 @media (max-width: 768px) {
   .lang-switcher__item {
     padding: var(--space-2) var(--space-3);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 ```
@@ -270,5 +288,5 @@ This is a base style change (not behind a media query) since `min()` is a no-op 
 - Container padding tablet breakpoint (769px-1024px) — touches design system
 - Desktop design changes of any kind
 - Responsive typography in the base token system
-- Algarve & You site (separate pass later)
+- Algarve & You site-specific fixes (separate pass later; shared component fixes apply to both brands)
 - Adding View Transitions or SPA navigation
