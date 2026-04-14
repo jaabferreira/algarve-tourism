@@ -83,11 +83,9 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 - Update `Footer.astro` A&Y links to point to `/tours/boats/`, `/tours/gastronomy/`, `/tours/land-tours/`, `/tours/transfers/`, `/tours/spa/` respectively.
 
 **Fix — Atlantis:**
-- Expand `packages/atlantis/src/config.ts` categories from `["boats"]` to `["boats", "gastronomy", "land-tours", "transfers", "spa"]` to match the actual FareHarbor data.
-- Create `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` modelled on A&Y's existing `[category]/index.astro`.
-- Each category page has its own keyword-targeted `<title>`, `<meta description>`, `<h1>`, and `ItemList` JSON-LD.
-- Update Atlantis footer labels to use `category.*` translation keys (same as A&Y: "Boat Tours", "Gastronomy", "Day Trips", "Transfers", "Spa & Wellness") and point to `/tours/[category]/`.
-- Remove the old `footer.cave_circuits`, `footer.yacht_cruises`, `footer.fishing_trips`, `footer.private_charters` pattern.
+- Keep `categories: ["boats"]` — all 10 products allowed by `itemPks` are boats. The other FareHarbor categories (gastronomy, land-tours, transfers, spa) are only shown on A&Y.
+- Create `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` modelled on A&Y's existing `[category]/index.astro`. Only one category page (`/tours/boats/`) is generated.
+- Replace the 4 marketing footer labels (Cave Circuits, Yacht Cruises, Fishing Trips, Private Charters) with a single "Boat Tours" link pointing to `/tours/boats/`.
 
 ### 5. Structured data gaps
 
