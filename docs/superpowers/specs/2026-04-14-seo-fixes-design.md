@@ -38,7 +38,7 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 - All currently generate thin descriptions via string concatenation: `` `${t(locale, "nav.contact")} — ${config.name}` `` → `"Contact — Atlantis Tours"`.
 - The FAQ page additionally hardcodes `"FAQ"` instead of using the translation key, so even non-English locales get `"FAQ — Atlantis Tours"`.
 - Fix: add `meta.*` keys to each locale translation file (`en.json`, `pt.json`, `es.json`, `fr.json`) in `/packages/shared/src/i18n/locales/`.
-- Update each page component to use `t(locale, "metaDescription.about")`, `t(locale, "metaDescription.contact")`, etc.
+- Update each page component to use `t(locale, "meta.about_atlantis")`, `t(locale, "meta.contact")`, etc.
 
 **Tour detail pages:**
 - **A&Y** already uses `(parsed.description ?? item.description_text).slice(0, 160)` — this is correct.
@@ -66,7 +66,7 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 
 - Use the shared `PageLayout` / `Layout` pattern consistent with other static pages (e.g. `terms.astro`).
 - Content: minimal GDPR-compliant privacy policy covering data collection (FareHarbor booking flow), cookies (Cloudflare analytics if any), contact email for data requests.
-- Unique `<title>` and `<meta description>` per site via `metaDescription.privacy` translation key.
+- Unique `<title>` and `<meta description>` per site via `meta.privacy` translation key.
 - All four locales render the same English content initially (add translations later).
 
 ### 4. Category pages & footer links
