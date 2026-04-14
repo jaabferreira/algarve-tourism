@@ -26,36 +26,36 @@ const email = "atlantistours@buyalgarveproperties.com";
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "footer.privacy")}</h1>
     <div class="page-content">
-      <h2>Data Controller</h2>
-      <p>P4Y Services - Mediacao Imobiliaria, Lda<br/>Rua Sophia Mello Breyner, Lote 43, Fraccao C, 8200-084 Albufeira<br/>Tax Number: 516 094 464</p>
+      <h2>{t(locale, "privacy.data_controller")}</h2>
+      <p set:html={t(locale, "privacy.data_controller_body")} />
 
-      <h2>What Data We Collect</h2>
-      <p>When you book a tour or experience, we collect your name, email address, phone number, and payment details. This data is processed by our booking partner FareHarbor on our behalf.</p>
+      <h2>{t(locale, "privacy.what_we_collect")}</h2>
+      <p>{t(locale, "privacy.what_we_collect_body")}</p>
 
-      <h2>How We Use Your Data</h2>
-      <p>We use your personal data solely for:</p>
+      <h2>{t(locale, "privacy.how_we_use")}</h2>
+      <p>{t(locale, "privacy.how_we_use_body")}</p>
       <ul>
-        <li>Processing and managing your booking</li>
-        <li>Communicating about your experience (confirmations, updates, weather changes)</li>
-        <li>Legal compliance with Portuguese maritime and tax regulations</li>
+        <li>{t(locale, "privacy.how_we_use_booking")}</li>
+        <li>{t(locale, "privacy.how_we_use_comms")}</li>
+        <li>{t(locale, "privacy.how_we_use_legal")}</li>
       </ul>
 
-      <h2>Third-Party Services</h2>
-      <p>We use the following third-party services that may process your data:</p>
+      <h2>{t(locale, "privacy.third_party")}</h2>
+      <p>{t(locale, "privacy.third_party_body")}</p>
       <ul>
         <li><strong>FareHarbor</strong> — booking management and payment processing</li>
         <li><strong>Cloudflare</strong> — website hosting and performance</li>
         <li><strong>Google Analytics</strong> — anonymous website usage statistics</li>
       </ul>
 
-      <h2>Your Rights</h2>
-      <p>Under the General Data Protection Regulation (GDPR), you have the right to access, correct, or delete your personal data at any time. To exercise these rights, contact us at <a href={`mailto:${email}`}>{email}</a>.</p>
+      <h2>{t(locale, "privacy.your_rights")}</h2>
+      <p>{t(locale, "privacy.your_rights_body")} <a href={`mailto:${email}`}>{email}</a>.</p>
 
-      <h2>Data Retention</h2>
-      <p>We retain booking data for the period required by Portuguese tax law (currently 10 years for financial records). Contact data is deleted upon request unless legally required.</p>
+      <h2>{t(locale, "privacy.data_retention")}</h2>
+      <p>{t(locale, "privacy.data_retention_body")}</p>
 
-      <h2>Cookies</h2>
-      <p>This website uses essential cookies for site functionality and analytics cookies (Google Analytics) to understand how visitors use our site. No advertising or tracking cookies are used.</p>
+      <h2>{t(locale, "privacy.cookies")}</h2>
+      <p>{t(locale, "privacy.cookies_body")}</p>
     </div>
   </section>
 
