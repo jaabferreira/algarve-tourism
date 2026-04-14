@@ -55,7 +55,28 @@ Update the toggle script to also add `.open` on the toggle button itself (not ju
 
 All transitions use `var(--transition-base)` for consistency. The spans already have `transition: all var(--transition-base)` set.
 
-### 1c. Menu overflow safety
+### 1c. Hamburger touch target
+
+The `.mobile-toggle` button is roughly 38x31px from current padding/span geometry. Add minimum touch target sizing and `aria-expanded` for accessibility:
+
+CSS (no media query needed — button is already `display: none` above 768px):
+```css
+.mobile-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+Update the toggle script to also set `aria-expanded`:
+```js
+toggle?.setAttribute("aria-expanded", nav?.classList.contains("open") ? "true" : "false");
+```
+
+Also update the initial HTML attribute from `aria-label="Open menu"` to include `aria-expanded="false"`.
+
+### 1d. Menu overflow safety
 
 Add `overflow-y: auto` to `.mobile-menu` so content scrolls if it exceeds the viewport (landscape orientation, small phones).
 
@@ -126,7 +147,15 @@ Styling:
 - Flex row: price left, CTA button right
 - `display: none` above 768px
 
-Content coverage: Add `padding-bottom` to the tour detail page body at 768px (matching the bar height ~60px + safe area) so the last footer row remains visible and tappable above the bar.
+Content coverage: Add a scoped `:global(body)` bottom padding in the tour detail page at 768px so the footer clears the fixed bar. The footer lives outside `<main>` in `PageLayout.astro`, so page-level element padding won't suffice — body padding is required:
+
+```css
+@media (max-width: 768px) {
+  :global(body) {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+}
+```
 
 ### 2d. WhatsApp button offset on tour pages
 
@@ -137,12 +166,12 @@ Add a scoped style that bumps the WhatsApp button up on mobile when the sticky b
 ```css
 @media (max-width: 768px) {
   :global(.whatsapp-btn) {
-    bottom: calc(var(--space-6) + 60px); /* clear the booking bar */
+    bottom: calc(var(--space-6) + 60px + env(safe-area-inset-bottom));
   }
 }
 ```
 
-The `60px` accounts for the booking bar height (padding + content).
+The `60px` accounts for the booking bar height (padding + content). The `env(safe-area-inset-bottom)` matches the bar's own safe-area padding so the button clears it on iOS home-indicator devices.
 
 ---
 
@@ -259,8 +288,10 @@ In the existing 768px media query, add:
   .lang-switcher__item {
     padding: var(--space-2) var(--space-3);
     min-height: 44px;
+    min-width: 44px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
   }
 }
 ```
