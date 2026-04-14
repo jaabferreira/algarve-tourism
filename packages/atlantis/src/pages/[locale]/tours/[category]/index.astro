@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t, getLocalePath } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildItemList } from "@algarve-tourism/shared";
 import type { TranslationKey } from "@algarve-tourism/shared";
 import Layout from "../../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
@@ -24,6 +24,7 @@ const categoryLabel = t(locale, `category.${category}` as TranslationKey);
 const categoryMeta = t(locale, `meta.category.${category}` as TranslationKey);
 
 const items = loadItems(locale).filter((item) => item.category === category);
+const structuredData = buildItemList(config, locale, items, categoryLabel);
 ---
 
 <Layout
@@ -32,6 +33,7 @@ const items = loadItems(locale).filter((item) => item.category === category);
   locale={locale}
   path={`/tours/${category}/`}
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${category}/`} />
 

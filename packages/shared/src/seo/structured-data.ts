@@ -116,3 +116,24 @@ export function buildBreadcrumbList(
     })),
   };
 }
+
+export function buildItemList(
+  config: BrandConfig,
+  locale: Locale,
+  items: { name: string; slug: string; image_url?: string; price_from_including_tax?: number }[],
+  listName: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: listName,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://www.${config.domain}/${locale}/tours/${item.slug}/`,
+      name: item.name,
+      ...(item.image_url && { image: item.image_url }),
+    })),
+  };
+}

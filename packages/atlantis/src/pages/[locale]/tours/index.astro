@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t } from "@algarve-tourism/shared";
+import { LOCALES, t, buildItemList } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -16,6 +16,7 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 
 const items = loadItems(locale);
+const structuredData = buildItemList(config, locale, items, t(locale, "nav.tours"));
 ---
 
 <Layout
@@ -24,6 +25,7 @@ const items = loadItems(locale);
   locale={locale}
   path="/tours/"
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/`} />
 
