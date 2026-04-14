@@ -162,4 +162,14 @@ const trustItems = [
   .see-all:hover {
     text-decoration: underline;
   }
+  @media (max-width: 768px) {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .section-title {
+      font-size: var(--text-2xl);
+    }
+  }
 </style>
