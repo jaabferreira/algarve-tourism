@@ -120,7 +120,7 @@ export function buildBreadcrumbList(
 export function buildItemList(
   config: BrandConfig,
   locale: Locale,
-  items: { name: string; slug: string; image_url?: string; price_from_including_tax?: number }[],
+  items: { name: string; slug: string; image_url?: string }[],
   listName: string,
 ) {
   return {
