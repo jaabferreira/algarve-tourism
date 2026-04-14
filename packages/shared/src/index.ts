@@ -5,6 +5,7 @@ export type { TranslationKey } from "./i18n/types.js";
 export { createFHClient, normalizeItem } from "./lib/fareharbor.js";
 export { slugify } from "./lib/slugify.js";
 export { formatPrice, getFromPrice } from "./lib/prices.js";
+export { optimizeImageUrl } from "./lib/images.js";
 export { parseDescription } from "./lib/description.js";
 export type { ParsedDescription } from "./lib/description.js";
 export * from "./seo/structured-data.js";

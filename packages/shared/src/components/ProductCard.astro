@@ -3,6 +3,7 @@ import type { NormalizedItem, Brand, Locale } from "../types.js";
 import { getLocalePath } from "../config.js";
 import { t } from "../i18n/index.js";
 import { formatPrice } from "../lib/prices.js";
+import { optimizeImageUrl } from "../lib/images.js";
 
 interface Props {
   item: NormalizedItem;
@@ -15,7 +16,8 @@ interface Props {
 const { item, brand, locale, featured = false, imageIndex = 0 } = Astro.props;
 const href = getLocalePath(locale, `/tours/${item.slug}/`);
 const priceLabel = `${t(locale, "product.from")} ${formatPrice(item.price_from_including_tax)}`;
-const imgSrc = item.images?.[imageIndex % (item.images.length || 1)]?.url || item.image_url;
+const rawSrc = item.images?.[imageIndex % (item.images.length || 1)]?.url || item.image_url;
+const imgSrc = optimizeImageUrl(rawSrc, 640);
 ---
 
 {brand === "atlantis" ? (

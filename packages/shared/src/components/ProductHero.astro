@@ -1,6 +1,7 @@
 ---
 import type { NormalizedItem, Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
+import { optimizeImageUrl } from "../lib/images.js";
 import PriceDisplay from "./PriceDisplay.astro";
 
 interface Props {
@@ -17,7 +18,7 @@ const { item, locale, brand } = Astro.props;
     {item.images.length > 0 ? (
       <div class="product-hero__main-wrap">
         <img
-          src={item.images[0].url}
+          src={optimizeImageUrl(item.images[0].url, 1200)}
           alt={item.name}
           class="product-hero__main-image"
           data-gallery-index="0"
@@ -31,7 +32,7 @@ const { item, locale, brand } = Astro.props;
     {item.images.length > 1 && (
       <div class="product-hero__thumbs">
         {item.images.slice(1, 5).map((img, i) => (
-          <img src={img.url} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" data-gallery-index={i + 1} />
+          <img src={optimizeImageUrl(img.url, 400)} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" data-gallery-index={i + 1} />
         ))}
       </div>
     )}
@@ -271,7 +272,7 @@ const { item, locale, brand } = Astro.props;
   }
 </style>
 
-<script define:vars={{ images: item.images.map(img => ({ url: img.url })), itemName: item.name }}>
+<script define:vars={{ images: item.images.map(img => ({ url: optimizeImageUrl(img.url, 1920) })), itemName: item.name }}>
   document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('gallery-lightbox');
     if (!lightbox || !images.length) return;

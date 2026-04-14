@@ -2,6 +2,7 @@
 import type { BrandConfig, Locale } from "../types.js";
 import { t } from "../i18n/index.js";
 import type { TranslationKey } from "../i18n/types.js";
+import { optimizeImageUrl } from "../lib/images.js";
 import HeroFloatCard from "./HeroFloatCard.astro";
 
 interface Props {
@@ -45,7 +46,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     <div class="at-hero">
       {image ? (
         <div class="at-hero__bg-image" aria-hidden="true">
-          <img src={image} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
+          <img src={optimizeImageUrl(image!, 1920, 85)} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
           <div class="at-hero__overlay"></div>
         </div>
       ) : (
@@ -95,7 +96,7 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     <div class="ay-hero">
       <div class="ay-hero__bg">
         {image ? (
-          <img src={image} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
+          <img src={optimizeImageUrl(image!, 1920, 85)} alt={title} width="1920" height="1080" loading="eager" fetchpriority="high" />
         ) : (
           <div class="ay-hero__bg-placeholder" aria-hidden="true"></div>
         )}
