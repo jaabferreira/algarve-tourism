@@ -73,19 +73,20 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     </button>
   </div>
 
-  <!-- Mobile nav overlay -->
-  <div class="mobile-menu" data-mobile-nav>
-    <nav class="mobile-menu__links">
-      {navItems.map((item) => (
-        <a href={item.href} class="mobile-menu__link">{item.label}</a>
-      ))}
-      <a href={ctaHref} class="nav-cta mobile-menu__cta">
-        {ctaLabel}
-      </a>
-    </nav>
-    <LanguageSwitcher locale={locale} path={path} config={config} />
-  </div>
 </header>
+
+<!-- Mobile nav overlay — outside header to avoid stacking context containment -->
+<div class="mobile-menu" data-mobile-nav data-brand={brand}>
+  <nav class="mobile-menu__links">
+    {navItems.map((item) => (
+      <a href={item.href} class="mobile-menu__link">{item.label}</a>
+    ))}
+    <a href={ctaHref} class="nav-cta mobile-menu__cta">
+      {ctaLabel}
+    </a>
+  </nav>
+  <LanguageSwitcher locale={locale} path={path} config={config} />
+</div>
 
 <style>
   /* ===========================
@@ -198,7 +199,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* Mobile menu — shared */
+  /* Mobile menu — outside header to avoid stacking context issues */
   .mobile-menu {
     display: none;
     position: fixed;
@@ -207,6 +208,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     right: 0;
     z-index: 99;
     bottom: 0;
+    background: var(--color-bg);
     padding: var(--space-8) var(--space-6);
     flex-direction: column;
     gap: var(--space-8);
@@ -306,7 +308,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     font-weight: var(--weight-semibold);
   }
 
-  .header[data-brand="atlantis"] .mobile-menu {
+  .mobile-menu[data-brand="atlantis"] {
     background: var(--color-bg);
   }
 
@@ -359,7 +361,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     text-transform: uppercase;
   }
 
-  .header[data-brand="algarve-and-you"] .mobile-menu {
+  .mobile-menu[data-brand="algarve-and-you"] {
     background: var(--color-bg);
   }
 </style>
