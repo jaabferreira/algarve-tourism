@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
 import type { TranslationKey } from "@algarve-tourism/shared";
-import { LOCALES, t, getLocalePath, buildItemList } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildItemList, buildBreadcrumbList } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -18,7 +18,13 @@ const locale = Astro.params.locale as Locale;
 
 const items = loadItems(locale);
 const categories = config.fh.categories;
-const structuredData = buildItemList(config, locale, items, t(locale, "nav.tours"));
+const structuredData = [
+  buildItemList(config, locale, items, t(locale, "nav.tours")),
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.tours"), path: "/tours/" },
+  ]),
+];
 ---
 
 <Layout

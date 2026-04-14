@@ -12,6 +12,7 @@ interface Props {
   config: BrandConfig;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
+  noindex?: boolean;
 }
 
 const props = Astro.props;

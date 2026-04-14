@@ -15,13 +15,14 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 
 let title = t(locale, "nav.about");
-let content = "";
+let AboutContent: any = null;
 try {
   const pages = await getCollection("pages");
-  const aboutPage = pages.find((p) => p.id === `${locale}/about`);
+  const aboutPage = pages.find((p) => p.id === `${locale}/about` || p.id === `${locale}/about.md`);
   if (aboutPage) {
     title = aboutPage.data.title;
-    const { Content } = await aboutPage.render();
+    const rendered = await aboutPage.render();
+    AboutContent = rendered.Content;
   }
 } catch {}
 ---
@@ -38,7 +39,7 @@ try {
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{title}</h1>
     <div class="page-content">
-      <slot />
+      {AboutContent && <AboutContent />}
     </div>
   </section>
 

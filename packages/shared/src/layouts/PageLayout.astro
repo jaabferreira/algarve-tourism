@@ -12,9 +12,10 @@ interface Props {
   config: BrandConfig;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
+  noindex?: boolean;
 }
 
-const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate } = Astro.props;
+const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, noindex } = Astro.props;
 const brand = config.brand;
 
 const fontUrls: Record<string, string> = {
@@ -33,6 +34,7 @@ const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://cdn.filestackcontent.com" />
   <link rel="preconnect" href="https://cdn.filestackcontent.com" />
+  <link rel="preconnect" href="https://fareharbor.com" />
   <link href={fontUrl} rel="stylesheet" />
   <SEO
     title={title}
@@ -44,6 +46,7 @@ const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
     config={config}
     structuredData={structuredData}
     publishedDate={publishedDate}
+    noindex={noindex}
   />
   {config.analytics.gtag && (
     <>

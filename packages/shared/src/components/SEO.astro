@@ -12,6 +12,7 @@ interface Props {
   config: BrandConfig;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   config,
   structuredData,
   publishedDate,
+  noindex,
 } = Astro.props;
 
 const siteName = config.name;
@@ -35,6 +37,7 @@ const alternates = getAlternateLocales(config, locale, path);
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- Open Graph -->

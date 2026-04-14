@@ -6,6 +6,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => page !== "https://www.algarveandyou.com/",
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", pt: "pt", es: "es", fr: "fr" },
+      },
     }),
   ],
   i18n: {
