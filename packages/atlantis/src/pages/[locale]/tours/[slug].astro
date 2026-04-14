@@ -230,10 +230,7 @@ const fhUrl = `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/$
 
     :global(body) {
       padding-bottom: calc(60px + env(safe-area-inset-bottom));
-    }
-
-    :global(.whatsapp-btn) {
-      bottom: calc(var(--space-6) + 60px + env(safe-area-inset-bottom));
+      --whatsapp-bottom: calc(var(--space-6) + 60px + env(safe-area-inset-bottom));
     }
   }
 </style>

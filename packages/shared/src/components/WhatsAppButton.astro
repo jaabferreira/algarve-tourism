@@ -28,7 +28,7 @@ const ariaLabel = locale ? t(locale, "common.whatsapp_contact") : "Contact us on
 <style>
   .whatsapp-btn {
     position: fixed;
-    bottom: var(--space-6);
+    bottom: var(--whatsapp-bottom, var(--space-6));
     right: var(--space-6);
     z-index: 90;
     width: 56px;
