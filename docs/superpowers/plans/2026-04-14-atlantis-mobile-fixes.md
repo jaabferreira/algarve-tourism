@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-04-14-atlantis-mobile-fixes-design.md`
 
-**Testing:** These are visual CSS/JS changes — no unit tests. Verify each task by running the dev server (`pnpm dev:atlantis`) and checking at 375px viewport width in browser DevTools. Confirm no desktop regressions at 1280px.
+**Testing:** These are visual CSS/JS changes — no unit tests. Verify each task by running the dev server (`pnpm dev:atlantis`) and checking at 375px viewport width in browser DevTools. Confirm no desktop regressions at 1280px. After all tasks are done, run `pnpm build` to catch any import/typing regressions.
 
 ---
 
@@ -157,38 +157,22 @@ git commit -m "fix: remove BookingWidget sticky position on mobile"
 
 ---
 
-### Task 3: Tour detail page — prop fix, sticky booking bar, body padding, WhatsApp offset
+### Task 3: Tour detail page — sticky booking bar, body padding, WhatsApp offset
 
 **Files:**
 - Modify: `packages/atlantis/src/pages/[locale]/tours/[slug].astro`
 
-- [ ] **Step 1: Fix BookingWidget props and add formatPrice import**
+- [ ] **Step 1: Add formatPrice to the shared import**
 
-In `packages/atlantis/src/pages/[locale]/tours/[slug].astro`, add `formatPrice` to the import from `@algarve-tourism/shared` (line 3):
-
-```astro
-import { LOCALES, t, buildBreadcrumbList, formatPrice } from "@algarve-tourism/shared";
-```
-
-- [ ] **Step 2: Fix the BookingWidget props**
-
-Replace the current BookingWidget call (lines 104–108):
+In `packages/atlantis/src/pages/[locale]/tours/[slug].astro`, add `formatPrice` to the existing import on line 3. Keep `parseDescription` which is already there:
 
 ```astro
-<!-- Before -->
-<BookingWidget
-  itemPk={item.pk}
-  companyShortname={config.fh.shortname}
-  locale={locale}
-/>
-
-<!-- After -->
-<BookingWidget
-  item={item}
-  companyShortname={config.fh.shortname}
-  locale={locale}
-/>
+import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice } from "@algarve-tourism/shared";
 ```
+
+- [ ] **Step 2: Verify BookingWidget props are correct**
+
+Confirm that the BookingWidget call (lines 106–110) already passes `item={item}` and `companyShortname={config.fh.shortname}`. No change needed — this was already fixed in a prior commit.
 
 - [ ] **Step 3: Add the FareHarbor URL variable in the frontmatter**
 
@@ -288,8 +272,8 @@ Open a tour detail page at 375px width:
 - [ ] **Step 7: Commit**
 
 ```bash
-git add packages/atlantis/src/pages/[locale]/tours/[slug].astro
-git commit -m "feat: add mobile sticky booking bar and fix BookingWidget props"
+git add 'packages/atlantis/src/pages/[locale]/tours/[slug].astro'
+git commit -m "feat: add mobile sticky booking bar on tour detail page"
 ```
 
 ---
@@ -326,7 +310,7 @@ Open `http://localhost:4321/en/` at 375px width:
 - [ ] **Step 3: Commit**
 
 ```bash
-git add packages/atlantis/src/pages/[locale]/index.astro
+git add 'packages/atlantis/src/pages/[locale]/index.astro'
 git commit -m "fix: stack section headers and reduce title size on mobile"
 ```
 
@@ -531,3 +515,22 @@ Open `http://localhost:4321/en/reviews/` (or the homepage reviews section) at 32
 git add packages/shared/src/components/ReviewsGrid.astro
 git commit -m "fix: prevent reviews grid horizontal overflow on narrow viewports"
 ```
+
+---
+
+### Task 9: Final build verification
+
+- [ ] **Step 1: Run full build**
+
+```bash
+pnpm build
+```
+
+Expected: Both sites build successfully with no import or type errors. If there are errors, fix them before proceeding.
+
+- [ ] **Step 2: Verify no regressions at desktop width**
+
+Run `pnpm dev:atlantis` and open `http://localhost:4321/en/` at 1280px width. Spot-check:
+- Homepage: hero, product grid, trust bar, reviews, footer all unchanged
+- Tour detail page: gallery, booking widget sidebar, footer all unchanged
+- Header navigation works normally
