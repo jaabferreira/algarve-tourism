@@ -16,7 +16,7 @@ const locale = Astro.params.locale as Locale;
 
 <Layout
   title={t(locale, "category.transfers")}
-  description={`${t(locale, "category.transfers")} — ${config.name}`}
+  description={t(locale, "meta.transfers")}
   locale={locale}
   path="/transfers/"
   config={config}

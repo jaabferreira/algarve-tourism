@@ -17,7 +17,7 @@ const locale = Astro.params.locale as Locale;
 
 <Layout
   title={t(locale, "nav.contact")}
-  description={`${t(locale, "nav.contact")} — ${config.name}`}
+  description={t(locale, "meta.contact")}
   locale={locale}
   path="/contact/"
   config={config}
