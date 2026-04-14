@@ -1,1 +1,40 @@
+# Locale redirect
 / /en/ 301
+
+# Old WordPress tour slugs → current FareHarbor slugs
+/en/tours/benagil /en/tours/circuito-de-grutas-ate-benagil/ 301
+/pt/tours/benagil /pt/tours/circuito-de-grutas-ate-benagil/ 301
+/en/tours/rio-arade-silves /en/tours/subida-do-rio-arade-ate-silves/ 301
+/pt/tours/rio-arade-silves /pt/tours/subida-do-rio-arade-ate-silves/ 301
+/en/tours/benagil-alvor /en/tours/benagil-e-reserva-natural-de-alvor/ 301
+/pt/tours/benagil-alvor /pt/tours/benagil-e-reserva-natural-de-alvor/ 301
+/en/tours/yacht /en/tours/luxuoso-iate-a-vela/ 301
+/pt/tours/yacht /pt/tours/luxuoso-iate-a-vela/ 301
+/en/tours/reef-fishing /en/tours/pesca-de-fundo/ 301
+/pt/tours/reef-fishing /pt/tours/pesca-de-fundo/ 301
+/en/tours/benagil-private /en/tours/circuito-de-grutas-ate-benagil/ 301
+/pt/tours/benagil-private /pt/tours/circuito-de-grutas-ate-benagil/ 301
+
+# Discontinued products → tours index
+/en/tours/paradise /en/tours/ 301
+/pt/tours/paradise /pt/tours/ 301
+/en/tours/portimao-paraiso-60 /en/tours/ 301
+/pt/tours/portimao-paraiso-60 /pt/tours/ 301
+/en/tours/portimao-paraiso-60-private /en/tours/ 301
+/pt/tours/portimao-paraiso-60-private /pt/tours/ 301
+/en/tours/portimao-paraiso-120-private /en/tours/ 301
+/pt/tours/portimao-paraiso-120-private /pt/tours/ 301
+
+# Old WordPress routes
+/pt/denuncia /pt/contact/ 301
+/?_locale=en /en/ 301
+/?_locale=pt /pt/ 301
+
+# Trailing-slash normalization for pages that GSC indexed without slash
+/en/about /en/about/ 301
+/pt/about /pt/about/ 301
+/en/terms /en/terms/ 301
+/pt/terms /pt/terms/ 301
+/en/contact /en/contact/ 301
+/pt/contact /pt/contact/ 301
+/pt /pt/ 301
