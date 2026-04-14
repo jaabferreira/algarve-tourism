@@ -1,6 +1,6 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, parseDescription } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -61,6 +61,8 @@ const breadcrumbData = buildBreadcrumbList(config, locale, [
 ]);
 
 const structuredData = [productData, breadcrumbData];
+
+const fhUrl = `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/?full-items=yes`;
 ---
 
 <Layout
@@ -121,6 +123,15 @@ const structuredData = [productData, breadcrumbData];
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+
+  <div class="mobile-booking-bar">
+    <div class="mobile-booking-bar__price">
+      {t(locale, "product.from")} {formatPrice(item.price_from_including_tax)}
+    </div>
+    <a href={fhUrl} class="mobile-booking-bar__cta">
+      {t(locale, "product.book_now")}
+    </a>
+  </div>
 </Layout>
 
 <style>
@@ -169,6 +180,60 @@ const structuredData = [productData, breadcrumbData];
   @media (max-width: 768px) {
     .product-detail__content {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* Mobile booking bar */
+  .mobile-booking-bar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-booking-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 91;
+      background: rgba(247, 250, 251, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-3) var(--space-5);
+      padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+    }
+
+    .mobile-booking-bar__price {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: var(--weight-bold);
+      color: var(--color-text);
+    }
+
+    .mobile-booking-bar__cta {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-2) var(--space-5);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+      color: #fff;
+      font-size: 13px;
+      font-weight: var(--weight-semibold);
+      border-radius: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    :global(body) {
+      padding-bottom: calc(60px + env(safe-area-inset-bottom));
+    }
+
+    :global(.whatsapp-btn) {
+      bottom: calc(var(--space-6) + 60px + env(safe-area-inset-bottom));
     }
   }
 </style>
