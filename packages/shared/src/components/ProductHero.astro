@@ -259,6 +259,15 @@ const { item, locale, brand } = Astro.props;
     .product-hero {
       grid-template-columns: 1fr;
     }
+    .product-hero__info h1 {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-hero__thumbs {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
 
