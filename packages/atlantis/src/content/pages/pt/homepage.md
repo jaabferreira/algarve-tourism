@@ -1,5 +1,5 @@
 ---
-title: Descubra a Costa Algarvia
+title: "Passeios de Barco às Grutas de Benagil e Cruzeiros de Iate em Portimão"
 description: Experiências marítimas artesanais ao longo da costa mais deslumbrante de Portugal
 ---
 

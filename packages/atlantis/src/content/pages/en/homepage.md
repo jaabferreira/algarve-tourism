@@ -1,5 +1,5 @@
 ---
-title: Discover the Algarve Coast
+title: "Benagil Caves Boat Tours & Yacht Cruises from Portimão"
 description: Handcrafted maritime experiences along Portugal's most stunning coastline
 ---
 
