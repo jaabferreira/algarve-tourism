@@ -37,7 +37,7 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 **Secondary pages (About, Contact, FAQ, Terms, Cancellation):**
 - All currently generate thin descriptions via string concatenation: `` `${t(locale, "nav.contact")} — ${config.name}` `` → `"Contact — Atlantis Tours"`.
 - The FAQ page additionally hardcodes `"FAQ"` instead of using the translation key, so even non-English locales get `"FAQ — Atlantis Tours"`.
-- Fix: add `metaDescription.*` keys to each locale translation file (`en.json`, `pt.json`, `es.json`, `fr.json`) in `/packages/shared/src/i18n/locales/`.
+- Fix: add `meta.*` keys to each locale translation file (`en.json`, `pt.json`, `es.json`, `fr.json`) in `/packages/shared/src/i18n/locales/`.
 - Update each page component to use `t(locale, "metaDescription.about")`, `t(locale, "metaDescription.contact")`, etc.
 
 **Tour detail pages:**
@@ -143,13 +143,14 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 | `packages/atlantis/src/pages/[locale]/tours/[slug].astro` | Add `parseDescription` call (match A&Y pattern) |
 | `packages/atlantis/src/pages/[locale]/privacy.astro` | New file |
 | `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` | New file (category pages) |
-| `packages/atlantis/src/config.ts` | Expand categories to all 5 |
+| `packages/atlantis/src/config.ts` | Keep `["boats"]` — all itemPks are boats |
 | `packages/algarve-and-you/src/pages/[locale]/privacy.astro` | New file |
 | `packages/shared/src/components/Footer.astro` | Point category links to `/tours/[category]/` |
-| `packages/shared/src/i18n/locales/en.json` | Add `metaDescription.*` keys |
-| `packages/shared/src/i18n/locales/pt.json` | Add `metaDescription.*` keys |
-| `packages/shared/src/i18n/locales/es.json` | Add `metaDescription.*` keys |
-| `packages/shared/src/i18n/locales/fr.json` | Add `metaDescription.*` keys |
+| `packages/shared/src/i18n/locales/en.json` | Add `meta.*` and `meta.category.*` keys |
+| `packages/shared/src/i18n/locales/pt.json` | Add `meta.*` and `meta.category.*` keys |
+| `packages/shared/src/i18n/locales/es.json` | Add `meta.*` and `meta.category.*` keys |
+| `packages/shared/src/i18n/locales/fr.json` | Add `meta.*` and `meta.category.*` keys |
+| `packages/algarve-and-you/src/pages/[locale]/transfers.astro` | Fix thin meta description |
 | `packages/shared/src/seo/structured-data.ts` | Add `buildItemList()` |
 | `packages/atlantis/astro.config.mjs` | Sitemap filter |
 | `packages/algarve-and-you/astro.config.mjs` | Sitemap filter |
