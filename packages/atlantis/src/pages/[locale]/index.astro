@@ -11,7 +11,7 @@ import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import Marquee from "@algarve-tourism/shared/components/Marquee.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
-import { config } from "../../config.js";
+import { config, tourCategories } from "../../config.js";
 import { getLocalePath, buildLocalBusiness } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
 import { loadItems } from "../../data.js";
@@ -26,8 +26,15 @@ const path = "/";
 const structuredData = buildLocalBusiness(config);
 
 const items = loadItems(locale);
+const itemsByPk = new Map(items.map((item) => [item.pk, item]));
 
-const featuredItems = items.slice(0, 6);
+const categorizedSections = tourCategories
+  .map((cat) => ({
+    key: cat.key,
+    label: t(locale, `category.${cat.key}` as any),
+    items: cat.pks.map((pk) => itemsByPk.get(pk)).filter((item): item is NonNullable<typeof item> => item !== undefined),
+  }))
+  .filter((section) => section.items.length > 0);
 const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
 
 // Speedboat Benagil caves — high-res (2.1MB source)
@@ -92,7 +99,7 @@ const trustItems = [
 
   <Marquee text={marqueeText} />
 
-  {featuredItems.length > 0 && (
+  {categorizedSections.length > 0 && (
     <section class="section">
       <div class="container">
         <div class="section-header">
@@ -102,7 +109,12 @@ const trustItems = [
           </div>
           <a href={`/${locale}/tours/`} class="see-all">{t(locale, "home.view_all_tours")} &rarr;</a>
         </div>
-        <ProductGrid items={featuredItems} brand={config.brand} locale={locale} />
+        {categorizedSections.map((section) => (
+          <div class="category-section">
+            <h3 class="category-title">{section.label}</h3>
+            <ProductGrid items={section.items} brand={config.brand} locale={locale} />
+          </div>
+        ))}
       </div>
     </section>
   )}
@@ -161,6 +173,20 @@ const trustItems = [
   }
   .see-all:hover {
     text-decoration: underline;
+  }
+  .category-section {
+    margin-bottom: var(--space-10);
+  }
+  .category-section:last-child {
+    margin-bottom: 0;
+  }
+  .category-title {
+    font-family: var(--font-accent);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+    font-style: italic;
   }
   @media (max-width: 768px) {
     .section-header {

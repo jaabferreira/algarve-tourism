@@ -6,7 +6,7 @@ import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
-import { config } from "../../../config.js";
+import { config, tourCategories } from "../../../config.js";
 import { loadItems } from "../../../data.js";
 
 export function getStaticPaths() {
@@ -16,6 +16,16 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 
 const items = loadItems(locale);
+const itemsByPk = new Map(items.map((item) => [item.pk, item]));
+
+const categorizedSections = tourCategories
+  .map((cat) => ({
+    key: cat.key,
+    label: t(locale, `category.${cat.key}` as any),
+    items: cat.pks.map((pk) => itemsByPk.get(pk)).filter((item): item is NonNullable<typeof item> => item !== undefined),
+  }))
+  .filter((section) => section.items.length > 0);
+
 const structuredData = [
   buildItemList(config, locale, items, t(locale, "nav.tours")),
   buildBreadcrumbList(config, locale, [
@@ -36,10 +46,32 @@ const structuredData = [
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/`} />
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
-    <h1>{t(locale, "category.boats")}</h1>
-    <ProductGrid items={items} brand={config.brand} locale={locale} />
+    <h1>{t(locale, "nav.tours")}</h1>
+    {categorizedSections.map((section) => (
+      <div class="category-section">
+        <h2 class="category-title">{section.label}</h2>
+        <ProductGrid items={section.items} brand={config.brand} locale={locale} />
+      </div>
+    ))}
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
+
+<style>
+  .category-section {
+    margin-bottom: var(--space-12);
+  }
+  .category-section:last-child {
+    margin-bottom: 0;
+  }
+  .category-title {
+    font-family: var(--font-accent);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+    font-style: italic;
+  }
+</style>

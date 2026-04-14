@@ -45,3 +45,28 @@ export function loadItems(locale: Locale = "en"): NormalizedItem[] {
     return [];
   }
 }
+
+export function findVariantItems(
+  primaryPk: number,
+  groups: Array<{ primary: number; variants: number[] }> | undefined,
+  items: NormalizedItem[],
+): NormalizedItem[] {
+  if (!groups) return [];
+  const group = groups.find((g) => g.primary === primaryPk);
+  if (!group) return [];
+  return group.variants
+    .map((pk) => items.find((item) => item.pk === pk))
+    .filter((item): item is NormalizedItem => item !== undefined);
+}
+
+export function getVariants(primaryPk: number, locale: Locale = "en"): NormalizedItem[] {
+  const dataPath = findDataFile(locale);
+  if (!dataPath) return [];
+  try {
+    const raw = readFileSync(dataPath, "utf-8");
+    const allItems = JSON.parse(raw) as NormalizedItem[];
+    return findVariantItems(primaryPk, config.fh.productGroups, allItems);
+  } catch {
+    return [];
+  }
+}

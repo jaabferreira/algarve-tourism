@@ -118,7 +118,7 @@ const structuredData = [productData, breadcrumbData];
         {parsed.itinerary && parsed.itinerary.length > 0 && (
           <section>
             <h3>{t(locale, "product.itinerary")}</h3>
-            <ol class="product-detail__list">
+            <ol class="product-detail__itinerary">
               {parsed.itinerary.map((stop) => <li>{stop}</li>)}
             </ol>
           </section>
@@ -253,6 +253,48 @@ const structuredData = [productData, breadcrumbData];
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     color: var(--color-text-body);
+  }
+
+  .product-detail__itinerary {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-1) var(--space-6);
+    counter-reset: itinerary;
+    padding: 0;
+    margin: 0;
+  }
+
+  .product-detail__itinerary li {
+    counter-increment: itinerary;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--color-text-body);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .product-detail__itinerary li::before {
+    content: counter(itinerary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .product-detail__itinerary {
+      grid-template-columns: 1fr;
+    }
   }
 
   .product-detail__disclaimer {

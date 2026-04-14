@@ -12,9 +12,10 @@
     "deploy": "bash scripts/deploy.sh"
   },
   "devDependencies": {
+    "tsx": "^4",
     "turbo": "^2",
     "typescript": "^5",
     "vitest": "^3",
-    "tsx": "^4"
+    "xlsx": "^0.18.5"
   }
 }

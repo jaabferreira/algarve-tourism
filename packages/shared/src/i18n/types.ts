@@ -30,6 +30,10 @@ export interface TranslationStrings {
   "product.restrictions": string;
   "product.extras": string;
   "category.boats": string;
+  "category.benagil-cave-tours": string;
+  "category.private-sail-yacht": string;
+  "category.private-yacht": string;
+  "category.reef-fishing": string;
   "category.gastronomy": string;
   "category.land-tours": string;
   "category.transfers": string;
