@@ -205,6 +205,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     top: var(--header-height);
     left: 0;
     right: 0;
+    z-index: 99;
     bottom: 0;
     padding: var(--space-8) var(--space-6);
     flex-direction: column;
@@ -249,10 +250,14 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
   /* ===========================
      Atlantis — Coastal Modern
      =========================== */
-  .header[data-brand="atlantis"] {
+  .header[data-brand="atlantis"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: rgba(247, 250, 251, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    z-index: -1;
   }
 
   .header[data-brand="atlantis"] .logo__icon {
@@ -308,10 +313,14 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
   /* ===========================
      Algarve & You — Mediterranean Editorial
      =========================== */
-  .header[data-brand="algarve-and-you"] {
+  .header[data-brand="algarve-and-you"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: rgba(250, 246, 240, 0.92);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    z-index: -1;
   }
 
   .header[data-brand="algarve-and-you"] .logo__text {
