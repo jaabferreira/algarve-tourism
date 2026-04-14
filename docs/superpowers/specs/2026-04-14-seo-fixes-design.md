@@ -8,11 +8,13 @@
 ## Background
 
 An SEO audit identified critical and important issues across both sites. The most damaging are:
-- Every page shares the same or near-identical meta description
-- Atlantis homepage H1 is hardcoded, keyword-light, and mismatches the `<title>`
+- Secondary pages (About, Contact, FAQ, Terms) have thin meta descriptions like `"Contact — Atlantis Tours"`
+- Homepage meta descriptions work but are not keyword-optimized
+- Atlantis homepage H1 is hardcoded in English (`"Discover the Algarve coastline"`) on ALL locales, mismatching the locale-aware `<title>` tag
 - Tour URLs use Portuguese slugs on all locales (EN/ES/FR pages)
-- Footer category links on Atlantis all point to the same `/tours/` page
+- Footer category links on both sites all point to the same `/tours/` page — A&Y has category pages but the footer doesn't link to them
 - `/privacy/` is linked in the footer but returns 404
+- Atlantis tour detail pages don't use `parseDescription` (unlike A&Y), getting worse meta descriptions
 
 The slug issue requires FareHarbor EN product name translations to be entered first. Everything else can be fixed immediately.
 
@@ -25,70 +27,79 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 **Scope:** Both sites.
 
 **Homepage:**
-- Update `packages/atlantis/src/content/pages/en/homepage.md` and `pt/homepage.md` with a proper `description` field containing a real, keyword-targeted sentence (not the tagline fallback).
-- Same for `packages/algarve-and-you/src/content/pages/en/homepage.md` and `pt/homepage.md`.
-- Verify the description is correctly read and passed through the `heroSubtitle || config.tagline` chain in each site's `[locale]/index.astro`.
+- The homepage description chain (`heroSubtitle || config.tagline`) works correctly — both sites have populated `description` fields in their `homepage.md` content files, so the fallback is never triggered.
+- Current descriptions are functional but not keyword-optimized:
+  - Atlantis EN: `"Handcrafted maritime experiences along Portugal's most stunning coastline"`
+  - A&Y EN: `"Boats, food, day trips, transfers, and wellness — everything you need in one place"`
+- Update these to be more search-forward, targeting high-intent keywords (e.g. "Benagil", "Portimão", "boat tours", "cave tours").
+- Update `packages/atlantis/src/content/pages/en/homepage.md`, `pt/homepage.md`, and `packages/algarve-and-you/src/content/pages/en/homepage.md`, `pt/homepage.md`.
 
 **Secondary pages (About, Contact, FAQ, Terms, Cancellation):**
-- Add a `metaDescription` key to each locale translation file (`en.json`, `pt.json`, `es.json`, `fr.json`) in `/packages/shared/src/i18n/locales/` for every static page that currently generates a thin description.
-- Update the relevant page components to use `t("metaDescription.about")`, `t("metaDescription.contact")`, etc. instead of the current `"{pageName} — {siteName}"` pattern.
+- All currently generate thin descriptions via string concatenation: `` `${t(locale, "nav.contact")} — ${config.name}` `` → `"Contact — Atlantis Tours"`.
+- The FAQ page additionally hardcodes `"FAQ"` instead of using the translation key, so even non-English locales get `"FAQ — Atlantis Tours"`.
+- Fix: add `metaDescription.*` keys to each locale translation file (`en.json`, `pt.json`, `es.json`, `fr.json`) in `/packages/shared/src/i18n/locales/`.
+- Update each page component to use `t(locale, "metaDescription.about")`, `t(locale, "metaDescription.contact")`, etc.
 
 **Tour detail pages:**
-- Audit the description fallback chain in `[locale]/tours/[slug].astro` for both sites. Ensure `parsed.description` (the structured FareHarbor description) produces a non-empty, unique 160-char description and that the fallback to `item.description_text` also works.
+- **A&Y** already uses `(parsed.description ?? item.description_text).slice(0, 160)` — this is correct.
+- **Atlantis** uses only `item.description_text.slice(0, 160)` — it does NOT call `parseDescription`. This means Atlantis tour descriptions may start with boilerplate or HTML-artifact text instead of the clean parsed description.
+- Fix: add `parseDescription` to the Atlantis tour detail page (`packages/atlantis/src/pages/[locale]/tours/[slug].astro`) to match A&Y's pattern.
 
 ### 2. Page titles & H1 (Atlantis homepage)
 
-**Problem:** The H1 is hardcoded as `"Discover the Algarve coastline"` in `packages/atlantis/src/pages/[locale]/index.astro` (does not use the content collection, not locale-aware, mismatches `<title>`).
+**Problem:** The H1 is hardcoded as `"Discover the Algarve coastline"` at line 86 of `packages/atlantis/src/pages/[locale]/index.astro`. This string is passed to the `HeroSection` component's `title` prop, which renders it as the `<h1>`. Three issues:
+1. It does not use the `heroTitle` variable (derived from the content collection), so changing `homepage.md` has no effect on the H1.
+2. It is always English — the Portuguese homepage shows an English H1 while the `<title>` tag correctly says `"Descubra a Costa Algarvia"`.
+3. The hardcoded string (`"coastline"`) doesn't even match the content collection value (`"Coast"`).
 
 **Fix:**
-- Remove the hardcoded H1 string. Replace with the `heroTitle` variable already derived from the content collection.
-- Update `packages/atlantis/src/content/pages/en/homepage.md` title to a keyword-forward phrase: `"Benagil Caves Boat Tours & Yacht Cruises from Portimão"`.
+- Line 86: change `title="Discover the Algarve coastline"` to `title={heroTitle}`.
+- Update `packages/atlantis/src/content/pages/en/homepage.md` title to a keyword-forward phrase: e.g. `"Benagil Caves Boat Tours & Yacht Cruises from Portimão"`.
 - Update `packages/atlantis/src/content/pages/pt/homepage.md` title to the PT equivalent.
 - The SEO component appends `| Atlantis Tours` to the title tag; the H1 renders the raw `heroTitle`. No structural changes needed.
 
 ### 3. Privacy page (both sites)
 
-**Problem:** Footer links to `/privacy/` return 404 on both sites.
+**Problem:** Footer links to `/privacy/` return 404 on both sites. Google Search Console confirms 2 not-found pages.
 
 **Fix:** Create `packages/atlantis/src/pages/[locale]/privacy.astro` and `packages/algarve-and-you/src/pages/[locale]/privacy.astro`.
 
-- Use the shared `PageLayout` / `Layout` pattern consistent with other static pages.
+- Use the shared `PageLayout` / `Layout` pattern consistent with other static pages (e.g. `terms.astro`).
 - Content: minimal GDPR-compliant privacy policy covering data collection (FareHarbor booking flow), cookies (Cloudflare analytics if any), contact email for data requests.
-- Unique `<title>` and `<meta description>` per site.
+- Unique `<title>` and `<meta description>` per site via `metaDescription.privacy` translation key.
 - All four locales render the same English content initially (add translations later).
 
-### 4. Category pages
+### 4. Category pages & footer links
 
-**Problem:** Footer links on both sites point every category label to the same `/tours/` URL. No category-level ranking surface exists on Atlantis; A&Y has the pages but footer links don't use them.
+**Problem:** Footer links on both sites point every category label to the same `/tours/` URL. A&Y has working category pages at `[locale]/tours/[category]/index.astro` but the footer doesn't link to them. Atlantis has no category pages at all.
 
-**Atlantis actual FareHarbor categories** (from live data):
-| Category value | Count | Page URL |
-|----------------|-------|----------|
-| `boats` | 44 | `/[locale]/tours/boats/` |
-| `transfers` | 24 | `/[locale]/tours/transfers/` |
-| `land-tours` | 14 | `/[locale]/tours/land-tours/` |
-| `gastronomy` | 5 | `/[locale]/tours/gastronomy/` |
-| `spa` | 4 | `/[locale]/tours/spa/` |
+**Current state:**
+- **A&Y config** has `categories: ["boats", "gastronomy", "land-tours", "transfers", "spa"]` and working `[category]/index.astro` pages.
+- **Atlantis config** has `categories: ["boats"]` — only one category. However, the FareHarbor data for Atlantis contains items across all 5 categories (boats: 44, transfers: 24, land-tours: 14, gastronomy: 5, spa: 4).
+- **Atlantis footer** uses marketing labels ("Cave Circuits", "Yacht Cruises", "Fishing Trips", "Private Charters") that don't map to any FareHarbor category — they are sub-types within "boats".
+- **A&Y footer** uses the actual category translation keys (`category.boats` → "Boat Tours", `category.gastronomy` → "Gastronomy", etc.) but all still link to `/tours/`.
 
-**Algarve & You:** Category pages already exist at `packages/algarve-and-you/src/pages/[locale]/tours/[category]/index.astro`. Footer links just need to be updated to use the correct category URLs.
+**Fix — A&Y (footer links only):**
+- Update `Footer.astro` A&Y links to point to `/tours/boats/`, `/tours/gastronomy/`, `/tours/land-tours/`, `/tours/transfers/`, `/tours/spa/` respectively.
 
-**Atlantis fix:** Create `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` modelled on the existing A&Y `[category]/index.astro`. Each page:
-- Has its own keyword-targeted `<title>`, `<meta description>`, and `<h1>`.
-- Lists and links to tours filtered by the `category` field from FareHarbor data.
-- Includes an `ItemList` JSON-LD structured data block.
-- Uses the shared `PageLayout` component.
-- Gets its own entry in the sitemap automatically.
-
-**Footer update (both sites):** Update `Footer.astro` so category links point to `/tours/[category]/` using the actual category slugs above. The marketing labels (Cave Circuits, Yacht Cruises, etc.) in the Atlantis footer translation keys should be updated to match the real categories (`footer.cave_circuits` → Boat Tours, etc.) or the existing translation keys re-pointed to real URLs.
+**Fix — Atlantis:**
+- Expand `packages/atlantis/src/config.ts` categories from `["boats"]` to `["boats", "gastronomy", "land-tours", "transfers", "spa"]` to match the actual FareHarbor data.
+- Create `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` modelled on A&Y's existing `[category]/index.astro`.
+- Each category page has its own keyword-targeted `<title>`, `<meta description>`, `<h1>`, and `ItemList` JSON-LD.
+- Update Atlantis footer labels to use `category.*` translation keys (same as A&Y: "Boat Tours", "Gastronomy", "Day Trips", "Transfers", "Spa & Wellness") and point to `/tours/[category]/`.
+- Remove the old `footer.cave_circuits`, `footer.yacht_cruises`, `footer.fishing_trips`, `footer.private_charters` pattern.
 
 ### 5. Structured data gaps
 
-- Add `ItemList` schema to the tours index page (`/[locale]/tours/`) for both sites.
+- Add `buildItemList()` helper to `packages/shared/src/seo/structured-data.ts`.
+- Add `ItemList` schema to the tours index page (`/[locale]/tours/`) and each category page for both sites.
 - Verify tour detail page `Product + TouristTrip` schema produces correct `price` (divide-by-100 assumption needs confirming against live FareHarbor prices).
 
 ### 6. Sitemap cleanup
 
-- Exclude the root `/` redirect page from the sitemap. Use the `@astrojs/sitemap` `filter` option in `astro.config.mjs` for both sites: `filter: (page) => page !== 'https://www.atlantistours.pt/'`.
+- Exclude the root `/` redirect page from the sitemap. Use the `@astrojs/sitemap` `filter` option in `astro.config.mjs` for both sites.
+- Atlantis: `filter: (page) => page !== 'https://www.atlantistours.pt/'`
+- A&Y: `filter: (page) => page !== 'https://www.algarveandyou.com/'`
 
 ---
 
@@ -96,10 +107,10 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 
 ### Slug pipeline fix
 
-**Problem:** `fetch-fh.ts` builds a `canonicalMap` from PT data (slug + category) and applies the canonical PT slug to all other languages via `normalizeItem(item, canonical)`. This means EN/ES/FR slugs are always Portuguese, even after FareHarbor translations are added.
+**Problem:** `fetch-fh.ts` builds a `canonicalMap` from PT data (slug + category) and applies the canonical PT slug to all other languages via `normalizeItem(item, canonical)` (line 50). The `normalizeItem` function uses `overrides?.slug ?? slugify(item.name)` (line 62 of `fareharbor.ts`), so the PT slug always wins when provided. This means EN/ES/FR slugs are always Portuguese, even after FareHarbor translations are added.
 
 **Fix — `fetch-fh.ts`:**
-- Split the canonical override: pass only the `category` (not the `slug`) from `canonicalMap` to `normalizeItem()` for non-PT languages.
+- Split the canonical override: pass only `{ category }` (not `{ slug, category }`) from `canonicalMap` to `normalizeItem()` for non-PT languages.
 - Each language derives its own slug from its own FareHarbor product name via the existing `slugify()` function.
 - PT remains the canonical source for category assignment only.
 
@@ -126,13 +137,17 @@ The slug issue requires FareHarbor EN product name translations to be entered fi
 
 | File | Change |
 |------|--------|
-| `packages/atlantis/src/content/pages/en/homepage.md` | New title + description |
-| `packages/atlantis/src/content/pages/pt/homepage.md` | New title + description |
-| `packages/atlantis/src/pages/[locale]/index.astro` | Remove hardcoded H1 |
+| `packages/atlantis/src/content/pages/en/homepage.md` | Keyword-forward title + description |
+| `packages/atlantis/src/content/pages/pt/homepage.md` | Keyword-forward title + description |
+| `packages/algarve-and-you/src/content/pages/en/homepage.md` | Keyword-forward description |
+| `packages/algarve-and-you/src/content/pages/pt/homepage.md` | Keyword-forward description |
+| `packages/atlantis/src/pages/[locale]/index.astro` | Line 86: replace hardcoded H1 with `{heroTitle}` |
+| `packages/atlantis/src/pages/[locale]/tours/[slug].astro` | Add `parseDescription` call (match A&Y pattern) |
 | `packages/atlantis/src/pages/[locale]/privacy.astro` | New file |
-| `packages/atlantis/src/pages/[locale]/tours/[category].astro` | New file (category pages) |
-| `packages/algarve-and-you/src/content/pages/en/homepage.md` | Description fix |
+| `packages/atlantis/src/pages/[locale]/tours/[category]/index.astro` | New file (category pages) |
+| `packages/atlantis/src/config.ts` | Expand categories to all 5 |
 | `packages/algarve-and-you/src/pages/[locale]/privacy.astro` | New file |
+| `packages/shared/src/components/Footer.astro` | Point category links to `/tours/[category]/` |
 | `packages/shared/src/i18n/locales/en.json` | Add `metaDescription.*` keys |
 | `packages/shared/src/i18n/locales/pt.json` | Add `metaDescription.*` keys |
 | `packages/shared/src/i18n/locales/es.json` | Add `metaDescription.*` keys |
