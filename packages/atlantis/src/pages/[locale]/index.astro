@@ -37,7 +37,7 @@ let heroTitle = config.tagline;
 let heroSubtitle = "";
 try {
   const page = await getCollection("pages");
-  const homePage = page.find((p) => p.id === `${locale}/homepage`);
+  const homePage = page.find((p) => p.id === `${locale}/homepage` || p.id === `${locale}/homepage.md`);
   if (homePage) {
     heroTitle = homePage.data.title;
     heroSubtitle = homePage.data.description ?? "";
