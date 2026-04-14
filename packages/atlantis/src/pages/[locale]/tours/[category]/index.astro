@@ -21,13 +21,14 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const category = Astro.params.category as string;
 const categoryLabel = t(locale, `category.${category}` as TranslationKey);
+const categoryMeta = t(locale, `meta.category.${category}` as TranslationKey);
 
 const items = loadItems(locale).filter((item) => item.category === category);
 ---
 
 <Layout
   title={categoryLabel}
-  description={`${categoryLabel} — ${config.name}`}
+  description={categoryMeta}
   locale={locale}
   path={`/tours/${category}/`}
   config={config}
