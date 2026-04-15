@@ -25,6 +25,8 @@ export interface TranslationStrings {
   "product.highlights": string;
   "product.cancellation": string;
   "product.location": string;
+  "product.location_directions": string;
+  "product.location_tap_to_interact": string;
   "product.choose_option": string;
   "product.itinerary": string;
   "product.restrictions": string;

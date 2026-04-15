@@ -1,0 +1,151 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+
+interface Props {
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  locale: Locale;
+}
+
+const { latitude, longitude, address, city, locale } = Astro.props;
+
+const label = `${address}, ${city}`;
+const mapSrc = `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+---
+
+<section class="meeting-point-map">
+  <h3>{t(locale, "product.location")}</h3>
+  <div class="meeting-point-map__wrap">
+    <iframe
+      src={mapSrc}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title={label}
+      class="meeting-point-map__iframe"
+    ></iframe>
+    <div class="meeting-point-map__overlay" data-map-overlay>
+      <span class="meeting-point-map__overlay-text">{t(locale, "product.location_tap_to_interact")}</span>
+    </div>
+  </div>
+  <div class="meeting-point-map__footer">
+    <span class="meeting-point-map__address">{label}</span>
+    <a href={mapsLink} target="_blank" rel="noopener noreferrer" class="meeting-point-map__link">
+      {t(locale, "product.location_directions")}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .meeting-point-map {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .meeting-point-map__wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .meeting-point-map__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .meeting-point-map__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .meeting-point-map__overlay[hidden] {
+    display: none;
+  }
+
+  .meeting-point-map__overlay-text {
+    padding: var(--space-2) var(--space-4);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .meeting-point-map__overlay:hover .meeting-point-map__overlay-text,
+  .meeting-point-map__overlay:active .meeting-point-map__overlay-text {
+    opacity: 1;
+  }
+
+  .meeting-point-map__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .meeting-point-map__address {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+  }
+
+  .meeting-point-map__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .meeting-point-map__link:hover {
+    opacity: 0.75;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-map-overlay]').forEach((overlay) => {
+    overlay.addEventListener('click', () => {
+      overlay.hidden = true;
+    });
+  });
+
+  // Re-enable overlay when user scrolls away, so it doesn't stay interactive
+  // and trap scroll on a return visit to this section
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        const overlay = entry.target.querySelector('[data-map-overlay]');
+        if (overlay) overlay.hidden = false;
+      }
+    });
+  }, { threshold: 0 });
+
+  document.querySelectorAll('.meeting-point-map__wrap').forEach((wrap) => {
+    observer.observe(wrap);
+  });
+</script>

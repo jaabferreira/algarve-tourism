@@ -8,6 +8,7 @@ import ProductHero from "@algarve-tourism/shared/components/ProductHero.astro";
 import BookingWidget from "@algarve-tourism/shared/components/BookingWidget.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import { config } from "../../../config.js";
 import { loadItems, getVariants } from "../../../data.js";
 
@@ -144,6 +145,16 @@ const structuredData = [productData, breadcrumbData];
 
         {parsed.disclaimers && (
           <p class="product-detail__disclaimer">{parsed.disclaimers}</p>
+        )}
+
+        {item.location && (
+          <MeetingPointMap
+            latitude={item.location.latitude}
+            longitude={item.location.longitude}
+            address={item.location.address}
+            city={item.location.city}
+            locale={locale}
+          />
         )}
 
         {item.cancellation_policy_html && (
