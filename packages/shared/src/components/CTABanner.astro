@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  buttonHref: string;
+}
+
+const { title, subtitle, buttonText, buttonHref } = Astro.props;
+---
+
+<section class="cta-banner">
+  <div class="cta-banner__inner container">
+    <h2 class="cta-banner__title" set:html={title} />
+    <p class="cta-banner__subtitle">{subtitle}</p>
+    <a href={buttonHref} class="cta-banner__button">{buttonText}</a>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    padding: var(--space-16) 0;
+    text-align: center;
+  }
+
+  .cta-banner__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .cta-banner__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    color: white;
+    margin: 0;
+  }
+
+  .cta-banner__title :global(em) {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+  }
+
+  .cta-banner__subtitle {
+    font-size: var(--text-base);
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    max-width: 480px;
+  }
+
+  .cta-banner__button {
+    display: inline-block;
+    background: white;
+    color: var(--color-primary);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-button);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .cta-banner__button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 640px) {
+    .cta-banner__title {
+      font-size: var(--text-2xl);
+    }
+
+    .cta-banner__subtitle {
+      font-size: var(--text-sm);
+    }
+  }
+</style>
