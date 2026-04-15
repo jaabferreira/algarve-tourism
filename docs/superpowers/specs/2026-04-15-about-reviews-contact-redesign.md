@@ -1,8 +1,10 @@
 # About, Reviews & Contact Page Redesign — Atlantis Tours
 
-**Goal:** Transform three thin, SEO-weak pages into rich, multi-section pages that match the homepage quality, maximize keyword coverage, and earn Google rich snippets.
+**Goal:** Transform three thin, SEO-weak pages into rich, multi-section pages that match the homepage quality, maximize keyword coverage, and improve search visibility through content depth and structured data.
 
-**Approach:** Maximum SEO — every page gets structured data, FAQ sections (FAQPage schema), internal links to tours, and content in all 4 languages (EN, PT, ES, FR).
+**Approach:** Maximum SEO — every page gets structured data, FAQ sections (valuable for users and long-tail search), internal links to tours, and content in all 4 languages (EN, PT, ES, FR).
+
+**Note on rich snippets:** Google currently limits FAQ rich results to well-known authoritative sites (government, health). FAQPage schema is still included for semantic correctness and future eligibility, but rich snippet display is not guaranteed. Similarly, business-level review rich snippets are ineligible for self-controlled reviews per Google's review snippet guidelines — review structured data is only used on individual tour pages where per-item reviews are eligible.
 
 **Business info:**
 - Address: Ac. Porto Comercial de Portimão, Portimão, Algarve, Portugal
@@ -10,6 +12,13 @@
 - WhatsApp: +351 969 703 185
 - Hours: Summer 8:00–21:00, Off-season 8:00–17:00
 - TripAdvisor & Google Business profiles: to be connected later (design with placeholder URLs)
+
+**Stats requiring user confirmation:** The following values appear in the homepage and are reused in the spec. Verify before shipping:
+- Founding year: homepage says "since 2010" but `en.json` line 66 says "since 2020" — resolve which is correct
+- "50k+ Happy Guests" — needs confirmation
+- "4.9 Average Rating" — needs confirmation against live TripAdvisor/Google profiles
+- "6 Boats in Fleet" — needs confirmation
+- Address is the default departure point; legal entity address may differ (check terms/privacy pages)
 
 ---
 
@@ -36,7 +45,8 @@ Sections top-to-bottom:
 ### 1.4 Our Fleet
 - Centered section header with accent label + editorial title
 - 3-card grid: Speedboats (Benagil/coast), Private Yachts (sunset/charters), Fishing Vessels (deep sea/reef)
-- Each card: photo placeholder, boat type name, short description, implicit link to relevant tour category
+- Each card: photo placeholder, boat type name, short description
+- Cards link to `/[locale]/tours/` (the tours listing page), not to individual category routes (Atlantis only has `["boats"]` in `config.fh.categories`, so granular category pages don't exist)
 - Cards use existing card styling (rounded corners, shadow, hover lift)
 
 ### 1.5 Why Choose Us
@@ -57,17 +67,19 @@ Sections top-to-bottom:
   3. Can I cancel or reschedule my booking?
   4. Are boat tours suitable for children?
   5. What happens if the weather is bad?
-- Generates FAQPage structured data
+- Generates FAQPage structured data (for semantic correctness; rich snippet display not guaranteed for non-authoritative sites)
 
 ### 1.8 Structured Data
-- `Organization` schema: name, url, logo, foundingDate (2010), address, contactPoint
+- `Organization` schema: name, url, logo, foundingDate (user to confirm), address, contactPoint
 - `LocalBusiness` with `TouristAttraction` type
 - `FAQPage` with all Q&A pairs
 - `BreadcrumbList`: Home > About
 
 ### 1.9 Content Requirements
-- About page content must exist in all 4 locales: EN, PT, ES, FR (currently only EN and PT exist)
-- Move from Markdown content collection to direct Astro page content (the page structure is now too complex for a simple Markdown render)
+- About page content in all 4 locales: EN, PT, ES, FR
+- Move from Markdown content collection to direct Astro page with i18n translation keys (the page structure is now too complex for a simple Markdown render — multiple sections, components, structured layouts)
+- Remove the existing `about.md` content collection files (EN, PT) once the new page is built
+- All translatable strings go into the locale JSON files as new keys
 
 ---
 
@@ -94,10 +106,32 @@ Sections top-to-bottom:
 - Each ReviewCard shows: star rating, quoted text (Instrument Serif italic), author name + origin, tour name, source platform (TripAdvisor/Google badge)
 - Staggered reveal animation on scroll (existing pattern)
 
-### 2.5 Review Data Expansion
-- Expand `manual.json` from 3 reviews to 10-15 reviews
-- Add fields to each review: `tour` (category for filtering), `source` (tripadvisor/google)
+### 2.5 Review Data Model
+Replace the current `manual.json` (3 hardcoded reviews) with a structured data model that tracks provenance:
+
+```json
+{
+  "source": "first_party | tripadvisor | google | fareharbor",
+  "sourceUrl": "https://...",
+  "externalReviewId": "optional",
+  "tourSlug": "benagil-cave-tour",
+  "fareharborItemPk": 717720,
+  "tourCategory": "benagil | yacht | fishing",
+  "rating": 5,
+  "authorName": "Sarah M.",
+  "authorLocation": "London, UK",
+  "text": "...",
+  "language": "en",
+  "datePublished": "2025-08-15",
+  "verifiedBooking": true,
+  "permissionToPublish": true
+}
+```
+
+- Expand from 3 to 10-15 real reviews
 - Reviews should cover all tour categories and multiple nationalities/languages
+- Only first-party, user-submitted, permissioned reviews attached to a specific tour are eligible for structured data markup — and that markup goes on the individual tour page, not on this Reviews listing page
+- TripAdvisor/Google reviews can be displayed with source badges and linked back, but are not aggregated into Atlantis' own review schema
 
 ### 2.6 Leave a Review CTA
 - Centered section with headline "Enjoyed Your *Experience*?"
@@ -115,13 +149,14 @@ Sections top-to-bottom:
   2. How can I leave a review for Atlantis Tours?
   3. What is the average rating for Atlantis Tours?
   4. Can I see reviews for a specific tour?
-- FAQPage structured data
+- FAQPage structured data (for semantic correctness; rich snippet display not guaranteed)
 
 ### 2.9 Structured Data
-- `AggregateRating`: ratingValue, reviewCount, bestRating, worstRating
-- Individual `Review` schema for each review (author, reviewRating, reviewBody, datePublished, itemReviewed)
+- `CollectionPage` + `ItemList` — semantically describes a page listing reviews
 - `FAQPage` with Q&A pairs
 - `BreadcrumbList`: Home > Reviews
+- **No** `AggregateRating` or `Review` schema on this page — Google's review snippet guidelines exclude self-serving business-level reviews. The aggregate rating display (4.9 stars, distribution bars) is shown visually for trust, but not marked up as structured data.
+- Per-tour review structured data belongs on individual tour detail pages (`/tours/[slug]`), where first-party verified reviews can be attached to the specific `Product` schema. This is handled in a separate enhancement to the tour detail page.
 
 ---
 
@@ -166,7 +201,7 @@ Sections top-to-bottom:
   3. What is the cancellation policy?
   4. Is there parking near the departure point?
   5. Can I book a private tour for a group?
-- FAQPage structured data
+- FAQPage structured data (for semantic correctness; rich snippet display not guaranteed)
 
 ### 3.7 Structured Data
 - `LocalBusiness`: name, address (PostalAddress), telephone, email, openingHoursSpecification (summer + off-season), geo coordinates, url, image
@@ -174,10 +209,13 @@ Sections top-to-bottom:
 - `BreadcrumbList`: Home > Contact
 
 ### 3.8 Form Backend
-- Cloudflare Pages Function at `/functions/contact.ts`
+- Cloudflare Pages Function — must be placed at the root of the Cloudflare Pages project (not inside `packages/atlantis/dist/`). The exact path depends on how the Pages project is configured:
+  - If Pages builds from the monorepo root: `functions/api/contact.ts`
+  - If Pages builds from `packages/atlantis/`: `packages/atlantis/functions/api/contact.ts`
+  - Verify the Pages project's build output directory and root before placing the function
 - Accepts POST with name, email, tour interest, message
 - Validates inputs server-side (required fields, email format)
-- Sends notification email to atlantistours@buyalgarveproperties.com
+- Sends notification email to atlantistours@buyalgarveproperties.com (using Cloudflare's MailChannels integration or a simple fetch to an email API)
 - Returns JSON success/error response
 - Client-side: fetch POST, show success message or error inline
 
@@ -187,9 +225,9 @@ Sections top-to-bottom:
 
 ### 4.1 i18n
 - All page content in 4 languages: EN, PT, ES, FR
-- New translation keys added to all locale JSON files
-- FAQ content per locale (hardcoded in components, same pattern as existing FAQ page)
-- About page: ES and FR content files must be created (currently missing)
+- New translation keys added to all locale JSON files for all three pages
+- FAQ content per locale (hardcoded in components via translation keys, same pattern as existing FAQ page)
+- About page moves from Markdown content collection to translation keys — no more `about.md` files. All text lives in `en.json`, `pt.json`, `es.json`, `fr.json`
 
 ### 4.2 SEO
 - Every page: unique `<title>`, `<meta description>`, Open Graph tags, Twitter cards
