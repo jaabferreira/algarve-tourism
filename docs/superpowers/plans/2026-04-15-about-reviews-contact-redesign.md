@@ -426,7 +426,7 @@ Add to end of `packages/shared/src/i18n/locales/fr.json` (before closing `}`):
 
 - [ ] **Step 6: Add tourCategory and source to ManualReview type**
 
-In `packages/shared/src/types.ts`, update the `ManualReview` interface:
+In `packages/shared/src/types.ts`, update the `ManualReview` interface with full provenance fields:
 
 ```typescript
 export interface ManualReview {
@@ -438,6 +438,12 @@ export interface ManualReview {
   product_slug?: string;
   tourCategory?: string;
   source?: string;
+  sourceUrl?: string;
+  externalReviewId?: string;
+  fareharborItemPk?: number;
+  language?: string;
+  verifiedBooking?: boolean;
+  permissionToPublish?: boolean;
 }
 ```
 
@@ -476,7 +482,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2026-03-15",
     "product_slug": "benagil-cave-tour",
     "tourCategory": "benagil",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717720,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Hans K.",
@@ -486,7 +498,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2026-02-20",
     "product_slug": "private-yacht-cruise",
     "tourCategory": "yacht",
-    "source": "google"
+    "source": "google",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 720028,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Ana R.",
@@ -496,7 +514,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2026-01-10",
     "product_slug": "benagil-cave-tour",
     "tourCategory": "benagil",
-    "source": "google"
+    "source": "google",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717720,
+    "language": "pt",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Pierre D.",
@@ -506,7 +530,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-12-05",
     "product_slug": "reef-fishing",
     "tourCategory": "fishing",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 718024,
+    "language": "fr",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Emma & James W.",
@@ -516,7 +546,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-11-18",
     "product_slug": "benagil-cave-tour",
     "tourCategory": "benagil",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717728,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Marco V.",
@@ -526,7 +562,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-10-22",
     "product_slug": "private-yacht-cruise",
     "tourCategory": "yacht",
-    "source": "google"
+    "source": "google",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 720028,
+    "language": "it",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Lisa van den Berg",
@@ -536,7 +578,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-09-30",
     "product_slug": "benagil-cave-tour",
     "tourCategory": "benagil",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717720,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Carlos M.",
@@ -546,7 +594,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-09-12",
     "product_slug": "reef-fishing",
     "tourCategory": "fishing",
-    "source": "google"
+    "source": "google",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 718024,
+    "language": "es",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Sophie Laurent",
@@ -556,7 +610,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-08-25",
     "product_slug": "private-yacht-cruise",
     "tourCategory": "yacht",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 720028,
+    "language": "fr",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Thomas B.",
@@ -566,7 +626,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-08-08",
     "product_slug": "benagil-cave-tour",
     "tourCategory": "benagil",
-    "source": "google"
+    "source": "google",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717720,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "João P.",
@@ -576,7 +642,13 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-07-20",
     "product_slug": "reef-fishing",
     "tourCategory": "fishing",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 718024,
+    "language": "pt",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   },
   {
     "author": "Maria & Stefan H.",
@@ -586,10 +658,18 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "date": "2025-07-05",
     "product_slug": "private-sail-yacht",
     "tourCategory": "yacht",
-    "source": "tripadvisor"
+    "source": "tripadvisor",
+    "sourceUrl": "",
+    "externalReviewId": "",
+    "fareharborItemPk": 717754,
+    "language": "en",
+    "verifiedBooking": true,
+    "permissionToPublish": true
   }
 ]
 ```
+
+Note: `sourceUrl` and `externalReviewId` are empty strings as placeholders — the business owner needs to populate these with actual TripAdvisor/Google review URLs and IDs once accounts are connected. Reviews without `sourceUrl` should not be used in per-tour structured data markup.
 
 - [ ] **Step 2: Update ReviewCard to show tour category and source**
 
@@ -616,7 +696,10 @@ const sourceLabel = review.source === "tripadvisor" ? "TripAdvisor" : review.sou
   <div class="review-card__footer">
     <div class="review-card__author-info">
       <span class="review-card__name">{review.author}</span>
-      <span class="review-card__origin">{review.origin}</span>
+      <span class="review-card__origin">
+        {review.origin}
+        {review.tourCategory && <> · {review.tourCategory === "benagil" ? "Benagil Tour" : review.tourCategory === "yacht" ? "Yacht Cruise" : review.tourCategory === "fishing" ? "Fishing Trip" : review.tourCategory}</>}
+      </span>
     </div>
     {sourceLabel && (
       <span class="review-card__source" data-source={review.source}>
@@ -807,6 +890,16 @@ const { title, subtitle, buttonText, buttonHref } = Astro.props;
   .cta-banner__button:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 640px) {
+    .cta-banner__title {
+      font-size: var(--text-2xl);
+    }
+
+    .cta-banner__subtitle {
+      font-size: var(--text-sm);
+    }
   }
 </style>
 ```
@@ -1196,7 +1289,7 @@ import FleetGrid from "@algarve-tourism/shared/components/FleetGrid.astro";
 import WhyChooseUs from "@algarve-tourism/shared/components/WhyChooseUs.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
-import config from "../../config.js";
+import { config } from "../../config.js";
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -1271,14 +1364,14 @@ const structuredData = [
 ---
 
 <Layout
-  title={`${t(locale, "nav.about")} | ${config.name}`}
+  title={t(locale, "nav.about")}
   description={t(locale, "meta.about_atlantis")}
   locale={locale}
   path="/about/"
   config={config}
   structuredData={structuredData}
 >
-  <Header slot="header" config={config} locale={locale} currentPath={`/${locale}/about/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/about/`} />
 
   <section class="about-hero">
     <div class="about-hero__inner container">
@@ -1644,6 +1737,19 @@ const pct3 = total > 0 ? Math.round((stars3 / total) * 100) : 0;
       width: 80px;
       height: 1px;
     }
+
+    .agg-rating__bar-track {
+      width: 100px;
+    }
+
+    .agg-rating__badges {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .agg-rating__badge {
+      min-height: 44px;
+    }
   }
 </style>
 ```
@@ -1730,6 +1836,13 @@ const { filters, allLabel } = Astro.props;
 
   .review-filters__btn:hover:not(.review-filters__btn--active) {
     background: var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .review-filters__btn {
+      padding: var(--space-3) var(--space-5);
+      min-height: 44px;
+    }
   }
 </style>
 ```
@@ -1884,7 +1997,7 @@ import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import LeaveReviewCTA from "@algarve-tourism/shared/components/LeaveReviewCTA.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
-import config from "../../config.js";
+import { config } from "../../config.js";
 import manualReviews from "../../content/reviews/manual.json";
 
 export function getStaticPaths() {
@@ -1931,8 +2044,26 @@ const faqItems = faqData[locale] || faqData.en;
 const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fréquentes" : "FAQ";
 const faqTitle = locale === "pt" ? "Sobre as <em>Avaliações</em>" : locale === "es" ? "Sobre las <em>Opiniones</em>" : locale === "fr" ? "À propos des <em>Avis</em>" : "About <em>Reviews</em>";
 
+const reviewItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: t(locale, "reviews.title"),
+  numberOfItems: manualReviews.length,
+  itemListElement: manualReviews.map((r: any, i: number) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Review",
+      author: { "@type": "Person", name: r.author },
+      reviewBody: r.text,
+      datePublished: r.date,
+    },
+  })),
+};
+
 const structuredData = [
   buildCollectionPage(config, locale, "/reviews/", t(locale, "reviews.title"), t(locale, "meta.reviews")),
+  reviewItemList,
   buildBreadcrumbList(config, locale, [
     { name: "Home", path: "/" },
     { name: t(locale, "nav.reviews"), path: "/reviews/" },
@@ -1942,14 +2073,14 @@ const structuredData = [
 ---
 
 <Layout
-  title={`${t(locale, "nav.reviews")} | ${config.name}`}
+  title={t(locale, "nav.reviews")}
   description={t(locale, "meta.reviews")}
   locale={locale}
   path="/reviews/"
   config={config}
   structuredData={structuredData}
 >
-  <Header slot="header" config={config} locale={locale} currentPath={`/${locale}/reviews/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/reviews/`} />
 
   <div class="container">
     <AggregateRating
@@ -2131,6 +2262,28 @@ const mapsLink = "https://maps.google.com/?q=Acostagem+Porto+Comercial+Portimao"
     .contact-cards {
       grid-template-columns: 1fr;
     }
+
+    .contact-cards__card:first-child {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+    }
+
+    .contact-cards__card:first-child .contact-cards__title {
+      color: white;
+    }
+
+    .contact-cards__card:first-child .contact-cards__desc {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .contact-cards__card:first-child .contact-cards__icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-cards__card:first-child .contact-cards__cta--wa {
+      background: white;
+      color: #25D366;
+    }
   }
 </style>
 ```
@@ -2281,7 +2434,7 @@ interface Props {
 const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props;
 ---
 
-<form class="contact-form" data-contact-form>
+<form class="contact-form" data-contact-form data-submit-text={t(locale, "contact.send")}>
   <h3 class="contact-form__title">{t(locale, "contact.form_title")}</h3>
   <p class="contact-form__subtitle">{t(locale, "contact.form_subtitle")}</p>
 
@@ -2315,22 +2468,47 @@ const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props
   <div class="contact-form__status" data-form-status></div>
 </form>
 
-<script define:vars={{ email }}>
+<script>
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("[data-contact-form]");
-    if (!form) return;
+    const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+    const status = document.querySelector("[data-form-status]");
+    if (!form || !status) return;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const name = data.get("name");
-      const userEmail = data.get("email");
-      const tour = data.get("tour");
-      const message = data.get("message");
+      const payload = {
+        name: data.get("name"),
+        email: data.get("email"),
+        tour: data.get("tour") || "",
+        message: data.get("message"),
+      };
 
-      const subject = encodeURIComponent(`Contact from ${name}${tour ? ` — ${tour}` : ""}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${userEmail}\nTour Interest: ${tour || "Not specified"}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = "…";
+      status.textContent = "";
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          status.textContent = "✓ Message sent! We'll get back to you soon.";
+          status.className = "contact-form__status contact-form__status--ok";
+          form.reset();
+        } else {
+          throw new Error("Server error");
+        }
+      } catch {
+        status.textContent = "Something went wrong. Please try WhatsApp instead.";
+        status.className = "contact-form__status contact-form__status--err";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = form.dataset.submitText || "Send";
+      }
     });
   });
 </script>
@@ -2404,6 +2582,15 @@ const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props
 
   .contact-form__status {
     font-size: var(--text-sm);
+    min-height: 1.5em;
+  }
+
+  .contact-form__status--ok {
+    color: #16a34a;
+  }
+
+  .contact-form__status--err {
+    color: #dc2626;
   }
 </style>
 ```
@@ -2426,7 +2613,7 @@ import ContactInfo from "@algarve-tourism/shared/components/ContactInfo.astro";
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
-import config from "../../config.js";
+import { config } from "../../config.js";
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -2505,14 +2692,14 @@ const structuredData = [
 ---
 
 <Layout
-  title={`${t(locale, "nav.contact")} | ${config.name}`}
+  title={t(locale, "nav.contact")}
   description={t(locale, "meta.contact")}
   locale={locale}
   path="/contact/"
   config={config}
   structuredData={structuredData}
 >
-  <Header slot="header" config={config} locale={locale} currentPath={`/${locale}/contact/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/contact/`} />
 
   <section class="contact-hero">
     <div class="container">
@@ -2603,6 +2790,14 @@ const structuredData = [
     .contact-layout {
       grid-template-columns: 1fr;
     }
+
+    .contact-layout__sidebar {
+      order: -1;
+    }
+
+    .contact-layout :global(.meeting-point-map__wrap) {
+      aspect-ratio: 4 / 3;
+    }
   }
 </style>
 ```
@@ -2626,6 +2821,220 @@ git commit -m "feat(contact): rebuild Contact page with info cards, sidebar, map
 
 ---
 
+## Task 7: Contact Form Backend (Cloudflare Pages Function)
+
+**Files:**
+- Create: `functions/api/contact.ts` (if Pages project root is the monorepo root) OR `packages/atlantis/functions/api/contact.ts` (if Pages project root is `packages/atlantis/`)
+
+**Note:** Before implementing, confirm which directory is the Cloudflare Pages project root. The function must live at the Pages project root under `functions/`. The `scripts/deploy.sh` uses rsync — if the site is served via Cloudflare Pages (as confirmed by the business owner), then either rsync deploys into a Pages-connected repo, or there's a separate Pages deployment. Confirm before placing the function.
+
+- [ ] **Step 1: Create the Cloudflare Pages Function**
+
+Create `functions/api/contact.ts` (adjust path based on Pages project root):
+
+```typescript
+interface ContactPayload {
+  name: string;
+  email: string;
+  tour: string;
+  message: string;
+}
+
+interface Env {
+  CONTACT_EMAIL?: string;
+  RESEND_API_KEY?: string;
+}
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const body = (await context.request.json()) as ContactPayload;
+
+    // Validate required fields
+    if (!body.name?.trim() || !body.email?.trim() || !body.message?.trim()) {
+      return new Response(JSON.stringify({ error: "Name, email, and message are required" }), {
+        status: 400,
+        headers: corsHeaders,
+      });
+    }
+
+    // Basic email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
+      return new Response(JSON.stringify({ error: "Invalid email format" }), {
+        status: 400,
+        headers: corsHeaders,
+      });
+    }
+
+    const toEmail = context.env.CONTACT_EMAIL || "atlantistours@buyalgarveproperties.com";
+    const apiKey = context.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      // Log to console for debugging but don't expose to client
+      console.error("RESEND_API_KEY not configured");
+      return new Response(JSON.stringify({ error: "Email service not configured" }), {
+        status: 503,
+        headers: corsHeaders,
+      });
+    }
+
+    const tourLabel = body.tour || "Not specified";
+    const emailBody = `New contact form submission:\n\nName: ${body.name}\nEmail: ${body.email}\nTour Interest: ${tourLabel}\n\nMessage:\n${body.message}`;
+
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Atlantis Tours <noreply@atlantistours.pt>",
+        to: toEmail,
+        reply_to: body.email,
+        subject: `Contact from ${body.name}${body.tour ? ` — ${body.tour}` : ""}`,
+        text: emailBody,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("Resend API error:", await res.text());
+      return new Response(JSON.stringify({ error: "Failed to send email" }), {
+        status: 502,
+        headers: corsHeaders,
+      });
+    }
+
+    return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: corsHeaders,
+    });
+  } catch (err) {
+    console.error("Contact form error:", err);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+      headers: corsHeaders,
+    });
+  }
+};
+```
+
+- [ ] **Step 2: Add CORS preflight handler**
+
+Add to the same file, before `onRequestPost`:
+
+```typescript
+export const onRequestOptions: PagesFunction = async () => {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+};
+```
+
+- [ ] **Step 3: Configure environment variables**
+
+In the Cloudflare Pages dashboard, add:
+- `RESEND_API_KEY` — get from resend.com (free tier: 100 emails/day, 3,000/month)
+- `CONTACT_EMAIL` — `atlantistours@buyalgarveproperties.com` (optional, defaults to this)
+
+Also verify that the domain `atlantistours.pt` is verified in Resend for the `from` address.
+
+- [ ] **Step 4: Test the endpoint**
+
+Run locally: `npx wrangler pages dev packages/atlantis/dist --compatibility-date=2024-01-01`
+
+```bash
+curl -X POST http://localhost:8788/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test","email":"test@example.com","tour":"","message":"Hello"}'
+```
+
+Expected: `{"ok":true}` (if RESEND_API_KEY is set) or `{"error":"Email service not configured"}` (if not).
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add functions/api/contact.ts
+git commit -m "feat(contact): add Cloudflare Pages Function for contact form email"
+```
+
+---
+
+## Mobile UX Notes
+
+The following mobile-specific CSS is already included in the components above. Summary of responsive breakpoints:
+
+| Component | Desktop | Mobile (≤768px) | Small (≤480px) |
+|-----------|---------|-----------------|----------------|
+| StatsBar | 4-col grid | 2-col grid | 2-col, smaller font |
+| FleetGrid | 3-col grid | 1-col stacked | — |
+| WhyChooseUs | 2-col grid | 1-col stacked (≤640px) | — |
+| ContactCards | 3-col grid | 1-col stacked | — |
+| ContactLayout | 2-col (form + sidebar) | 1-col stacked | — |
+| AggregateRating | Horizontal (score / bars) | Vertical stacked (≤640px) | — |
+| ReviewFilters | Horizontal row | Horizontal scroll + touch | — |
+| About Hero | 4xl title | 3xl title | — |
+| Contact Hero | 4xl title | 3xl title | — |
+| About Story | 2-col (text + image) | 1-col, image on top | — |
+
+**Additional mobile UX refinements to apply during implementation:**
+
+These are inline CSS additions in the page-level `<style>` blocks during Tasks 4–6, not separate tasks:
+
+1. **Touch targets** — All interactive elements (filter pills, badge links, CTA buttons) must be minimum 44px height. The ReviewFilters buttons already use `padding: var(--space-2) var(--space-4)` which with the sm font size should be ~36px — increase padding to `var(--space-3) var(--space-5)` on mobile.
+
+2. **Contact sidebar order on mobile** — On mobile, the info sidebar (hours, address) should appear BEFORE the form since it's more immediately useful. Add to the Contact page `<style>`:
+```css
+@media (max-width: 768px) {
+  .contact-layout__sidebar { order: -1; }
+}
+```
+
+3. **Map aspect ratio on mobile** — The MeetingPointMap uses 16:9 which is too short on mobile. Override in the Contact page:
+```css
+@media (max-width: 768px) {
+  .contact-layout :global(.meeting-point-map__wrap) {
+    aspect-ratio: 4 / 3;
+  }
+}
+```
+
+4. **CTA Banner text on mobile** — Reduce title size:
+```css
+@media (max-width: 640px) {
+  .cta-banner__title { font-size: var(--text-2xl); }
+}
+```
+This should be added to the CTABanner component.
+
+5. **WhatsApp prominence on mobile** — The first ContactCard (WhatsApp) should be visually larger on mobile. Add to ContactCards:
+```css
+@media (max-width: 768px) {
+  .contact-cards__card:first-child {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+  }
+  .contact-cards__card:first-child .contact-cards__desc { color: rgba(255,255,255,0.85); }
+  .contact-cards__card:first-child .contact-cards__cta--wa { background: white; color: #25D366; }
+}
+```
+
+6. **AggregateRating bar width on mobile** — The 120px fixed-width bars should scale:
+```css
+@media (max-width: 640px) {
+  .agg-rating__bar-track { width: 100px; }
+}
+```
+
+---
+
 ## Post-Implementation Notes
 
 **Stats values to confirm with business owner before deploying:**
@@ -2638,9 +3047,14 @@ git commit -m "feat(contact): rebuild Contact page with info cards, sidebar, map
 **TripAdvisor / Google Business URLs:**
 - Platform badge links (`href="#"`) in AggregateRating and LeaveReviewCTA need real URLs once available.
 
+**Review provenance:**
+- All 12 reviews currently have empty `sourceUrl` and `externalReviewId` fields. These must be populated with actual review URLs before the data can be used in per-tour structured data markup.
+- Reviews without verified `sourceUrl` should only be displayed visually, never included in Schema.org review markup.
+
 **Contact form backend:**
-- Currently uses `mailto:` link as a fallback. A proper backend (Cloudflare Pages Function, Formspree, etc.) can be added later.
-- The deploy script (`scripts/deploy.sh`) uses rsync to a VPS, not Cloudflare Pages. Verify hosting setup before adding server-side functions.
+- Requires `RESEND_API_KEY` environment variable in Cloudflare Pages settings.
+- Requires domain verification in Resend for the `from` address.
+- The `scripts/deploy.sh` uses rsync — confirm whether the Cloudflare Pages project root is the monorepo root or `packages/atlantis/`, and place the `functions/` directory accordingly.
 
 **Fleet / story images:**
 - FleetGrid cards and the About story section use placeholder `<div>` elements. Replace with real photos via Filestack CDN once available.
