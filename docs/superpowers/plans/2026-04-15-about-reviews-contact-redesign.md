@@ -125,6 +125,11 @@ In `packages/shared/src/i18n/types.ts`, add these keys to the `TranslationString
   "contact.find_us": string;
   "contact.follow_us": string;
 
+  // Contact form status
+  "contact.status_success": string;
+  "contact.status_error": string;
+  "contact.sending": string;
+
   // Shared CTA
   "cta.explore_title": string;
   "cta.explore_subtitle": string;
@@ -138,7 +143,9 @@ In `packages/shared/src/i18n/types.ts`, add these keys to the `TranslationString
 
 - [ ] **Step 2: Add English translations**
 
-Add to end of `packages/shared/src/i18n/locales/en.json` (before the closing `}`):
+Add to end of `packages/shared/src/i18n/locales/en.json` (before the closing `}`).
+
+**Important JSON formatting:** First, add a comma after the current last key (`"common.whatsapp_contact": "Contact us on WhatsApp"` becomes `"common.whatsapp_contact": "Contact us on WhatsApp",`). Then paste the block below. The last key in the block must NOT have a trailing comma — remove it if your editor adds one.
 
 ```json
   "about.hero_badge": "Since 2010 · Portimão, Algarve",
@@ -198,6 +205,9 @@ Add to end of `packages/shared/src/i18n/locales/en.json` (before the closing `}`
   "contact.hours_note": "Open 7 days a week · Weather dependent",
   "contact.find_us": "Find Us",
   "contact.follow_us": "Follow Us",
+  "contact.status_success": "Message sent! We'll get back to you soon.",
+  "contact.status_error": "Something went wrong. Please try WhatsApp instead.",
+  "contact.sending": "Sending…",
   "cta.explore_title": "Ready to Explore the <em>Algarve Coast</em>?",
   "cta.explore_subtitle": "Browse our boat tours, yacht cruises, and fishing adventures",
   "cta.explore_button": "Explore Tours",
@@ -205,12 +215,12 @@ Add to end of `packages/shared/src/i18n/locales/en.json` (before the closing `}`
   "cta.book_subtitle": "Skip the form — browse our tours and book instantly online",
   "cta.book_button": "Explore Tours",
   "cta.reviews_title": "Ready to Create Your <em>Own Story</em>?",
-  "cta.reviews_subtitle": "Browse our boat tours and book your Algarve adventure",
+  "cta.reviews_subtitle": "Browse our boat tours and book your Algarve adventure"
 ```
 
 - [ ] **Step 3: Add Portuguese translations**
 
-Add to end of `packages/shared/src/i18n/locales/pt.json` (before closing `}`):
+Add to end of `packages/shared/src/i18n/locales/pt.json` (before closing `}`). Same JSON formatting rule: add comma after the current last key, paste block, ensure no trailing comma on the final new key.
 
 ```json
   "about.hero_badge": "Desde 2010 · Portimão, Algarve",
@@ -270,6 +280,9 @@ Add to end of `packages/shared/src/i18n/locales/pt.json` (before closing `}`):
   "contact.hours_note": "Aberto 7 dias por semana · Dependente do tempo",
   "contact.find_us": "Onde Estamos",
   "contact.follow_us": "Siga-nos",
+  "contact.status_success": "Mensagem enviada! Responderemos em breve.",
+  "contact.status_error": "Algo correu mal. Por favor tente o WhatsApp.",
+  "contact.sending": "A enviar…",
   "cta.explore_title": "Pronto para Explorar a <em>Costa Algarvia</em>?",
   "cta.explore_subtitle": "Descubra os nossos passeios de barco, cruzeiros de iate e aventuras de pesca",
   "cta.explore_button": "Explorar Passeios",
@@ -277,12 +290,12 @@ Add to end of `packages/shared/src/i18n/locales/pt.json` (before closing `}`):
   "cta.book_subtitle": "Passe à frente do formulário — veja os nossos passeios e reserve online",
   "cta.book_button": "Explorar Passeios",
   "cta.reviews_title": "Pronto para Criar a Sua <em>Própria História</em>?",
-  "cta.reviews_subtitle": "Descubra os nossos passeios de barco e reserve a sua aventura no Algarve",
+  "cta.reviews_subtitle": "Descubra os nossos passeios de barco e reserve a sua aventura no Algarve"
 ```
 
 - [ ] **Step 4: Add Spanish translations**
 
-Add to end of `packages/shared/src/i18n/locales/es.json` (before closing `}`):
+Add to end of `packages/shared/src/i18n/locales/es.json` (before closing `}`). Same JSON formatting rule.
 
 ```json
   "about.hero_badge": "Desde 2010 · Portimão, Algarve",
@@ -342,6 +355,9 @@ Add to end of `packages/shared/src/i18n/locales/es.json` (before closing `}`):
   "contact.hours_note": "Abierto 7 días a la semana · Sujeto al clima",
   "contact.find_us": "Encuéntrenos",
   "contact.follow_us": "Síguenos",
+  "contact.status_success": "¡Mensaje enviado! Le responderemos pronto.",
+  "contact.status_error": "Algo salió mal. Por favor intente WhatsApp.",
+  "contact.sending": "Enviando…",
   "cta.explore_title": "¿Listo para Explorar la <em>Costa del Algarve</em>?",
   "cta.explore_subtitle": "Descubra nuestros tours en barco, cruceros en yate y aventuras de pesca",
   "cta.explore_button": "Explorar Tours",
@@ -349,12 +365,12 @@ Add to end of `packages/shared/src/i18n/locales/es.json` (before closing `}`):
   "cta.book_subtitle": "Salte el formulario — vea nuestros tours y reserve en línea",
   "cta.book_button": "Explorar Tours",
   "cta.reviews_title": "¿Listo para Crear Su <em>Propia Historia</em>?",
-  "cta.reviews_subtitle": "Descubra nuestros tours en barco y reserve su aventura en el Algarve",
+  "cta.reviews_subtitle": "Descubra nuestros tours en barco y reserve su aventura en el Algarve"
 ```
 
 - [ ] **Step 5: Add French translations**
 
-Add to end of `packages/shared/src/i18n/locales/fr.json` (before closing `}`):
+Add to end of `packages/shared/src/i18n/locales/fr.json` (before closing `}`). Same JSON formatting rule.
 
 ```json
   "about.hero_badge": "Depuis 2010 · Portimão, Algarve",
@@ -414,6 +430,9 @@ Add to end of `packages/shared/src/i18n/locales/fr.json` (before closing `}`):
   "contact.hours_note": "Ouvert 7 jours sur 7 · Selon la météo",
   "contact.find_us": "Nous Trouver",
   "contact.follow_us": "Suivez-nous",
+  "contact.status_success": "Message envoyé ! Nous vous répondrons bientôt.",
+  "contact.status_error": "Quelque chose s'est mal passé. Essayez WhatsApp.",
+  "contact.sending": "Envoi…",
   "cta.explore_title": "Prêt à Explorer la <em>Côte de l'Algarve</em> ?",
   "cta.explore_subtitle": "Découvrez nos excursions en bateau, croisières en yacht et aventures de pêche",
   "cta.explore_button": "Explorer les Circuits",
@@ -421,10 +440,10 @@ Add to end of `packages/shared/src/i18n/locales/fr.json` (before closing `}`):
   "cta.book_subtitle": "Passez le formulaire — parcourez nos circuits et réservez en ligne",
   "cta.book_button": "Explorer les Circuits",
   "cta.reviews_title": "Prêt à Créer Votre <em>Propre Histoire</em> ?",
-  "cta.reviews_subtitle": "Découvrez nos excursions en bateau et réservez votre aventure en Algarve",
+  "cta.reviews_subtitle": "Découvrez nos excursions en bateau et réservez votre aventure en Algarve"
 ```
 
-- [ ] **Step 6: Add tourCategory and source to ManualReview type**
+- [ ] **Step 6: Add provenance fields to ManualReview type**
 
 In `packages/shared/src/types.ts`, update the `ManualReview` interface with full provenance fields:
 
@@ -487,8 +506,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717720,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Hans K.",
@@ -503,8 +522,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 720028,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Ana R.",
@@ -519,8 +538,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717720,
     "language": "pt",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Pierre D.",
@@ -535,8 +554,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 718024,
     "language": "fr",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Emma & James W.",
@@ -551,8 +570,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717728,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Marco V.",
@@ -567,8 +586,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 720028,
     "language": "it",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Lisa van den Berg",
@@ -583,8 +602,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717720,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Carlos M.",
@@ -599,8 +618,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 718024,
     "language": "es",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Sophie Laurent",
@@ -615,8 +634,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 720028,
     "language": "fr",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Thomas B.",
@@ -631,8 +650,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717720,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "João P.",
@@ -647,8 +666,8 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 718024,
     "language": "pt",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   },
   {
     "author": "Maria & Stefan H.",
@@ -663,13 +682,17 @@ Replace the entire content of `packages/atlantis/src/content/reviews/manual.json
     "externalReviewId": "",
     "fareharborItemPk": 717754,
     "language": "en",
-    "verifiedBooking": true,
-    "permissionToPublish": true
+    "verifiedBooking": false,
+    "permissionToPublish": false
   }
 ]
 ```
 
-Note: `sourceUrl` and `externalReviewId` are empty strings as placeholders — the business owner needs to populate these with actual TripAdvisor/Google review URLs and IDs once accounts are connected. Reviews without `sourceUrl` should not be used in per-tour structured data markup.
+Note: All reviews default to `verifiedBooking: false` and `permissionToPublish: false`. The business owner must:
+1. Populate `sourceUrl` and `externalReviewId` with actual TripAdvisor/Google review URLs and IDs
+2. Set `verifiedBooking: true` only for reviews from guests with confirmed bookings
+3. Set `permissionToPublish: true` only after obtaining explicit consent
+Only reviews with both fields set to `true` AND a valid `sourceUrl` are eligible for per-tour structured data markup on tour detail pages.
 
 - [ ] **Step 2: Update ReviewCard to show tour category and source**
 
@@ -2044,20 +2067,15 @@ const faqItems = faqData[locale] || faqData.en;
 const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fréquentes" : "FAQ";
 const faqTitle = locale === "pt" ? "Sobre as <em>Avaliações</em>" : locale === "es" ? "Sobre las <em>Opiniones</em>" : locale === "fr" ? "À propos des <em>Avis</em>" : "About <em>Reviews</em>";
 
+// ItemList without Review type — per-tour Review markup belongs on tour detail pages only
 const reviewItemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: t(locale, "reviews.title"),
   numberOfItems: manualReviews.length,
-  itemListElement: manualReviews.map((r: any, i: number) => ({
+  itemListElement: manualReviews.map((_: any, i: number) => ({
     "@type": "ListItem",
     position: i + 1,
-    item: {
-      "@type": "Review",
-      author: { "@type": "Person", name: r.author },
-      reviewBody: r.text,
-      datePublished: r.date,
-    },
   })),
 };
 
@@ -2434,7 +2452,7 @@ interface Props {
 const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props;
 ---
 
-<form class="contact-form" data-contact-form data-submit-text={t(locale, "contact.send")}>
+<form class="contact-form" data-contact-form>
   <h3 class="contact-form__title">{t(locale, "contact.form_title")}</h3>
   <p class="contact-form__subtitle">{t(locale, "contact.form_subtitle")}</p>
 
@@ -2468,6 +2486,10 @@ const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props
   <div class="contact-form__status" data-form-status></div>
 </form>
 
+<input type="hidden" data-msg-success value={t(locale, "contact.status_success")} />
+<input type="hidden" data-msg-error value={t(locale, "contact.status_error")} />
+<input type="hidden" data-msg-sending value={t(locale, "contact.sending")} />
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
@@ -2485,8 +2507,13 @@ const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props
       };
 
       const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+      const originalBtnText = btn.textContent;
+      const msgSuccess = document.querySelector<HTMLInputElement>("[data-msg-success]")?.value || "Message sent!";
+      const msgError = document.querySelector<HTMLInputElement>("[data-msg-error]")?.value || "Something went wrong.";
+      const msgSending = document.querySelector<HTMLInputElement>("[data-msg-sending]")?.value || "…";
+
       btn.disabled = true;
-      btn.textContent = "…";
+      btn.textContent = msgSending;
       status.textContent = "";
 
       try {
@@ -2496,18 +2523,18 @@ const { locale, email = "atlantistours@buyalgarveproperties.com" } = Astro.props
           body: JSON.stringify(payload),
         });
         if (res.ok) {
-          status.textContent = "✓ Message sent! We'll get back to you soon.";
+          status.textContent = "✓ " + msgSuccess;
           status.className = "contact-form__status contact-form__status--ok";
           form.reset();
         } else {
           throw new Error("Server error");
         }
       } catch {
-        status.textContent = "Something went wrong. Please try WhatsApp instead.";
+        status.textContent = msgError;
         status.className = "contact-form__status contact-form__status--err";
       } finally {
         btn.disabled = false;
-        btn.textContent = form.dataset.submitText || "Send";
+        btn.textContent = originalBtnText;
       }
     });
   });
@@ -2893,8 +2920,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       },
       body: JSON.stringify({
         from: "Atlantis Tours <noreply@atlantistours.pt>",
-        to: toEmail,
-        reply_to: body.email,
+        to: [toEmail],
+        reply_to: [body.email],
         subject: `Contact from ${body.name}${body.tour ? ` — ${body.tour}` : ""}`,
         text: emailBody,
       }),
@@ -2948,8 +2975,19 @@ Also verify that the domain `atlantistours.pt` is verified in Resend for the `fr
 
 - [ ] **Step 4: Test the endpoint**
 
-Run locally: `npx wrangler pages dev packages/atlantis/dist --compatibility-date=2024-01-01`
+Run locally (adjust based on where the `functions/` directory lives):
 
+If Pages project root is the monorepo root:
+```bash
+npx wrangler pages dev packages/atlantis/dist --compatibility-date=2024-01-01
+```
+
+If Pages project root is `packages/atlantis/`:
+```bash
+cd packages/atlantis && npx wrangler pages dev dist --compatibility-date=2024-01-01
+```
+
+Then test:
 ```bash
 curl -X POST http://localhost:8788/api/contact \
   -H "Content-Type: application/json" \
