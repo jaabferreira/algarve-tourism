@@ -35,10 +35,12 @@ const { filters, allLabel } = Astro.props;
         btn.classList.add("review-filters__btn--active");
 
         cards.forEach((card) => {
+          const target = card.closest(".reviews-grid__item") as HTMLElement | null;
+          const el = target || card;
           if (filter === "all" || card.dataset.category === filter) {
-            card.style.display = "";
+            el.style.display = "";
           } else {
-            card.style.display = "none";
+            el.style.display = "none";
           }
         });
       });
