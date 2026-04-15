@@ -1,0 +1,207 @@
+---
+import type { ManualReview } from "../types.js";
+
+interface Props {
+  reviews: ManualReview[];
+  label: string;
+  basedOnText: string;
+}
+
+const { reviews, label, basedOnText } = Astro.props;
+
+const total = reviews.length;
+const avg = total > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / total).toFixed(1) : "0";
+const stars5 = reviews.filter((r) => r.rating === 5).length;
+const stars4 = reviews.filter((r) => r.rating === 4).length;
+const stars3 = reviews.filter((r) => r.rating <= 3).length;
+const pct5 = total > 0 ? Math.round((stars5 / total) * 100) : 0;
+const pct4 = total > 0 ? Math.round((stars4 / total) * 100) : 0;
+const pct3 = total > 0 ? Math.round((stars3 / total) * 100) : 0;
+---
+
+<div class="agg-rating" data-reveal>
+  <span class="section-label">{label}</span>
+  <div class="agg-rating__main">
+    <div class="agg-rating__score">
+      <span class="agg-rating__number">{avg}</span>
+      <span class="agg-rating__stars">★★★★★</span>
+      <span class="agg-rating__count">{basedOnText} {total}+ reviews</span>
+    </div>
+    <div class="agg-rating__divider"></div>
+    <div class="agg-rating__bars">
+      <div class="agg-rating__bar-row">
+        <span class="agg-rating__bar-label">5 stars</span>
+        <div class="agg-rating__bar-track"><div class="agg-rating__bar-fill" style={`width: ${pct5}%`}></div></div>
+        <span class="agg-rating__bar-pct">{pct5}%</span>
+      </div>
+      <div class="agg-rating__bar-row">
+        <span class="agg-rating__bar-label">4 stars</span>
+        <div class="agg-rating__bar-track"><div class="agg-rating__bar-fill" style={`width: ${pct4}%`}></div></div>
+        <span class="agg-rating__bar-pct">{pct4}%</span>
+      </div>
+      <div class="agg-rating__bar-row">
+        <span class="agg-rating__bar-label">3 stars</span>
+        <div class="agg-rating__bar-track"><div class="agg-rating__bar-fill" style={`width: ${pct3}%`}></div></div>
+        <span class="agg-rating__bar-pct">{pct3}%</span>
+      </div>
+    </div>
+  </div>
+  <div class="agg-rating__badges">
+    <a href="#" class="agg-rating__badge" data-platform="tripadvisor">
+      <span class="agg-rating__badge-icon agg-rating__badge-icon--ta">TA</span>
+      <span><strong>TripAdvisor</strong> · {avg}</span>
+    </a>
+    <a href="#" class="agg-rating__badge" data-platform="google">
+      <span class="agg-rating__badge-icon agg-rating__badge-icon--g">G</span>
+      <span><strong>Google</strong> · {avg}</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .agg-rating {
+    text-align: center;
+    padding: calc(var(--header-height) + var(--space-12)) 0 var(--space-8);
+  }
+
+  .agg-rating__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    margin: var(--space-8) 0;
+  }
+
+  .agg-rating__score {
+    text-align: center;
+  }
+
+  .agg-rating__number {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .agg-rating__stars {
+    display: block;
+    color: var(--color-gold);
+    font-size: var(--text-xl);
+    margin: var(--space-2) 0;
+  }
+
+  .agg-rating__count {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+  }
+
+  .agg-rating__divider {
+    width: 1px;
+    height: 80px;
+    background: var(--color-border);
+  }
+
+  .agg-rating__bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: left;
+  }
+
+  .agg-rating__bar-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+  }
+
+  .agg-rating__bar-label {
+    width: 50px;
+    flex-shrink: 0;
+  }
+
+  .agg-rating__bar-track {
+    width: 120px;
+    height: 8px;
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .agg-rating__bar-fill {
+    height: 100%;
+    background: var(--color-gold);
+    border-radius: var(--radius-full);
+    transition: width 0.6s ease-out;
+  }
+
+  .agg-rating__bar-pct {
+    width: 32px;
+    text-align: right;
+  }
+
+  .agg-rating__badges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .agg-rating__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-button);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color var(--transition-base);
+  }
+
+  .agg-rating__badge:hover {
+    border-color: var(--color-primary);
+  }
+
+  .agg-rating__badge-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    color: white;
+  }
+
+  .agg-rating__badge-icon--ta { background: #34E0A1; }
+  .agg-rating__badge-icon--g { background: #4285F4; }
+
+  @media (max-width: 640px) {
+    .agg-rating__main {
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .agg-rating__divider {
+      width: 80px;
+      height: 1px;
+    }
+
+    .agg-rating__bar-track {
+      width: 100px;
+    }
+
+    .agg-rating__badges {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .agg-rating__badge {
+      min-height: 44px;
+    }
+  }
+</style>

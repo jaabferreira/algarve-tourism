@@ -137,3 +137,24 @@ export function buildItemList(
     })),
   };
 }
+
+export function buildCollectionPage(
+  config: BrandConfig,
+  locale: Locale,
+  path: string,
+  name: string,
+  description: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url: `https://www.${config.domain}/${locale}${path}`,
+    isPartOf: {
+      "@type": "WebSite",
+      name: config.name,
+      url: `https://www.${config.domain}`,
+    },
+  };
+}

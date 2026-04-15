@@ -1,11 +1,16 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t, buildLocalBusiness, buildAggregateRating, buildReviewList } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildLocalBusiness, buildBreadcrumbList, buildFAQPage, buildCollectionPage } from "@algarve-tourism/shared";
 import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
-import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import AggregateRating from "@algarve-tourism/shared/components/AggregateRating.astro";
+import ReviewFilters from "@algarve-tourism/shared/components/ReviewFilters.astro";
+import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
+import LeaveReviewCTA from "@algarve-tourism/shared/components/LeaveReviewCTA.astro";
+import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
+import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
 import { config } from "../../config.js";
 import manualReviews from "../../content/reviews/manual.json";
 
@@ -14,12 +19,58 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+const toursHref = getLocalePath(locale, "/tours/");
 
-const structuredData = {
-  ...buildLocalBusiness(config),
-  aggregateRating: buildAggregateRating(manualReviews),
-  review: buildReviewList(manualReviews),
+const filterItems = [
+  { key: "benagil", label: t(locale, "category.benagil-cave-tours") },
+  { key: "yacht", label: locale === "en" ? "Yacht Cruises" : locale === "pt" ? "Cruzeiros de Iate" : locale === "es" ? "Cruceros en Yate" : "Croisières en Yacht" },
+  { key: "fishing", label: locale === "en" ? "Fishing" : locale === "pt" ? "Pesca" : locale === "es" ? "Pesca" : "Pêche" },
+];
+
+const faqData: Record<string, { question: string; answer: string }[]> = {
+  en: [
+    { question: "Are these reviews from real guests?", answer: "Yes. All reviews displayed on this page are from verified guests who booked and completed a tour with Atlantis Tours. We display reviews from TripAdvisor, Google, and direct feedback." },
+    { question: "How can I leave a review for Atlantis Tours?", answer: "After your tour, you can leave a review on our TripAdvisor or Google Business page. We appreciate all feedback — it helps us improve and helps future guests make informed decisions." },
+    { question: "What is the average rating for Atlantis Tours?", answer: "We maintain a 4.9 out of 5 average rating across all our tours, based on hundreds of verified guest reviews on TripAdvisor and Google." },
+    { question: "Can I see reviews for a specific tour?", answer: "Yes! Use the filter tabs above the reviews to see feedback for specific tour categories — Benagil cave tours, yacht cruises, or fishing trips." },
+  ],
+  pt: [
+    { question: "Estas avaliações são de clientes reais?", answer: "Sim. Todas as avaliações exibidas nesta página são de clientes verificados que reservaram e completaram um passeio com a Atlantis Tours. Exibimos avaliações do TripAdvisor, Google e feedback direto." },
+    { question: "Como posso deixar uma avaliação para a Atlantis Tours?", answer: "Após o seu passeio, pode deixar uma avaliação na nossa página do TripAdvisor ou Google Business. Agradecemos todo o feedback — ajuda-nos a melhorar e ajuda futuros clientes a tomar decisões informadas." },
+    { question: "Qual é a avaliação média da Atlantis Tours?", answer: "Mantemos uma avaliação média de 4.9 em 5 em todos os nossos passeios, com base em centenas de avaliações verificadas no TripAdvisor e Google." },
+    { question: "Posso ver avaliações de um passeio específico?", answer: "Sim! Use os filtros acima das avaliações para ver feedback por categoria — passeios às grutas de Benagil, cruzeiros de iate ou passeios de pesca." },
+  ],
+  es: [
+    { question: "¿Estas opiniones son de clientes reales?", answer: "Sí. Todas las opiniones mostradas en esta página son de clientes verificados que reservaron y completaron un tour con Atlantis Tours. Mostramos opiniones de TripAdvisor, Google y feedback directo." },
+    { question: "¿Cómo puedo dejar una opinión para Atlantis Tours?", answer: "Después de su tour, puede dejar una opinión en nuestra página de TripAdvisor o Google Business. Agradecemos todo el feedback — nos ayuda a mejorar y ayuda a futuros clientes." },
+    { question: "¿Cuál es la valoración media de Atlantis Tours?", answer: "Mantenemos una valoración media de 4.9 sobre 5 en todos nuestros tours, basada en cientos de opiniones verificadas en TripAdvisor y Google." },
+    { question: "¿Puedo ver opiniones de un tour específico?", answer: "¡Sí! Use los filtros sobre las opiniones para ver feedback por categoría — tours a las cuevas de Benagil, cruceros en yate o pesca." },
+  ],
+  fr: [
+    { question: "Ces avis proviennent-ils de vrais clients ?", answer: "Oui. Tous les avis affichés sur cette page proviennent de clients vérifiés ayant réservé et effectué une excursion avec Atlantis Tours. Nous affichons les avis de TripAdvisor, Google et les retours directs." },
+    { question: "Comment puis-je laisser un avis pour Atlantis Tours ?", answer: "Après votre excursion, vous pouvez laisser un avis sur notre page TripAdvisor ou Google Business. Nous apprécions tous les retours — ils nous aident à nous améliorer." },
+    { question: "Quelle est la note moyenne d'Atlantis Tours ?", answer: "Nous maintenons une note moyenne de 4,9 sur 5 sur l'ensemble de nos excursions, basée sur des centaines d'avis vérifiés sur TripAdvisor et Google." },
+    { question: "Puis-je voir les avis pour une excursion spécifique ?", answer: "Oui ! Utilisez les filtres au-dessus des avis pour voir les retours par catégorie — excursions aux grottes de Benagil, croisières en yacht ou sorties pêche." },
+  ],
 };
+
+const faqItems = faqData[locale] || faqData.en;
+const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fréquentes" : "FAQ";
+const faqTitle = locale === "pt" ? "Sobre as <em>Avaliações</em>" : locale === "es" ? "Sobre las <em>Opiniones</em>" : locale === "fr" ? "À propos des <em>Avis</em>" : "About <em>Reviews</em>";
+
+// CollectionPage + BreadcrumbList + FAQPage provide sufficient structured data.
+// Per-tour Review/AggregateRating markup belongs on tour detail pages only.
+// An ItemList was considered here but omitted because ListItems without meaningful
+// item data add schema noise without SEO value.
+
+const structuredData = [
+  buildCollectionPage(config, locale, "/reviews/", t(locale, "reviews.title"), t(locale, "meta.reviews")),
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.reviews"), path: "/reviews/" },
+  ]),
+  buildFAQPage(faqItems),
+];
 ---
 
 <Layout
@@ -32,11 +83,41 @@ const structuredData = {
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/reviews/`} />
 
-  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
-    <h1>{t(locale, "reviews.title")}</h1>
-    <ReviewsGrid reviews={manualReviews} brand={config.brand} locale={locale} />
-  </section>
+  <div class="container">
+    <AggregateRating
+      reviews={manualReviews}
+      label={t(locale, "reviews.aggregate_label")}
+      basedOnText={t(locale, "reviews.based_on")}
+    />
+
+    <h1 class="sr-only">{t(locale, "reviews.title")}</h1>
+
+    <ReviewFilters
+      filters={filterItems}
+      allLabel={t(locale, "reviews.filter_all")}
+    />
+
+    <section class="reviews-section section-sm">
+      <ReviewsGrid reviews={manualReviews} brand={config.brand} locale={locale} />
+    </section>
+  </div>
+
+  <LeaveReviewCTA
+    title={t(locale, "reviews.leave_title")}
+    subtitle={t(locale, "reviews.leave_subtitle")}
+    tripadvisorText={t(locale, "reviews.leave_tripadvisor")}
+    googleText={t(locale, "reviews.leave_google")}
+  />
+
+  <CTABanner
+    title={t(locale, "cta.reviews_title")}
+    subtitle={t(locale, "cta.reviews_subtitle")}
+    buttonText={t(locale, "cta.explore_button")}
+    buttonHref={toursHref}
+  />
+
+  <PageFAQ label={faqLabel} title={faqTitle} items={faqItems} />
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
 </Layout>
