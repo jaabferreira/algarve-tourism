@@ -11,6 +11,7 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import { config } from "../../../config.js";
 import { loadItems, getVariants } from "../../../data.js";
+import manualReviews from "../../../content/reviews/manual.json";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -54,6 +55,31 @@ const productData = {
     },
   }),
 };
+
+const tourReviews = manualReviews.filter(
+  (r) => r.product_slug === item.slug && r.verifiedBooking && r.permissionToPublish
+);
+
+if (tourReviews.length > 0) {
+  const avgRating = (tourReviews.reduce((sum, r) => sum + r.rating, 0) / tourReviews.length).toFixed(1);
+  productData.aggregateRating = {
+    "@type": "AggregateRating",
+    ratingValue: avgRating,
+    bestRating: "5",
+    ratingCount: tourReviews.length,
+  };
+  productData.review = tourReviews.map((r) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: r.author },
+    datePublished: r.date,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: r.rating,
+      bestRating: "5",
+    },
+    reviewBody: r.text,
+  }));
+}
 
 const breadcrumbData = buildBreadcrumbList(config, locale, [
   { name: "Home", path: "/" },
