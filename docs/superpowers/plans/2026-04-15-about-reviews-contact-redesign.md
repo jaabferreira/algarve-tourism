@@ -2067,21 +2067,13 @@ const faqItems = faqData[locale] || faqData.en;
 const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fréquentes" : "FAQ";
 const faqTitle = locale === "pt" ? "Sobre as <em>Avaliações</em>" : locale === "es" ? "Sobre las <em>Opiniones</em>" : locale === "fr" ? "À propos des <em>Avis</em>" : "About <em>Reviews</em>";
 
-// ItemList without Review type — per-tour Review markup belongs on tour detail pages only
-const reviewItemList = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: t(locale, "reviews.title"),
-  numberOfItems: manualReviews.length,
-  itemListElement: manualReviews.map((_: any, i: number) => ({
-    "@type": "ListItem",
-    position: i + 1,
-  })),
-};
+// CollectionPage + BreadcrumbList + FAQPage provide sufficient structured data.
+// Per-tour Review/AggregateRating markup belongs on tour detail pages only.
+// An ItemList was considered here but omitted because ListItems without meaningful
+// item data add schema noise without SEO value.
 
 const structuredData = [
   buildCollectionPage(config, locale, "/reviews/", t(locale, "reviews.title"), t(locale, "meta.reviews")),
-  reviewItemList,
   buildBreadcrumbList(config, locale, [
     { name: "Home", path: "/" },
     { name: t(locale, "nav.reviews"), path: "/reviews/" },
@@ -2859,6 +2851,8 @@ git commit -m "feat(contact): rebuild Contact page with info cards, sidebar, map
 
 Create `functions/api/contact.ts` (adjust path based on Pages project root):
 
+> **Typing note:** The snippet below avoids importing `PagesFunction` from `@cloudflare/workers-types` because that package is not in the repo. Cloudflare's runtime provides the convention-based exports (`onRequestPost`, `onRequestOptions`) without a type import — the `context` parameter is typed inline instead. If you later add `@cloudflare/workers-types` as a dev dependency you can replace the inline type with `PagesFunction<Env>`.
+
 ```typescript
 interface ContactPayload {
   name: string;
@@ -2872,7 +2866,22 @@ interface Env {
   RESEND_API_KEY?: string;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
+interface CFContext {
+  request: Request;
+  env: Env;
+}
+
+export async function onRequestOptions(): Promise<Response> {
+  return new Response(null, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+}
+
+export async function onRequestPost(context: CFContext): Promise<Response> {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -2946,26 +2955,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       headers: corsHeaders,
     });
   }
-};
+}
 ```
 
-- [ ] **Step 2: Add CORS preflight handler**
-
-Add to the same file, before `onRequestPost`:
-
-```typescript
-export const onRequestOptions: PagesFunction = async () => {
-  return new Response(null, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
-  });
-};
-```
-
-- [ ] **Step 3: Configure environment variables**
+- [ ] **Step 2: Configure environment variables**
 
 In the Cloudflare Pages dashboard, add:
 - `RESEND_API_KEY` — get from resend.com (free tier: 100 emails/day, 3,000/month)
@@ -2973,7 +2966,7 @@ In the Cloudflare Pages dashboard, add:
 
 Also verify that the domain `atlantistours.pt` is verified in Resend for the `from` address.
 
-- [ ] **Step 4: Test the endpoint**
+- [ ] **Step 3: Test the endpoint**
 
 Run locally (adjust based on where the `functions/` directory lives):
 
@@ -2996,7 +2989,7 @@ curl -X POST http://localhost:8788/api/contact \
 
 Expected: `{"ok":true}` (if RESEND_API_KEY is set) or `{"error":"Email service not configured"}` (if not).
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
 git add functions/api/contact.ts
