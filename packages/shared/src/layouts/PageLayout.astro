@@ -79,7 +79,26 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
     <slot />
   </main>
   <slot name="footer" />
-  <script defer src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"></script>
+  <script>
+    // Defer FareHarbor's autolightframe bundle (~1.3 MB) until the visitor
+    // actually engages. Booking links still work before load — they fall
+    // back to FH's hosted checkout page instead of the modal lightframe.
+    (() => {
+      let loaded = false;
+      const load = () => {
+        if (loaded) return;
+        loaded = true;
+        const s = document.createElement('script');
+        s.src = 'https://fareharbor.com/embeds/api/v1/?autolightframe=yes';
+        s.async = true;
+        document.body.appendChild(s);
+      };
+      const events = ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'];
+      events.forEach((e) => addEventListener(e, load, { once: true, passive: true }));
+      // Fallback for crawlers / users who never interact
+      setTimeout(load, 5000);
+    })();
+  </script>
 </body>
 </html>
 
