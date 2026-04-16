@@ -1,6 +1,6 @@
 ---
 import PageLayout from '@algarve-tourism/shared/layouts/PageLayout.astro';
-import type { BrandConfig } from '@algarve-tourism/shared/types';
+import type { BrandConfig, Locale } from '@algarve-tourism/shared/types';
 
 interface Props {
   title: string;
@@ -12,7 +12,11 @@ interface Props {
   config: BrandConfig;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
+  modifiedDate?: string;
+  articleSection?: string;
+  articleTags?: string[];
   noindex?: boolean;
+  alternateUrls?: { locale: Locale; href: string }[];
 }
 
 const props = Astro.props;

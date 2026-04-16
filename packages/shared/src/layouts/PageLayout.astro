@@ -1,6 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
-import type { BrandConfig } from '../types';
+import type { BrandConfig, Locale } from '../types';
 
 interface Props {
   title: string;
@@ -12,10 +12,14 @@ interface Props {
   config: BrandConfig;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
+  modifiedDate?: string;
+  articleSection?: string;
+  articleTags?: string[];
   noindex?: boolean;
+  alternateUrls?: { locale: Locale; href: string }[];
 }
 
-const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, noindex } = Astro.props;
+const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, modifiedDate, articleSection, articleTags, noindex, alternateUrls } = Astro.props;
 const brand = config.brand;
 
 const fontUrls: Record<string, string> = {
@@ -46,7 +50,11 @@ const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
     config={config}
     structuredData={structuredData}
     publishedDate={publishedDate}
+    modifiedDate={modifiedDate}
+    articleSection={articleSection}
+    articleTags={articleTags}
     noindex={noindex}
+    alternateUrls={alternateUrls}
   />
   {config.analytics.gtag && (
     <>

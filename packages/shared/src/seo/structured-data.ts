@@ -74,9 +74,12 @@ export function buildBlogPosting(
     title: string;
     excerpt: string;
     date: string;
+    lastModified?: string;
     author?: string;
     image?: string;
     slug: string;
+    category?: string;
+    tags?: string[];
   },
   locale: Locale,
 ) {
@@ -86,6 +89,9 @@ export function buildBlogPosting(
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    ...(post.lastModified && { dateModified: post.lastModified }),
+    ...(post.category && { articleSection: post.category }),
+    ...(post.tags && post.tags.length > 0 && { keywords: post.tags.join(", ") }),
     author: {
       "@type": "Organization",
       name: config.name,
