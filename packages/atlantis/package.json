@@ -12,6 +12,8 @@
     "@algarve-tourism/shared": "workspace:*",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3",
+    "@fontsource-variable/space-grotesk": "^5.2.5",
+    "@fontsource/instrument-serif": "^5.2.5",
     "astro": "^5"
   }
 }

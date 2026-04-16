@@ -26,7 +26,7 @@ const { label, title, items, toursHref } = Astro.props;
         <a href={toursHref} class="fleet__card">
           <div class="fleet__card-image">
             {item.image ? (
-              <img src={item.image} alt={item.title} loading="lazy" />
+              <img src={item.image} alt={item.title} loading="lazy" width="640" height="400" decoding="async" />
             ) : (
               <div class="fleet__card-placeholder" />
             )}

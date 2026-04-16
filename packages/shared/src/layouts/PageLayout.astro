@@ -20,13 +20,6 @@ interface Props {
 }
 
 const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, modifiedDate, articleSection, articleTags, noindex, alternateUrls } = Astro.props;
-const brand = config.brand;
-
-const fontUrls: Record<string, string> = {
-  'atlantis': 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap',
-  'algarve-and-you': 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap',
-};
-const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
 ---
 
 <!DOCTYPE html>
@@ -34,12 +27,9 @@ const fontUrl = fontUrls[brand] || fontUrls['atlantis'];
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://cdn.filestackcontent.com" />
   <link rel="preconnect" href="https://cdn.filestackcontent.com" />
   <link rel="preconnect" href="https://fareharbor.com" />
-  <link href={fontUrl} rel="stylesheet" />
   <SEO
     title={title}
     description={description}

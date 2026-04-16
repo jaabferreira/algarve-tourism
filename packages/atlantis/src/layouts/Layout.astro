@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/space-grotesk/wght.css';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
 import PageLayout from '@algarve-tourism/shared/layouts/PageLayout.astro';
 import type { BrandConfig, Locale } from '@algarve-tourism/shared/types';
 
@@ -29,5 +32,6 @@ const props = Astro.props;
 </PageLayout>
 
 <style is:global>
+  @import "../styles/fonts.css";
   @import "../styles/tokens.css";
 </style>

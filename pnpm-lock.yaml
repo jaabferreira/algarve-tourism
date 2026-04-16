@@ -35,6 +35,12 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3
         version: 3.7.2
+      '@fontsource-variable/cormorant-garamond':
+        specifier: ^5.2.5
+        version: 5.2.6
+      '@fontsource-variable/dm-sans':
+        specifier: ^5.2.5
+        version: 5.2.8
       astro:
         specifier: ^5
         version: 5.18.1(@types/node@24.12.2)(rollup@4.60.1)(tsx@4.21.0)(typescript@5.9.3)
@@ -50,6 +56,12 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3
         version: 3.7.2
+      '@fontsource-variable/space-grotesk':
+        specifier: ^5.2.5
+        version: 5.2.10
+      '@fontsource/instrument-serif':
+        specifier: ^5.2.5
+        version: 5.2.8
       astro:
         specifier: ^5
         version: 5.18.1(@types/node@24.12.2)(rollup@4.60.1)(tsx@4.21.0)(typescript@5.9.3)
@@ -424,6 +436,18 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/cormorant-garamond@5.2.6':
+    resolution: {integrity: sha512-5vHPJWMuTbVoB6OnorCflWJ51NJZ7eQWw58tVFUE/hHphTi/z2vrKESbuMSJ3diOC5KgPm/RLv2ULur+N1NLJQ==}
+
+  '@fontsource-variable/dm-sans@5.2.8':
+    resolution: {integrity: sha512-AxkvMTvNWgfrmlyjiV05vlHYJa+nRQCf1EfvIrQAPBpFJW0O9VTz7oAFr9S3lvbWdmnFoBk7yFqQL86u64nl2g==}
+
+  '@fontsource-variable/space-grotesk@5.2.10':
+    resolution: {integrity: sha512-yJQO/o35/hAP3CFnpdFTwQku2yzJOae2HIpBmqkOVoxhhXJaQP3g+b6Jrz7u+eI7A5ZdCIf88uMWpBJdFiGr5w==}
+
+  '@fontsource/instrument-serif@5.2.8':
+    resolution: {integrity: sha512-s+bkz+syj2rO00Rmq9g0P+PwuLig33DR1xDR8pTWmovH1pUjwnncrFk++q9mmOex8fUQ7oW80gPpPDaw7V1MMw==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2267,6 +2291,14 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.7':
     optional: true
+
+  '@fontsource-variable/cormorant-garamond@5.2.6': {}
+
+  '@fontsource-variable/dm-sans@5.2.8': {}
+
+  '@fontsource-variable/space-grotesk@5.2.10': {}
+
+  '@fontsource/instrument-serif@5.2.8': {}
 
   '@img/colour@1.1.0':
     optional: true

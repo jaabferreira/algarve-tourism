@@ -1,0 +1,21 @@
+/* Size-adjust fallbacks keep text metrics stable while the web font loads,
+   which prevents the layout shift that happens when fonts swap in (FOUT).
+   The web font @font-face rules themselves are imported from @fontsource in Layout.astro. */
+
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial');
+  size-adjust: 100%;
+  ascent-override: 94%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Serif Fallback';
+  src: local('Georgia');
+  size-adjust: 107%;
+  ascent-override: 85%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}

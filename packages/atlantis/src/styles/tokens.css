@@ -23,9 +23,9 @@
   --color-success: #0C7C8C;
 
   /* === Typography === */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
-  --font-accent: 'Instrument Serif', Georgia, serif;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk Fallback', system-ui, sans-serif;
+  --font-body: 'Space Grotesk Variable', 'Space Grotesk Fallback', system-ui, sans-serif;
+  --font-accent: 'Instrument Serif', 'Instrument Serif Fallback', Georgia, serif;
 
   /* === Shape — Rounded, modern === */
   --radius-card: 14px;

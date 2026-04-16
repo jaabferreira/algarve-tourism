@@ -25,9 +25,9 @@
   --color-success: #6B7F56;
 
   /* === Typography === */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
-  --font-accent: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond Fallback', Georgia, serif;
+  --font-body: 'DM Sans Variable', 'DM Sans Fallback', system-ui, sans-serif;
+  --font-accent: 'Cormorant Garamond Variable', 'Cormorant Garamond Fallback', Georgia, serif;
 
   /* === Shape — Sharp editorial === */
   --radius-card: 0px;
