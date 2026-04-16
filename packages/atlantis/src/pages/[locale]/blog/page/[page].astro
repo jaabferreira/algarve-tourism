@@ -13,11 +13,12 @@ import { config } from "../../../../config.js";
 const POSTS_PER_PAGE = 9;
 
 export async function getStaticPaths() {
+  const perPage = 9;
   const allPosts = await getCollection("blog");
 
   return LOCALES.flatMap((locale) => {
     const localePosts = allPosts.filter((p) => p.data.locale === locale);
-    const totalPages = Math.ceil(localePosts.length / POSTS_PER_PAGE);
+    const totalPages = Math.ceil(localePosts.length / perPage);
 
     return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
       params: { locale, page: String(i + 2) },
