@@ -1,0 +1,105 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t, buildCollectionPage, buildBreadcrumbList } from "@algarve-tourism/shared";
+import Layout from "../../../../../layouts/Layout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../../../../config.js";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+
+  const tagsByLocale = new Map<string, Set<string>>();
+  for (const post of allPosts) {
+    const locale = post.data.locale;
+    if (!tagsByLocale.has(locale)) tagsByLocale.set(locale, new Set());
+    for (const tag of post.data.tags ?? []) {
+      tagsByLocale.get(locale)!.add(tag);
+    }
+  }
+
+  return LOCALES.flatMap((locale) => {
+    const tags = tagsByLocale.get(locale) ?? new Set();
+    return Array.from(tags).map((tag) => ({
+      params: { locale, tag },
+    }));
+  });
+}
+
+const locale = Astro.params.locale as Locale;
+const tag = Astro.params.tag as string;
+const tagLabel = tag.replace(/-/g, " ");
+
+const allPosts = await getCollection("blog");
+const posts = allPosts
+  .filter((post) => post.data.locale === locale && (post.data.tags ?? []).includes(tag))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const structuredData = [
+  buildCollectionPage(config, locale, `/blog/tag/${tag}/`, tagLabel, `Posts tagged "${tagLabel}" — ${config.name}`),
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.blog"), path: "/blog/" },
+    { name: tagLabel, path: `/blog/tag/${tag}/` },
+  ]),
+];
+---
+
+<Layout
+  title={`${tagLabel} — ${t(locale, "nav.blog")}`}
+  description={`Posts tagged "${tagLabel}" — ${config.name}`}
+  locale={locale}
+  path={`/blog/tag/${tag}/`}
+  config={config}
+  structuredData={structuredData}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/tag/${tag}/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <p class="section-label">{t(locale, "blog.tags")}</p>
+    <h1 class="tag-title">{tagLabel}</h1>
+    {posts.length > 0 ? (
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            excerpt={post.data.excerpt}
+            slug={post.slug.replace(`${locale}/`, "")}
+            image={post.data.image}
+            date={post.data.date}
+            locale={locale}
+            brand={config.brand}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-muted">{t(locale, "blog.no_posts")}</p>
+    )}
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+</Layout>
+
+<style>
+  .section-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .tag-title {
+    text-transform: capitalize;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+</style>
