@@ -9,9 +9,10 @@ interface Props {
   config: BrandConfig;
   locale: Locale;
   path: string;
+  localePaths?: Partial<Record<Locale, string>>;
 }
 
-const { config, locale, path } = Astro.props;
+const { config, locale, path, localePaths } = Astro.props;
 const brand = config.brand;
 
 interface NavItem {
@@ -61,7 +62,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     </nav>
 
     <div class="header__actions">
-      <LanguageSwitcher locale={locale} path={path} config={config} />
+      <LanguageSwitcher locale={locale} path={path} config={config} localePaths={localePaths} />
       <a href={ctaHref} class="nav-cta">
         {ctaLabel}
       </a>
@@ -86,7 +87,7 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
       {ctaLabel}
     </a>
   </nav>
-  <LanguageSwitcher locale={locale} path={path} config={config} />
+  <LanguageSwitcher locale={locale} path={path} config={config} localePaths={localePaths} />
 </div>
 
 <style>

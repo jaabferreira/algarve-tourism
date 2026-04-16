@@ -21,7 +21,14 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const locale = Astro.params.locale as Locale;
+const slug = Astro.params.slug as string;
 const { Content } = await post.render();
+
+const localePaths: Partial<Record<Locale, string>> = { [locale]: `/${locale}/blog/${slug}/` };
+for (const loc of config.locales as Locale[]) {
+  if (loc === locale) continue;
+  localePaths[loc] = `/${loc}/blog/`;
+}
 
 const structuredData = [
   buildBlogPosting(config, {
@@ -51,7 +58,7 @@ const structuredData = [
   structuredData={structuredData}
   publishedDate={post.data.date}
 >
-  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/${Astro.params.slug}/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/${slug}/`} localePaths={localePaths} />
 
   <article class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{post.data.title}</h1>

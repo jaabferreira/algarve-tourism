@@ -90,6 +90,17 @@ const breadcrumbData = buildBreadcrumbList(config, locale, [
 const structuredData = [productData, breadcrumbData];
 
 const fhUrl = `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/?full-items=yes`;
+
+const localePaths: Partial<Record<Locale, string>> = {};
+for (const loc of config.locales as Locale[]) {
+  if (loc === locale) {
+    localePaths[loc] = `/${loc}/tours/${item.slug}/`;
+    continue;
+  }
+  const localeItems = loadItems(loc);
+  const match = localeItems.find((i) => i.pk === item.pk);
+  localePaths[loc] = match ? `/${loc}/tours/${match.slug}/` : `/${loc}/tours/`;
+}
 ---
 
 <Layout
@@ -101,7 +112,7 @@ const fhUrl = `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/$
   config={config}
   structuredData={structuredData}
 >
-  <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} localePaths={localePaths} />
 
   <div class="container product-detail">
     <ProductHero item={item} locale={locale} brand={config.brand} />

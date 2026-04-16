@@ -41,6 +41,15 @@ const alternateUrls = [
   })),
 ];
 
+const localePaths: Partial<Record<Locale, string>> = { [locale]: `/${locale}/blog/${slug}/` };
+for (const loc of config.locales as Locale[]) {
+  if (loc === locale) continue;
+  const match = translations.find((p) => p.data.locale === loc);
+  localePaths[loc] = match
+    ? `/${loc}/blog/${match.slug.replace(`${loc}/`, "")}/`
+    : `/${loc}/blog/`;
+}
+
 const categoryLabel = t(locale, `blog.category.${post.data.category}` as any);
 
 const structuredData = [
@@ -87,7 +96,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
   articleTags={tags}
   alternateUrls={alternateUrls}
 >
-  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/${slug}/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/${slug}/`} localePaths={localePaths} />
 
   <section class="post-hero">
     <div class="post-hero__inner container">

@@ -6,9 +6,10 @@ interface Props {
   locale: Locale;
   path: string;
   config: BrandConfig;
+  localePaths?: Partial<Record<Locale, string>>;
 }
 
-const { locale, path, config } = Astro.props;
+const { locale, path, config, localePaths } = Astro.props;
 const localeLabels: Record<Locale, string> = {
   en: "EN",
   pt: "PT",
@@ -20,7 +21,7 @@ const localeLabels: Record<Locale, string> = {
 <nav class="lang-switcher" aria-label="Language selector">
   {config.locales.map((loc) => (
     <a
-      href={getPathInLocale(path, loc)}
+      href={localePaths?.[loc] ?? getPathInLocale(path, loc)}
       class:list={["lang-switcher__item", { active: loc === locale }]}
       aria-current={loc === locale ? "page" : undefined}
     >
