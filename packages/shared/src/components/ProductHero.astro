@@ -1,7 +1,7 @@
 ---
 import type { NormalizedItem, Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
-import { optimizeImageUrl } from "../lib/images.js";
+import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
 import PriceDisplay from "./PriceDisplay.astro";
 
 interface Props {
@@ -18,12 +18,17 @@ const { item, locale, brand } = Astro.props;
     {item.images.length > 0 ? (
       <div class="product-hero__main-wrap">
         <img
-          src={optimizeImageUrl(item.images[0].url, 1200)}
+          src={optimizeImageUrl(item.images[0].url, 1200, 75)}
+          srcset={optimizeImageSrcset(item.images[0].url, [600, 800, 1200, 1600])}
+          sizes="(max-width: 768px) 100vw, 60vw"
           alt={item.name}
           class="product-hero__main-image"
           data-gallery-index="0"
           width="800"
           height="500"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
       </div>
     ) : (

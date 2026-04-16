@@ -83,6 +83,7 @@ for (const loc of config.locales as Locale[]) {
   path={`/tours/${item.slug}/`}
   config={config}
   structuredData={structuredData}
+  heroImage={item.images[0]?.url}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} localePaths={localePaths} />
 
