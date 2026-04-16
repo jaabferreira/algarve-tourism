@@ -1,5 +1,8 @@
 / /en/ 301
 
+# RSS per-locale migration
+/rss.xml  /en/rss.xml  301
+
 # Transfer retorno URL redirects (wrong FH items replaced 2026-04-15)
 /en/tours/transfers-privados-retorno-albufeira-aeroporto-faro/ /en/tours/private-transfers-albufeira-faro-airport/ 301
 /pt/tours/transfers-privados-retorno-albufeira-aeroporto-faro/ /pt/tours/transfers-privados-albufeira-aeroporto-faro/ 301

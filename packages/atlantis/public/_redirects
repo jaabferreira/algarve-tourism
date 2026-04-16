@@ -1,6 +1,9 @@
 # Locale redirect
 / /en/ 301
 
+# RSS per-locale migration
+/rss.xml  /en/rss.xml  301
+
 # Old WordPress tour slugs → current tour slugs
 /en/tours/benagil /en/tours/benagil-caves-speed-boat-tour/ 301
 /pt/tours/benagil /pt/tours/circuito-de-grutas-ate-benagil/ 301
