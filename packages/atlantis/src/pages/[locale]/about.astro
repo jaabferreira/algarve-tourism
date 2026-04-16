@@ -10,6 +10,7 @@ import FleetGrid from "@algarve-tourism/shared/components/FleetGrid.astro";
 import WhyChooseUs from "@algarve-tourism/shared/components/WhyChooseUs.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
+import { optimizeImageUrl } from "@algarve-tourism/shared";
 import { config } from "../../config.js";
 
 export function getStaticPaths() {
@@ -27,9 +28,9 @@ const statsItems = [
 ];
 
 const fleetItems = [
-  { title: t(locale, "about.fleet_speedboats"), description: t(locale, "about.fleet_speedboats_desc") },
-  { title: t(locale, "about.fleet_yachts"), description: t(locale, "about.fleet_yachts_desc") },
-  { title: t(locale, "about.fleet_fishing"), description: t(locale, "about.fleet_fishing_desc") },
+  { title: t(locale, "about.fleet_speedboats"), description: t(locale, "about.fleet_speedboats_desc"), image: optimizeImageUrl("https://cdn.filestackcontent.com/bT14MOwPTli7XyXt79eR", 600) },
+  { title: t(locale, "about.fleet_yachts"), description: t(locale, "about.fleet_yachts_desc"), image: optimizeImageUrl("https://cdn.filestackcontent.com/fvkdjmHEQOGSCQYAfjx3", 600) },
+  { title: t(locale, "about.fleet_fishing"), description: t(locale, "about.fleet_fishing_desc"), image: optimizeImageUrl("https://cdn.filestackcontent.com/IYn3lGQwSi2dTx4Q5jNi", 600) },
 ];
 
 const whyItems = [
@@ -111,7 +112,7 @@ const structuredData = [
           <p class="about-story__text">{t(locale, "about.story_text")}</p>
         </div>
         <div class="about-story__image">
-          <div class="about-story__image-placeholder"></div>
+          <img src={optimizeImageUrl("https://cdn.filestackcontent.com/r5ANbJiiTTUEF7dC8OAn", 800)} alt="Benagil sea cave, Algarve coast" loading="lazy" width="800" height="600" class="about-story__img" />
         </div>
       </div>
     </div>
@@ -200,10 +201,11 @@ const structuredData = [
     margin: var(--space-4) 0 0;
   }
 
-  .about-story__image-placeholder {
+  .about-story__img {
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(135deg, var(--color-border), var(--color-bg));
+    object-fit: cover;
     border-radius: var(--radius-card);
   }
 
