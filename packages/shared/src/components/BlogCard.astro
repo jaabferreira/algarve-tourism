@@ -2,6 +2,7 @@
 import type { Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
 import { getLocalePath } from "../config.js";
+import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
 
 interface Props {
   title: string;
@@ -20,12 +21,23 @@ const formattedDate = new Date(date).toLocaleDateString(locale, {
   month: "long",
   day: "numeric",
 });
+const imgSrc = image ? optimizeImageUrl(image, 400) : undefined;
+const imgSrcset = image ? optimizeImageSrcset(image, [400, 800]) : "";
 ---
 
 <a href={href} class="blog-card" data-brand={brand}>
   {image && (
     <div class="blog-card__image">
-      <img src={image} alt={title} loading="lazy" width="400" height="250" />
+      <img
+        src={imgSrc}
+        srcset={imgSrcset}
+        sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw"
+        alt={title}
+        loading="lazy"
+        decoding="async"
+        width="400"
+        height="250"
+      />
     </div>
   )}
   <div class="blog-card__body">

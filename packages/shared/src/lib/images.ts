@@ -19,3 +19,18 @@ export function optimizeImageUrl(
 
   return `${FILESTACK_PREFIX}resize=width:${width},fit:max/quality=value:${quality}/output=format:webp/${handle}`;
 }
+
+/**
+ * Build a `srcset` string with multiple width variants.
+ * Non-Filestack URLs return an empty string so callers can skip srcset.
+ */
+export function optimizeImageSrcset(
+  url: string,
+  widths: number[],
+  quality = 75,
+): string {
+  if (!url.startsWith(FILESTACK_PREFIX)) return "";
+  return widths
+    .map((w) => `${optimizeImageUrl(url, w, quality)} ${w}w`)
+    .join(", ");
+}
