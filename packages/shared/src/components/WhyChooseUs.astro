@@ -1,0 +1,88 @@
+---
+interface Reason {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  label: string;
+  title: string;
+  items: Reason[];
+}
+
+const { label, title, items } = Astro.props;
+---
+
+<section class="why-choose section" data-reveal>
+  <div class="container">
+    <div class="why-choose__header">
+      <span class="section-label">{label}</span>
+      <h2 class="section-title" set:html={title} />
+    </div>
+    <div class="why-choose__grid">
+      {items.map((item) => (
+        <div class="why-choose__card">
+          <div class="why-choose__icon">{item.icon}</div>
+          <h3 class="why-choose__card-title">{item.title}</h3>
+          <p class="why-choose__card-desc">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose__header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+
+  .why-choose__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .why-choose__card {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    transition: box-shadow var(--transition-base);
+  }
+
+  .why-choose__card:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .why-choose__icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(12, 124, 140, 0.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .why-choose__card-title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .why-choose__card-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .why-choose__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

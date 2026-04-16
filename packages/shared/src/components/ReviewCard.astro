@@ -8,86 +8,87 @@ interface Props {
 
 const { review, brand } = Astro.props;
 const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+const sourceLabel = review.source === "tripadvisor" ? "TripAdvisor" : review.source === "google" ? "Google" : "";
 ---
 
-<div class="review-card" data-brand={brand}>
-  <div class="review-card__rating" aria-label={`${review.rating} out of 5 stars`}>
-    {stars}
-  </div>
-  <p class="review-card__text">&ldquo;{review.text}&rdquo;</p>
-  {brand === "algarve-and-you" && (
-    <div class="review-card__divider" />
-  )}
-  <div class="review-card__author">
-    <span class="review-card__name">{review.author}</span>
-    <span class="review-card__origin">{review.origin}</span>
+<div class="review-card" data-brand={brand} data-category={review.tourCategory || ""}>
+  <div class="review-card__rating">{stars}</div>
+  <blockquote class="review-card__text">&ldquo;{review.text}&rdquo;</blockquote>
+  <div class="review-card__divider"></div>
+  <div class="review-card__footer">
+    <div class="review-card__author-info">
+      <span class="review-card__name">{review.author}</span>
+      <span class="review-card__origin">
+        {review.origin}
+        {review.tourCategory && <> · {review.tourCategory === "benagil" ? "Benagil Tour" : review.tourCategory === "yacht" ? "Yacht Cruise" : review.tourCategory === "fishing" ? "Fishing Trip" : review.tourCategory}</>}
+      </span>
+    </div>
+    {sourceLabel && (
+      <span class="review-card__source" data-source={review.source}>
+        {sourceLabel}
+      </span>
+    )}
   </div>
 </div>
 
 <style>
   .review-card {
-    padding: var(--space-6);
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
 
-  /* Atlantis: rounded card */
   .review-card[data-brand="atlantis"] {
     border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
   }
 
-  /* A&Y: sharp card */
   .review-card[data-brand="algarve-and-you"] {
     border-radius: 0;
   }
 
   .review-card__rating {
-    font-size: var(--text-base);
+    color: var(--color-gold);
+    font-size: var(--text-lg);
     letter-spacing: 2px;
   }
 
-  /* Atlantis: amber stars */
-  [data-brand="atlantis"] .review-card__rating {
-    color: var(--color-gold);
-  }
-
-  /* A&Y: gold-wire stars */
-  [data-brand="algarve-and-you"] .review-card__rating {
-    color: var(--color-gold);
-  }
-
   .review-card__text {
-    font-family: var(--font-accent);
-    font-size: var(--text-lg);
+    font-family: var(--font-accent), Georgia, serif;
     font-style: italic;
-    color: var(--color-text);
+    font-size: var(--text-base);
     line-height: var(--leading-relaxed);
+    color: var(--color-text);
+    margin: 0;
     flex: 1;
   }
 
   .review-card__divider {
-    width: 24px;
     height: 1px;
-    background: var(--color-accent);
+    background: var(--color-border);
   }
 
-  .review-card__author {
+  .review-card[data-brand="algarve-and-you"] .review-card__divider {
+    background: var(--color-gold);
+    width: 40px;
+  }
+
+  .review-card__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--space-3);
   }
 
-  /* Atlantis: border separator above author */
-  [data-brand="atlantis"] .review-card__author {
-    border-top: 1px solid var(--color-border);
+  .review-card__author-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
   .review-card__name {
-    font-weight: var(--weight-medium);
+    font-weight: var(--weight-semibold);
     font-size: var(--text-sm);
     color: var(--color-text);
   }
@@ -95,6 +96,23 @@ const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
   .review-card__origin {
     font-size: var(--text-xs);
     color: var(--color-text-muted);
-    letter-spacing: var(--tracking-wide);
+  }
+
+  .review-card__source {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .review-card__source[data-source="tripadvisor"] {
+    border-color: #34E0A1;
+    color: #00aa6c;
+  }
+
+  .review-card__source[data-source="google"] {
+    border-color: #4285F4;
+    color: #4285F4;
   }
 </style>

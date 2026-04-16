@@ -127,6 +127,84 @@ export interface TranslationStrings {
   "common.all": string;
   "common.no_image": string;
   "common.whatsapp_contact": string;
+
+  // About page
+  "about.hero_badge": string;
+  "about.hero_title": string;
+  "about.hero_subtitle": string;
+  "about.story_label": string;
+  "about.story_title": string;
+  "about.story_text": string;
+  "about.stats_years": string;
+  "about.stats_guests": string;
+  "about.stats_rating": string;
+  "about.stats_fleet": string;
+  "about.fleet_label": string;
+  "about.fleet_title": string;
+  "about.fleet_speedboats": string;
+  "about.fleet_speedboats_desc": string;
+  "about.fleet_yachts": string;
+  "about.fleet_yachts_desc": string;
+  "about.fleet_fishing": string;
+  "about.fleet_fishing_desc": string;
+  "about.why_label": string;
+  "about.why_title": string;
+  "about.why_licensed": string;
+  "about.why_licensed_desc": string;
+  "about.why_groups": string;
+  "about.why_groups_desc": string;
+  "about.why_local": string;
+  "about.why_local_desc": string;
+  "about.why_cancel": string;
+  "about.why_cancel_desc": string;
+
+  // Reviews page
+  "reviews.aggregate_label": string;
+  "reviews.based_on": string;
+  "reviews.leave_title": string;
+  "reviews.leave_subtitle": string;
+  "reviews.leave_tripadvisor": string;
+  "reviews.leave_google": string;
+  "reviews.filter_all": string;
+  "reviews.via": string;
+
+  // Contact page
+  "contact.hero_label": string;
+  "contact.hero_title": string;
+  "contact.hero_subtitle": string;
+  "contact.whatsapp_title": string;
+  "contact.whatsapp_desc": string;
+  "contact.whatsapp_cta": string;
+  "contact.email_title": string;
+  "contact.email_desc": string;
+  "contact.visit_title": string;
+  "contact.visit_desc": string;
+  "contact.visit_cta": string;
+  "contact.form_title": string;
+  "contact.form_subtitle": string;
+  "contact.tour_interest": string;
+  "contact.tour_interest_placeholder": string;
+  "contact.hours_title": string;
+  "contact.hours_summer": string;
+  "contact.hours_offseason": string;
+  "contact.hours_note": string;
+  "contact.find_us": string;
+  "contact.follow_us": string;
+
+  // Contact form status
+  "contact.status_success": string;
+  "contact.status_error": string;
+  "contact.sending": string;
+
+  // Shared CTA
+  "cta.explore_title": string;
+  "cta.explore_subtitle": string;
+  "cta.explore_button": string;
+  "cta.book_title": string;
+  "cta.book_subtitle": string;
+  "cta.book_button": string;
+  "cta.reviews_title": string;
+  "cta.reviews_subtitle": string;
 }
 
 export type TranslationKey = keyof TranslationStrings;

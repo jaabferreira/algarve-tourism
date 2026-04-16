@@ -1,11 +1,15 @@
 ---
-import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildLocalBusiness, buildBreadcrumbList, buildFAQPage } from "@algarve-tourism/shared";
 import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import StatsBar from "@algarve-tourism/shared/components/StatsBar.astro";
+import FleetGrid from "@algarve-tourism/shared/components/FleetGrid.astro";
+import WhyChooseUs from "@algarve-tourism/shared/components/WhyChooseUs.astro";
+import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
+import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
 import { config } from "../../config.js";
 
 export function getStaticPaths() {
@@ -13,46 +17,208 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+const toursHref = getLocalePath(locale, "/tours/");
 
-let title = t(locale, "nav.about");
-let AboutContent: any = null;
-try {
-  const pages = await getCollection("pages");
-  const aboutPage = pages.find((p) => p.id === `${locale}/about` || p.id === `${locale}/about.md`);
-  if (aboutPage) {
-    title = aboutPage.data.title;
-    const rendered = await aboutPage.render();
-    AboutContent = rendered.Content;
-  }
-} catch {}
+const statsItems = [
+  { value: "14+", label: t(locale, "about.stats_years") },
+  { value: "50k+", label: t(locale, "about.stats_guests") },
+  { value: "4.9", label: t(locale, "about.stats_rating") },
+  { value: "6", label: t(locale, "about.stats_fleet") },
+];
+
+const fleetItems = [
+  { title: t(locale, "about.fleet_speedboats"), description: t(locale, "about.fleet_speedboats_desc") },
+  { title: t(locale, "about.fleet_yachts"), description: t(locale, "about.fleet_yachts_desc") },
+  { title: t(locale, "about.fleet_fishing"), description: t(locale, "about.fleet_fishing_desc") },
+];
+
+const whyItems = [
+  { icon: "\u{1F6E1}\uFE0F", title: t(locale, "about.why_licensed"), description: t(locale, "about.why_licensed_desc") },
+  { icon: "\u{1F465}", title: t(locale, "about.why_groups"), description: t(locale, "about.why_groups_desc") },
+  { icon: "\u{1F30A}", title: t(locale, "about.why_local"), description: t(locale, "about.why_local_desc") },
+  { icon: "\u{1F49A}", title: t(locale, "about.why_cancel"), description: t(locale, "about.why_cancel_desc") },
+];
+
+const faqData: Record<string, { question: string; answer: string }[]> = {
+  en: [
+    { question: "Where do Atlantis Tours depart from?", answer: "All our tours depart from the Portim\u00E3o Commercial Port (Acostagem Porto Comercial de Portim\u00E3o). We recommend arriving at least 15 minutes before your scheduled departure." },
+    { question: "What should I bring on a boat tour?", answer: "We recommend sunscreen, a hat, sunglasses, a light jacket, and a camera. In summer months, bring swimwear and a towel if your tour includes swimming stops." },
+    { question: "Can I cancel or reschedule my booking?", answer: "Yes! We offer free cancellation up to 24 hours before departure for a full refund. Rescheduling is also available subject to availability." },
+    { question: "Are boat tours suitable for children?", answer: "Absolutely. Most of our tours welcome children of all ages. Our crew is experienced with families and all boats are equipped with appropriate safety gear." },
+    { question: "What happens if the weather is bad?", answer: "Safety comes first. If conditions are unsuitable for sailing, we will contact you to reschedule or offer a full refund. We monitor weather closely and make the call as early as possible." },
+  ],
+  pt: [
+    { question: "De onde partem os passeios da Atlantis Tours?", answer: "Todos os nossos passeios partem do Porto Comercial de Portim\u00E3o (Acostagem Porto Comercial de Portim\u00E3o). Recomendamos chegar pelo menos 15 minutos antes da partida." },
+    { question: "O que devo levar num passeio de barco?", answer: "Recomendamos protetor solar, chap\u00E9u, \u00F3culos de sol, um casaco leve e m\u00E1quina fotogr\u00E1fica. Nos meses de ver\u00E3o, traga fato de banho e toalha caso o passeio inclua paragens para nadar." },
+    { question: "Posso cancelar ou reagendar a minha reserva?", answer: "Sim! Oferecemos cancelamento gratuito at\u00E9 24 horas antes da partida com reembolso total. O reagendamento tamb\u00E9m est\u00E1 dispon\u00EDvel mediante disponibilidade." },
+    { question: "Os passeios de barco s\u00E3o adequados para crian\u00E7as?", answer: "Certamente. A maioria dos nossos passeios aceita crian\u00E7as de todas as idades. A tripula\u00E7\u00E3o tem experi\u00EAncia com fam\u00EDlias e todos os barcos possuem equipamento de seguran\u00E7a apropriado." },
+    { question: "O que acontece se o tempo estiver mau?", answer: "A seguran\u00E7a vem primeiro. Se as condi\u00E7\u00F5es n\u00E3o forem adequadas para navegar, contactamo-lo para reagendar ou oferecer reembolso total. Monitorizamos o tempo de perto e tomamos a decis\u00E3o o mais cedo poss\u00EDvel." },
+  ],
+  es: [
+    { question: "\u00BFDe d\u00F3nde salen los tours de Atlantis Tours?", answer: "Todos nuestros tours salen del Puerto Comercial de Portim\u00E3o (Acostagem Porto Comercial de Portim\u00E3o). Recomendamos llegar al menos 15 minutos antes de la salida." },
+    { question: "\u00BFQu\u00E9 debo llevar a un tour en barco?", answer: "Recomendamos protector solar, sombrero, gafas de sol, una chaqueta ligera y c\u00E1mara de fotos. En verano, traiga ba\u00F1ador y toalla si el tour incluye paradas para nadar." },
+    { question: "\u00BFPuedo cancelar o reprogramar mi reserva?", answer: "\u00A1S\u00ED! Ofrecemos cancelaci\u00F3n gratuita hasta 24 horas antes de la salida con reembolso completo. La reprogramaci\u00F3n tambi\u00E9n est\u00E1 disponible seg\u00FAn disponibilidad." },
+    { question: "\u00BFLos tours en barco son adecuados para ni\u00F1os?", answer: "Por supuesto. La mayor\u00EDa de nuestros tours admiten ni\u00F1os de todas las edades. Nuestra tripulaci\u00F3n tiene experiencia con familias y todos los barcos est\u00E1n equipados con equipo de seguridad apropiado." },
+    { question: "\u00BFQu\u00E9 pasa si hace mal tiempo?", answer: "La seguridad es lo primero. Si las condiciones no son adecuadas para navegar, le contactaremos para reprogramar u ofrecer un reembolso completo. Monitoreamos el clima de cerca." },
+  ],
+  fr: [
+    { question: "D\u2019o\u00F9 partent les excursions d\u2019Atlantis Tours ?", answer: "Toutes nos excursions partent du Port Commercial de Portim\u00E3o (Acostagem Porto Comercial de Portim\u00E3o). Nous recommandons d\u2019arriver au moins 15 minutes avant le d\u00E9part." },
+    { question: "Que faut-il apporter lors d\u2019une excursion en bateau ?", answer: "Nous recommandons de la cr\u00E8me solaire, un chapeau, des lunettes de soleil, une veste l\u00E9g\u00E8re et un appareil photo. En \u00E9t\u00E9, apportez un maillot de bain et une serviette si l\u2019excursion comprend des arr\u00EAts baignade." },
+    { question: "Puis-je annuler ou reporter ma r\u00E9servation ?", answer: "Oui ! Nous offrons l\u2019annulation gratuite jusqu\u2019\u00E0 24 heures avant le d\u00E9part avec remboursement complet. Le report est \u00E9galement possible sous r\u00E9serve de disponibilit\u00E9." },
+    { question: "Les excursions en bateau sont-elles adapt\u00E9es aux enfants ?", answer: "Absolument. La plupart de nos excursions accueillent les enfants de tous \u00E2ges. Notre \u00E9quipage a l\u2019exp\u00E9rience des familles et tous les bateaux sont \u00E9quip\u00E9s de mat\u00E9riel de s\u00E9curit\u00E9 approprié." },
+    { question: "Que se passe-t-il en cas de mauvais temps ?", answer: "La s\u00E9curit\u00E9 passe en premier. Si les conditions ne sont pas favorables, nous vous contactons pour reporter ou offrir un remboursement complet. Nous surveillons la m\u00E9t\u00E9o de pr\u00E8s." },
+  ],
+};
+
+const faqItems = faqData[locale] || faqData.en;
+const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fr\u00E9quentes" : "FAQ";
+const faqTitle = locale === "pt" ? "Perguntas <em>Frequentes</em>" : locale === "es" ? "Preguntas <em>Frecuentes</em>" : locale === "fr" ? "Questions <em>Fr\u00E9quentes</em>" : "Frequently Asked <em>Questions</em>";
+
+const structuredData = [
+  buildLocalBusiness(config),
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.about"), path: "/about/" },
+  ]),
+  buildFAQPage(faqItems),
+];
 ---
 
 <Layout
-  title={title}
+  title={t(locale, "nav.about")}
   description={t(locale, "meta.about_atlantis")}
   locale={locale}
   path="/about/"
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/about/`} />
 
-  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
-    <h1>{title}</h1>
-    <div class="page-content">
-      {AboutContent && <AboutContent />}
+  <section class="about-hero">
+    <div class="about-hero__inner container">
+      <span class="about-hero__badge">{t(locale, "about.hero_badge")}</span>
+      <h1 class="about-hero__title" set:html={t(locale, "about.hero_title")} />
+      <p class="about-hero__subtitle">{t(locale, "about.hero_subtitle")}</p>
     </div>
   </section>
 
+  <section class="about-story section" data-reveal>
+    <div class="container">
+      <div class="about-story__grid">
+        <div class="about-story__content">
+          <span class="section-label">{t(locale, "about.story_label")}</span>
+          <h2 class="section-title" set:html={t(locale, "about.story_title")} />
+          <p class="about-story__text">{t(locale, "about.story_text")}</p>
+        </div>
+        <div class="about-story__image">
+          <div class="about-story__image-placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <StatsBar items={statsItems} />
+
+  <FleetGrid
+    label={t(locale, "about.fleet_label")}
+    title={t(locale, "about.fleet_title")}
+    items={fleetItems}
+    toursHref={toursHref}
+  />
+
+  <WhyChooseUs
+    label={t(locale, "about.why_label")}
+    title={t(locale, "about.why_title")}
+    items={whyItems}
+  />
+
+  <CTABanner
+    title={t(locale, "cta.explore_title")}
+    subtitle={t(locale, "cta.explore_subtitle")}
+    buttonText={t(locale, "cta.explore_button")}
+    buttonHref={toursHref}
+  />
+
+  <PageFAQ label={faqLabel} title={faqTitle} items={faqItems} />
+
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
 </Layout>
 
 <style>
-  .page-content {
+  .about-hero {
+    background: linear-gradient(135deg, #0A1A2A 0%, #0C3547 40%, #0E6B7A 70%, #1AABB8 100%);
+    padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
+    text-align: center;
+    color: white;
+  }
+
+  .about-hero__inner {
     max-width: 680px;
-    margin-top: var(--space-8);
+  }
+
+  .about-hero__badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    color: var(--color-primary-light);
+    margin-bottom: var(--space-4);
+  }
+
+  .about-hero__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .about-hero__title :global(em) {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+  }
+
+  .about-hero__subtitle {
     font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin: 0;
     line-height: var(--leading-relaxed);
+  }
+
+  .about-story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .about-story__text {
+    font-size: var(--text-base);
+    line-height: var(--leading-loose);
     color: var(--color-text-body);
+    margin: var(--space-4) 0 0;
+  }
+
+  .about-story__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--color-border), var(--color-bg));
+    border-radius: var(--radius-card);
+  }
+
+  @media (max-width: 768px) {
+    .about-hero__title {
+      font-size: var(--text-3xl);
+    }
+
+    .about-story__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .about-story__image {
+      order: -1;
+    }
   }
 </style>

@@ -1,0 +1,40 @@
+---
+import FAQ from "./FAQ.astro";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  label: string;
+  title: string;
+  items: FAQItem[];
+}
+
+const { label, title, items } = Astro.props;
+---
+
+<section class="page-faq section">
+  <div class="container">
+    <div class="page-faq__header">
+      <span class="section-label">{label}</span>
+      <h2 class="section-title" set:html={title} />
+    </div>
+    <div class="page-faq__content">
+      <FAQ items={items} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-faq__header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+
+  .page-faq__content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+</style>

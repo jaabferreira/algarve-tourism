@@ -109,4 +109,12 @@ export interface ManualReview {
   text: string;
   date: string;
   product_slug?: string;
+  tourCategory?: string;
+  source?: string;
+  sourceUrl?: string;
+  externalReviewId?: string;
+  fareharborItemPk?: number;
+  language?: string;
+  verifiedBooking?: boolean;
+  permissionToPublish?: boolean;
 }

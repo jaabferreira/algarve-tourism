@@ -1,11 +1,16 @@
 ---
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildLocalBusiness, buildBreadcrumbList, buildFAQPage } from "@algarve-tourism/shared";
 import Layout from "../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
-import ContactForm from "@algarve-tourism/shared/components/ContactForm.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import ContactCards from "@algarve-tourism/shared/components/ContactCards.astro";
+import ContactForm from "@algarve-tourism/shared/components/ContactForm.astro";
+import ContactInfo from "@algarve-tourism/shared/components/ContactInfo.astro";
+import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
+import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
+import PageFAQ from "@algarve-tourism/shared/components/PageFAQ.astro";
 import { config } from "../../config.js";
 
 export function getStaticPaths() {
@@ -13,6 +18,75 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
+const toursHref = getLocalePath(locale, "/tours/");
+const contactEmail = "atlantistours@buyalgarveproperties.com";
+
+const faqData: Record<string, { question: string; answer: string }[]> = {
+  en: [
+    { question: "How do I book a tour with Atlantis Tours?", answer: "You can book directly on our website by visiting the Tours page and selecting your preferred experience. Online booking is instant and you'll receive a confirmation email immediately." },
+    { question: "Where exactly do tours depart from in Portimão?", answer: "All tours depart from the Portimão Commercial Port (Acostagem Porto Comercial de Portimão). Look for the Atlantis Tours meeting point near the main dock. We recommend arriving 15 minutes early." },
+    { question: "What is the cancellation policy?", answer: "We offer free cancellation up to 24 hours before your scheduled departure for a full refund. Cancellations within 24 hours are subject to the full charge." },
+    { question: "Is there parking near the departure point?", answer: "Yes, there is public parking available near the Portimão Commercial Port. During peak summer months, we recommend arriving early to secure a spot or using a taxi/ride service." },
+    { question: "Can I book a private tour for a group?", answer: "Absolutely! We offer private charters for groups of all sizes — from intimate couples cruises to larger family or corporate events. Contact us via WhatsApp for custom pricing and availability." },
+  ],
+  pt: [
+    { question: "Como posso reservar um passeio com a Atlantis Tours?", answer: "Pode reservar diretamente no nosso website visitando a página de Passeios e selecionando a experiência preferida. A reserva online é instantânea e receberá um email de confirmação imediatamente." },
+    { question: "De onde exatamente partem os passeios em Portimão?", answer: "Todos os passeios partem do Porto Comercial de Portimão (Acostagem Porto Comercial de Portimão). Procure o ponto de encontro da Atlantis Tours junto ao cais principal. Recomendamos chegar 15 minutos antes." },
+    { question: "Qual é a política de cancelamento?", answer: "Oferecemos cancelamento gratuito até 24 horas antes da partida para reembolso total. Cancelamentos com menos de 24 horas estão sujeitos à cobrança total." },
+    { question: "Há estacionamento perto do ponto de partida?", answer: "Sim, existe estacionamento público disponível perto do Porto Comercial de Portimão. Nos meses de verão, recomendamos chegar cedo ou usar táxi." },
+    { question: "Posso reservar um passeio privado para um grupo?", answer: "Com certeza! Oferecemos charters privados para grupos de todos os tamanhos — desde cruzeiros íntimos para casais a eventos familiares ou corporativos. Contacte-nos via WhatsApp para preços personalizados." },
+  ],
+  es: [
+    { question: "¿Cómo puedo reservar un tour con Atlantis Tours?", answer: "Puede reservar directamente en nuestro sitio web visitando la página de Tours y seleccionando su experiencia preferida. La reserva online es instantánea y recibirá un email de confirmación inmediatamente." },
+    { question: "¿De dónde exactamente salen los tours en Portimão?", answer: "Todos los tours salen del Puerto Comercial de Portimão (Acostagem Porto Comercial de Portimão). Busque el punto de encuentro de Atlantis Tours cerca del muelle principal. Recomendamos llegar 15 minutos antes." },
+    { question: "¿Cuál es la política de cancelación?", answer: "Ofrecemos cancelación gratuita hasta 24 horas antes de la salida para un reembolso completo. Las cancelaciones con menos de 24 horas están sujetas al cargo total." },
+    { question: "¿Hay aparcamiento cerca del punto de salida?", answer: "Sí, hay aparcamiento público disponible cerca del Puerto Comercial de Portimão. En verano, recomendamos llegar temprano o usar taxi." },
+    { question: "¿Puedo reservar un tour privado para un grupo?", answer: "¡Por supuesto! Ofrecemos charters privados para grupos de todos los tamaños. Contáctenos por WhatsApp para precios personalizados y disponibilidad." },
+  ],
+  fr: [
+    { question: "Comment puis-je réserver une excursion avec Atlantis Tours ?", answer: "Vous pouvez réserver directement sur notre site web en visitant la page Circuits et en sélectionnant l'expérience souhaitée. La réservation en ligne est instantanée et vous recevrez un email de confirmation immédiatement." },
+    { question: "D'où exactement partent les excursions à Portimão ?", answer: "Toutes les excursions partent du Port Commercial de Portimão (Acostagem Porto Comercial de Portimão). Cherchez le point de rendez-vous Atlantis Tours près du quai principal. Nous recommandons d'arriver 15 minutes à l'avance." },
+    { question: "Quelle est la politique d'annulation ?", answer: "Nous offrons l'annulation gratuite jusqu'à 24 heures avant le départ pour un remboursement complet. Les annulations dans les 24 heures sont soumises au tarif complet." },
+    { question: "Y a-t-il un parking près du point de départ ?", answer: "Oui, un parking public est disponible près du Port Commercial de Portimão. En été, nous recommandons d'arriver tôt ou d'utiliser un taxi." },
+    { question: "Puis-je réserver une excursion privée pour un groupe ?", answer: "Absolument ! Nous proposons des charters privés pour des groupes de toutes tailles. Contactez-nous par WhatsApp pour des tarifs personnalisés et la disponibilité." },
+  ],
+};
+
+const faqItems = faqData[locale] || faqData.en;
+const faqLabel = locale === "pt" ? "Perguntas Frequentes" : locale === "es" ? "Preguntas Frecuentes" : locale === "fr" ? "Questions Fréquentes" : "FAQ";
+const faqTitle = locale === "pt" ? "Reservas e <em>Contacto</em>" : locale === "es" ? "Reservas y <em>Contacto</em>" : locale === "fr" ? "Réservations et <em>Contact</em>" : "Booking & Contact <em>Questions</em>";
+
+const localBusiness = {
+  ...buildLocalBusiness(config),
+  email: contactEmail,
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00",
+      closes: "21:00",
+      validFrom: "2026-06-01",
+      validThrough: "2026-09-30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00",
+      closes: "17:00",
+      validFrom: "2026-10-01",
+      validThrough: "2027-05-31",
+    },
+  ],
+};
+
+const structuredData = [
+  localBusiness,
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.contact"), path: "/contact/" },
+  ]),
+  buildFAQPage(faqItems),
+];
 ---
 
 <Layout
@@ -21,14 +95,106 @@ const locale = Astro.params.locale as Locale;
   locale={locale}
   path="/contact/"
   config={config}
+  structuredData={structuredData}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/contact/`} />
 
-  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
-    <h1>{t(locale, "nav.contact")}</h1>
-    <ContactForm locale={locale} />
+  <section class="contact-hero">
+    <div class="container">
+      <span class="section-label">{t(locale, "contact.hero_label")}</span>
+      <h1 class="contact-hero__title" set:html={t(locale, "contact.hero_title")} />
+      <p class="contact-hero__subtitle">{t(locale, "contact.hero_subtitle")}</p>
+    </div>
   </section>
 
+  <section class="section-sm">
+    <div class="container">
+      <ContactCards locale={locale} whatsappPhone={config.social.whatsapp} email={contactEmail} />
+
+      <div class="contact-layout">
+        <div class="contact-layout__form">
+          <ContactForm locale={locale} email={contactEmail} />
+        </div>
+        <div class="contact-layout__sidebar">
+          <ContactInfo locale={locale} config={config} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <MeetingPointMap
+        latitude={37.1214}
+        longitude={-8.5371}
+        address="Ac. Porto Comercial de Portimão"
+        city="Portimão"
+        locale={locale}
+      />
+    </div>
+  </section>
+
+  <CTABanner
+    title={t(locale, "cta.book_title")}
+    subtitle={t(locale, "cta.book_subtitle")}
+    buttonText={t(locale, "cta.book_button")}
+    buttonHref={toursHref}
+  />
+
+  <PageFAQ label={faqLabel} title={faqTitle} items={faqItems} />
+
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} />
 </Layout>
+
+<style>
+  .contact-hero {
+    padding: calc(var(--header-height) + var(--space-12)) 0 var(--space-8);
+    text-align: center;
+  }
+
+  .contact-hero__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-regular);
+    margin: var(--space-3) 0;
+  }
+
+  .contact-hero__title :global(em) {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+  }
+
+  .contact-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-body);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: var(--leading-relaxed);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero__title {
+      font-size: var(--text-3xl);
+    }
+
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-layout__sidebar {
+      order: -1;
+    }
+
+    .contact-layout :global(.meeting-point-map__wrap) {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

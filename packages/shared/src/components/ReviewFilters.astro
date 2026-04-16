@@ -1,0 +1,88 @@
+---
+interface FilterItem {
+  key: string;
+  label: string;
+}
+
+interface Props {
+  filters: FilterItem[];
+  allLabel: string;
+}
+
+const { filters, allLabel } = Astro.props;
+---
+
+<div class="review-filters" data-review-filters>
+  <button class="review-filters__btn review-filters__btn--active" data-filter="all">{allLabel}</button>
+  {filters.map((f) => (
+    <button class="review-filters__btn" data-filter={f.key}>{f.label}</button>
+  ))}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector("[data-review-filters]");
+    if (!container) return;
+
+    const buttons = container.querySelectorAll<HTMLButtonElement>("[data-filter]");
+    const cards = document.querySelectorAll<HTMLElement>("[data-category]");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+
+        buttons.forEach((b) => b.classList.remove("review-filters__btn--active"));
+        btn.classList.add("review-filters__btn--active");
+
+        cards.forEach((card) => {
+          const target = card.closest(".reviews-grid__item") as HTMLElement | null;
+          const el = target || card;
+          if (filter === "all" || card.dataset.category === filter) {
+            el.style.display = "";
+          } else {
+            el.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .review-filters {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-4) 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .review-filters__btn {
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    transition: background var(--transition-base), color var(--transition-base);
+  }
+
+  .review-filters__btn--active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .review-filters__btn:hover:not(.review-filters__btn--active) {
+    background: var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .review-filters__btn {
+      padding: var(--space-3) var(--space-5);
+      min-height: 44px;
+    }
+  }
+</style>

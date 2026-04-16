@@ -1,0 +1,116 @@
+---
+interface FleetItem {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+interface Props {
+  label: string;
+  title: string;
+  items: FleetItem[];
+  toursHref: string;
+}
+
+const { label, title, items, toursHref } = Astro.props;
+---
+
+<section class="fleet section" data-reveal>
+  <div class="container">
+    <div class="fleet__header">
+      <span class="section-label">{label}</span>
+      <h2 class="section-title" set:html={title} />
+    </div>
+    <div class="fleet__grid">
+      {items.map((item) => (
+        <a href={toursHref} class="fleet__card">
+          <div class="fleet__card-image">
+            {item.image ? (
+              <img src={item.image} alt={item.title} loading="lazy" />
+            ) : (
+              <div class="fleet__card-placeholder" />
+            )}
+          </div>
+          <div class="fleet__card-body">
+            <h3 class="fleet__card-title">{item.title}</h3>
+            <p class="fleet__card-desc">{item.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fleet__header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+
+  .fleet__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .fleet__card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .fleet__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .fleet__card-image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-border);
+  }
+
+  .fleet__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .fleet__card:hover .fleet__card-image img {
+    transform: scale(1.05);
+  }
+
+  .fleet__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-border), var(--color-bg));
+  }
+
+  .fleet__card-body {
+    padding: var(--space-5);
+  }
+
+  .fleet__card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin: 0 0 var(--space-1) 0;
+  }
+
+  .fleet__card-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .fleet__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>

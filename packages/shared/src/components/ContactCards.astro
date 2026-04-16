@@ -1,0 +1,134 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+
+interface Props {
+  locale: Locale;
+  whatsappPhone: string;
+  email: string;
+}
+
+const { locale, whatsappPhone, email } = Astro.props;
+const waLink = `https://wa.me/${whatsappPhone.replace(/[^0-9]/g, "")}`;
+const mapsLink = "https://maps.google.com/?q=Acostagem+Porto+Comercial+Portimao";
+---
+
+<div class="contact-cards" data-reveal>
+  <div class="contact-cards__card">
+    <div class="contact-cards__icon">💬</div>
+    <h3 class="contact-cards__title">{t(locale, "contact.whatsapp_title")}</h3>
+    <p class="contact-cards__desc">{t(locale, "contact.whatsapp_desc")}</p>
+    <a href={waLink} target="_blank" rel="noopener noreferrer" class="contact-cards__cta contact-cards__cta--wa">
+      {t(locale, "contact.whatsapp_cta")} →
+    </a>
+  </div>
+  <div class="contact-cards__card">
+    <div class="contact-cards__icon">✉️</div>
+    <h3 class="contact-cards__title">{t(locale, "contact.email_title")}</h3>
+    <p class="contact-cards__desc">{t(locale, "contact.email_desc")}</p>
+    <a href={`mailto:${email}`} class="contact-cards__email">{email}</a>
+  </div>
+  <div class="contact-cards__card">
+    <div class="contact-cards__icon">📍</div>
+    <h3 class="contact-cards__title">{t(locale, "contact.visit_title")}</h3>
+    <p class="contact-cards__desc">{t(locale, "contact.visit_desc")}</p>
+    <a href={mapsLink} target="_blank" rel="noopener noreferrer" class="contact-cards__link">
+      {t(locale, "contact.visit_cta")} →
+    </a>
+  </div>
+</div>
+
+<style>
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    margin-bottom: var(--space-10);
+  }
+
+  .contact-cards__card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-cards__icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(12, 124, 140, 0.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    margin: 0 auto var(--space-4);
+  }
+
+  .contact-cards__title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    margin: 0 0 var(--space-1) 0;
+  }
+
+  .contact-cards__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .contact-cards__cta--wa {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-button);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+
+  .contact-cards__email {
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .contact-cards__link {
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .contact-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-cards__card:first-child {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+    }
+
+    .contact-cards__card:first-child .contact-cards__title {
+      color: white;
+    }
+
+    .contact-cards__card:first-child .contact-cards__desc {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .contact-cards__card:first-child .contact-cards__icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-cards__card:first-child .contact-cards__cta--wa {
+      background: white;
+      color: #25D366;
+    }
+  }
+</style>
