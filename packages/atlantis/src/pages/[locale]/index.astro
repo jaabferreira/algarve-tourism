@@ -10,6 +10,7 @@ import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import Marquee from "@algarve-tourism/shared/components/Marquee.astro";
+import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
 import { config, tourCategories } from "../../config.js";
 import { getLocalePath, buildLocalBusiness } from "@algarve-tourism/shared";
@@ -52,6 +53,11 @@ try {
 } catch {}
 
 const marqueeText = t(locale, "marquee.atlantis");
+
+const blogPosts = (await getCollection("blog"))
+  .filter((post) => post.data.locale === locale)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
 
 const trustItems = [
   {
@@ -136,6 +142,33 @@ const trustItems = [
     </section>
   )}
 
+  {blogPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">{t(locale, "home.blog_label")}</p>
+            <h2 class="section-title" set:html={t(locale, "home.blog_title")} />
+          </div>
+          <a href={`/${locale}/blog/`} class="see-all">{t(locale, "home.view_all_posts")} &rarr;</a>
+        </div>
+        <div class="blog-grid">
+          {blogPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              slug={post.slug.replace(`${locale}/`, "")}
+              image={post.data.image}
+              date={post.data.date}
+              locale={locale}
+              brand={config.brand}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
@@ -187,6 +220,11 @@ const trustItems = [
     color: var(--color-text);
     margin-bottom: var(--space-6);
     font-style: italic;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
   }
   @media (max-width: 768px) {
     .section-header {
