@@ -205,6 +205,26 @@ export interface TranslationStrings {
   "cta.book_button": string;
   "cta.reviews_title": string;
   "cta.reviews_subtitle": string;
+
+  // Blog
+  "blog.category": string;
+  "blog.tags": string;
+  "blog.reading_time": string;
+  "blog.related_tours": string;
+  "blog.all_posts": string;
+  "blog.no_posts": string;
+  "blog.page": string;
+  "blog.previous": string;
+  "blog.next": string;
+  "blog.meta_description": string;
+  "blog.category.destinations": string;
+  "blog.category.travel-tips": string;
+  "blog.category.marine-life": string;
+  "blog.category.local-culture": string;
+  "blog.category.seasonal": string;
+  "home.blog_label": string;
+  "home.blog_title": string;
+  "home.view_all_posts": string;
 }
 
 export type TranslationKey = keyof TranslationStrings;
