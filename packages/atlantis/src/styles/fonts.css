@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Space Grotesk Fallback';
-  src: local('Arial');
+  src: local('Arial'), local('Roboto'), local('Helvetica Neue'), local('Liberation Sans');
   size-adjust: 100%;
   ascent-override: 94%;
   descent-override: 28%;
@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: 'Instrument Serif Fallback';
-  src: local('Georgia');
+  src: local('Georgia'), local('Noto Serif'), local('Times New Roman'), local('Liberation Serif');
   size-adjust: 107%;
   ascent-override: 85%;
   descent-override: 22%;
