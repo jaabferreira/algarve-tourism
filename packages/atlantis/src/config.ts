@@ -35,3 +35,25 @@ export const tourCategories = [
   { key: "private-yacht", pks: [720028] },
   { key: "reef-fishing", pks: [718024] },
 ];
+
+export const blogCategories = [
+  "destinations",
+  "travel-tips",
+  "marine-life",
+  "local-culture",
+  "seasonal",
+] as const;
+
+export type BlogCategory = (typeof blogCategories)[number];
+
+export const tagTourMap: Record<string, number[]> = {
+  benagil: [717720, 717728],
+  caves: [717720, 717728],
+  yacht: [717754, 720028],
+  sailing: [717754],
+  fishing: [718024],
+  luxury: [717754, 720028],
+  sunset: [717754],
+  dolphins: [717720, 717728],
+  family: [717720, 717728],
+};
