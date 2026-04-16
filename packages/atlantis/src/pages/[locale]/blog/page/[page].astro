@@ -2,76 +2,83 @@
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
 import { LOCALES, t, buildCollectionPage, buildBreadcrumbList } from "@algarve-tourism/shared";
-import Layout from "../../../layouts/Layout.astro";
+import Layout from "../../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
 import Pagination from "@algarve-tourism/shared/components/Pagination.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
-import { config } from "../../../config.js";
+import { config } from "../../../../config.js";
 
 const POSTS_PER_PAGE = 9;
 
-export function getStaticPaths() {
-  return LOCALES.map((locale) => ({ params: { locale } }));
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+
+  return LOCALES.flatMap((locale) => {
+    const localePosts = allPosts.filter((p) => p.data.locale === locale);
+    const totalPages = Math.ceil(localePosts.length / POSTS_PER_PAGE);
+
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+      params: { locale, page: String(i + 2) },
+    }));
+  });
 }
 
 const locale = Astro.params.locale as Locale;
+const currentPage = Number(Astro.params.page);
+
 const allPosts = await getCollection("blog");
 const posts = allPosts
   .filter((post) => post.data.locale === locale)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
-const pagePosts = posts.slice(0, POSTS_PER_PAGE);
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+const start = (currentPage - 1) * POSTS_PER_PAGE;
+const pagePosts = posts.slice(start, start + POSTS_PER_PAGE);
 
 const structuredData = [
-  buildCollectionPage(config, locale, "/blog/", t(locale, "nav.blog"), t(locale, "blog.meta_description")),
+  buildCollectionPage(config, locale, `/blog/page/${currentPage}/`, `${t(locale, "nav.blog")} — ${t(locale, "blog.page")} ${currentPage}`, t(locale, "blog.meta_description")),
   buildBreadcrumbList(config, locale, [
     { name: "Home", path: "/" },
     { name: t(locale, "nav.blog"), path: "/blog/" },
+    { name: `${t(locale, "blog.page")} ${currentPage}`, path: `/blog/page/${currentPage}/` },
   ]),
 ];
 ---
 
 <Layout
-  title={t(locale, "nav.blog")}
+  title={`${t(locale, "nav.blog")} — ${t(locale, "blog.page")} ${currentPage}`}
   description={t(locale, "blog.meta_description")}
   locale={locale}
-  path="/blog/"
+  path={`/blog/page/${currentPage}/`}
   config={config}
   structuredData={structuredData}
 >
-  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/`} />
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/page/${currentPage}/`} />
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "nav.blog")}</h1>
-    {pagePosts.length > 0 ? (
-      <>
-        <div class="blog-grid">
-          {pagePosts.map((post) => (
-            <BlogCard
-              title={post.data.title}
-              excerpt={post.data.excerpt}
-              slug={post.slug.replace(`${locale}/`, "")}
-              image={post.data.image}
-              date={post.data.date}
-              locale={locale}
-              brand={config.brand}
-            />
-          ))}
-        </div>
-        <Pagination
-          currentPage={1}
-          totalPages={totalPages}
-          basePath="/blog/"
+    <div class="blog-grid">
+      {pagePosts.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          excerpt={post.data.excerpt}
+          slug={post.slug.replace(`${locale}/`, "")}
+          image={post.data.image}
+          date={post.data.date}
           locale={locale}
           brand={config.brand}
         />
-      </>
-    ) : (
-      <p class="text-muted">{t(locale, "blog.no_posts")}</p>
-    )}
+      ))}
+    </div>
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath="/blog/"
+      locale={locale}
+      brand={config.brand}
+    />
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
