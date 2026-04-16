@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t, buildCollectionPage, buildBreadcrumbList } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath, buildCollectionPage, buildBreadcrumbList } from "@algarve-tourism/shared";
 import Layout from "../../../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
+import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config, blogCategories } from "../../../../../config.js";
 
@@ -20,6 +21,7 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const category = Astro.params.category as string;
 const categoryLabel = t(locale, `blog.category.${category}` as any);
+const toursHref = getLocalePath(locale, "/tours/");
 
 const allPosts = await getCollection("blog");
 const posts = allPosts
@@ -46,45 +48,175 @@ const structuredData = [
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/blog/category/${category}/`} />
 
-  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
-    <p class="section-label">{t(locale, "blog.category")}</p>
-    <h1>{categoryLabel}</h1>
-    {posts.length > 0 ? (
-      <div class="blog-grid">
-        {posts.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            excerpt={post.data.excerpt}
-            slug={post.slug.replace(`${locale}/`, "")}
-            image={post.data.image}
-            date={post.data.date}
-            locale={locale}
-            brand={config.brand}
-          />
-        ))}
-      </div>
-    ) : (
-      <p class="text-muted">{t(locale, "blog.no_posts")}</p>
-    )}
+  <section class="taxonomy-hero">
+    <div class="taxonomy-hero__inner container">
+      <nav class="taxonomy-hero__breadcrumbs" aria-label="Breadcrumb">
+        <a href={getLocalePath(locale, "/blog/")}>{t(locale, "nav.blog")}</a>
+        <span class="taxonomy-hero__sep">/</span>
+        <span>{t(locale, "blog.category")}</span>
+      </nav>
+      <span class="taxonomy-hero__badge">{t(locale, "blog.category")}</span>
+      <h1 class="taxonomy-hero__title">{categoryLabel}</h1>
+    </div>
   </section>
+
+  {blogCategories.length > 0 && (
+    <section class="blog-filters section-sm">
+      <div class="container">
+        <div class="blog-filters__row">
+          <a href={`/${locale}/blog/`} class="blog-filters__chip">
+            {t(locale, "blog.all_posts")}
+          </a>
+          {blogCategories.map((cat) => (
+            <a
+              href={`/${locale}/blog/category/${cat}/`}
+              class={`blog-filters__chip${cat === category ? " blog-filters__chip--active" : ""}`}
+            >
+              {t(locale, `blog.category.${cat}` as any)}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" data-reveal>
+    <div class="container">
+      {posts.length > 0 ? (
+        <div class="blog-grid">
+          {posts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              slug={post.slug.replace(`${locale}/`, "")}
+              image={post.data.image}
+              date={post.data.date}
+              locale={locale}
+              brand={config.brand}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="blog-empty">{t(locale, "blog.no_posts")}</p>
+      )}
+    </div>
+  </section>
+
+  <CTABanner
+    title={t(locale, "cta.explore_title")}
+    subtitle={t(locale, "cta.explore_subtitle")}
+    buttonText={t(locale, "cta.explore_button")}
+    buttonHref={toursHref}
+  />
 
   <Footer slot="footer" config={config} locale={locale} />
   <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
 
 <style>
-  .section-label {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-primary);
-    margin-bottom: var(--space-2);
+  .taxonomy-hero {
+    background: linear-gradient(135deg, #0A1A2A 0%, #0C3547 40%, #0E6B7A 70%, #1AABB8 100%);
+    padding: calc(var(--header-height) + var(--space-12)) 0 var(--space-12);
+    text-align: center;
+    color: white;
   }
+
+  .taxonomy-hero__inner {
+    max-width: 680px;
+  }
+
+  .taxonomy-hero__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: var(--space-5);
+  }
+
+  .taxonomy-hero__breadcrumbs a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+  }
+
+  .taxonomy-hero__breadcrumbs a:hover {
+    color: var(--color-primary-light);
+  }
+
+  .taxonomy-hero__sep { opacity: 0.5; }
+
+  .taxonomy-hero__badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    color: var(--color-primary-light);
+    margin-bottom: var(--space-3);
+  }
+
+  .taxonomy-hero__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
+
+  .blog-filters {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .blog-filters__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .blog-filters__chip {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .blog-filters__chip:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .blog-filters__chip--active {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-6);
-    margin-top: var(--space-8);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .blog-empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    padding: var(--space-16) 0;
+  }
+
+  @media (max-width: 768px) {
+    .taxonomy-hero__title {
+      font-size: var(--text-3xl);
+    }
   }
 </style>
