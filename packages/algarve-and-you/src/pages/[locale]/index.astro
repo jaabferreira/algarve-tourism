@@ -293,6 +293,13 @@ try {
     opacity: 1;
     transform: translateY(0);
   }
+  @media (prefers-reduced-motion: reduce) {
+    .category-grid__item[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
   @media (max-width: 960px) {
     .category-grid {
       grid-template-columns: 1fr 1fr;

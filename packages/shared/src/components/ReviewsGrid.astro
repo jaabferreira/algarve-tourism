@@ -37,4 +37,12 @@ const { reviews, brand, locale } = Astro.props;
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-grid__item[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 </style>

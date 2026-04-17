@@ -57,6 +57,14 @@ const { items, brand, locale } = Astro.props;
     transform: translateY(0);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .product-grid__item[data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   /* ===========================
      Atlantis — Symmetric grid
      =========================== */
