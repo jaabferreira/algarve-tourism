@@ -19,9 +19,10 @@ interface Props {
   noindex?: boolean;
   alternateUrls?: { locale: Locale; href: string }[];
   heroImage?: string;
+  preloadFonts?: string[];
 }
 
-const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, modifiedDate, articleSection, articleTags, noindex, alternateUrls, heroImage } = Astro.props;
+const { title, description, image, type = 'website', locale, path, config, structuredData, publishedDate, modifiedDate, articleSection, articleTags, noindex, alternateUrls, heroImage, preloadFonts } = Astro.props;
 
 const heroPreloadSrc = heroImage ? optimizeImageUrl(heroImage, 1080, 75) : undefined;
 const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080, 1440, 1920]) : undefined;
@@ -35,6 +36,9 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
   <link rel="dns-prefetch" href="https://cdn.filestackcontent.com" />
   <link rel="preconnect" href="https://cdn.filestackcontent.com" />
   <link rel="preconnect" href="https://fareharbor.com" />
+  {preloadFonts?.map((href) => (
+    <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
+  ))}
   {heroPreloadSrc && (
     <link
       rel="preload"
@@ -79,6 +83,47 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
     <slot />
   </main>
   <slot name="footer" />
+  {config.analytics.gtag && (
+    <script>
+      import { onCLS, onLCP, onINP, onFCP, onTTFB } from 'web-vitals/attribution';
+
+      const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+
+      function report(metric: any) {
+        const a = metric.attribution || {};
+        // CLS is a unitless score; scale ×1000 so GA4 stores it as an integer.
+        const isCls = metric.name === 'CLS';
+        const scaled = (v: number) => Math.round(isCls ? v * 1000 : v);
+
+        dl.push([
+          'event',
+          'web_vitals',
+          {
+            metric_id: metric.id,
+            metric_name: metric.name,
+            metric_value: scaled(metric.value),
+            metric_delta: scaled(metric.delta),
+            metric_rating: metric.rating,
+            nav_type: metric.navigationType,
+            // Attribution fields — one is populated per metric type.
+            cls_target: a.largestShiftTarget || '',
+            cls_source: a.largestShiftSource?.node?.nodeName || '',
+            lcp_element: a.element || '',
+            lcp_url: a.url || '',
+            inp_target: a.interactionTarget || '',
+            inp_type: a.interactionType || '',
+            page_path: location.pathname,
+          },
+        ]);
+      }
+
+      onCLS(report);
+      onLCP(report);
+      onINP(report);
+      onFCP(report);
+      onTTFB(report);
+    </script>
+  )}
   <script>
     // Defer FareHarbor's autolightframe bundle (~1.3 MB) until the visitor
     // actually engages. Booking links still work before load — they fall
