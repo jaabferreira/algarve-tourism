@@ -23,7 +23,7 @@ export const config: BrandConfig = {
     youtube: "https://www.youtube.com/@atlantistours9867",
   },
   analytics: {
-    gtag: "G-7MKYTWY07D",
+    gtag: "G-YE21ZWJNY7",
   },
   defaultLocale: "en",
   locales: ["en", "pt", "es", "fr"],
