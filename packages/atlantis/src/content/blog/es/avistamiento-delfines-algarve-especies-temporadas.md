@@ -14,7 +14,6 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
   - benagil-caves-speed-boat-tour
 ---
 
@@ -67,7 +66,7 @@ Los avistamientos dependen más del estado del mar y de la actividad de la cebol
 - **Días de mar plato** son los mejores — en superficie cristalina, ves aletas dorsales a un kilómetro.
 - **Finales de primavera y comienzos de otoño** son ligeramente mejores que pleno verano. Más actividad de cebolla, menos barcos.
 
-Nuestra tasa de avistamientos en el [Tour Benagil y Reserva Natural de Alvor](/es/tours/benagil-and-alvor-nature-reserve/), que entra específicamente en la ría de Alvor rica en delfines, ronda el 85–90% de mayo a octubre.
+En nuestros [tours a la cueva de Benagil](/es/tours/benagil-caves-speed-boat-tour/), los avistamientos de delfines son habituales de mayo a octubre — sobre todo en mañanas tranquilas, cuando los grupos se alimentan cerca de la costa.
 
 Nota: ningún operador serio garantiza avistamientos. Si alguien promete que "seguro vas a ver delfines", trátalo como una señal de alarma sobre el resto de sus afirmaciones.
 
@@ -88,7 +87,7 @@ Si un operador promete "nadar garantizado con delfines" o muestra vídeos de bar
 
 En parte. La mayoría de tours en cueva hacen un pequeño desvío si se avista un grupo de camino, pero su prioridad es la costa Benagil–Marinha, y no buscan activamente delfines. Un tour vendido específicamente como "avistamiento de delfines" generalmente se aleja de la costa o entra en rías donde los grupos se alimentan, y pasa más tiempo a la deriva.
 
-La diferencia está en las prioridades: si quieres ver delfines absolutamente, elige un tour que los liste como atracción principal. Si quieres cuevas con buena probabilidad de delfines, los tours combinados en la [reserva natural de Alvor](/es/tours/benagil-and-alvor-nature-reserve/) entregan genuinamente ambos.
+La diferencia está en las prioridades: si quieres ver delfines absolutamente, elige un tour que los liste como atracción principal. Si quieres cuevas con buena probabilidad de delfines, nuestro [tour a la cueva de Benagil](/es/tours/benagil-caves-speed-boat-tour/) en una mañana tranquila entrega genuinamente ambos la mayoría de las veces.
 
 ## Qué Llevar
 

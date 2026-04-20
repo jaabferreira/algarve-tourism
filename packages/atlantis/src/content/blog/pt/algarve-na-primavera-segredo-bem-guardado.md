@@ -16,7 +16,6 @@ readingTime: 6
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
   - luxuoso-iate-a-vela
-  - benagil-e-reserva-natural-de-alvor
 ---
 
 Pergunte a uma agência de viagens quando visitar o Algarve e dirão Julho ou Agosto. Pergunte a alguém que vive aqui e dirão primavera.
@@ -83,7 +82,7 @@ A primavera é também quando os restaurantes locais servem a maior variedade de
 
 **Dia 3:** Condução até ao Cabo de São Vicente e Sagres. Caminhada pelos topos de falésia. Jantar em Sagres ou Aljezur.
 
-**Dia 4:** Passeio à vela ou [tour mais lento à reserva natural de Alvor](/pt/tours/benagil-e-reserva-natural-de-alvor/). Almoço tardio num sítio ribeirinho.
+**Dia 4:** Passeio à vela ou [tour à gruta de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) numa hora mais tranquila. Almoço tardio num sítio ribeirinho.
 
 **Dia 5:** Dia no interior — serra de Monchique, termas de Caldas de Monchique, almoço em Silves ou Alte.
 

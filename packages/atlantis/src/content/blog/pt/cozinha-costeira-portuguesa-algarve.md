@@ -15,7 +15,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - pesca-de-fundo
-  - benagil-e-reserva-natural-de-alvor
+  - circuito-de-grutas-ate-benagil
 ---
 
 Uma manhã na água faz coisas notáveis ao apetite. Ar salgado, sol, a adrenalina ligeira de um semi-rígido — sai-se do barco genuinamente esfomeado de uma forma que um buffet de almoço de hotel simplesmente não vai satisfazer. Felizmente, o Algarve alimenta pescadores esfomeados há dois mil anos, e a sua cozinha costeira é feita exactamente para o que vai querer.

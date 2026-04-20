@@ -15,7 +15,7 @@ author: Atlantis Tours
 readingTime: 7
 relatedTourSlugs:
   - pesca-de-fundo
-  - benagil-e-reserva-natural-de-alvor
+  - circuito-de-grutas-ate-benagil
 ---
 
 Antes do turismo, antes das autoestradas, antes do primeiro apartamento de férias construído, o Algarve era uma costa de pescadores. A sua identidade — comida, arquitectura, linguagem — foi moldada por gerações que viviam do Atlântico. Muito dessa tradição desapareceu, mas o suficiente sobrevive para que um visitante curioso ainda possa ver, provar e até juntar-se a ela por um dia.

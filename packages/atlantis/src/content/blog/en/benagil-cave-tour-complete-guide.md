@@ -16,7 +16,6 @@ readingTime: 7
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
   - cranchi-yacht-cruise-to-the-benagil-caves
-  - benagil-and-alvor-nature-reserve
 ---
 
 The Algar de Benagil is the single most photographed landmark on Portugal's southern coast — and for good reason. A domed sea cave carved into the cliffs east of Lagos, with a circular opening in the roof that pours sunlight straight down onto a private sandy beach, it looks more like a film set than a place you can actually visit.

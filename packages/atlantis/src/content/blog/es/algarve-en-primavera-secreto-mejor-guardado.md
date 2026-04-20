@@ -16,7 +16,6 @@ readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
   - luxury-sail-yacht-cruise
-  - benagil-and-alvor-nature-reserve
 ---
 
 Pregunta a una agencia de viajes cuándo visitar el Algarve y te dirán julio o agosto. Pregunta a alguien que vive aquí y te dirá primavera.
@@ -83,7 +82,7 @@ La primavera es también cuando los restaurantes locales sirven la mayor varieda
 
 **Día 3:** Conducir hasta Cabo San Vicente y Sagres. Caminar las cimas. Cena en Sagres o Aljezur.
 
-**Día 4:** Tour en velero o [salida más lenta a la reserva natural de Alvor](/es/tours/benagil-and-alvor-nature-reserve/). Almuerzo tardío en un sitio junto al agua.
+**Día 4:** Tour en velero o [tour a la cueva de Benagil](/es/tours/benagil-caves-speed-boat-tour/) en una hora más tranquila. Almuerzo tardío en un sitio junto al agua.
 
 **Día 5:** Día al interior — sierra de Monchique, termas de Caldas de Monchique, almuerzo en Silves o Alte.
 

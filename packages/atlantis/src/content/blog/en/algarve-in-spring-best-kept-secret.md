@@ -16,7 +16,6 @@ readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
   - luxury-sail-yacht-cruise
-  - benagil-and-alvor-nature-reserve
 ---
 
 Ask a travel agent when to visit the Algarve and they'll say July or August. Ask anyone who actually lives here and they'll say spring.
@@ -83,7 +82,7 @@ Spring is also when local restaurants serve the widest variety of vegetables —
 
 **Day 3:** Drive to Cabo São Vicente and Sagres. Walk the clifftops. Dinner in Sagres or Aljezur.
 
-**Day 4:** Sailing tour or slower [Alvor nature reserve trip](/en/tours/benagil-and-alvor-nature-reserve/). Late lunch at a waterfront place.
+**Day 4:** Sailing tour or a quieter-hour [Benagil cave tour](/en/tours/benagil-caves-speed-boat-tour/). Late lunch at a waterfront place.
 
 **Day 5:** Day in the interior — Monchique mountains, thermal baths at Caldas de Monchique, lunch in Silves or Alte.
 

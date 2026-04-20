@@ -14,7 +14,7 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
   - reef-fishing-tour
 ---
 
@@ -125,6 +125,6 @@ Et quand quelque chose apparaît, restez silencieux et observez. La pire façon 
 
 ## Prêt à Regarder ?
 
-N'importe lequel de nos [tours en bateau en Algarve](/fr/tours/) passe par des habitats où vous pourriez voir la plupart de ce qui précède. Le [tour à la réserve naturelle d'Alvor](/fr/tours/benagil-and-alvor-nature-reserve/) entre spécifiquement dans l'habitat d'estuaire le plus riche de la côte centrale et a la plus forte densité de faune de tout ce que nous opérons.
+N'importe lequel de nos [tours en bateau en Algarve](/fr/tours/) passe par des habitats où vous pourriez voir la plupart de ce qui précède. Les matins calmes, la [route des grottes de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) offre régulièrement dauphins, raies et oiseaux marins en plus de la géologie côtière.
 
 Une espèce spécifique que vous espérez voir ? Écrivez-nous au moment de la réservation — nous pouvons parfois programmer un départ autour de conditions de marée ou de lumière qui augmentent vos chances.

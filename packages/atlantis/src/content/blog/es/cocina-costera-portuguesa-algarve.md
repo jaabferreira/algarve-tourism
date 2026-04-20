@@ -15,7 +15,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - reef-fishing-tour
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
 ---
 
 Una mañana en el agua hace cosas notables al apetito. Aire salado, sol, la ligera adrenalina de una lancha — sales del barco genuinamente hambriento, de una forma que un bufé de hotel no va a satisfacer. Por suerte, el Algarve lleva dos mil años alimentando pescadores con hambre, y su cocina costera está hecha exactamente para lo que vas a querer.

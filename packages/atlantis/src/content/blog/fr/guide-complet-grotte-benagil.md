@@ -16,7 +16,6 @@ readingTime: 7
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
   - cranchi-yacht-cruise-to-the-benagil-caves
-  - benagil-and-alvor-nature-reserve
 ---
 
 L'Algar de Benagil est le site naturel le plus photographié de la côte sud du Portugal — et à juste titre. Une grotte marine creusée dans les falaises à l'est de Lagos, avec une ouverture circulaire dans le plafond qui laisse tomber la lumière du soleil directement sur une petite plage de sable privée à l'intérieur, cela ressemble plus à un décor de cinéma qu'à un lieu que l'on peut vraiment visiter.

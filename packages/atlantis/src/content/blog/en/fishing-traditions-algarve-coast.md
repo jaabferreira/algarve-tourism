@@ -15,7 +15,7 @@ author: Atlantis Tours
 readingTime: 7
 relatedTourSlugs:
   - reef-fishing-tour
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
 ---
 
 Before tourism, before the highways, before the first holiday apartment was built, the Algarve was a coast of fishermen. Its identity — its food, its architecture, its language — was shaped by generations who made their living from the Atlantic. Much of that tradition has faded, but enough survives that a curious visitor can still see, taste, and even join it for a day.

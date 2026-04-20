@@ -15,7 +15,6 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - benagil-and-alvor-nature-reserve
 ---
 
 Si vous cherchez "grottes de l'Algarve" en ligne, environ 90 % des images viennent d'un seul endroit : l'Algar de Benagil. Elle domine les résultats à tel point que beaucoup de voyageurs ne réalisent pas qu'il existe des dizaines d'autres grottes marines sur la même portion de côte — dont certaines objectivement plus belles, et presque toutes beaucoup plus calmes.
@@ -64,7 +63,7 @@ Elles sont moins connues parce qu'elles sont plus éloignées des principaux por
 
 Si vous partez dans la direction opposée — vers l'ouest depuis Portimão jusqu'à Alvor — vous quittez la côte des grottes et entrez dans un monde différent : l'estuaire d'Alvor. C'est une réserve naturelle protégée avec des dunes basses, une eau peu profonde et calme, et des dauphins qui suivent régulièrement les petits bateaux jusque dans la lagune.
 
-Notre [Tour Benagil et Réserve Naturelle d'Alvor](/fr/tours/benagil-and-alvor-nature-reserve/) est construit précisément pour associer les grottes à ce côté plus paisible de la côte, parce qu'ils se complètent : grottes le matin, faune et baignade tranquille dans la ria ensuite. La plupart des visiteurs qui le réservent nous disent que la partie Alvor les a plus surpris que Benagil elle-même.
+Si vous voulez ce côté plus paisible de la côte en complément des grottes, combinez un [tour à la grotte de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) avec une marche ou un SUP en autonomie autour de l'estuaire d'Alvor. La plupart des visiteurs nous disent que la partie Alvor les surprend plus que Benagil elle-même.
 
 ## Laquelle Choisir ?
 

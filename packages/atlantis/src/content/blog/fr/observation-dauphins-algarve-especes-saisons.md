@@ -14,7 +14,6 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
   - benagil-caves-speed-boat-tour
 ---
 
@@ -67,7 +66,7 @@ Les observations dépendent plus de l'état de la mer et de l'activité des proi
 - **Jours de mer plate** sont les meilleurs — sur une surface comme un miroir, on voit les ailerons dorsaux à un kilomètre.
 - **Fin de printemps et début d'automne** sont légèrement meilleurs que le plein été. Plus d'activité de proies, moins de bateaux sur l'eau.
 
-Notre taux d'observation sur le [Tour Benagil et Réserve Naturelle d'Alvor](/fr/tours/benagil-and-alvor-nature-reserve/), qui entre spécifiquement dans l'estuaire d'Alvor riche en dauphins, est d'environ 85 à 90 % de mai à octobre.
+Sur nos [tours à la grotte de Benagil](/fr/tours/benagil-caves-speed-boat-tour/), les observations de dauphins sont fréquentes de mai à octobre — surtout les matins calmes, quand les groupes s'alimentent près de la côte.
 
 Note : aucun opérateur sérieux ne garantit les observations. Si quelqu'un promet que vous "verrez à coup sûr des dauphins", traitez ça comme un signal d'alarme sur le reste de ses affirmations.
 
@@ -88,7 +87,7 @@ Si un opérateur promet "nager garanti avec les dauphins" ou montre des vidéos 
 
 En partie. La plupart des tours en grotte font un petit détour si un groupe est repéré en chemin, mais leur priorité est la côte Benagil–Marinha, et ils ne cherchent pas activement les dauphins. Un tour vendu spécifiquement comme "observation de dauphins" s'éloigne généralement au large ou entre dans les estuaires où les groupes s'alimentent, et passe plus de temps à la dérive.
 
-La différence est une question de priorités : si vous voulez absolument voir des dauphins, choisissez un tour qui les liste comme attraction principale. Si vous voulez des grottes avec de bonnes chances de dauphins, les tours combinés dans la [réserve naturelle d'Alvor](/fr/tours/benagil-and-alvor-nature-reserve/) offrent véritablement les deux.
+La différence est une question de priorités : si vous voulez absolument voir des dauphins, choisissez un tour qui les liste comme attraction principale. Si vous voulez des grottes avec de bonnes chances de dauphins, notre [tour à la grotte de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) un matin calme offre véritablement les deux la plupart du temps.
 
 ## Que Prendre
 

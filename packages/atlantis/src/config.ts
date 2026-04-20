@@ -8,7 +8,7 @@ export const config: BrandConfig = {
   fh: {
     shortname: "atlantistours",
     categories: ["boats"],
-    itemPks: [717720, 717728, 717754, 720028, 718024],
+    itemPks: [717720, 717754, 720028, 718024],
     flow: "1602637",
     productGroups: [
       { primary: 717754, variants: [718007, 718013] },
@@ -30,7 +30,7 @@ export const config: BrandConfig = {
 };
 
 export const tourCategories = [
-  { key: "benagil-cave-tours", pks: [717720, 717728] },
+  { key: "benagil-cave-tours", pks: [717720] },
   { key: "private-sail-yacht", pks: [717754] },
   { key: "private-yacht", pks: [720028] },
   { key: "reef-fishing", pks: [718024] },
@@ -47,13 +47,13 @@ export const blogCategories = [
 export type BlogCategory = (typeof blogCategories)[number];
 
 export const tagTourMap: Record<string, number[]> = {
-  benagil: [717720, 717728],
-  caves: [717720, 717728],
+  benagil: [717720],
+  caves: [717720],
   yacht: [717754, 720028],
   sailing: [717754],
   fishing: [718024],
   luxury: [717754, 720028],
   sunset: [717754],
-  dolphins: [717720, 717728],
-  family: [717720, 717728],
+  dolphins: [717720],
+  family: [717720],
 };

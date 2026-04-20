@@ -15,7 +15,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - reef-fishing-tour
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
 ---
 
 A morning on the water does remarkable things to your appetite. Salt air, sun, the faint adrenaline of a speedboat — you come off the boat genuinely hungry in a way that a hotel lunch buffet is simply not going to satisfy. Fortunately, the Algarve has been feeding hungry fishermen for two thousand years, and its coastal cuisine is built exactly for what you're going to want.

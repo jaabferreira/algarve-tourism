@@ -16,7 +16,6 @@ readingTime: 7
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
   - cranchi-yacht-cruise-to-the-benagil-caves
-  - benagil-and-alvor-nature-reserve
 ---
 
 El Algar de Benagil es el monumento natural más fotografiado de la costa sur de Portugal — y con razón. Una cueva marina excavada en los acantilados al este de Lagos, con una abertura circular en el techo que deja caer la luz del sol directamente sobre una pequeña playa de arena en el interior, parece más un decorado de cine que un lugar que realmente se pueda visitar.

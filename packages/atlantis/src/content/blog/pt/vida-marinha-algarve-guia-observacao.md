@@ -14,7 +14,7 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-e-reserva-natural-de-alvor
+  - circuito-de-grutas-ate-benagil
   - pesca-de-fundo
 ---
 
@@ -125,6 +125,6 @@ E quando algo aparece, fique em silêncio e observe. A pior forma de ver vida ma
 
 ## Pronto Para Olhar?
 
-Qualquer um dos nossos [tours de barco no Algarve](/pt/tours/) passa por habitat onde pode ver grande parte do que está acima. O [tour à reserva natural de Alvor](/pt/tours/benagil-e-reserva-natural-de-alvor/) entra especificamente no habitat de ria mais rico da costa central e tem a maior densidade de vida selvagem de tudo o que operamos.
+Qualquer um dos nossos [tours de barco no Algarve](/pt/tours/) passa por habitat onde pode ver grande parte do que está acima. Em manhãs calmas, a [rota pelas grutas de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) costuma oferecer golfinhos, raias e aves marinhas para além da geologia costeira.
 
 Tem uma espécie específica que gostaria de ver? Envie mensagem ao reservar — por vezes podemos agendar uma saída em torno de condições de maré ou luz que aumentem as suas hipóteses.

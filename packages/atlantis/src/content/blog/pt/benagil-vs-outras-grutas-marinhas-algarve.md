@@ -15,7 +15,6 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
-  - benagil-e-reserva-natural-de-alvor
 ---
 
 Se pesquisar "grutas do Algarve" na Internet, cerca de 90% das imagens serão de um único sítio: o Algar de Benagil. Domina os resultados de busca de tal forma que muitos visitantes não percebem que há dezenas de outras grutas marinhas ao longo do mesmo trecho de costa — algumas delas, sem favores, mais bonitas, quase todas muito mais sossegadas.
@@ -64,7 +63,7 @@ São menos famosas porque ficam mais longe dos principais portos turísticos, e 
 
 Se seguir no sentido inverso — de Portimão para oeste em direcção a Alvor — abandona a costa das grutas e entra num mundo diferente: a ria de Alvor. Trata-se de uma reserva natural protegida com dunas baixas, água pouco profunda e tranquila e golfinhos que frequentemente seguem pequenos barcos até dentro da lagoa.
 
-O nosso [Passeio a Benagil e Reserva Natural de Alvor](/pt/tours/benagil-e-reserva-natural-de-alvor/) foi construído precisamente para emparelhar as grutas com este lado mais sereno da costa, porque se complementam: grutas de manhã, vida selvagem e banho sossegado na ria a seguir. Muitos visitantes que reservam este tour dizem-nos que a parte de Alvor os surpreendeu mais do que a própria Benagil.
+Se quer este lado mais sereno da costa a acompanhar as grutas, combine um [tour à gruta de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) com uma caminhada ou SUP autoguiado pela ria de Alvor. Muitos visitantes dizem-nos que a parte de Alvor os surpreende mais do que a própria Benagil.
 
 ## Qual Escolher?
 

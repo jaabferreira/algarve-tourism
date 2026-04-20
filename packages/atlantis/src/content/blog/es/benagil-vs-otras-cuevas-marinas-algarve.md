@@ -15,7 +15,6 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - benagil-and-alvor-nature-reserve
 ---
 
 Si buscas "cuevas del Algarve" en internet, cerca del 90% de las imágenes son de un único lugar: el Algar de Benagil. Domina los resultados de búsqueda hasta tal punto que muchos viajeros no se dan cuenta de que hay docenas de otras cuevas marinas en el mismo tramo de costa — algunas de ellas, sin ser menos, más bellas, y casi todas mucho más tranquilas.
@@ -64,7 +63,7 @@ Son menos famosas porque están más lejos de los puertos turísticos principale
 
 Si vas en dirección contraria — al oeste desde Portimão hacia Alvor — dejas la costa de las cuevas y entras en un mundo distinto: la ría de Alvor. Es una reserva natural protegida con dunas bajas, agua poco profunda y tranquila, y delfines que suelen seguir a los barcos pequeños hasta dentro de la laguna.
 
-Nuestro [Tour Benagil y Reserva Natural de Alvor](/es/tours/benagil-and-alvor-nature-reserve/) está construido precisamente para combinar las cuevas con este lado más tranquilo de la costa, porque se complementan: cuevas por la mañana, vida silvestre y baño tranquilo en la ría después. La mayoría de los visitantes que lo reservan nos dicen que la parte de Alvor les sorprendió más que la propia Benagil.
+Si quieres este lado más tranquilo de la costa junto con las cuevas, combina un [tour a la cueva de Benagil](/es/tours/benagil-caves-speed-boat-tour/) con una caminata o SUP autoguiado por la ría de Alvor. La mayoría de los visitantes nos dicen que la parte de Alvor les sorprende más que la propia Benagil.
 
 ## ¿Cuál Elegir?
 

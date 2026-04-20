@@ -14,7 +14,7 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
   - reef-fishing-tour
 ---
 
@@ -125,6 +125,6 @@ Y cuando algo aparezca, quédate en silencio y observa. La peor forma de ver fau
 
 ## ¿Listo Para Mirar?
 
-Cualquiera de nuestros [tours en barco por el Algarve](/es/tours/) pasa por hábitat donde puedes ver gran parte de lo anterior. El [tour a la reserva natural de Alvor](/es/tours/benagil-and-alvor-nature-reserve/) entra específicamente en el hábitat de ría más rico de la costa central y tiene la mayor densidad de fauna de todo lo que operamos.
+Cualquiera de nuestros [tours en barco por el Algarve](/es/tours/) pasa por hábitat donde puedes ver gran parte de lo anterior. En mañanas tranquilas, la [ruta por las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) suele ofrecer delfines, rayas y aves marinas además de la geología costera.
 
 ¿Hay una especie concreta que te gustaría ver? Escríbenos al reservar — a veces podemos programar una salida en torno a condiciones de marea o luz que suben tus posibilidades.

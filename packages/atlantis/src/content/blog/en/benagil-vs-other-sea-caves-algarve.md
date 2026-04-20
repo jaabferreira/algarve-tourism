@@ -15,7 +15,6 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - benagil-and-alvor-nature-reserve
 ---
 
 If you search "Algarve caves" online, roughly 90% of the images you'll see are of one place: Algar de Benagil. It has dominated the search results so thoroughly that many travellers don't realise there are dozens of other sea caves along the same stretch of coast — some of them arguably more beautiful, almost all of them much quieter.
@@ -64,7 +63,7 @@ These are less famous because they are further from the main tourist ports, and 
 
 If you head the opposite direction — west from Portimão toward Alvor — you leave the cave coast and enter a different world: the Alvor estuary. This is a protected nature reserve with low sand dunes, calm shallow water, and dolphins that routinely follow small boats into the lagoon.
 
-Our [Benagil and Alvor Nature Reserve tour](/en/tours/benagil-and-alvor-nature-reserve/) is built around pairing the caves with this quieter side of the coast, because they complement each other: caves in the morning, wildlife and swimming in the lagoon after. Most visitors who book it tell us the Alvor stretch surprised them more than Benagil itself.
+If you want this quieter side of the coast alongside the caves, pair a [Benagil cave tour](/en/tours/benagil-caves-speed-boat-tour/) with a self-guided walk or SUP around the Alvor estuary. Most visitors we talk to find the Alvor stretch surprises them more than Benagil itself.
 
 ## Which One Should You Choose?
 

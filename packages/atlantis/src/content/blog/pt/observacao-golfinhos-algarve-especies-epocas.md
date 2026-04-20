@@ -14,7 +14,6 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-e-reserva-natural-de-alvor
   - circuito-de-grutas-ate-benagil
 ---
 
@@ -67,7 +66,7 @@ Os avistamentos de golfinhos dependem mais do estado do mar e da actividade das 
 - **Dias de mar chão** são os melhores — numa superfície vítrea, consegue ver barbatanas dorsais a um quilómetro.
 - **Final da primavera e início do outono** são ligeiramente melhores do que o pleno verão. Mais actividade de isca, menos barcos na água.
 
-A nossa taxa de avistamento no [Passeio a Benagil e Reserva Natural de Alvor](/pt/tours/benagil-e-reserva-natural-de-alvor/), que entra especificamente na ria de Alvor rica em golfinhos, ronda os 85–90% de Maio a Outubro.
+Nos nossos [tours à gruta de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/), os avistamentos de golfinhos são frequentes de Maio a Outubro — sobretudo em manhãs calmas, quando os grupos se alimentam mais perto da costa.
 
 Nota: nenhum operador sério garante avistamentos. Se alguém promete que vai "de certeza ver golfinhos", trate isso como sinal de alarme sobre o resto das suas afirmações.
 
@@ -88,7 +87,7 @@ Se um operador promete "nadar garantido com golfinhos" ou mostra vídeos de barc
 
 Em parte. A maioria dos tours às grutas faz um pequeno desvio se avistar um grupo pelo caminho, mas a sua prioridade é o litoral de Benagil–Marinha, e não procura activamente golfinhos. Um tour vendido especificamente como "observação de golfinhos" geralmente segue para zonas mais ao largo ou entra em rias onde os grupos se alimentam, e passa mais tempo à deriva.
 
-A diferença é de prioridades: se quer absolutamente ver golfinhos, escolha um tour que os indique como atracção principal. Se quer grutas com boa probabilidade de golfinhos, os tours combinados na [reserva natural de Alvor](/pt/tours/benagil-e-reserva-natural-de-alvor/) entregam genuinamente ambos.
+A diferença é de prioridades: se quer absolutamente ver golfinhos, escolha um tour que os indique como atracção principal. Se quer grutas com boa probabilidade de golfinhos, o nosso [tour à gruta de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) numa manhã calma entrega genuinamente ambos na maioria das vezes.
 
 ## O Que Levar
 

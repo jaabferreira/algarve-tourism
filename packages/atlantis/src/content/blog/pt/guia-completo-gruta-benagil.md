@@ -16,7 +16,6 @@ readingTime: 7
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
   - cranchi-yacht-cruise-ate-as-grutas-de-benagil
-  - benagil-e-reserva-natural-de-alvor
 ---
 
 O Algar de Benagil é o monumento natural mais fotografado da costa sul de Portugal — e com razão. Uma gruta marinha escavada nas falésias a leste de Lagos, com uma abertura circular no tecto por onde a luz do sol cai directamente sobre uma pequena praia de areia no interior, parece mais um cenário de filme do que um lugar que se possa realmente visitar.

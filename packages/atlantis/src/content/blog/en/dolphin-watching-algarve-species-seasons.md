@@ -14,7 +14,6 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
   - benagil-caves-speed-boat-tour
 ---
 
@@ -67,7 +66,7 @@ Dolphin sightings depend more on sea state and baitfish activity than on the cal
 - **Flat calm days** are best — on a glassy surface, you can spot dorsal fins from a kilometre away.
 - **Late spring and early autumn** are slightly better than deep summer. More baitfish activity, fewer boats on the water.
 
-Our own sighting rate across the [Benagil and Alvor Nature Reserve tour](/en/tours/benagil-and-alvor-nature-reserve/), which specifically heads into the dolphin-rich Alvor estuary, is around 85–90% from May to October.
+Across our [Benagil cave tours](/en/tours/benagil-caves-speed-boat-tour/), dolphin sightings are common from May to October — most reliably on calm mornings when pods feed closer to the coast.
 
 Note: no reputable operator guarantees sightings. If anyone promises you'll "definitely see dolphins," treat that as a red flag about the rest of their claims.
 
@@ -88,7 +87,7 @@ If an operator promises you "guaranteed swimming with dolphins" or shows video o
 
 Somewhat. Most cave tours include a quick detour if a pod is spotted on the way, but their priority is the Benagil–Marinha coastline, and they don't actively search for dolphins. A tour marketed specifically as "dolphin watching" generally heads offshore or into estuaries where pods feed, and spends more time drifting.
 
-The difference is priorities: if you absolutely want dolphins, pick a tour that lists them as the main attraction. If you want caves with a realistic chance of dolphins, the combined tours in the [Alvor nature reserve](/en/tours/benagil-and-alvor-nature-reserve/) genuinely deliver both.
+The difference is priorities: if you absolutely want dolphins, pick a tour that lists them as the main attraction. If you want caves with a realistic chance of dolphins, our standard [Benagil cave tour](/en/tours/benagil-caves-speed-boat-tour/) on a calm morning genuinely delivers both most of the time.
 
 ## What to Bring
 

@@ -14,7 +14,7 @@ tags:
 author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
-  - benagil-and-alvor-nature-reserve
+  - benagil-caves-speed-boat-tour
   - reef-fishing-tour
 ---
 
@@ -125,6 +125,6 @@ And when something does show up, go quiet and watch. The worst way to see marine
 
 ## Ready to Look?
 
-Any of our [Algarve boat tours](/en/tours/) pass through habitat where you might see most of what's above. The [Alvor nature reserve tour](/en/tours/benagil-and-alvor-nature-reserve/) specifically enters the richest lagoon habitat on the central coast and has the highest wildlife density of anything we run.
+Any of our [Algarve boat tours](/en/tours/) pass through habitat where you might see most of what's above. On calm mornings, the [Benagil cave route](/en/tours/benagil-caves-speed-boat-tour/) regularly turns up dolphins, rays, and seabirds alongside the coastal geology.
 
 Got a specific species you're hoping to see? Message us when booking — we can sometimes time a departure around tidal or light conditions that boost your odds.
