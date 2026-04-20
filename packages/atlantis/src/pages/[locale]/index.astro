@@ -116,12 +116,14 @@ const trustItems = [
           </div>
           <a href={`/${locale}/tours/`} class="see-all">{t(locale, "home.view_all_tours")} &rarr;</a>
         </div>
-        {categorizedSections.map((section) => (
-          <div class="category-section">
-            <h3 class="category-title">{section.label}</h3>
-            <ProductGrid items={section.items} brand={config.brand} locale={locale} />
-          </div>
-        ))}
+        <div class="categories-row">
+          {categorizedSections.map((section) => (
+            <div class="category-column">
+              <h3 class="category-title">{section.label}</h3>
+              <ProductGrid items={section.items} brand={config.brand} locale={locale} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )}
@@ -208,19 +210,26 @@ const trustItems = [
   .see-all:hover {
     text-decoration: underline;
   }
-  .category-section {
-    margin-bottom: var(--space-10);
+  .categories-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+    align-items: start;
   }
-  .category-section:last-child {
-    margin-bottom: 0;
+  .category-column {
+    display: flex;
+    flex-direction: column;
   }
   .category-title {
     font-family: var(--font-accent);
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     font-weight: var(--weight-regular);
     color: var(--color-text);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     font-style: italic;
+  }
+  .category-column :global(.product-grid--atlantis) {
+    grid-template-columns: 1fr;
   }
   .blog-grid {
     display: grid;

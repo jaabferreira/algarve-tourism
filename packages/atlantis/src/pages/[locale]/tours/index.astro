@@ -47,12 +47,14 @@ const structuredData = [
 
   <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
     <h1>{t(locale, "nav.tours")}</h1>
-    {categorizedSections.map((section) => (
-      <div class="category-section">
-        <h2 class="category-title">{section.label}</h2>
-        <ProductGrid items={section.items} brand={config.brand} locale={locale} />
-      </div>
-    ))}
+    <div class="categories-row">
+      {categorizedSections.map((section) => (
+        <div class="category-column">
+          <h2 class="category-title">{section.label}</h2>
+          <ProductGrid items={section.items} brand={config.brand} locale={locale} />
+        </div>
+      ))}
+    </div>
   </section>
 
   <Footer slot="footer" config={config} locale={locale} />
@@ -60,18 +62,26 @@ const structuredData = [
 </Layout>
 
 <style>
-  .category-section {
-    margin-bottom: var(--space-12);
+  .categories-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+    align-items: start;
+    margin-top: var(--space-8);
   }
-  .category-section:last-child {
-    margin-bottom: 0;
+  .category-column {
+    display: flex;
+    flex-direction: column;
   }
   .category-title {
     font-family: var(--font-accent);
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     font-weight: var(--weight-regular);
     color: var(--color-text);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     font-style: italic;
+  }
+  .category-column :global(.product-grid--atlantis) {
+    grid-template-columns: 1fr;
   }
 </style>
