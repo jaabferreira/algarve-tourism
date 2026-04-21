@@ -88,7 +88,15 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
     <script>
       import { onCLS, onLCP, onINP, onFCP, onTTFB } from 'web-vitals/attribution';
 
-      const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+
+      // Pushing an Arguments object (via function call) is what gtag.js picks
+      // up from the dataLayer queue — plain-array pushes get ignored.
+      function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        w.dataLayer.push(arguments);
+      }
 
       function report(metric: any) {
         const a = metric.attribution || {};
@@ -96,26 +104,26 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
         const isCls = metric.name === 'CLS';
         const scaled = (v: number) => Math.round(isCls ? v * 1000 : v);
 
-        dl.push([
-          'event',
-          'web_vitals',
-          {
-            metric_id: metric.id,
-            metric_name: metric.name,
-            metric_value: scaled(metric.value),
-            metric_delta: scaled(metric.delta),
-            metric_rating: metric.rating,
-            nav_type: metric.navigationType,
-            // Attribution fields — one is populated per metric type.
-            cls_target: a.largestShiftTarget || '',
-            cls_source: a.largestShiftSource?.node?.nodeName || '',
-            lcp_element: a.element || '',
-            lcp_url: a.url || '',
-            inp_target: a.interactionTarget || '',
-            inp_type: a.interactionType || '',
-            page_path: location.pathname,
-          },
-        ]);
+        gtag('event', 'web_vitals', {
+          metric_id: metric.id,
+          metric_name: metric.name,
+          metric_value: scaled(metric.value),
+          metric_delta: scaled(metric.delta),
+          metric_rating: metric.rating,
+          nav_type: metric.navigationType,
+          // Attribution fields — one is populated per metric type.
+          cls_target: a.largestShiftTarget || '',
+          cls_source: a.largestShiftSource?.node?.nodeName || '',
+          lcp_element: a.element || '',
+          lcp_url: a.url || '',
+          inp_target: a.interactionTarget || '',
+          inp_type: a.interactionType || '',
+          page_path: location.pathname,
+        });
+
+        if ((w as any).__webVitalsDebug) {
+          console.log('[web-vitals]', metric.name, scaled(metric.value), a);
+        }
       }
 
       onCLS(report);
