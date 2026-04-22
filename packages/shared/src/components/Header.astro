@@ -38,6 +38,10 @@ const navItems: NavItem[] =
 
 const ctaLabel = t(locale, "nav.book_now");
 const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full-items=yes&flow=${config.fh.flow}`;
+
+const phone = config.social.phone;
+const phoneHref = phone ? `tel:${phone.replace(/[^+0-9]/g, "")}` : null;
+const phoneDisplay = phone?.replace(/^(\+\d{3})(\d{3})(\d{3})(\d{3})$/, "$1 $2 $3 $4") ?? "";
 ---
 
 <header class="header" data-brand={brand}>
@@ -63,6 +67,12 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
 
     <div class="header__actions">
       <LanguageSwitcher locale={locale} path={path} config={config} localePaths={localePaths} />
+      {phoneHref && (
+        <a href={phoneHref} class="nav-phone" aria-label={`Call ${phoneDisplay}`}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          <span>{phoneDisplay}</span>
+        </a>
+      )}
       <a href={ctaHref} class="nav-cta">
         {ctaLabel}
       </a>
@@ -83,6 +93,12 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
     {navItems.map((item) => (
       <a href={item.href} class="mobile-menu__link">{item.label}</a>
     ))}
+    {phoneHref && (
+      <a href={phoneHref} class="mobile-menu__link mobile-menu__phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        {phoneDisplay}
+      </a>
+    )}
     <a href={ctaHref} class="nav-cta mobile-menu__cta">
       {ctaLabel}
     </a>
@@ -164,6 +180,38 @@ const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full
   .nav-cta:hover {
     opacity: 0.9;
     transform: translateY(-1px);
+  }
+
+  /* Phone link — shared */
+  .nav-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+  }
+  .nav-phone:hover {
+    color: var(--color-primary);
+  }
+  .nav-phone svg {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+
+  .mobile-menu__phone {
+    display: inline-flex !important;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-2xl) !important;
+    color: var(--color-primary) !important;
+  }
+  .mobile-menu__phone svg {
+    flex-shrink: 0;
   }
 
   /* Hamburger — shared */

@@ -17,6 +17,7 @@ export interface BrandConfig {
     instagram: string;
     facebook: string;
     whatsapp: string;
+    phone?: string;
     youtube?: string;
   };
   analytics: {

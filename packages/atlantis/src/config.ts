@@ -20,6 +20,7 @@ export const config: BrandConfig = {
     instagram: "https://www.instagram.com/atlantis.tours/",
     facebook: "https://www.facebook.com/atlantistoursbap/",
     whatsapp: "+351969703185",
+    phone: "+351969703185",
     youtube: "https://www.youtube.com/@atlantistours9867",
   },
   analytics: {
