@@ -158,6 +158,33 @@ const shareUrl = `https://www.${config.domain}${path}`;
     </div>
   </div>
 
+  <section class="location">
+    <div class="container">
+      <a
+        class="location-card"
+        href="https://www.google.com/maps/search/?api=1&query=Allgarbe+R.+da+Hortinha+35+Portim%C3%A3o&query_place_id=ChIJ4YxkPwgmyw0RW_lwZgExaYE"
+        target="_blank"
+        rel="noopener"
+        data-track="open_maps"
+      >
+        <span class="location-card__pin" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        <span class="location-card__text">
+          <span class="location-card__name">Allgarbe</span>
+          <span class="location-card__address">R. da Hortinha 35, Portimão</span>
+        </span>
+        <span class="location-card__cta">
+          {t(locale, "product.location_directions")}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
   <section class="share">
     <div class="share__inner container">
       <h2 class="share__title">{c.shareTitle}</h2>
@@ -685,6 +712,64 @@ const shareUrl = `https://www.${config.domain}${path}`;
       border-top: 1px solid var(--color-border);
       padding-top: var(--space-8);
     }
+  }
+
+  .location {
+    padding: var(--space-8) 0 var(--space-6);
+  }
+  .location-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+  .location-card:hover {
+    border-color: var(--color-primary);
+  }
+  .location-card:active {
+    transform: scale(0.99);
+  }
+  .location-card__pin {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+  }
+  .location-card__text {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .location-card__name {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    line-height: 1.25;
+  }
+  .location-card__address {
+    font-size: var(--text-sm);
+    color: var(--color-text-body);
+    line-height: 1.25;
+  }
+  .location-card__cta {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary);
   }
 
   /* Share section — follows CTABanner pattern */
