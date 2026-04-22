@@ -5,7 +5,9 @@ export default defineConfig({
   site: "https://www.atlantistours.pt",
   integrations: [
     sitemap({
-      filter: (page) => page !== "https://www.atlantistours.pt/",
+      filter: (page) =>
+        page !== "https://www.atlantistours.pt/" &&
+        !page.includes("/partners/"),
       i18n: {
         defaultLocale: "en",
         locales: { en: "en", pt: "pt", es: "es", fr: "fr" },

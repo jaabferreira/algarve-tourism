@@ -1,0 +1,758 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES, t, getLocalePath } from "@algarve-tourism/shared";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
+import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
+import { config } from "../../../config.js";
+import { loadItems } from "../../../data.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const path = `/${locale}/partners/allgarbe/`;
+const menuImage = "/partners/allgarbe-menu.jpg";
+const toursHref = getLocalePath(locale, "/tours/");
+
+const items = loadItems(locale);
+
+const benagilPostSlugs = [
+  "benagil-cave-tour-complete-guide",
+  "best-time-visit-benagil-caves",
+  "benagil-vs-other-sea-caves-algarve",
+  "what-to-pack-algarve-boat-tour",
+  "best-time-visit-algarve-boat-tours",
+];
+
+const blogPosts = (await getCollection("blog"))
+  .filter((post) => post.data.locale === locale)
+  .filter((post) => {
+    const slug = post.slug.replace(`${locale}/`, "");
+    return benagilPostSlugs.includes(slug);
+  })
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const copy: Record<Locale, Record<string, string>> = {
+  en: {
+    menuSubtitle: "Restaurant menu",
+    tapHint: "Tap the image to view full size",
+    exploreLabel: "Our Tours",
+    exploreTitle: "Book <em>another adventure</em>",
+    exploreSub: "Loved your trip? Explore more ways to experience the Algarve coast.",
+    viewAll: "View all tours",
+    blogLabel: "Benagil & boat trip reads",
+    blogTitle: "Know <em>before you go</em>",
+    viewBlog: "View all posts",
+    shareTitle: "Share with friends",
+    shareSub: "Know someone who'd love this? Send them our menu.",
+    shareBtn: "Share on WhatsApp",
+    shareCopy: "Copy link",
+    shareCopied: "Link copied",
+    igLabel: "Your trip, our feed",
+    igTitle: "Tag us <em>@atlantis.tours</em>",
+    igSub: "Share your favourite shot from today's tour — best photos get featured on our page.",
+    igBtn: "Follow @atlantis.tours",
+  },
+  pt: {
+    menuSubtitle: "Ementa do restaurante",
+    tapHint: "Toque na imagem para ver em tamanho real",
+    exploreLabel: "Os Nossos Passeios",
+    exploreTitle: "Reserve <em>outra aventura</em>",
+    exploreSub: "Adorou a viagem? Descubra mais formas de viver a costa algarvia.",
+    viewAll: "Ver todos os passeios",
+    blogLabel: "Leituras sobre Benagil",
+    blogTitle: "Saiba <em>antes de ir</em>",
+    viewBlog: "Ver todos os artigos",
+    shareTitle: "Partilhar com amigos",
+    shareSub: "Conhece alguém que iria adorar? Envie a ementa.",
+    shareBtn: "Partilhar no WhatsApp",
+    shareCopy: "Copiar link",
+    shareCopied: "Link copiado",
+    igLabel: "A sua viagem, o nosso feed",
+    igTitle: "Marque-nos <em>@atlantis.tours</em>",
+    igSub: "Partilhe a sua foto favorita do passeio — as melhores são destacadas na nossa página.",
+    igBtn: "Seguir @atlantis.tours",
+  },
+  es: {
+    menuSubtitle: "Carta del restaurante",
+    tapHint: "Toca la imagen para verla a tamaño completo",
+    exploreLabel: "Nuestros Tours",
+    exploreTitle: "Reserva <em>otra aventura</em>",
+    exploreSub: "¿Te encantó el viaje? Descubre más formas de vivir la costa del Algarve.",
+    viewAll: "Ver todos los tours",
+    blogLabel: "Lecturas sobre Benagil",
+    blogTitle: "Infórmate <em>antes de ir</em>",
+    viewBlog: "Ver todos los artículos",
+    shareTitle: "Compartir con amigos",
+    shareSub: "¿Conoces a alguien a quien le encantaría? Envía la carta.",
+    shareBtn: "Compartir por WhatsApp",
+    shareCopy: "Copiar enlace",
+    shareCopied: "Enlace copiado",
+    igLabel: "Tu viaje, nuestro feed",
+    igTitle: "Etiquétanos <em>@atlantis.tours</em>",
+    igSub: "Comparte tu foto favorita del tour — las mejores salen destacadas en nuestra página.",
+    igBtn: "Seguir @atlantis.tours",
+  },
+  fr: {
+    menuSubtitle: "Menu du restaurant",
+    tapHint: "Touchez l'image pour voir en taille réelle",
+    exploreLabel: "Nos Excursions",
+    exploreTitle: "Réservez <em>une autre aventure</em>",
+    exploreSub: "Vous avez adoré votre sortie ? Découvrez d'autres façons de vivre la côte algarvienne.",
+    viewAll: "Voir toutes les excursions",
+    blogLabel: "Lectures sur Benagil",
+    blogTitle: "À savoir <em>avant d'y aller</em>",
+    viewBlog: "Voir tous les articles",
+    shareTitle: "Partager avec des amis",
+    shareSub: "Vous connaissez quelqu'un qui adorerait ? Envoyez-lui le menu.",
+    shareBtn: "Partager sur WhatsApp",
+    shareCopy: "Copier le lien",
+    shareCopied: "Lien copié",
+    igLabel: "Votre voyage, notre feed",
+    igTitle: "Identifiez-nous <em>@atlantis.tours</em>",
+    igSub: "Partagez votre plus belle photo du jour — les meilleures seront mises à l'honneur sur notre page.",
+    igBtn: "Suivre @atlantis.tours",
+  },
+};
+
+const c = copy[locale];
+const shareUrl = `https://www.${config.domain}${path}`;
+---
+
+<Layout
+  title="Allgarbe Menu"
+  description="Allgarbe restaurant menu."
+  locale={locale}
+  path="/partners/allgarbe/"
+  config={config}
+  noindex
+>
+  <Header slot="header" config={config} locale={locale} path={path} />
+
+  <section class="menu-hero">
+    <div class="menu-hero__inner container">
+      <h1 class="menu-hero__title">Allgarbe</h1>
+      <p class="menu-hero__subtitle">{c.menuSubtitle}</p>
+      <img
+        src={menuImage}
+        alt="Allgarbe restaurant menu"
+        class="menu-hero__image"
+        decoding="async"
+        fetchpriority="high"
+        data-gallery-index="0"
+      />
+      <p class="menu-hero__hint">{c.tapHint}</p>
+    </div>
+  </section>
+
+  <div class="lightbox" id="menu-lightbox" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Close">&times;</button>
+    <div class="lightbox__content">
+      <img class="lightbox__image" src={menuImage} alt="Allgarbe restaurant menu" />
+    </div>
+  </div>
+
+  <section class="share">
+    <div class="share__inner container">
+      <h2 class="share__title">{c.shareTitle}</h2>
+      <p class="share__sub">{c.shareSub}</p>
+      <div class="share__buttons">
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noopener"
+          class="share__btn share__btn--primary"
+          data-track="share_whatsapp"
+        >
+          {c.shareBtn}
+        </a>
+        <button
+          type="button"
+          class="share__btn"
+          data-share-copy
+          data-url={shareUrl}
+          data-copied-label={c.shareCopied}
+        >
+          {c.shareCopy}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="social-split">
+    <div class="container">
+      <div class="social-split__grid">
+        <div class="social-split__card">
+          <div class="social-split__badges" aria-hidden="true">
+            <div class="social-split__badge social-split__badge--ta">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="#00AF87">
+                <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.976 5.976 0 0 0 4.072 1.598 6 6 0 0 0 6.003-5.998 5.974 5.974 0 0 0-1.962-4.435L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM6.003 8.912a4.088 4.088 0 1 1 0 8.176 4.088 4.088 0 0 1 0-8.176zm11.991 0a4.088 4.088 0 1 1 .001 8.177 4.088 4.088 0 0 1 0-8.177zM6.003 10.85a2.15 2.15 0 1 0 .001 4.301 2.15 2.15 0 0 0 0-4.301zm11.991 0a2.15 2.15 0 1 0 .001 4.301 2.15 2.15 0 0 0 0-4.301z"/>
+              </svg>
+            </div>
+            <div class="social-split__badge social-split__badge--google">
+              <svg viewBox="0 0 48 48" width="24" height="24">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+            </div>
+          </div>
+          <h2 class="social-split__title" set:html={t(locale, "reviews.leave_title")} />
+          <p class="social-split__sub">{t(locale, "reviews.leave_subtitle")}</p>
+          <div class="social-split__buttons">
+            <a
+              href="https://www.tripadvisor.com/Attraction_Review-g189120-d19733159-Reviews-ATLANTIS_TOURS_Mare_Nostrum-Portimao_Faro_District_Algarve.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-split__btn social-split__btn--ta"
+              data-track="review_click"
+              data-platform="tripadvisor"
+            >
+              {t(locale, "reviews.leave_tripadvisor")}
+            </a>
+            <a
+              href="https://g.page/r/CXFx9AoFKCpREBM/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-split__btn social-split__btn--google"
+              data-track="review_click"
+              data-platform="google"
+            >
+              {t(locale, "reviews.leave_google")}
+            </a>
+          </div>
+        </div>
+
+        <div class="social-split__card">
+          <div class="social-split__badges" aria-hidden="true">
+            <div class="social-split__badge social-split__badge--ig">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </div>
+          </div>
+          <h2 class="social-split__title" set:html={c.igTitle} />
+          <p class="social-split__sub">{c.igSub}</p>
+          <div class="social-split__buttons">
+            <a
+              href={config.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-split__btn social-split__btn--ig"
+              data-track="instagram_click"
+            >
+              {c.igBtn}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {items.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">{c.exploreLabel}</p>
+            <h2 class="section-title" set:html={c.exploreTitle} />
+            <p class="section-sub">{c.exploreSub}</p>
+          </div>
+          <a href={toursHref} class="see-all">{c.viewAll} &rarr;</a>
+        </div>
+        <ProductGrid items={items} brand={config.brand} locale={locale} />
+      </div>
+    </section>
+  )}
+
+  {blogPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">{c.blogLabel}</p>
+            <h2 class="section-title" set:html={c.blogTitle} />
+          </div>
+          <a href={`/${locale}/blog/`} class="see-all">{c.viewBlog} &rarr;</a>
+        </div>
+        <div class="blog-grid-compact">
+          {blogPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              excerpt={post.data.excerpt}
+              slug={post.slug.replace(`${locale}/`, "")}
+              image={post.data.image}
+              date={post.data.date}
+              locale={locale}
+              brand={config.brand}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+</Layout>
+
+<script>
+  // GA4 event helper — all events land in GA4 under the 'allgarbe_menu' context
+  function track(event: string, params: Record<string, unknown> = {}) {
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag("event", event, { page_context: "allgarbe_menu", ...params });
+    }
+  }
+
+  // Share: copy-to-clipboard with GA event
+  document.querySelectorAll<HTMLButtonElement>("[data-share-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const url = btn.dataset.url || "";
+      const copied = btn.dataset.copiedLabel || "Copied";
+      const original = btn.textContent || "";
+      track("share_copy");
+      try {
+        await navigator.clipboard.writeText(url);
+        btn.textContent = copied;
+        setTimeout(() => { btn.textContent = original; }, 1800);
+      } catch {
+        // Ignore clipboard failures (e.g. insecure context)
+      }
+    });
+  });
+
+  // Generic tracking via [data-track] attribute — passes data-platform if present
+  document.querySelectorAll<HTMLElement>("[data-track]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const event = el.dataset.track || "click";
+      const params: Record<string, unknown> = {};
+      if (el.dataset.platform) params.platform = el.dataset.platform;
+      track(event, params);
+    });
+  });
+
+  // Tour card clicks
+  document.querySelectorAll<HTMLAnchorElement>(".product-grid a.card").forEach((link) => {
+    link.addEventListener("click", () => {
+      const title = link.querySelector(".card__title")?.textContent?.trim() || "unknown";
+      track("tour_click", { tour: title });
+    });
+  });
+
+  // Blog card clicks
+  document.querySelectorAll<HTMLAnchorElement>(".blog-grid-compact a.blog-card").forEach((link) => {
+    link.addEventListener("click", () => {
+      const title = link.querySelector(".blog-card__title")?.textContent?.trim() || "unknown";
+      track("blog_click", { post: title });
+    });
+  });
+
+  // Floating WhatsApp button (shared component, selector matches its class)
+  document.querySelectorAll<HTMLAnchorElement>("a.whatsapp-btn").forEach((link) => {
+    link.addEventListener("click", () => track("whatsapp_float_click"));
+  });
+
+  // Lightbox — matches ProductHero pattern
+  document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = document.getElementById("menu-lightbox");
+    if (!lightbox) return;
+    const closeBtn = lightbox.querySelector(".lightbox__close");
+    const content = lightbox.querySelector(".lightbox__content");
+
+    function show() {
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      track("menu_zoom");
+    }
+    function hide() {
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("[data-gallery-index]").forEach((el) => {
+      el.addEventListener("click", () => show());
+    });
+    closeBtn?.addEventListener("click", hide);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox || e.target === content) hide();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.getAttribute("aria-hidden") !== "false") return;
+      if (e.key === "Escape") hide();
+    });
+  });
+</script>
+
+<style>
+  .menu-hero {
+    padding: calc(var(--header-height) + var(--space-8)) 0 var(--space-10);
+  }
+  .menu-hero__inner {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+  .menu-hero__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: clamp(40px, 7vw, 56px);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-style: italic;
+  }
+  .menu-hero__subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    margin: 0 0 var(--space-4);
+  }
+  .menu-hero__image {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--radius-card, 12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    cursor: zoom-in;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+  .menu-hero__image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Lightbox — matches ProductHero pattern */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .lightbox[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lightbox__content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox__image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lightbox__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    z-index: 1;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+  .lightbox__close:hover { opacity: 1; }
+  .menu-hero__hint {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .section-label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-2);
+  }
+  .section-title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0;
+  }
+  .section-title :global(em) {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .section-sub {
+    font-size: var(--text-base);
+    color: var(--color-text-body);
+    margin: var(--space-2) 0 0;
+    max-width: 520px;
+  }
+  .see-all {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .see-all:hover { text-decoration: underline; }
+
+  /* Compact blog grid — smaller cards, more per row */
+  .blog-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+  .blog-grid-compact :global(.blog-card__image img) {
+    height: 140px !important;
+    object-fit: cover;
+  }
+  .blog-grid-compact :global(.blog-card__title) {
+    font-size: var(--text-base) !important;
+    line-height: var(--leading-snug) !important;
+  }
+  .blog-grid-compact :global(.blog-card__excerpt) {
+    display: none;
+  }
+  .blog-grid-compact :global(.blog-card__body) {
+    padding: var(--space-3) var(--space-3) var(--space-4) !important;
+  }
+  @media (max-width: 640px) {
+    .blog-grid-compact {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+    .blog-grid-compact :global(.blog-card__image img) {
+      height: 110px !important;
+    }
+  }
+
+  /* Social split — Reviews + Instagram, two columns, centered */
+  .social-split {
+    padding: var(--space-12) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .social-split__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: stretch;
+  }
+  .social-split__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+  }
+  .social-split__card + .social-split__card {
+    border-left: 1px solid var(--color-border);
+  }
+  .social-split__badges {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+  .social-split__badge {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full, 999px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-split__badge--ta {
+    background: white;
+    border: 1px solid var(--color-border);
+  }
+  .social-split__badge--google {
+    background: white;
+    border: 1px solid var(--color-border);
+  }
+  .social-split__badge--ig {
+    background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+    color: white;
+  }
+  .social-split__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0;
+  }
+  .social-split__title :global(em) {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .social-split__sub {
+    font-size: var(--text-base);
+    color: var(--color-text-body);
+    margin: 0 0 var(--space-2);
+    max-width: 420px;
+  }
+  .social-split__buttons {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .social-split__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-button, 999px);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+  .social-split__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  .social-split__btn--ta {
+    background: #00AF87;
+    color: white;
+  }
+  .social-split__btn--ta:hover {
+    background: #009274;
+    box-shadow: 0 8px 24px rgba(0, 175, 135, 0.3);
+  }
+  .social-split__btn--google {
+    background: white;
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+  .social-split__btn--google:hover {
+    border-color: #4285F4;
+    box-shadow: 0 8px 24px rgba(66, 133, 244, 0.15);
+  }
+  .social-split__btn--ig {
+    background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+    color: white;
+  }
+  .social-split__btn--ig:hover {
+    box-shadow: 0 8px 24px rgba(221, 42, 123, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .social-split__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    .social-split__card + .social-split__card {
+      border-left: none;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-8);
+    }
+  }
+
+  /* Share section — follows CTABanner pattern */
+  .share {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-12) 0;
+    text-align: center;
+  }
+  .share__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .share__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0;
+    font-style: italic;
+  }
+  .share__sub {
+    font-size: var(--text-base);
+    color: var(--color-text-body);
+    margin: 0 0 var(--space-2);
+    max-width: 480px;
+  }
+  .share__buttons {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .share__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-button, 999px);
+    background: white;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  }
+  .share__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary);
+  }
+  .share__btn--primary {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+  }
+  .share__btn--primary:hover {
+    background: #1ebe5a;
+    border-color: #1ebe5a;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .section-title { font-size: var(--text-2xl); }
+    .section-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /*/partners/
 
 Sitemap: https://www.atlantistours.pt/sitemap-index.xml
