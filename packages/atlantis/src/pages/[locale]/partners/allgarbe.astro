@@ -19,6 +19,8 @@ const locale = Astro.params.locale as Locale;
 const path = `/${locale}/partners/allgarbe/`;
 const menuImage = "/partners/allgarbe-menu.jpg";
 const toursHref = getLocalePath(locale, "/tours/");
+const discountCode = "ATLANTIS10";
+const discountPercent = 10;
 
 const items = loadItems(locale);
 
@@ -42,9 +44,16 @@ const copy: Record<Locale, Record<string, string>> = {
   en: {
     menuSubtitle: "Restaurant menu",
     tapHint: "Tap the image to view full size",
+    discountEyebrow: "A thank-you from Atlantis",
+    discountTitle: "10% off your <em>next adventure</em>",
+    discountSub: "You explored the caves with us — here's a little something for your next visit.",
+    discountCodeLabel: "Your code",
+    discountCopyHint: "Tap to copy",
+    discountCopied: "Copied",
+    discountCTA: "See tours",
     exploreLabel: "Our Tours",
     exploreTitle: "Book <em>another adventure</em>",
-    exploreSub: "Loved your trip? Explore more ways to experience the Algarve coast.",
+    exploreSub: "Use code ATLANTIS10 at checkout for 10% off any tour below.",
     viewAll: "View all tours",
     blogLabel: "Benagil & boat trip reads",
     blogTitle: "Know <em>before you go</em>",
@@ -62,9 +71,16 @@ const copy: Record<Locale, Record<string, string>> = {
   pt: {
     menuSubtitle: "Ementa do restaurante",
     tapHint: "Toque na imagem para ver em tamanho real",
+    discountEyebrow: "Um obrigado da Atlantis",
+    discountTitle: "10% de desconto na <em>próxima aventura</em>",
+    discountSub: "Explorou as grutas connosco — aqui vai um miminho para a próxima visita.",
+    discountCodeLabel: "O seu código",
+    discountCopyHint: "Toque para copiar",
+    discountCopied: "Copiado",
+    discountCTA: "Ver passeios",
     exploreLabel: "Os Nossos Passeios",
     exploreTitle: "Reserve <em>outra aventura</em>",
-    exploreSub: "Adorou a viagem? Descubra mais formas de viver a costa algarvia.",
+    exploreSub: "Use o código ATLANTIS10 no checkout para 10% de desconto em qualquer passeio.",
     viewAll: "Ver todos os passeios",
     blogLabel: "Leituras sobre Benagil",
     blogTitle: "Saiba <em>antes de ir</em>",
@@ -82,9 +98,16 @@ const copy: Record<Locale, Record<string, string>> = {
   es: {
     menuSubtitle: "Carta del restaurante",
     tapHint: "Toca la imagen para verla a tamaño completo",
+    discountEyebrow: "Gracias de parte de Atlantis",
+    discountTitle: "10% de descuento en tu <em>próxima aventura</em>",
+    discountSub: "Has explorado las cuevas con nosotros — aquí va un detalle para tu próxima visita.",
+    discountCodeLabel: "Tu código",
+    discountCopyHint: "Toca para copiar",
+    discountCopied: "Copiado",
+    discountCTA: "Ver tours",
     exploreLabel: "Nuestros Tours",
     exploreTitle: "Reserva <em>otra aventura</em>",
-    exploreSub: "¿Te encantó el viaje? Descubre más formas de vivir la costa del Algarve.",
+    exploreSub: "Usa el código ATLANTIS10 al reservar para un 10% de descuento en cualquier tour.",
     viewAll: "Ver todos los tours",
     blogLabel: "Lecturas sobre Benagil",
     blogTitle: "Infórmate <em>antes de ir</em>",
@@ -102,9 +125,16 @@ const copy: Record<Locale, Record<string, string>> = {
   fr: {
     menuSubtitle: "Menu du restaurant",
     tapHint: "Touchez l'image pour voir en taille réelle",
+    discountEyebrow: "Un merci d'Atlantis",
+    discountTitle: "10% de réduction sur votre <em>prochaine aventure</em>",
+    discountSub: "Vous avez exploré les grottes avec nous — voici un petit quelque chose pour votre prochaine visite.",
+    discountCodeLabel: "Votre code",
+    discountCopyHint: "Touchez pour copier",
+    discountCopied: "Copié",
+    discountCTA: "Voir les excursions",
     exploreLabel: "Nos Excursions",
     exploreTitle: "Réservez <em>une autre aventure</em>",
-    exploreSub: "Vous avez adoré votre sortie ? Découvrez d'autres façons de vivre la côte algarvienne.",
+    exploreSub: "Utilisez le code ATLANTIS10 au paiement pour 10% de réduction sur toute excursion.",
     viewAll: "Voir toutes les excursions",
     blogLabel: "Lectures sur Benagil",
     blogTitle: "À savoir <em>avant d'y aller</em>",
@@ -185,32 +215,53 @@ const shareUrl = `https://www.${config.domain}${path}`;
     </div>
   </section>
 
-  <section class="share">
-    <div class="share__inner container">
-      <h2 class="share__title">{c.shareTitle}</h2>
-      <p class="share__sub">{c.shareSub}</p>
-      <div class="share__buttons">
-        <a
-          href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`}
-          target="_blank"
-          rel="noopener"
-          class="share__btn share__btn--primary"
-          data-track="share_whatsapp"
-        >
-          {c.shareBtn}
-        </a>
-        <button
-          type="button"
-          class="share__btn"
-          data-share-copy
-          data-url={shareUrl}
-          data-copied-label={c.shareCopied}
-        >
-          {c.shareCopy}
-        </button>
-      </div>
+  <section class="discount-hero" aria-labelledby="discount-title">
+    <div class="container discount-hero__inner">
+      <p class="discount-hero__eyebrow">{c.discountEyebrow}</p>
+      <h2 id="discount-title" class="discount-hero__title" set:html={c.discountTitle} />
+      <p class="discount-hero__sub">{c.discountSub}</p>
+
+      <button
+        type="button"
+        class="discount-code"
+        data-copy-code
+        data-code={discountCode}
+        data-copied-label={c.discountCopied}
+        aria-label={`${c.discountCodeLabel}: ${discountCode}. ${c.discountCopyHint}`}
+      >
+        <span class="discount-code__label">{c.discountCodeLabel}</span>
+        <span class="discount-code__row">
+          <span class="discount-code__value">{discountCode}</span>
+          <span class="discount-code__icon" aria-hidden="true">
+            <svg class="discount-code__icon--copy" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="discount-code__icon--check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+        </span>
+        <span class="discount-code__hint" data-copy-hint>{c.discountCopyHint}</span>
+      </button>
+
+      <a href="#tours" class="discount-hero__cta" data-track="discount_see_tours">
+        {c.discountCTA}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </div>
   </section>
+
+  {items.length > 0 && (
+    <section id="tours" class="section section--tours">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-label">{c.exploreLabel}</p>
+            <h2 class="section-title" set:html={c.exploreTitle} />
+            <p class="section-sub">{c.exploreSub}</p>
+          </div>
+          <a href={toursHref} class="see-all">{c.viewAll} &rarr;</a>
+        </div>
+        <ProductGrid items={items} brand={config.brand} locale={locale} />
+      </div>
+    </section>
+  )}
 
   <section class="social-split">
     <div class="container">
@@ -285,21 +336,32 @@ const shareUrl = `https://www.${config.domain}${path}`;
     </div>
   </section>
 
-  {items.length > 0 && (
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <p class="section-label">{c.exploreLabel}</p>
-            <h2 class="section-title" set:html={c.exploreTitle} />
-            <p class="section-sub">{c.exploreSub}</p>
-          </div>
-          <a href={toursHref} class="see-all">{c.viewAll} &rarr;</a>
-        </div>
-        <ProductGrid items={items} brand={config.brand} locale={locale} />
+  <section class="share">
+    <div class="share__inner container">
+      <h2 class="share__title">{c.shareTitle}</h2>
+      <p class="share__sub">{c.shareSub}</p>
+      <div class="share__buttons">
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noopener"
+          class="share__btn share__btn--primary"
+          data-track="share_whatsapp"
+        >
+          {c.shareBtn}
+        </a>
+        <button
+          type="button"
+          class="share__btn"
+          data-share-copy
+          data-url={shareUrl}
+          data-copied-label={c.shareCopied}
+        >
+          {c.shareCopy}
+        </button>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
   {blogPosts.length > 0 && (
     <section class="section">
@@ -340,6 +402,30 @@ const shareUrl = `https://www.${config.domain}${path}`;
       w.gtag("event", event, { page_context: "allgarbe_menu", ...params });
     }
   }
+
+  // Discount: tap-to-copy promo code with GA event + visual confirmation
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-code]").forEach((btn) => {
+    const hint = btn.querySelector<HTMLElement>("[data-copy-hint]");
+    const originalHint = hint?.textContent || "";
+    const copiedLabel = btn.dataset.copiedLabel || "Copied";
+    const code = btn.dataset.code || "";
+    let timer: number | undefined;
+    btn.addEventListener("click", async () => {
+      track("copy_promo_code", { code });
+      try {
+        await navigator.clipboard.writeText(code);
+        btn.classList.add("is-copied");
+        if (hint) hint.textContent = copiedLabel;
+        if (timer) window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          btn.classList.remove("is-copied");
+          if (hint) hint.textContent = originalHint;
+        }, 2000);
+      } catch {
+        // Ignore clipboard failures (e.g. insecure context)
+      }
+    });
+  });
 
   // Share: copy-to-clipboard with GA event
   document.querySelectorAll<HTMLButtonElement>("[data-share-copy]").forEach((btn) => {
@@ -770,6 +856,158 @@ const shareUrl = `https://www.${config.domain}${path}`;
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
     color: var(--color-primary);
+  }
+
+  /* Discount hero — the primary conversion section */
+  .discount-hero {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+      linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    color: white;
+    padding: var(--space-12) 0;
+    text-align: center;
+  }
+  .discount-hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: 560px;
+  }
+  .discount-hero__eyebrow {
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: var(--weight-medium);
+    margin: 0;
+  }
+  .discount-hero__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl));
+    font-weight: var(--weight-regular);
+    line-height: 1.15;
+    color: white;
+    margin: 0;
+  }
+  .discount-hero__title :global(em) {
+    font-style: italic;
+  }
+  .discount-hero__sub {
+    font-size: var(--text-base);
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 44ch;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .discount-code {
+    appearance: none;
+    background: white;
+    color: var(--color-primary-dark);
+    border: 0;
+    border-radius: var(--radius-card);
+    padding: var(--space-3) var(--space-5) var(--space-4);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    min-width: 280px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    font-family: inherit;
+    margin-top: var(--space-2);
+  }
+  .discount-code:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+  }
+  .discount-code:active {
+    transform: translateY(0);
+  }
+  .discount-code__label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-body);
+    font-weight: var(--weight-medium);
+    text-align: left;
+  }
+  .discount-code__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .discount-code__value {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: clamp(var(--text-3xl), 7vw, var(--text-4xl));
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.06em;
+    color: var(--color-primary-dark);
+    line-height: 1;
+  }
+  .discount-code__icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-primary);
+    flex: 0 0 auto;
+  }
+  .discount-code__icon--check {
+    display: none;
+  }
+  .discount-code.is-copied {
+    background: #eaf7f5;
+  }
+  .discount-code.is-copied .discount-code__icon--copy {
+    display: none;
+  }
+  .discount-code.is-copied .discount-code__icon--check {
+    display: inline-block;
+  }
+  .discount-code__hint {
+    font-size: var(--text-xs);
+    color: var(--color-text-body);
+    text-align: left;
+  }
+  .discount-code.is-copied .discount-code__hint {
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .discount-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: white;
+    color: var(--color-primary-dark);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    margin-top: var(--space-2);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+  }
+  .discount-hero__cta:hover {
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-1px);
+  }
+
+  /* Tours anchor scroll — account for any future sticky nav */
+  .section--tours {
+    scroll-margin-top: 72px;
+  }
+
+  @media (max-width: 480px) {
+    .discount-hero {
+      padding: var(--space-10) 0;
+    }
+    .discount-code {
+      min-width: 0;
+      width: 100%;
+    }
   }
 
   /* Share section — follows CTABanner pattern */
