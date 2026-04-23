@@ -30,7 +30,6 @@ const { items, brand, locale } = Astro.props;
         brand={brand}
         locale={locale}
         featured={brand === "algarve-and-you" && i === 0}
-        imageIndex={i % Math.max(item.images?.length || 1, 1)}
       />
     </div>
   ))}
