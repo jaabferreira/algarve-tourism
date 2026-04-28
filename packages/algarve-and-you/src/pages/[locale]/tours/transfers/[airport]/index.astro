@@ -1,0 +1,257 @@
+---
+import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
+import {
+  LOCALES,
+  t,
+  getLocalePath,
+  optimizeImageUrl,
+  formatPrice,
+  buildBreadcrumbList,
+} from "@algarve-tourism/shared";
+import Layout from "../../../../../layouts/Layout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
+import { config } from "../../../../../config.js";
+import { loadItems } from "../../../../../data.js";
+import { AIRPORTS, getDestinationsForAirport, type Airport } from "../../../../../transfers.js";
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) =>
+    AIRPORTS.map((airport) => ({
+      params: { locale, airport },
+    })),
+  );
+}
+
+const locale = Astro.params.locale as Locale;
+const airport = Astro.params.airport as Airport;
+
+const items = loadItems(locale);
+const destinations = getDestinationsForAirport(airport);
+
+const cards = destinations
+  .map((d) => {
+    const primary = items.find((i) => i.pk === d.primaryPk);
+    const variants = d.variantPks
+      .map((pk) => items.find((i) => i.pk === pk))
+      .filter((i): i is NormalizedItem => i !== undefined);
+    if (!primary) return null;
+    const allPriced = [primary, ...variants].filter((i) => i.price_from_including_tax > 0);
+    const lowestPrice = allPriced.length
+      ? Math.min(...allPriced.map((i) => i.price_from_including_tax))
+      : primary.price_from_including_tax;
+    const hasRoundTrip = variants.some((v) => v.slug.includes("return"));
+    const variantLabel = hasRoundTrip
+      ? `${t(locale, "transfer.oneway")} · ${t(locale, "transfer.roundtrip")}`
+      : t(locale, "transfer.oneway");
+    const rawImg = primary.images?.[0]?.url ?? primary.image_url;
+    return {
+      destination: d.destination,
+      href: getLocalePath(locale, `/tours/${primary.slug}/`),
+      img: rawImg ? optimizeImageUrl(rawImg, 600) : "",
+      priceLabel: `${t(locale, "product.from")} ${formatPrice(lowestPrice)}`,
+      variantLabel,
+    };
+  })
+  .filter((c): c is NonNullable<typeof c> => c !== null);
+
+const titleKey = airport === "faro" ? "transfers.from_faro_title" : "transfers.from_lisbon_title";
+const airportName = t(locale, `transfer.airport.${airport}`);
+
+const structuredData = [
+  buildBreadcrumbList(config, locale, [
+    { name: "Home", path: "/" },
+    { name: t(locale, "nav.tours"), path: "/tours/" },
+    { name: t(locale, "category.transfers"), path: "/tours/transfers/" },
+    { name: airportName, path: `/tours/transfers/${airport}/` },
+  ]),
+];
+---
+
+<Layout
+  title={t(locale, titleKey)}
+  description={t(locale, "meta.category.transfers")}
+  locale={locale}
+  path={`/tours/transfers/${airport}/`}
+  config={config}
+  structuredData={structuredData}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/transfers/${airport}/`} />
+
+  <section class="section container airport-page">
+    <nav class="airport-page__breadcrumb" aria-label="Breadcrumb">
+      <a href={getLocalePath(locale, "/tours/transfers/")}>&larr; {t(locale, "transfers.choose_airport_title")}</a>
+    </nav>
+
+    <header class="airport-page__intro">
+      <h1>{t(locale, titleKey)}</h1>
+      <p class="airport-page__lede">{t(locale, "transfers.choose_destination")}</p>
+    </header>
+
+    <div class="dest-grid">
+      {cards.map((card) => (
+        <a href={card.href} class="dest-card" data-reveal>
+          <div class="dest-card__image">
+            {card.img && (
+              <img src={card.img} alt={card.destination} loading="lazy" width="600" height="380" />
+            )}
+            <span class="dest-card__variant">{card.variantLabel}</span>
+          </div>
+          <div class="dest-card__body">
+            <h3 class="dest-card__title">{card.destination}</h3>
+            <div class="dest-card__footer">
+              <span class="dest-card__price">{card.priceLabel}</span>
+              <span class="dest-card__cta">{t(locale, "product.discover")} &rarr;</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
+</Layout>
+
+<style>
+  .airport-page {
+    padding-top: calc(var(--header-height) + var(--space-10));
+    padding-bottom: var(--space-16);
+  }
+
+  .airport-page__breadcrumb {
+    margin-bottom: var(--space-6);
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+
+  .airport-page__breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .airport-page__breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+
+  .airport-page__intro {
+    max-width: 720px;
+    margin-bottom: var(--space-10);
+  }
+
+  .airport-page__lede {
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 768px) {
+    .dest-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dest-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .dest-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .dest-card__image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .dest-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms ease;
+  }
+
+  .dest-card:hover .dest-card__image img {
+    transform: scale(1.04);
+  }
+
+  .dest-card__variant {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: rgba(61, 43, 31, 0.85);
+    color: #fff;
+    font-size: 10px;
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+
+  .dest-card__body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .dest-card__title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-text);
+    line-height: var(--leading-snug);
+  }
+
+  .dest-card__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .dest-card__price {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: var(--weight-regular);
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .dest-card__cta {
+    font-size: 11px;
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .dest-card:hover .dest-card__cta {
+    color: var(--color-primary-dark);
+  }
+</style>

@@ -11,6 +11,7 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import { config } from "../../../config.js";
 import { loadItems, getVariants } from "../../../data.js";
+import { transferLabel } from "../../../transfers.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -27,6 +28,13 @@ const locale = Astro.params.locale as Locale;
 
 const allItems = loadItems(locale);
 const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
+
+const withTransferLabel = (i: NormalizedItem): NormalizedItem => {
+  const label = transferLabel(i.pk, locale);
+  return label ? { ...i, name: label } : i;
+};
+const widgetItem = withTransferLabel(item);
+const widgetVariants = getVariants(item.pk, locale).map(withTransferLabel);
 
 const parsed = parseDescription(item.description_html);
 
@@ -179,10 +187,10 @@ for (const loc of config.locales as Locale[]) {
 
       <aside class="product-detail__sidebar">
         <BookingWidget
-          item={item}
+          item={widgetItem}
           companyShortname={config.fh.shortname}
           locale={locale}
-          variants={getVariants(item.pk, locale)}
+          variants={widgetVariants}
         />
       </aside>
     </div>

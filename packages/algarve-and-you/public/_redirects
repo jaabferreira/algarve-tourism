@@ -1,5 +1,12 @@
 / /en/ 301
 
+# Old standalone transfers stub → grouped transfers chooser (2026-04-28)
+/transfers/   /en/tours/transfers/   301
+/en/transfers/   /en/tours/transfers/   301
+/pt/transfers/   /pt/tours/transfers/   301
+/es/transfers/   /es/tours/transfers/   301
+/fr/transfers/   /fr/tours/transfers/   301
+
 # RSS per-locale migration
 /rss.xml  /en/rss.xml  301
 

@@ -12,9 +12,11 @@ import { loadItems } from "../../../../data.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) =>
-    config.fh.categories.map((category) => ({
-      params: { locale, category },
-    })),
+    config.fh.categories
+      .filter((category) => category !== "transfers")
+      .map((category) => ({
+        params: { locale, category },
+      })),
   );
 }
 

@@ -123,6 +123,17 @@ export interface TranslationStrings {
   "marquee.ay": string;
   "marquee.atlantis": string;
   "transfers.desc": string;
+  "transfer.oneway": string;
+  "transfer.roundtrip": string;
+  "transfer.airport.faro": string;
+  "transfer.airport.lisbon": string;
+  "transfers.choose_airport_title": string;
+  "transfers.choose_airport_blurb": string;
+  "transfers.faro_blurb": string;
+  "transfers.lisbon_blurb": string;
+  "transfers.from_faro_title": string;
+  "transfers.from_lisbon_title": string;
+  "transfers.choose_destination": string;
   "common.loading": string;
   "common.all": string;
   "common.no_image": string;
