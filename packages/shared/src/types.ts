@@ -1,5 +1,7 @@
 export type Brand = "atlantis" | "algarve-and-you";
 
+export type SiteSource = "atlantis-tours" | "any";
+
 export interface BrandConfig {
   brand: Brand;
   name: string;
