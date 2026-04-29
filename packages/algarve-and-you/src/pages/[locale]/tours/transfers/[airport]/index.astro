@@ -41,7 +41,7 @@ const cards = destinations
     const lowestPrice = allPriced.length
       ? Math.min(...allPriced.map((i) => i.price_from_including_tax))
       : primary.price_from_including_tax;
-    const variantLabel = t(locale, "transfer.oneway");
+    const variantLabel = `${t(locale, "transfer.roundtrip")} · ${t(locale, "transfer.oneway")}`;
     const rawImg = primary.images?.[0]?.url ?? primary.image_url;
     return {
       destination: d.destination,

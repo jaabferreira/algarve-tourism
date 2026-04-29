@@ -2,7 +2,7 @@ import type { Locale } from "@algarve-tourism/shared";
 import { t } from "@algarve-tourism/shared";
 
 type Airport = "faro" | "lisbon";
-type VariantKind = "oneway-out" | "oneway-in" | "round-trip";
+type VariantKind = "oneway-in" | "round-trip";
 
 interface TransferVariant {
   kind: VariantKind;
@@ -10,24 +10,28 @@ interface TransferVariant {
   destination: string;
 }
 
+// The "outbound-named" PKs (slug `airport-destination`) are round-trip products —
+// FH bundles a €0 second-leg PK so the customer pays one full round-trip price up front.
+// The "inbound-named" PKs (slug `destination-airport` or `return-destination-airport` for PC)
+// are standalone D→A one-ways, priced at ~60% of the round-trip.
 const TRANSFER_VARIANTS: Record<number, TransferVariant> = {
   // Faro
-  718075: { kind: "oneway-out", airport: "faro", destination: "Albufeira" },
+  718075: { kind: "round-trip", airport: "faro", destination: "Albufeira" },
   720350: { kind: "oneway-in", airport: "faro", destination: "Albufeira" },
-  718083: { kind: "oneway-out", airport: "faro", destination: "Portimão/Carvoeiro" },
+  718083: { kind: "round-trip", airport: "faro", destination: "Portimão/Carvoeiro" },
   720354: { kind: "oneway-in", airport: "faro", destination: "Portimão/Carvoeiro" },
-  718087: { kind: "oneway-out", airport: "faro", destination: "Armação de Pêra" },
+  718087: { kind: "round-trip", airport: "faro", destination: "Armação de Pêra" },
   720356: { kind: "oneway-in", airport: "faro", destination: "Armação de Pêra" },
-  718096: { kind: "oneway-out", airport: "faro", destination: "Vilamoura/Almancil" },
+  718096: { kind: "round-trip", airport: "faro", destination: "Vilamoura/Almancil" },
   720357: { kind: "oneway-in", airport: "faro", destination: "Vilamoura/Almancil" },
   // Lisbon
-  718103: { kind: "oneway-out", airport: "lisbon", destination: "Albufeira" },
+  718103: { kind: "round-trip", airport: "lisbon", destination: "Albufeira" },
   720358: { kind: "oneway-in", airport: "lisbon", destination: "Albufeira" },
-  718109: { kind: "oneway-out", airport: "lisbon", destination: "Portimão/Carvoeiro" },
+  718109: { kind: "round-trip", airport: "lisbon", destination: "Portimão/Carvoeiro" },
   720361: { kind: "oneway-in", airport: "lisbon", destination: "Portimão/Carvoeiro" },
-  718112: { kind: "oneway-out", airport: "lisbon", destination: "Armação de Pêra" },
+  718112: { kind: "round-trip", airport: "lisbon", destination: "Armação de Pêra" },
   720362: { kind: "oneway-in", airport: "lisbon", destination: "Armação de Pêra" },
-  718115: { kind: "oneway-out", airport: "lisbon", destination: "Vilamoura/Almancil" },
+  718115: { kind: "round-trip", airport: "lisbon", destination: "Vilamoura/Almancil" },
   720365: { kind: "oneway-in", airport: "lisbon", destination: "Vilamoura/Almancil" },
 };
 
@@ -41,9 +45,6 @@ export function transferLabel(pk: number, locale: Locale): string | undefined {
   const airportName = t(locale, `transfer.airport.${v.airport}`);
   if (v.kind === "round-trip") {
     return `${t(locale, "transfer.roundtrip")} · ${airportName} ⇆ ${v.destination}`;
-  }
-  if (v.kind === "oneway-out") {
-    return `${t(locale, "transfer.oneway")} · ${airportName} → ${v.destination}`;
   }
   return `${t(locale, "transfer.oneway")} · ${v.destination} → ${airportName}`;
 }

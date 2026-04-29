@@ -18,11 +18,11 @@ The transfers category currently renders all 16 priced transfer products in a si
 
 ## Active product inventory
 
-24 transfer records exist in FH; 16 are customer-facing one-ways (the curated `itemPks`), and 8 are zero-priced "round-trip return-leg" plumbing PKs. The round-trip booking flow is handled inside the FareHarbor lightframe — when a customer selects "round trip" in the FH widget, FH books the priced outbound + the €0 return-leg companion behind the scenes. The €0 PKs are never surfaced as standalone variants on the website.
+Each destination has two customer-facing FH products: a round-trip and a D→A one-way. The round-trip product (named after the A→D direction in FH) is priced at the full round-trip cost; FH bundles a €0 second-leg PK behind the scenes so the customer pays once at checkout. The D→A one-way is a standalone product, priced at exactly 60% of the round-trip — for customers who only need transport from their accommodation back to the airport.
 
 Customer-facing inventory (priced PKs):
 
-| Destination | A→D one-way | D→A one-way | (€0 plumbing PK, hidden) |
+| Destination | Round-trip | D→A one-way | (€0 second-leg PK, hidden) |
 |---|---|---|---|
 | Faro / Albufeira | 718075 €116.00 | 720350 €69.60 | 718080 |
 | Faro / Portimão-Carvoeiro | 718083 €158.00 | 720354 €94.80 | 718085 |
@@ -34,8 +34,9 @@ Customer-facing inventory (priced PKs):
 | Lisbon / Vilamoura-Almancil | 718115 €811.00 | 720365 €486.60 | 718116 |
 
 Notes:
-- The `private-transfers-return-…` slugs for Faro/Lisbon PC are misleading — those PKs (720354, 720361) are simply the D→A one-way direction, priced at exactly 60% of the A→D one-way (matching the discount pattern of every other destination's reverse direction).
-- Each destination has exactly two customer-facing variants: A→D and D→A. Both variants offer round-trip as an option inside the FH lightframe.
+- The slug `private-transfers-faro-airport-albufeira` describes the route but the PK behind it is a round-trip product, not an A→D one-way. This was a misread on the first pass.
+- The 60% pricing pattern (D→A one-way ÷ round-trip) holds for every destination, including PC where the D→A PK is named `private-transfers-return-…` rather than the usual `destination-airport` slug shape.
+- The €0 second-leg PKs are operational plumbing for the round-trip booking flow and never surfaced as standalone variants.
 
 ## Architecture
 
@@ -72,10 +73,8 @@ The destination detail page is the existing `/tours/[slug]/` for the primary PK.
 
 The shared `BookingWidget` renders `option.name`, but the raw FH names are too long ("Private Transfers - Faro Airport - Albufeira"). The page transforms transfer items before passing to the widget:
 
-- Outbound: "One way · Faro Airport → Albufeira"
-- Reverse one-way: "One way · Albufeira → Faro Airport"
-
-Round-trip is offered inside the FH lightframe for both variants — it is not surfaced as a third row in the widget.
+- Round-trip: "Round trip · Faro Airport ⇆ Albufeira"
+- D→A one-way: "One way · Albufeira → Faro Airport"
 
 Implementation: a small `transferVariants.ts` helper in the AnY package maps PK → `{ kind, airport, destination }`. The `[slug].astro` page calls a `transferLabel(pk, locale)` helper to produce the localized string and clones items with overridden `name` only when the item is a transfer. No change to `BookingWidget`; yacht behaviour untouched.
 
