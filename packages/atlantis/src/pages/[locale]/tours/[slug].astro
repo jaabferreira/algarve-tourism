@@ -98,7 +98,10 @@ const breadcrumbData = buildBreadcrumbList(config, locale, [
 
 const structuredData = [productData, breadcrumbData];
 
-const fhUrl = `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/?full-items=yes`;
+const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
+const fhUrl =
+  `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/` +
+  `?full-items=yes&cf-${SOURCE_SITE_CF_ID}=atlantis-tours`;
 
 const localePaths: Partial<Record<Locale, string>> = {};
 for (const loc of config.locales as Locale[]) {
@@ -219,6 +222,7 @@ for (const loc of config.locales as Locale[]) {
           item={item}
           companyShortname={config.fh.shortname}
           locale={locale}
+          siteSource="atlantis-tours"
           variants={getVariants(item.pk, locale)}
         />
       </aside>

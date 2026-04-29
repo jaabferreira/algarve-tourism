@@ -1,5 +1,5 @@
 ---
-import type { Locale, NormalizedItem } from "../types.js";
+import type { Locale, NormalizedItem, SiteSource } from "../types.js";
 import { t } from "../i18n/index.js";
 import { formatPrice } from "../lib/prices.js";
 
@@ -7,13 +7,17 @@ interface Props {
   item: NormalizedItem;
   companyShortname: string;
   locale: Locale;
+  siteSource: SiteSource;
   variants?: NormalizedItem[];
 }
 
-const { item, companyShortname, locale, variants = [] } = Astro.props;
+const { item, companyShortname, locale, siteSource, variants = [] } = Astro.props;
+
+const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
 
 const fhUrl = (pk: number) =>
-  `https://fareharbor.com/embeds/book/${companyShortname}/items/${pk}/?full-items=yes`;
+  `https://fareharbor.com/embeds/book/${companyShortname}/items/${pk}/` +
+  `?full-items=yes&cf-${SOURCE_SITE_CF_ID}=${siteSource}`;
 
 const allOptions = variants.length > 0 ? [item, ...variants] : [];
 ---
