@@ -1,9 +1,14 @@
 ---
-import type { BrandConfig, Locale } from "../types.js";
+import type { BrandConfig, Locale, SiteSource } from "../types.js";
 import type { TranslationKey } from "../i18n/types.js";
 import { t } from "../i18n/index.js";
 import { getLocalePath } from "../config.js";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const BRAND_TO_SITE_SOURCE: Record<BrandConfig["brand"], SiteSource> = {
+  atlantis: "atlantis-tours",
+  "algarve-and-you": "any",
+};
 
 interface Props {
   config: BrandConfig;
@@ -37,7 +42,11 @@ const navItems: NavItem[] =
       ];
 
 const ctaLabel = t(locale, "nav.book_now");
-const ctaHref = `https://fareharbor.com/embeds/book/${config.fh.shortname}/?full-items=yes&flow=${config.fh.flow}`;
+const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
+const siteSource = BRAND_TO_SITE_SOURCE[config.brand];
+const ctaHref =
+  `https://fareharbor.com/embeds/book/${config.fh.shortname}/` +
+  `?full-items=yes&flow=${config.fh.flow}&cf-${SOURCE_SITE_CF_ID}=${siteSource}`;
 
 const phone = config.social.phone;
 const phoneHref = phone ? `tel:${phone.replace(/[^+0-9]/g, "")}` : null;
