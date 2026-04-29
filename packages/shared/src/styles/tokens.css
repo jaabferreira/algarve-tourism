@@ -24,9 +24,9 @@
   --color-secondary-light: #8A96A3;
 
   /* === Typography === */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
-  --font-accent: 'Instrument Serif', Georgia, serif;
+  --font-display: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
+  --font-accent: 'Instrument Serif', 'Instrument Serif Fallback', Georgia, serif;
 
   --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;
