@@ -151,8 +151,10 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
       };
       const events = ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'];
       events.forEach((e) => addEventListener(e, load, { once: true, passive: true }));
-      // Fallback for crawlers / users who never interact
-      setTimeout(load, 5000);
+      // Fallback for fully-idle users — pushed past the CLS-sensitive window.
+      // The 5s default was firing during first-impression and any FH-induced
+      // shift was being attributed to CLS (visible in GA4 web_vitals.cls_target).
+      setTimeout(load, 30000);
     })();
   </script>
 </body>

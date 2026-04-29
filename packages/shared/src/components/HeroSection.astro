@@ -376,7 +376,9 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
   /* Atlantis mobile */
   @media (max-width: 768px) {
     .at-hero {
-      min-height: 75vh;
+      /* svh stays stable when the mobile URL bar collapses; vh recalculates
+         and shifts at-hero__stats (pinned by margin-top: auto). */
+      min-height: 75svh;
     }
 
     .at-hero__title {
