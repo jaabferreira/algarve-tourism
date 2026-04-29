@@ -3,6 +3,8 @@ import '@fontsource-variable/space-grotesk/wght.css';
 import '@fontsource/instrument-serif/400.css';
 import '@fontsource/instrument-serif/400-italic.css';
 import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import instrumentSerifLatinUrl from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import instrumentSerifLatinItalicUrl from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 import PageLayout from '@algarve-tourism/shared/layouts/PageLayout.astro';
 import type { BrandConfig, Locale } from '@algarve-tourism/shared/types';
 
@@ -27,7 +29,7 @@ interface Props {
 const props = Astro.props;
 ---
 
-<PageLayout {...props} preloadFonts={[spaceGroteskLatinUrl]}>
+<PageLayout {...props} preloadFonts={[spaceGroteskLatinUrl, instrumentSerifLatinUrl, instrumentSerifLatinItalicUrl]}>
   <slot name="header" slot="header" />
   <slot />
   <slot name="footer" slot="footer" />
