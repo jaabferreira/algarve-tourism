@@ -28,7 +28,8 @@ const ariaLabel = locale ? t(locale, "common.whatsapp_contact") : "Contact us on
 <style>
   .whatsapp-btn {
     position: fixed;
-    bottom: var(--whatsapp-bottom, var(--space-6));
+    /* 88px clears the FareHarbor lightframe cart bar (~60–70px tall) that sits at viewport bottom */
+    bottom: var(--whatsapp-bottom, 88px);
     right: var(--space-6);
     z-index: 90;
     width: 56px;
