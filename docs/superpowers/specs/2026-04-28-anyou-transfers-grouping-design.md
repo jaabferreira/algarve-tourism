@@ -18,20 +18,24 @@ The transfers category currently renders all 16 priced transfer products in a si
 
 ## Active product inventory
 
-13 priced FH products are visible across 24 records (the other 11 are zero-priced duplicates). The 16 curated PKs in `algarve-and-you/src/config.ts` `itemPks` map onto:
+24 transfer records exist in FH; 16 are customer-facing one-ways (the curated `itemPks`), and 8 are zero-priced "round-trip return-leg" plumbing PKs. The round-trip booking flow is handled inside the FareHarbor lightframe — when a customer selects "round trip" in the FH widget, FH books the priced outbound + the €0 return-leg companion behind the scenes. The €0 PKs are never surfaced as standalone variants on the website.
 
-| Destination | Outbound (Airport→Dest) | Reverse (Dest→Airport) | Round-trip |
+Customer-facing inventory (priced PKs):
+
+| Destination | A→D one-way | D→A one-way | (€0 plumbing PK, hidden) |
 |---|---|---|---|
-| Faro / Albufeira | 718075 | 720350 | — |
-| Faro / Portimão-Carvoeiro | 718083 | — | 720354 |
-| Faro / Armação de Pêra | 718087 | 720356 | — |
-| Faro / Vilamoura-Almancil | 718096 | 720357 | — |
-| Lisbon / Albufeira | 718103 | 720358 | — |
-| Lisbon / Portimão-Carvoeiro | 718109 | — | 720361 |
-| Lisbon / Armação de Pêra | 718112 | 720362 | — |
-| Lisbon / Vilamoura-Almancil | 718115 | 720365 | — |
+| Faro / Albufeira | 718075 €116.00 | 720350 €69.60 | 718080 |
+| Faro / Portimão-Carvoeiro | 718083 €158.00 | 720354 €94.80 | 718085 |
+| Faro / Armação de Pêra | 718087 €137.00 | 720356 €82.20 | 718093 |
+| Faro / Vilamoura-Almancil | 718096 €95.00 | 720357 €57.00 | 718101 |
+| Lisbon / Albufeira | 718103 €811.00 | 720358 €486.60 | 718107 |
+| Lisbon / Portimão-Carvoeiro | 718109 €853.00 | 720361 €511.80 | 718110 |
+| Lisbon / Armação de Pêra | 718112 €811.00 | 720362 €486.60 | 718113 |
+| Lisbon / Vilamoura-Almancil | 718115 €811.00 | 720365 €486.60 | 718116 |
 
-Each destination has exactly two variants. PC's variant is round-trip; the other three destinations' variant is the reverse one-way.
+Notes:
+- The `private-transfers-return-…` slugs for Faro/Lisbon PC are misleading — those PKs (720354, 720361) are simply the D→A one-way direction, priced at exactly 60% of the A→D one-way (matching the discount pattern of every other destination's reverse direction).
+- Each destination has exactly two customer-facing variants: A→D and D→A. Both variants offer round-trip as an option inside the FH lightframe.
 
 ## Architecture
 
@@ -70,7 +74,8 @@ The shared `BookingWidget` renders `option.name`, but the raw FH names are too l
 
 - Outbound: "One way · Faro Airport → Albufeira"
 - Reverse one-way: "One way · Albufeira → Faro Airport"
-- Round-trip: "Round trip · Faro Airport ⇆ Portimão/Carvoeiro"
+
+Round-trip is offered inside the FH lightframe for both variants — it is not surfaced as a third row in the widget.
 
 Implementation: a small `transferVariants.ts` helper in the AnY package maps PK → `{ kind, airport, destination }`. The `[slug].astro` page calls a `transferLabel(pk, locale)` helper to produce the localized string and clones items with overridden `name` only when the item is a transfer. No change to `BookingWidget`; yacht behaviour untouched.
 
@@ -106,9 +111,8 @@ Delete `packages/algarve-and-you/src/pages/[locale]/transfers.astro`.
 
 ## Out of scope
 
-- Adding the 8 missing FH products (round-trips for non-PC destinations, reverse one-ways for PC). The user has chosen to live with the asymmetric two-variant model.
 - Atlantis package — transfers are not a category there.
-- Faro asymmetric pricing (€116 outbound vs €69.60 inbound for Albufeira). Treated as data, not a UI concern.
+- Reverse-direction pricing asymmetry (D→A is consistently 60% of A→D across every destination — confirmed pattern, not a bug).
 
 ## Verification
 
