@@ -60,7 +60,7 @@ const productData = {
 };
 
 const tourReviews = manualReviews.filter(
-  (r) => r.product_slug === item.slug && r.verifiedBooking && r.permissionToPublish
+  (r) => r.fareharborItemPk === item.pk && r.verifiedBooking && r.permissionToPublish
 );
 
 const visibleReviews = tourReviews.length >= 2
