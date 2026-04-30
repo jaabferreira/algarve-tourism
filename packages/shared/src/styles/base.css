@@ -27,16 +27,17 @@ body {
   line-height: var(--leading-normal);
 }
 
-/* Headings */
+/* Headings — color reads from --heading-color so dark sections can override
+   by setting that one custom property on a parent. Falls back to --color-text. */
 h1, h2, h3 {
   font-family: var(--font-display);
-  color: var(--color-text);
+  color: var(--heading-color, var(--color-text));
   line-height: var(--leading-snug);
 }
 
 h4, h5, h6 {
   font-family: var(--font-body);
-  color: var(--color-text);
+  color: var(--heading-color, var(--color-text));
   font-weight: var(--weight-semibold);
 }
 
