@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildBlogPosting } from "./structured-data.js";
+import { buildBlogPosting, buildVideoObject } from "./structured-data.js";
 import type { BrandConfig } from "../types.js";
 
 const mockConfig = {
@@ -101,5 +101,36 @@ describe("buildBlogPosting", () => {
       "@type": "Organization",
       name: "Atlantis Tours",
     });
+  });
+});
+
+describe("buildVideoObject", () => {
+  const sample = {
+    youtubeId: "dQw4w9WgXcQ",
+    name: "Atlantis Tours (Caves) + Allgarbe",
+    description: "Boat tour through Benagil sea caves.",
+    uploadDate: "2022-06-15",
+    duration: "PT3M39S",
+  };
+
+  it("returns a VideoObject with all required fields", () => {
+    const result = buildVideoObject(sample);
+    expect(result["@context"]).toBe("https://schema.org");
+    expect(result["@type"]).toBe("VideoObject");
+    expect(result.name).toBe(sample.name);
+    expect(result.description).toBe(sample.description);
+    expect(result.uploadDate).toBe(sample.uploadDate);
+    expect(result.duration).toBe(sample.duration);
+  });
+
+  it("derives thumbnailUrl, contentUrl, and embedUrl from youtubeId", () => {
+    const result = buildVideoObject(sample);
+    expect(result.thumbnailUrl).toBe(
+      "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    );
+    expect(result.contentUrl).toBe(
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    );
+    expect(result.embedUrl).toBe("https://www.youtube.com/embed/dQw4w9WgXcQ");
   });
 });
