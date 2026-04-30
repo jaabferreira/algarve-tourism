@@ -1,0 +1,86 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+
+interface Props {
+  name: string;
+  bio: string;
+  image: string;
+  locale: Locale;
+}
+
+const { name, bio, image, locale } = Astro.props;
+---
+
+<aside class="author-bio" aria-label={t(locale, "blog.about_author")}>
+  <img class="author-bio__avatar" src={image} alt={name} width="96" height="96" loading="lazy" />
+  <div class="author-bio__body">
+    <span class="author-bio__label">{t(locale, "blog.about_author")}</span>
+    <h3 class="author-bio__name">{name}</h3>
+    <p class="author-bio__text">{bio}</p>
+  </div>
+</aside>
+
+<style>
+  .author-bio {
+    max-width: 720px;
+    margin: var(--space-12) auto 0;
+    padding: var(--space-6);
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    background: var(--color-surface, #f7f8fa);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  .author-bio__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .author-bio__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .author-bio__label {
+    display: block;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .author-bio__name {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .author-bio__text {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 540px) {
+    .author-bio {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .author-bio__avatar {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>
