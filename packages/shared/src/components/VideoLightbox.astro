@@ -1,0 +1,181 @@
+---
+import { optimizeImageUrl } from "../lib/images.js";
+
+interface Props {
+  youtubeId: string;
+  posterImage?: string;
+  label: string;
+}
+
+const { youtubeId, posterImage, label } = Astro.props;
+
+const poster = posterImage
+  ? optimizeImageUrl(posterImage, 1200, 80)
+  : `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+
+const lightboxId = `vlb-${youtubeId}`;
+---
+
+<button
+  type="button"
+  class="video-lightbox__trigger"
+  data-vlb-trigger={lightboxId}
+  data-youtube-id={youtubeId}
+  aria-label={label}
+>
+  <img
+    src={poster}
+    alt=""
+    loading="lazy"
+    decoding="async"
+    width="1200"
+    height="675"
+    class="video-lightbox__poster"
+  />
+  <span class="video-lightbox__play" aria-hidden="true">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+      <circle cx="36" cy="36" r="35" fill="rgba(0,0,0,0.55)" stroke="#fff" stroke-width="2" />
+      <path d="M28 22 L52 36 L28 50 Z" fill="#fff" />
+    </svg>
+  </span>
+  <span class="video-lightbox__label">{label}</span>
+</button>
+
+<div class="video-lightbox" id={lightboxId} aria-hidden="true" role="dialog" aria-modal="true">
+  <button class="video-lightbox__close" aria-label="Close">&times;</button>
+  <div class="video-lightbox__content"></div>
+</div>
+
+<style>
+  .video-lightbox__trigger {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--radius-card, 8px);
+    overflow: hidden;
+  }
+  .video-lightbox__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 300ms ease;
+  }
+  .video-lightbox__trigger:hover .video-lightbox__poster {
+    transform: scale(1.02);
+  }
+  .video-lightbox__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .video-lightbox__label {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .video-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .video-lightbox[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .video-lightbox__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    z-index: 1;
+    opacity: 0.8;
+  }
+  .video-lightbox__close:hover {
+    opacity: 1;
+  }
+  .video-lightbox__content {
+    width: min(90vw, 1280px);
+    aspect-ratio: 16 / 9;
+    max-height: 85vh;
+    background: #000;
+  }
+  .video-lightbox__content :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const triggers = document.querySelectorAll<HTMLButtonElement>(
+      "[data-vlb-trigger]",
+    );
+    triggers.forEach((trigger) => {
+      const lightboxId = trigger.dataset.vlbTrigger!;
+      const youtubeId = trigger.dataset.youtubeId!;
+      const lightbox = document.getElementById(lightboxId);
+      if (!lightbox) return;
+      const content = lightbox.querySelector<HTMLElement>(".video-lightbox__content");
+      const closeBtn = lightbox.querySelector<HTMLButtonElement>(".video-lightbox__close");
+
+      function open() {
+        if (!content) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+        iframe.allowFullscreen = true;
+        content.replaceChildren(iframe);
+        lightbox!.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function close() {
+        if (!content) return;
+        content.replaceChildren();
+        lightbox!.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      trigger.addEventListener("click", open);
+      closeBtn?.addEventListener("click", close);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) close();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.getAttribute("aria-hidden") === "false") {
+          close();
+        }
+      });
+    });
+  });
+</script>
