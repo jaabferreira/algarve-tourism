@@ -1,0 +1,129 @@
+---
+import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
+
+interface Props {
+  src: string;
+  posterImage: string;
+  alt: string;
+  width: number;
+  height: number;
+  imgSrcset?: string;
+  imgSizes?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "auto";
+  class?: string;
+}
+
+const {
+  src,
+  posterImage,
+  alt,
+  width,
+  height,
+  imgSrcset,
+  imgSizes,
+  loading = "eager",
+  fetchpriority = "high",
+  class: className,
+} = Astro.props;
+
+const posterUrl = optimizeImageUrl(posterImage, 1080, 75);
+const computedSrcset =
+  imgSrcset ?? optimizeImageSrcset(posterImage, [750, 1080, 1440, 1920]);
+const computedSizes = imgSizes ?? "100vw";
+---
+
+<div class={`ambient-video${className ? ` ${className}` : ""}`} data-video-src={src}>
+  <img
+    src={posterUrl}
+    srcset={computedSrcset}
+    sizes={computedSizes}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+    class="ambient-video__poster"
+  />
+  <video
+    muted
+    playsinline
+    loop
+    preload="none"
+    aria-hidden="true"
+    class="ambient-video__video"
+  ></video>
+</div>
+
+<style>
+  .ambient-video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .ambient-video__poster,
+  .ambient-video__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ambient-video__video {
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+  .ambient-video__video.is-playing {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  import { shouldEnableAmbientVideo } from "../lib/ambient-video-gate.js";
+
+  function init() {
+    if (!shouldEnableAmbientVideo(window)) {
+      document
+        .querySelectorAll(".ambient-video .ambient-video__video")
+        .forEach((v) => v.remove());
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const wrapper = entry.target as HTMLElement;
+          const video = wrapper.querySelector<HTMLVideoElement>(".ambient-video__video");
+          const src = wrapper.dataset.videoSrc;
+          if (!video || !src || video.src) continue;
+          video.preload = "auto";
+          video.src = src;
+          video.load();
+          video.addEventListener(
+            "canplay",
+            () => {
+              video.classList.add("is-playing");
+              void video.play().catch(() => {});
+            },
+            { once: true },
+          );
+          observer.unobserve(wrapper);
+        }
+      },
+      { rootMargin: "200px" },
+    );
+
+    document
+      .querySelectorAll<HTMLElement>(".ambient-video[data-video-src]")
+      .forEach((el) => observer.observe(el));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>

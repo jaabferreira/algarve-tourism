@@ -1,6 +1,6 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice, buildVideoObject } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -11,10 +11,12 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
+import VideoLightbox from "@algarve-tourism/shared/components/VideoLightbox.astro";
 import { config } from "../../../config.js";
 import { loadItems, getVariants } from "../../../data.js";
 import manualReviews from "../../../content/reviews/manual.json";
 import { getTrustItems } from "../../../lib/trust-items.js";
+import { getTourVideo } from "../../../lib/videos.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -68,6 +70,7 @@ const visibleReviews = tourReviews.length >= 2
   : manualReviews.filter((r) => r.rating >= 4 && r.permissionToPublish).slice(0, 3);
 
 const trustItems = getTrustItems(locale);
+const tourVideo = getTourVideo(item.pk);
 
 if (tourReviews.length > 0) {
   const avgRating = (tourReviews.reduce((sum, r) => sum + r.rating, 0) / tourReviews.length).toFixed(1);
@@ -96,7 +99,15 @@ const breadcrumbData = buildBreadcrumbList(config, locale, [
   { name: item.name, path: `/tours/${item.slug}/` },
 ]);
 
-const structuredData = [productData, breadcrumbData];
+const structuredData: object[] = [productData, breadcrumbData];
+if (tourVideo?.youtubeId && tourVideo.youtubeMetadata) {
+  structuredData.push(
+    buildVideoObject({
+      youtubeId: tourVideo.youtubeId,
+      ...tourVideo.youtubeMetadata,
+    }),
+  );
+}
 
 const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
 const fhUrl =
@@ -128,7 +139,12 @@ for (const loc of config.locales as Locale[]) {
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} localePaths={localePaths} />
 
   <div class="container product-detail">
-    <ProductHero item={item} locale={locale} brand={config.brand} />
+    <ProductHero
+      item={item}
+      locale={locale}
+      brand={config.brand}
+      videoSrc={tourVideo?.ambientClip}
+    />
 
     <div class="product-detail__content">
       <div class="product-detail__body">
@@ -165,6 +181,15 @@ for (const loc of config.locales as Locale[]) {
                 <p>{para.replace(/\n/g, " ").trim()}</p>
               ))}
             </div>
+          </section>
+        )}
+
+        {tourVideo?.youtubeId && (
+          <section class="product-detail__video">
+            <VideoLightbox
+              youtubeId={tourVideo.youtubeId}
+              label={t(locale, "product.watch_experience")}
+            />
           </section>
         )}
 

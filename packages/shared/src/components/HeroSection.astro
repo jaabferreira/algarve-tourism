@@ -4,6 +4,7 @@ import { t } from "../i18n/index.js";
 import type { TranslationKey } from "../i18n/types.js";
 import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
 import HeroFloatCard from "./HeroFloatCard.astro";
+import AmbientVideo from "./AmbientVideo.astro";
 
 interface Props {
   config: BrandConfig;
@@ -11,6 +12,7 @@ interface Props {
   title: string;
   subtitle?: string;
   image?: string;
+  videoSrc?: string;
   ctaText?: string;
   ctaLink?: string;
   // For A&Y float card
@@ -26,6 +28,7 @@ const {
   title,
   subtitle,
   image,
+  videoSrc,
   ctaText,
   ctaLink,
   floatLabel,
@@ -46,16 +49,29 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
     <div class="at-hero">
       {image ? (
         <div class="at-hero__bg-image" aria-hidden="true">
-          <img
-            src={optimizeImageUrl(image!, 1080, 75)}
-            srcset={optimizeImageSrcset(image!, [750, 1080, 1440, 1920])}
-            sizes="100vw"
-            alt={title}
-            width="1920"
-            height="1080"
-            loading="eager"
-            fetchpriority="high"
-          />
+          {videoSrc ? (
+            <AmbientVideo
+              src={videoSrc}
+              posterImage={image!}
+              alt={title}
+              width={1920}
+              height={1080}
+              imgSizes="100vw"
+              loading="eager"
+              fetchpriority="high"
+            />
+          ) : (
+            <img
+              src={optimizeImageUrl(image!, 1080, 75)}
+              srcset={optimizeImageSrcset(image!, [750, 1080, 1440, 1920])}
+              sizes="100vw"
+              alt={title}
+              width="1920"
+              height="1080"
+              loading="eager"
+              fetchpriority="high"
+            />
+          )}
           <div class="at-hero__overlay"></div>
         </div>
       ) : (
@@ -209,6 +225,17 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
       rgba(12, 53, 71, 0.55) 50%,
       rgba(14, 107, 122, 0.40) 100%
     );
+    transition: background 400ms ease;
+  }
+
+  /* When ambient video is playing, lighten the overlay so the video pops. */
+  .at-hero__bg-image:has(.ambient-video__video.is-playing) .at-hero__overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(10, 26, 42, 0.72) 0%,
+      rgba(12, 53, 71, 0.35) 55%,
+      rgba(14, 107, 122, 0.10) 100%
+    );
   }
 
   .at-hero__bg-gradient {
@@ -345,8 +372,11 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
   .at-hero__stats {
     position: relative;
     z-index: 2;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin-top: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .at-hero__stats-inner {

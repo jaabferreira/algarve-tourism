@@ -17,6 +17,7 @@ import { getLocalePath, buildLocalBusiness } from "@algarve-tourism/shared";
 import manualReviews from "../../content/reviews/manual.json";
 import { loadItems } from "../../data.js";
 import { getTrustItems } from "../../lib/trust-items.js";
+import { getHomepageVideo } from "../../lib/videos.js";
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -41,6 +42,7 @@ const topReviews = manualReviews.filter((r) => r.rating >= 4).slice(0, 3);
 
 // Speedboat Benagil caves — high-res (2.1MB source)
 const heroImage = "https://cdn.filestackcontent.com/resize=width:1920,fit:max/quality=value:85/bT14MOwPTli7XyXt79eR";
+const homepageVideo = getHomepageVideo();
 
 let heroTitle = config.tagline;
 let heroSubtitle = "";
@@ -82,6 +84,7 @@ const trustItems = getTrustItems(locale);
     ctaText={t(locale, "hero.cta")}
     ctaLink={getLocalePath(locale, "/tours/")}
     image={heroImage}
+    videoSrc={homepageVideo?.ambientClip}
   />
 
   <Marquee text={marqueeText} />

@@ -181,3 +181,25 @@ export function buildCollectionPage(
     },
   };
 }
+
+export interface VideoObjectInput {
+  youtubeId: string;
+  name: string;
+  description: string;
+  uploadDate: string;
+  duration: string;
+}
+
+export function buildVideoObject(input: VideoObjectInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: input.name,
+    description: input.description,
+    thumbnailUrl: `https://img.youtube.com/vi/${input.youtubeId}/maxresdefault.jpg`,
+    uploadDate: input.uploadDate,
+    duration: input.duration,
+    contentUrl: `https://www.youtube.com/watch?v=${input.youtubeId}`,
+    embedUrl: `https://www.youtube.com/embed/${input.youtubeId}`,
+  };
+}
