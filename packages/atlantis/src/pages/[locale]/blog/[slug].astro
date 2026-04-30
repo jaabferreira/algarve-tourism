@@ -7,6 +7,7 @@ import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import RelatedTours from "@algarve-tourism/shared/components/RelatedTours.astro";
+import AuthorBio from "@algarve-tourism/shared/components/AuthorBio.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import { config, tagTourMap } from "../../../config.js";
 import { loadItems } from "../../../data.js";
@@ -59,6 +60,8 @@ const structuredData = [
     date: post.data.date,
     lastModified: post.data.lastModified,
     author: post.data.author,
+    authorBio: post.data.authorBio,
+    authorImage: post.data.authorImage,
     image: post.data.image,
     slug,
     category: categoryLabel,
@@ -145,6 +148,15 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
             ))}
           </div>
         </div>
+      )}
+
+      {post.data.authorBio && post.data.authorImage && (
+        <AuthorBio
+          name={post.data.author}
+          bio={post.data.authorBio}
+          image={post.data.authorImage}
+          locale={locale}
+        />
       )}
 
       <RelatedTours
