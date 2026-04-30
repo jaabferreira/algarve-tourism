@@ -6,6 +6,29 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-04-30 — Hero video on landing pages (homepage + Benagil)
+
+**What:**
+- Homepage hero now plays a 12s ambient video loop (1080p, 4.8MB, no audio, faststart) on desktop only. Mobile/save-data/reduced-motion users keep the static poster image.
+- Benagil Caves Speed Boat tour page (FH pk 717720) gets a click-to-play YouTube lightbox between description and itinerary, plus a `VideoObject` JSON-LD schema for Google video rich results.
+- Other tours unaffected — manual JSON-driven, only Benagil is wired today.
+
+**Architecture:** image+video layered (poster `<img>` always loads first as LCP), IntersectionObserver-mounted video, `:has()`-driven overlay swap so the static-image case keeps its proper text contrast. YouTube facade — no iframe in initial HTML, created on click only.
+
+**Why:** Google ranks video pages well for tourism queries; ambient hero video is a known engagement lift on direct-bookings-style sites; click-to-play YouTube on the highest-traffic tour page (Benagil, 7.7K views) tests the pattern with our best content.
+
+**Expected effect:**
+- Mobile CWV (CrUX): zero change — gate strips the video before any request fires. Mobile CLS investigation from 2026-04-29 stays clean.
+- Desktop CWV: +4.8MB transfer; LCP/CLS/INP unaffected (video loads after LCP is locked, layered architecture, async load).
+- Engagement: longer time-on-page for desktop homepage and Benagil tour visitors. Possible CTR/booking lift from richer SERP for Benagil queries once `VideoObject` is indexed.
+- SEO: net positive once `VideoObject` is in Google's index (1-2 week lag typical).
+
+**Verify on/after 2026-05-14:** check GA4 for time-on-page deltas (homepage desktop, Benagil tour); Google Search Console → Search appearance → Videos for the Benagil URL; CrUX report for desktop LCP/CLS/INP.
+
+**Follow-ups:** finalize `VideoObject` `uploadDate`/`duration` for Benagil (currently placeholders), produce ambient clips for the remaining tours, consider AnY parity in a separate plan.
+
+---
+
 ## 2026-04-30 — Reef fishing blog posts published
 
 **What:** Published two new reef-fishing blog posts in EN/PT/ES/FR (8 markdown files):
