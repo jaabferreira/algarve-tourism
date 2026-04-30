@@ -3,33 +3,50 @@ import type { NormalizedItem, Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
 import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
 import PriceDisplay from "./PriceDisplay.astro";
+import AmbientVideo from "./AmbientVideo.astro";
 
 interface Props {
   item: NormalizedItem;
   locale: Locale;
   brand: Brand;
+  videoSrc?: string;
 }
 
-const { item, locale, brand } = Astro.props;
+const { item, locale, brand, videoSrc } = Astro.props;
 ---
 
 <section class="product-hero" data-brand={brand}>
   <div class="product-hero__gallery">
     {item.images.length > 0 ? (
       <div class="product-hero__main-wrap">
-        <img
-          src={optimizeImageUrl(item.images[0].url, 1200, 75)}
-          srcset={optimizeImageSrcset(item.images[0].url, [600, 800, 1200, 1600])}
-          sizes="(max-width: 768px) 100vw, 60vw"
-          alt={item.name}
-          class="product-hero__main-image"
-          data-gallery-index="0"
-          width="800"
-          height="500"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+        {videoSrc ? (
+          <AmbientVideo
+            src={videoSrc}
+            posterImage={item.images[0].url}
+            alt={item.name}
+            width={800}
+            height={500}
+            imgSrcset={optimizeImageSrcset(item.images[0].url, [600, 800, 1200, 1600])}
+            imgSizes="(max-width: 768px) 100vw, 60vw"
+            loading="eager"
+            fetchpriority="high"
+            class="product-hero__main-image"
+          />
+        ) : (
+          <img
+            src={optimizeImageUrl(item.images[0].url, 1200, 75)}
+            srcset={optimizeImageSrcset(item.images[0].url, [600, 800, 1200, 1600])}
+            sizes="(max-width: 768px) 100vw, 60vw"
+            alt={item.name}
+            class="product-hero__main-image"
+            data-gallery-index="0"
+            width="800"
+            height="500"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        )}
       </div>
     ) : (
       <div class="product-hero__placeholder">{t(locale, "common.no_image")}</div>
