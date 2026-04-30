@@ -6,6 +6,24 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-04-30 — Reef fishing blog posts published
+
+**What:** Published two new reef-fishing blog posts in EN/PT/ES/FR (8 markdown files):
+- "Reef Fishing in the Algarve: What to Expect on the Boat" — national-intent, ~1,200 words
+- "Reef Fishing from Portimão: A Skipper's Half-Day Guide" — Portimão-anchored sibling, ~1,200 words
+
+Introduced a signed-author byline pattern for skipper Nuno Albino. Tiny shared schema extension (`authorBio`, `authorImage` optional fields), `buildBlogPosting` forks to emit `Person` JSON-LD when both new fields are set, and a new `<AuthorBio>` component renders bio + photo on the post page. Existing 11 posts unchanged (no new fields → fallback to `Organization` JSON-LD, no visible bio block).
+
+Hero image Filestack URLs and Nuno's headshot (`/authors/nuno-albino.jpg`) are placeholders pending user upload before deploy.
+
+**Why:** The Reef Fishing campaign (€8/day, live since 2026-04-29) had zero supporting blog content — clicks landed on the product page only. Two practical posts give organic search a route in for "reef fishing Algarve / Portimão" queries and reinforce landing-page-experience signals for paid clicks. The Portimão-anchored sibling matches the +30% Portimão geo bid adjustment with a city-anchored organic page. The Nuno byline pattern lifts E-E-A-T from generic brand byline to a real, identifiable operator.
+
+**Expected effect:** Slow ramp on organic impressions for "reef fishing algarve / portimão" and PT/ES/FR equivalents over 4–8 weeks. Possible small Quality-Score lift on the Reef Fishing campaign as the site adds topical breadth (low confidence; QS is sticky and budget-driven). Person JSON-LD eligible for Google's author-entity surfaces; visible bio + photo improves trust signal for first-time visitors arriving from cold ad clicks.
+
+**Verify on:** 2026-05-28 — check Search Console for impressions on the 8 new URLs and any movement in Reef Fishing campaign CTR / Quality Score.
+
+---
+
 ## 2026-04-30 — Scale-to-learn budget bumps
 
 **What:** Bumped 6 campaign daily budgets via API.
