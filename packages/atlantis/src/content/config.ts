@@ -14,6 +14,8 @@ const blog = defineCollection({
     category: z.string(),
     tags: z.array(z.string()).optional().default([]),
     author: z.string().default("Atlantis Tours"),
+    authorBio: z.string().optional(),
+    authorImage: z.string().optional(),
     readingTime: z.number().optional(),
     relatedTourSlugs: z.array(z.string()).optional(),
   }),
