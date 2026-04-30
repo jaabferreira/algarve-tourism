@@ -2,8 +2,8 @@
 title: "Reef Fishing from Portimão: A Skipper's Half-Day Guide"
 date: "2026-04-30"
 excerpt: "Where to actually meet us at Portimão Naval Club, what the dock looks like, and how a half-day reef fishing trip unfolds from this stretch of the Algarve. Practical notes from the skipper."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Fishing boats moored at Cais de São Francisco in Portimão Naval Club at golden hour"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Traditional Algarve fishing boat at anchor on calm water at golden hour"
 locale: en
 translationKey: reef-fishing-portimao-guide
 category: destinations

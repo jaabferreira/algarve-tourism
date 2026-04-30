@@ -2,8 +2,8 @@
 title: "Pesca de Fundo a Partir de Portimão: Guia de Meio-Dia do Skipper"
 date: "2026-04-30"
 excerpt: "Onde nos vai realmente encontrar no Clube Naval de Portimão, qual o aspecto da doca e como decorre uma saída de pesca de fundo de meio-dia a partir deste troço do Algarve. Notas práticas do skipper."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Barcos de pesca atracados no Cais de São Francisco no Clube Naval de Portimão à hora dourada"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Barco de pesca tradicional algarvio ancorado em água calma à hora dourada"
 locale: pt
 translationKey: reef-fishing-portimao-guide
 category: destinations

@@ -2,8 +2,8 @@
 title: "Pêche au Récif depuis Portimão : Guide d'une Demi-Journée par le Skipper"
 date: "2026-04-30"
 excerpt: "Où on se retrouve vraiment au Club Naval de Portimão, à quoi ressemble le quai, et comment se déroule une demi-journée de pêche au récif depuis ce bout de l'Algarve. Notes pratiques du skipper."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Bateaux de pêche amarrés au Cais de São Francisco du Club Naval de Portimão à l'heure dorée"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Bateau de pêche traditionnel algarvien à l'ancre sur des eaux calmes à l'heure dorée"
 locale: fr
 translationKey: reef-fishing-portimao-guide
 category: destinations

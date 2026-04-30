@@ -2,8 +2,8 @@
 title: "Pesca de Fondo desde Portimão: Guía de Medio Día del Patrón"
 date: "2026-04-30"
 excerpt: "Dónde nos encuentras realmente en el Club Naval de Portimão, qué aspecto tiene el muelle y cómo se desarrolla una salida de medio día de pesca de fondo desde este tramo del Algarve. Notas prácticas del patrón."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Barcos de pesca amarrados en el Cais de São Francisco del Club Naval de Portimão a la hora dorada"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Barco de pesca tradicional algarveño fondeado en agua tranquila a la hora dorada"
 locale: es
 translationKey: reef-fishing-portimao-guide
 category: destinations

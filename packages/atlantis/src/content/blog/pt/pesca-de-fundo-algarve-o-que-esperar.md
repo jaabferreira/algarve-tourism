@@ -2,8 +2,8 @@
 title: "Pesca de Fundo no Algarve: O Que Esperar a Bordo"
 date: "2026-04-30"
 excerpt: "Ancorados sobre um recife a cinco quilómetros ao largo de Portimão, a largar a linha à procura de sargo e garoupa. Eis o que é, na prática, um meio-dia de pesca de fundo no Algarve — contado pelo skipper que faz a saída."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Pescadores no convés de um barco de pesca ancorado sobre um recife ao largo da costa algarvia, com as linhas na água"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Barco de pesca tradicional algarvio ancorado em água calma à hora dourada"
 locale: pt
 translationKey: reef-fishing-algarve-what-to-expect
 category: travel-tips

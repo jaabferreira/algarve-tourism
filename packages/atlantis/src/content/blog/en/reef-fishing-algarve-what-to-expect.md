@@ -2,8 +2,8 @@
 title: "Reef Fishing in the Algarve: What to Expect on the Boat"
 date: "2026-04-30"
 excerpt: "Anchored over a reef five kilometres off Portimão, dropping a line for sea bream and grouper. Here's what a half-day reef fishing trip on the Algarve actually looks like — straight from the skipper who runs it."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Anglers on the deck of a fishing boat anchored over a reef off the Algarve coast, lines in the water"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Traditional Algarve fishing boat at anchor on calm water at golden hour"
 locale: en
 translationKey: reef-fishing-algarve-what-to-expect
 category: travel-tips

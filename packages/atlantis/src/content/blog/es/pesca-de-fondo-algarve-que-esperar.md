@@ -2,8 +2,8 @@
 title: "Pesca de Fondo en el Algarve: Qué Esperar a Bordo"
 date: "2026-04-30"
 excerpt: "Fondeados sobre un arrecife a cinco kilómetros de Portimão, soltando una línea a por sargos y meros. Esto es lo que es, en realidad, una salida de medio día de pesca de fondo en el Algarve — contado por el patrón que la lleva."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Pescadores en la cubierta de un barco de pesca fondeado sobre un arrecife frente a la costa del Algarve, con las líneas en el agua"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Barco de pesca tradicional algarveño fondeado en agua tranquila a la hora dorada"
 locale: es
 translationKey: reef-fishing-algarve-what-to-expect
 category: travel-tips

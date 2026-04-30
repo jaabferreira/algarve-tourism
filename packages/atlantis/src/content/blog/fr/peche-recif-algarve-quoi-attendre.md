@@ -2,8 +2,8 @@
 title: "Pêche au Récif en Algarve : À Quoi S'attendre à Bord"
 date: "2026-04-30"
 excerpt: "Mouillés sur un récif à cinq kilomètres au large de Portimão, en train de descendre une ligne pour la dorade et le mérou. Voici ce à quoi ressemble vraiment une demi-journée de pêche au récif en Algarve — raconté par le skipper qui la mène."
-image: "https://cdn.filestackcontent.com/REPLACE-WITH-FILESTACK-URL"
-imageAlt: "Pêcheurs sur le pont d'un bateau de pêche mouillé sur un récif au large de la côte de l'Algarve, lignes à l'eau"
+image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
+imageAlt: "Bateau de pêche traditionnel algarvien à l'ancre sur des eaux calmes à l'heure dorée"
 locale: fr
 translationKey: reef-fishing-algarve-what-to-expect
 category: travel-tips
