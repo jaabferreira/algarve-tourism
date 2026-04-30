@@ -76,6 +76,8 @@ export function buildBlogPosting(
     date: string;
     lastModified?: string;
     author?: string;
+    authorBio?: string;
+    authorImage?: string;
     image?: string;
     slug: string;
     category?: string;
@@ -83,6 +85,24 @@ export function buildBlogPosting(
   },
   locale: Locale,
 ) {
+  const usePersonAuthor =
+    post.author &&
+    post.author !== config.name &&
+    post.authorBio &&
+    post.authorImage;
+
+  const author = usePersonAuthor
+    ? {
+        "@type": "Person",
+        name: post.author!,
+        description: post.authorBio!,
+        image: post.authorImage!,
+      }
+    : {
+        "@type": "Organization",
+        name: config.name,
+      };
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -92,10 +112,7 @@ export function buildBlogPosting(
     ...(post.lastModified && { dateModified: post.lastModified }),
     ...(post.category && { articleSection: post.category }),
     ...(post.tags && post.tags.length > 0 && { keywords: post.tags.join(", ") }),
-    author: {
-      "@type": "Organization",
-      name: config.name,
-    },
+    author,
     publisher: {
       "@type": "Organization",
       name: config.name,
