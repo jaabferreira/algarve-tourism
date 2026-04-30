@@ -17,7 +17,6 @@ Active project (started 2026-04-21). Spec, plan, and ready-to-launch assets all 
 - Plan: `docs/superpowers/plans/2026-04-21-atlantis-google-ads.md`
 - CEO deck: `docs/presentations/2026-04-21-atlantis-google-ads-ceo-deck.html`
 - **Asset folder (start here for any Ads work):** `docs/ads/atlantis/`
-  - `00-glossary.md` — terms & definitions
   - `01-keywords/negatives-account.md` — account-wide negative list
   - `02-campaigns/{brand,competitors,benagil,algarve-generic,cranchi-yacht,sail-yacht,reef-fishing}/keywords-and-rsa.md`
   - `03-extensions/all-extensions.md` — sitelinks, callouts, snippets, call/location/image extensions

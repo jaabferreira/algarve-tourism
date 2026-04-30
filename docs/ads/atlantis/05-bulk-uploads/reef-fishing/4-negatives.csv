@@ -1,0 +1,41 @@
+Row Type,Action,Keyword status,Level,Campaign,Negative keyword,Type
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,license,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,licence,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing license,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing licence,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,carta,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,carta de pesca,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,rod,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,pole,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,reel,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,tackle,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,bait,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing gear,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing equipment,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,shore,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,shore fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,pier,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,pier fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,from the rocks,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fly fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,spearfishing,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,spear fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,big game,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,marlin,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,tuna,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,shark,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,shark fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,swordfish,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,game fishing,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,sport fishing tournament,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,tournament,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,charter captain,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,boat for sale,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing boat for sale,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,how to fish,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing tips,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,fishing video,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,benagil,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,benagil tour,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,yacht,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Reef Fishing,sailing,Broad match

@@ -1,0 +1,28 @@
+Row Type,Action,Keyword status,Level,Campaign,Negative keyword,Type
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,shared,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,group,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,group tour,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,join a group,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,per person,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,per pax,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,benagil cave tour,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,benagil tour,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,fishing,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,kayak,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,sup,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,stand up paddle,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,swim,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,motor yacht,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,motor yacht charter,Exact match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,speedboat,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,speed boat,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,power boat,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,powerboat,Exact match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,catamaran,Broad match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,catamaran charter algarve,Exact match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,catamaran tour algarve,Exact match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,yacht week,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,how to buy,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,for sale,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,used yacht,Phrase match
+Negative keyword,Add,Enabled,Campaign,NB — Sail Yacht,classified,Broad match

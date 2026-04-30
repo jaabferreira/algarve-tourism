@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atlantis Tours — Growth Brief, Vol. I · Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────────────
+     ATLANTIS · GROWTH BRIEF — Editorial design system
+     ───────────────────────────────────────────────────── */
+  :root {
+    --paper:        #F4EDDC;
+    --paper-deep:   #ECE2C9;
+    --paper-fold:   #E2D6B6;
+    --ink:          #0A2540;
+    --ink-soft:     #2C435E;
+    --ink-mute:     #6E7A89;
+    --rule:         #CFC4A6;
+    --rule-soft:    #E2D8BD;
+    --brass:        #B68A3E;
+    --brass-deep:   #8E6A2A;
+    --teal:         #00A89A;
+    --teal-bright:  #00D2BE;
+    --crimson:      #B23A2D;
+    --shadow:       0 1px 0 rgba(10,37,64,.06), 0 30px 60px -30px rgba(10,37,64,.15);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Manrope", -apple-system, system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain — subtle SVG noise overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.14  0 0 0 0 0.25  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Paper edge vignette */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse at top, transparent 60%, rgba(142,106,42,0.06) 100%),
+      radial-gradient(ellipse at bottom, transparent 60%, rgba(10,37,64,0.06) 100%);
+  }
+
+  .serif { font-family: "Fraunces", "Garamond", serif; font-optical-sizing: auto; font-variation-settings: "SOFT" 50; }
+  .display { font-family: "Fraunces", "Garamond", serif; font-optical-sizing: auto; font-variation-settings: "SOFT" 80; font-weight: 300; letter-spacing: -0.025em; line-height: 0.95; }
+
+  .figs-tab { font-variant-numeric: tabular-nums; }
+  .figs-old { font-variant-numeric: oldstyle-nums; }
+
+  .smallcaps {
+    font-family: "Manrope", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--brass-deep);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     LAYOUT
+     ───────────────────────────────────────────────────── */
+  main {
+    position: relative;
+    z-index: 3;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  @media (max-width: 720px) {
+    main { padding: 0 24px; }
+  }
+
+  section {
+    padding: 110px 0;
+    position: relative;
+  }
+
+  .rule {
+    display: block;
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+    margin: 0;
+  }
+
+  .rule-fat {
+    display: block;
+    height: 0;
+    border: 0;
+    border-top: 3px double var(--ink);
+    margin: 0;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--brass);
+    font-size: 22px;
+    letter-spacing: 0.6em;
+    padding: 28px 0;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     TOP MASTHEAD
+     ───────────────────────────────────────────────────── */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .masthead .mark {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--ink);
+  }
+
+  .masthead .coords {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--brass-deep);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     COVER
+     ───────────────────────────────────────────────────── */
+  .cover {
+    padding-top: 80px;
+    padding-bottom: 130px;
+    position: relative;
+  }
+
+  .cover .kicker {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+
+  .cover .kicker .smallcaps { color: var(--ink); }
+
+  .cover .kicker .vol {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brass-deep);
+  }
+
+  .cover h1 {
+    margin: 0;
+    font-size: clamp(60px, 11vw, 168px);
+    line-height: 0.88;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--brass-deep);
+    font-weight: 300;
+  }
+
+  .cover .subtitle {
+    margin-top: 56px;
+    max-width: 720px;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(20px, 2.3vw, 28px);
+    line-height: 1.35;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .cover .meta {
+    margin-top: 96px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+  }
+
+  @media (max-width: 720px) {
+    .cover .meta { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+
+  .cover .meta dt {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+
+  .cover .meta dd {
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* compass mark */
+  .compass {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 92px;
+    height: 92px;
+    opacity: 0.7;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     SECTION HEADER
+     ───────────────────────────────────────────────────── */
+  .sec-head {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 64px;
+  }
+
+  .sec-head .num {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--brass);
+    font-feature-settings: "lnum" 0;
+  }
+
+  .sec-head .num small {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--ink-mute);
+    margin-top: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+  }
+
+  .sec-head h2 {
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(38px, 5.5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+  }
+
+  .sec-head h2 em {
+    font-style: italic;
+    color: var(--brass-deep);
+    font-weight: 300;
+  }
+
+  .sec-head .lede {
+    margin-top: 28px;
+    max-width: 640px;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 720px) {
+    .sec-head { grid-template-columns: 1fr; gap: 12px; }
+    .sec-head .num { font-size: 36px; }
+  }
+
+  /* ─────────────────────────────────────────────────────
+     EXEC SUMMARY — three pillars
+     ───────────────────────────────────────────────────── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pillars > div {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .pillars > div:last-child { border-right: 0; padding-right: 0; }
+  .pillars > div:not(:first-child) { padding-left: 32px; }
+
+  @media (max-width: 720px) {
+    .pillars { grid-template-columns: 1fr; }
+    .pillars > div { border-right: 0; border-bottom: 1px solid var(--rule); padding: 28px 0; }
+    .pillars > div:not(:first-child) { padding-left: 0; }
+    .pillars > div:last-child { border-bottom: 0; }
+  }
+
+  .pillars .roman {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brass-deep);
+    margin-bottom: 14px;
+  }
+
+  .pillars h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.1;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+
+  .pillars p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     INSIGHT — pull-quote spread
+     ───────────────────────────────────────────────────── */
+  .insight {
+    background: var(--ink);
+    color: var(--paper);
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 130px 0;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .insight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .insight .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 720px) {
+    .insight { padding: 80px 0; }
+    .insight .inner { padding: 0 24px; }
+  }
+
+  .insight .smallcaps { color: var(--brass); }
+
+  .insight .quote {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(34px, 5.5vw, 76px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 28px 0 56px;
+    max-width: 1000px;
+  }
+
+  .insight .quote em {
+    font-style: normal;
+    color: var(--teal-bright);
+  }
+
+  .insight .quote .mark {
+    font-family: "Fraunces", serif;
+    color: var(--brass);
+    font-style: normal;
+    font-size: 0.7em;
+    line-height: 0;
+    vertical-align: -0.25em;
+    margin-right: 0.05em;
+  }
+
+  .insight .annotations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    border-top: 1px solid rgba(244, 237, 220, 0.18);
+    padding-top: 36px;
+  }
+
+  @media (max-width: 720px) {
+    .insight .annotations { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  .insight .annotations dt {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--brass);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .insight .annotations dd {
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--paper);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     STRATEGY — phased timeline
+     ───────────────────────────────────────────────────── */
+  .phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper-deep);
+  }
+
+  @media (max-width: 720px) {
+    .phases { grid-template-columns: 1fr; }
+  }
+
+  .phase {
+    padding: 44px 40px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .phase:last-child { border-right: 0; }
+
+  .phase .label {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brass-deep);
+    margin-bottom: 6px;
+  }
+
+  .phase .when {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+
+  .phase .when small {
+    display: block;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .phase ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .phase ul li {
+    padding: 12px 0 12px 24px;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    position: relative;
+  }
+
+  .phase ul li:last-child { border-bottom: 0; }
+
+  .phase ul li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--brass);
+    font-family: "Fraunces", serif;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .phase ul li strong {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* gate */
+  .gate {
+    margin-top: 32px;
+    padding: 22px 28px;
+    background: var(--paper);
+    border: 1px dashed var(--brass);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .gate .icon {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--brass-deep);
+    line-height: 1;
+  }
+
+  .gate .text {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     CAMPAIGNS — table-as-magazine
+     ───────────────────────────────────────────────────── */
+  .campaigns {
+    border-top: 3px double var(--ink);
+    border-bottom: 3px double var(--ink);
+  }
+
+  .campaigns .row {
+    display: grid;
+    grid-template-columns: 60px 2.2fr 1fr 1.6fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .campaigns .row:last-child { border-bottom: 0; }
+
+  .campaigns .head {
+    border-bottom: 1px solid var(--ink);
+    padding: 14px 0;
+  }
+
+  .campaigns .head > * {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    font-weight: 600;
+  }
+
+  .campaigns .num {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--brass-deep);
+    font-weight: 300;
+  }
+
+  .campaigns .name {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .campaigns .name small {
+    display: block;
+    font-family: "Manrope", sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .campaigns .pct {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 32px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .campaigns .pct small {
+    display: block;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  .campaigns .geo {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .campaigns .geo .tag {
+    display: inline-block;
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    color: var(--brass-deep);
+    margin-right: 8px;
+  }
+
+  /* allocation bar */
+  .alloc {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+
+  @media (max-width: 720px) {
+    .alloc { grid-template-columns: 1fr; gap: 32px; }
+    .campaigns .row { grid-template-columns: 1fr; gap: 8px; }
+    .campaigns .head { display: none; }
+  }
+
+  .alloc-bar {
+    display: flex;
+    height: 96px;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+  }
+
+  .alloc-bar > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px 12px;
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(244, 237, 220, 0.25);
+  }
+
+  .alloc-bar > div:last-child { border-right: 0; }
+
+  .alloc-bar .seg-1 { background: #1a3a5c; flex: 6; }
+  .alloc-bar .seg-2 { background: var(--ink); flex: 55; }
+  .alloc-bar .seg-3 { background: var(--brass); color: var(--ink); flex: 25; }
+  .alloc-bar .seg-4 { background: var(--brass-deep); flex: 12; }
+
+  .alloc-bar > div span {
+    display: block;
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 18px;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  .alloc-note {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .alloc-note strong {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     AUDIENCE — 80/20 visualization
+     ───────────────────────────────────────────────────── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 720px) {
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+
+  .aud-card {
+    padding: 44px 40px;
+    border: 1px solid var(--rule);
+    background: var(--paper-deep);
+    position: relative;
+  }
+
+  .aud-card.primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .aud-card .pct-large {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(80px, 13vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .aud-card.primary .pct-large {
+    color: var(--paper);
+  }
+
+  .aud-card.primary .pct-large em {
+    color: var(--teal-bright);
+    font-style: normal;
+  }
+
+  .aud-card.secondary .pct-large {
+    color: var(--brass-deep);
+  }
+
+  .aud-card .label {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 22px;
+    margin: 24px 0 16px;
+    line-height: 1.25;
+  }
+
+  .aud-card.primary .label { color: var(--paper); }
+  .aud-card.secondary .label { color: var(--ink); }
+
+  .aud-card .desc {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .aud-card.primary .desc { color: rgba(244, 237, 220, 0.78); }
+  .aud-card.secondary .desc { color: var(--ink-soft); }
+
+  .aud-card .markers {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .aud-card .markers span {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    padding: 4px 10px;
+    border: 1px solid rgba(244, 237, 220, 0.3);
+    border-radius: 100px;
+  }
+
+  .aud-card.secondary .markers span {
+    border-color: var(--rule);
+    color: var(--brass-deep);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     KPIs
+     ───────────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper-deep);
+  }
+
+  @media (max-width: 720px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .kpi {
+    padding: 36px 28px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .kpi:nth-child(4n) { border-right: 0; }
+  .kpi:nth-last-child(-n+4) { border-bottom: 0; }
+
+  @media (max-width: 720px) {
+    .kpi:nth-child(4n) { border-right: 1px solid var(--rule); }
+    .kpi:nth-child(2n) { border-right: 0; }
+    .kpi:nth-last-child(-n+4) { border-bottom: 1px solid var(--rule); }
+    .kpi:nth-last-child(-n+2) { border-bottom: 0; }
+  }
+
+  .kpi .name {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  .kpi .val {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 0.95;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+
+  .kpi .val em {
+    font-style: italic;
+    color: var(--brass-deep);
+  }
+
+  .kpi .val .arrow {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-mute);
+    font-size: 28px;
+    margin: 0 4px;
+  }
+
+  .kpi .ph {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: 12px;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     TIMELINE
+     ───────────────────────────────────────────────────── */
+  .timeline {
+    margin-top: 8px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 36px 0;
+    position: relative;
+  }
+
+  .timeline-track {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline-track::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .month {
+    text-align: center;
+    position: relative;
+    padding-top: 0;
+  }
+
+  .month .dot {
+    width: 9px;
+    height: 9px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .month.peak .dot {
+    background: var(--brass);
+    border-color: var(--brass-deep);
+    width: 14px;
+    height: 14px;
+    margin-top: -3px;
+    margin-bottom: 9px;
+  }
+
+  .month .lbl {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .month .note {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    font-weight: 600;
+    min-height: 24px;
+  }
+
+  .month.peak .note { color: var(--brass-deep); }
+
+  /* phase bands */
+  .timeline-bands {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    height: 60px;
+    position: relative;
+  }
+
+  .band {
+    border-right: 1px dashed var(--rule);
+    position: relative;
+    padding-top: 12px;
+  }
+
+  .band:last-child { border-right: 0; }
+
+  .band-label {
+    position: absolute;
+    top: 16px;
+    left: 8px;
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--paper);
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  .band-bar {
+    position: absolute;
+    top: 0;
+    height: 38px;
+    background: var(--ink);
+    z-index: 1;
+  }
+
+  .band-bar.phase0    { background: var(--brass-deep); left: 0%;     width: 12.5%; }
+  .band-bar.phase1    { background: var(--ink-soft);   left: 12.5%;  width: 18.75%; }
+  .band-bar.phase2    { background: var(--ink);        left: 31.25%; width: 43.75%; }
+  .band-bar.offseason { background: var(--brass);      left: 75%;    width: 25%; }
+
+  .band-label.l-p0 { left: 8px; }
+  .band-label.l-p1 { left: calc(12.5% + 8px); }
+  .band-label.l-p2 { left: calc(31.25% + 8px); }
+  .band-label.l-os { left: calc(75% + 8px); color: var(--ink); }
+
+  /* ─────────────────────────────────────────────────────
+     RISKS
+     ───────────────────────────────────────────────────── */
+  .risks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  @media (max-width: 720px) {
+    .risks { grid-template-columns: 1fr; }
+  }
+
+  .risk {
+    padding: 28px 32px 28px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+  }
+
+  .risk:nth-child(2n) { padding-left: 32px; padding-right: 0; border-left: 1px solid var(--rule); }
+  .risk:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
+
+  @media (max-width: 720px) {
+    .risk:nth-child(2n) { padding-left: 0; border-left: 0; }
+  }
+
+  .risk .level {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    padding: 4px 0;
+    border: 1px solid;
+    border-radius: 100px;
+    align-self: start;
+    height: 26px;
+    line-height: 18px;
+  }
+
+  .risk .level.high { color: var(--crimson); border-color: var(--crimson); }
+  .risk .level.med  { color: var(--brass-deep); border-color: var(--brass); }
+  .risk .level.low  { color: var(--teal); border-color: var(--teal); }
+
+  .risk h4 {
+    margin: 0 0 6px;
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .risk p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .risk p strong {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--brass-deep);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     ASK / NEXT STEPS
+     ───────────────────────────────────────────────────── */
+  .ask {
+    background: var(--ink);
+    color: var(--paper);
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 130px 0 110px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .ask::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+  }
+
+  .ask .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 720px) {
+    .ask { padding: 80px 0; }
+    .ask .inner { padding: 0 24px; }
+  }
+
+  .ask h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 24px 0 56px;
+    color: var(--paper);
+  }
+
+  .ask h2 em {
+    font-style: italic;
+    color: var(--teal-bright);
+  }
+
+  .ask .smallcaps { color: var(--brass); }
+
+  .ask .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(244, 237, 220, 0.18);
+  }
+
+  @media (max-width: 720px) {
+    .ask .steps { grid-template-columns: 1fr; }
+  }
+
+  .step {
+    padding: 36px 32px 36px 0;
+    border-right: 1px solid rgba(244, 237, 220, 0.18);
+  }
+
+  .step:last-child { border-right: 0; padding-right: 0; }
+  .step:not(:first-child) { padding-left: 32px; }
+
+  @media (max-width: 720px) {
+    .step { border-right: 0; border-bottom: 1px solid rgba(244, 237, 220, 0.18); padding: 28px 0; }
+    .step:not(:first-child) { padding-left: 0; }
+    .step:last-child { border-bottom: 0; }
+  }
+
+  .step .step-num {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--brass);
+    margin-bottom: 18px;
+  }
+
+  .step h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    color: var(--paper);
+  }
+
+  .step p {
+    margin: 0;
+    font-size: 14.5px;
+    color: rgba(244, 237, 220, 0.7);
+    line-height: 1.55;
+  }
+
+  .ask .signature {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(244, 237, 220, 0.18);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(244, 237, 220, 0.6);
+    font-weight: 600;
+  }
+
+  .ask .signature .right {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--brass);
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     COLOPHON
+     ───────────────────────────────────────────────────── */
+  footer {
+    padding: 36px 0 60px;
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     ANIMATION — staggered reveal on load
+     ───────────────────────────────────────────────────── */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal { opacity: 0; animation: rise 1s cubic-bezier(.2,.7,.2,1) forwards; }
+  .reveal.d1 { animation-delay: 0.05s; }
+  .reveal.d2 { animation-delay: 0.18s; }
+  .reveal.d3 { animation-delay: 0.32s; }
+  .reveal.d4 { animation-delay: 0.46s; }
+  .reveal.d5 { animation-delay: 0.60s; }
+  .reveal.d6 { animation-delay: 0.74s; }
+
+  /* scroll reveals via IntersectionObserver class */
+  .obs { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .obs.in { opacity: 1; transform: translateY(0); }
+
+  /* ─────────────────────────────────────────────────────
+     PRINT
+     ───────────────────────────────────────────────────── */
+  @media print {
+    body::before, body::after { display: none; }
+    section { padding: 40px 0; break-inside: avoid; }
+    .insight, .ask {
+      margin-left: 0;
+      margin-right: 0;
+      width: auto;
+      left: 0;
+      right: 0;
+      padding: 60px 0;
+    }
+    .obs, .reveal { opacity: 1; transform: none; animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <span>Strategic Brief · Confidential</span>
+    <span class="mark">Atlantis Tours</span>
+    <span class="coords">37°06′N · 8°31′W</span>
+  </div>
+
+  <!-- COVER -->
+  <section class="cover">
+    <svg class="compass" viewBox="0 0 100 100" fill="none" stroke="#B68A3E" stroke-width="0.6">
+      <circle cx="50" cy="50" r="42"/>
+      <circle cx="50" cy="50" r="34" stroke-dasharray="1 3"/>
+      <circle cx="50" cy="50" r="2" fill="#B68A3E"/>
+      <path d="M50 8 L54 50 L50 92 L46 50 Z" fill="#B68A3E" stroke="none"/>
+      <path d="M8 50 L50 46 L92 50 L50 54 Z" fill="none" stroke="#B68A3E"/>
+      <text x="50" y="6" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="6" fill="#B68A3E" stroke="none">N</text>
+    </svg>
+
+    <div class="kicker reveal d1">
+      <span class="smallcaps">Growth Brief</span>
+      <span class="vol">Vol. I</span>
+      <hr class="rule" style="flex:1; max-width:280px;" />
+      <span class="vol">2026 Season</span>
+    </div>
+
+    <h1 class="display reveal d2">
+      Sailing into<br/>
+      paid <em>discovery.</em>
+    </h1>
+
+    <p class="subtitle reveal d3">
+      A phased Google Ads strategy to convert in-Algarve last-minute searchers and
+      intercept pre-trip planners — before our margin disappears into OTA commissions.
+    </p>
+
+    <dl class="cover meta reveal d4">
+      <div>
+        <dt>Prepared for</dt>
+        <dd>João Vicente</dd>
+      </div>
+      <div>
+        <dt>Author</dt>
+        <dd>José Ferreira</dd>
+      </div>
+      <div>
+        <dt>Date</dt>
+        <dd>21 April 2026</dd>
+      </div>
+      <div>
+        <dt>Decision required</dt>
+        <dd class="serif" style="font-style:italic; color:var(--brass-deep);">€600 — €1,500 / mo</dd>
+      </div>
+    </dl>
+  </section>
+
+  <hr class="rule-fat" />
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section>
+    <div class="sec-head">
+      <div class="num">01<small>Executive Summary</small></div>
+      <div>
+        <h2>Three things to <em>remember</em>.</h2>
+        <p class="lede">
+          The opportunity, the bet, and the discipline that makes it pay back.
+        </p>
+      </div>
+    </div>
+
+    <div class="pillars obs">
+      <div>
+        <div class="roman">i.</div>
+        <h3>The customer is already on the beach.</h3>
+        <p>Most bookings come from English-speaking tourists who are <em>physically in Portugal</em> and book the same day or the day before. We win or lose this audience on a phone, in the next 30 minutes.</p>
+      </div>
+      <div>
+        <div class="roman">ii.</div>
+        <h3>OTAs are taxing what we should own.</h3>
+        <p>Every booking that goes through GetYourGuide or Viator costs us 20%+ in commission. A small slice of pre-trip search ads in the UK, Ireland, and Germany can intercept those bookings <em>before</em> the marketplace does.</p>
+      </div>
+      <div>
+        <div class="roman">iii.</div>
+        <h3>Discipline before scale.</h3>
+        <p>No spend goes live until conversion tracking is verified. We start small, prove ROAS, then let Google's automation amplify what works. Phase the budget — don't pour money into a leaky bucket.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHT (full-bleed dark) -->
+  <section class="insight">
+    <div class="inner obs">
+      <span class="smallcaps">The Founding Insight</span>
+      <p class="quote">
+        <span class="mark">“</span>Our buyer isn't a researcher in Manchester.<br/>
+        She's <em>already in Portimão,</em> tomorrow's plans still open,<br/>
+        her phone in her hand.<span class="mark">„</span>
+      </p>
+      <dl class="annotations">
+        <div>
+          <dt>Where</dt>
+          <dd>Algarve coast, 25&nbsp;km radius around Portimão, Albufeira, Carvoeiro, Lagos, Vilamoura.</dd>
+        </div>
+        <div>
+          <dt>When</dt>
+          <dd>Same day or previous day. Decision peaks 7–10 AM and 5–9 PM, local time.</dd>
+        </div>
+        <div>
+          <dt>How</dt>
+          <dd>Mobile. English-language search. High intent, short consideration, instant booking expected.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- STRATEGY -->
+  <section>
+    <div class="sec-head">
+      <div class="num">02<small>The Approach</small></div>
+      <div>
+        <h2>Walk, then <em>run.</em></h2>
+        <p class="lede">
+          Search-only first to learn. Search + Performance Max once the algorithm has earned its training data.
+        </p>
+      </div>
+    </div>
+
+    <div class="phases obs">
+      <div class="phase">
+        <div class="label">Phase I</div>
+        <div class="when">May → mid-June<small>The Listening Season</small></div>
+        <ul>
+          <li><strong>Pure Search.</strong> Four campaigns: Brand, Benagil, Yacht & Fishing, Pre-trip Planners.</li>
+          <li><strong>Manual CPC bidding.</strong> Tight control while we calibrate.</li>
+          <li><strong>50% of budget.</strong> Soft launch — gather conversions, prove the funnel.</li>
+          <li><strong>Daily reviews</strong> the first two weeks; weekly thereafter.</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="label">Phase II</div>
+        <div class="when">Mid-June → September<small>The Scaling Season</small></div>
+        <ul>
+          <li><strong>Smart Bidding.</strong> Switch to Maximize Conversion Value with target ROAS.</li>
+          <li><strong>One Performance Max</strong> for Benagil cave tours, leveraging photo + video assets.</li>
+          <li><strong>Full budget.</strong> Aligned with peak July–August demand.</li>
+          <li><strong>Customer Match seeds</strong> — past FareHarbor customers fuel lookalikes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gate obs">
+      <span class="icon">§</span>
+      <span class="text">
+        Phase 0 is a hard gate: conversion tracking must be verified by a real test booking before any euro is spent.
+        No tracking, no spend.
+      </span>
+    </div>
+  </section>
+
+  <hr class="rule-fat" />
+
+  <!-- CAMPAIGNS -->
+  <section>
+    <div class="sec-head">
+      <div class="num">03<small>Campaign Architecture</small></div>
+      <div>
+        <h2>Four campaigns, four <em>jobs.</em></h2>
+        <p class="lede">
+          Each with its own budget so winners can't drown losers, and losers can't poison winners.
+        </p>
+      </div>
+    </div>
+
+    <div class="campaigns obs">
+      <div class="row head">
+        <div>№</div>
+        <div>Campaign</div>
+        <div>Share</div>
+        <div>Audience &amp; Geography</div>
+      </div>
+
+      <div class="row">
+        <div class="num">i</div>
+        <div class="name">Brand <small>Atlantis Tours · trademark protection from OTAs</small></div>
+        <div class="pct figs-tab">6%<small>€2 / day</small></div>
+        <div class="geo"><span class="tag">Worldwide</span> all four languages, exact + phrase match</div>
+      </div>
+
+      <div class="row">
+        <div class="num">ii</div>
+        <div class="name">Benagil Cave Tours <small>Speedboat &amp; Cranchi Yacht — the volume engine</small></div>
+        <div class="pct figs-tab">55%<small>€18 / day</small></div>
+        <div class="geo"><span class="tag">In-Algarve</span> 25 km from key coast hubs · EN PT ES FR</div>
+      </div>
+
+      <div class="row">
+        <div class="num">iii</div>
+        <div class="name">Luxury Sail Yacht &amp; Reef Fishing <small>Higher AOV, niche searches, premium audience</small></div>
+        <div class="pct figs-tab">25%<small>€8 / day</small></div>
+        <div class="geo"><span class="tag">In-Algarve + UK / IE / DE</span> EN only · CPC ceiling €1.50</div>
+      </div>
+
+      <div class="row">
+        <div class="num">iv</div>
+        <div class="name">Pre-trip Planners <small>Intercept the OTA-bound buyer before they convert elsewhere</small></div>
+        <div class="pct figs-tab">14%<small>€4 / day</small></div>
+        <div class="geo"><span class="tag">UK · IE · DE</span> Phrase match, EN, broader exploration</div>
+      </div>
+    </div>
+
+    <div class="alloc obs">
+      <div class="alloc-bar">
+        <div class="seg-1"><span>Brand</span></div>
+        <div class="seg-2"><span>Benagil</span></div>
+        <div class="seg-3"><span>Yacht &amp; Fishing</span></div>
+        <div class="seg-4"><span>Pre-trip</span></div>
+      </div>
+      <p class="alloc-note">
+        Visualised: budget allocation at the <strong>€1,000 / month</strong> midpoint.
+        The Benagil campaign carries the volume; Brand defends our doorstep; Yacht &amp; Fishing pays for itself per click;
+        Pre-trip Planners is our lever against OTA dependency.
+      </p>
+    </div>
+  </section>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- AUDIENCE / GEO -->
+  <section>
+    <div class="sec-head">
+      <div class="num">04<small>Audience Split</small></div>
+      <div>
+        <h2>Eighty for <em>now,</em><br/>twenty for <em>later.</em></h2>
+        <p class="lede">
+          Last-minute capture pays today. Pre-trip interception builds tomorrow.
+        </p>
+      </div>
+    </div>
+
+    <div class="audience-grid obs">
+      <div class="aud-card primary">
+        <div class="pct-large">80<em>%</em></div>
+        <p class="label">In-Algarve last-minute</p>
+        <p class="desc">
+          The audience already on holiday. Highest conversion rate, lowest cost per booking, mobile-first.
+          Bid premium on 7–10 AM and 5–9 PM peaks. This is where our money makes money.
+        </p>
+        <div class="markers">
+          <span>Portimão</span>
+          <span>Carvoeiro</span>
+          <span>Lagos</span>
+          <span>Albufeira</span>
+          <span>Vilamoura</span>
+          <span>Armação de Pêra</span>
+        </div>
+      </div>
+      <div class="aud-card secondary">
+        <div class="pct-large figs-tab">20<em style="font-style:italic;">%</em></div>
+        <p class="label">Pre-trip planners abroad</p>
+        <p class="desc">
+          UK, Ireland, Germany — researching Benagil cave tours one to four weeks before travel.
+          A small bet that intercepts bookings <em>before</em> they reach OTAs.
+        </p>
+        <div class="markers">
+          <span>UK</span>
+          <span>Ireland</span>
+          <span>Germany</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule-fat" />
+
+  <!-- KPIs -->
+  <section>
+    <div class="sec-head">
+      <div class="num">05<small>What Success Looks Like</small></div>
+      <div>
+        <h2>The numbers we're <em>hunting.</em></h2>
+        <p class="lede">
+          Phase I targets are deliberately modest — we're earning the right to scale. Phase II is where the strategy pays off.
+        </p>
+      </div>
+    </div>
+
+    <div class="kpi-grid obs">
+      <div class="kpi">
+        <div class="name">Account ROAS</div>
+        <div class="val figs-tab">200<span class="arrow">→</span><em>400%</em></div>
+        <div class="ph">Phase I → Phase II</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Cost / cave booking</div>
+        <div class="val figs-tab">€40<span class="arrow">→</span><em>€25</em></div>
+        <div class="ph">Down as the algorithm learns</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Cost / yacht booking</div>
+        <div class="val figs-tab">€100<span class="arrow">→</span><em>€70</em></div>
+        <div class="ph">Higher AOV, sustains higher CPC</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Brand campaign ROAS</div>
+        <div class="val figs-tab"><em>1500%+</em></div>
+        <div class="ph">Defensive — almost free clicks</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Click → booking rate</div>
+        <div class="val figs-tab">2<span class="arrow">→</span><em>4%</em></div>
+        <div class="ph">Phase I → Phase II</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Quality Score (avg)</div>
+        <div class="val figs-tab">6<span class="arrow">→</span><em>7</em><span style="font-size:24px; color:var(--ink-mute);">&nbsp;/ 10</span></div>
+        <div class="ph">Tighter ad-keyword-page match</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Conversions to unlock PMax</div>
+        <div class="val figs-tab"><em>30+</em></div>
+        <div class="ph">In a 30-day window, account-wide</div>
+      </div>
+      <div class="kpi">
+        <div class="name">Decision review</div>
+        <div class="val serif" style="font-style:italic; color:var(--brass-deep); font-size:32px; line-height:1.1;">Mid-June</div>
+        <div class="ph">Phase II go / no-go gate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section>
+    <div class="sec-head">
+      <div class="num">06<small>Timing</small></div>
+      <div>
+        <h2>The 2026 <em>season.</em></h2>
+        <p class="lede">
+          Aligned with peak Algarve demand. Off-season decisions made on data, not assumption.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline obs">
+      <div class="timeline-track">
+        <div class="month"><div class="dot"></div><div class="lbl">Apr</div><div class="note">Tracking</div></div>
+        <div class="month peak"><div class="dot"></div><div class="lbl">May</div><div class="note">Soft Launch</div></div>
+        <div class="month"><div class="dot"></div><div class="lbl">Jun</div><div class="note">Phase II Gate</div></div>
+        <div class="month peak"><div class="dot"></div><div class="lbl">Jul</div><div class="note">Peak</div></div>
+        <div class="month peak"><div class="dot"></div><div class="lbl">Aug</div><div class="note">Peak</div></div>
+        <div class="month peak"><div class="dot"></div><div class="lbl">Sep</div><div class="note">Scale Review</div></div>
+        <div class="month"><div class="dot"></div><div class="lbl">Oct</div><div class="note">Wind-Down</div></div>
+        <div class="month"><div class="dot"></div><div class="lbl">Nov+</div><div class="note">Off-Season</div></div>
+      </div>
+
+      <div class="timeline-bands">
+        <div class="band-bar phase0"></div>
+        <div class="band-bar phase1"></div>
+        <div class="band-bar phase2"></div>
+        <div class="band-bar offseason"></div>
+
+        <div class="band-label l-p0">Phase 0 · Tracking</div>
+        <div class="band-label l-p1">Phase I · Listening</div>
+        <div class="band-label l-p2">Phase II · Scaling</div>
+        <div class="band-label l-os">Off-season pause</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule-fat" />
+
+  <!-- RISKS -->
+  <section>
+    <div class="sec-head">
+      <div class="num">07<small>Known Risks &amp; Guardrails</small></div>
+      <div>
+        <h2>What could <em>break it.</em></h2>
+        <p class="lede">
+          The most likely failure modes — and what we've built into the plan to catch them.
+        </p>
+      </div>
+    </div>
+
+    <div class="risks obs">
+      <div class="risk">
+        <div class="level high">High</div>
+        <div>
+          <h4>Conversion tracking silently breaks</h4>
+          <p>Smart Bidding optimises against bad data. <strong>Mitigation:</strong> weekly tracking-health check; pause automation if &gt;5% of bookings arrive without a value.</p>
+        </div>
+      </div>
+      <div class="risk">
+        <div class="level med">Medium</div>
+        <div>
+          <h4>OTAs bid on our brand keyword</h4>
+          <p>Steal traffic we already won. <strong>Mitigation:</strong> Brand campaign with €2/day floor and exact match — they can't dislodge us cheaply.</p>
+        </div>
+      </div>
+      <div class="risk">
+        <div class="level med">Medium</div>
+        <div>
+          <h4>Budget burns out before peak</h4>
+          <p>Spending €30/day in early May leaves nothing for July. <strong>Mitigation:</strong> per-campaign daily caps and account-level max-spend backstop.</p>
+        </div>
+      </div>
+      <div class="risk">
+        <div class="level med">Medium</div>
+        <div>
+          <h4>Performance Max cannibalises Search</h4>
+          <p>Notorious in Phase II. <strong>Mitigation:</strong> brand exclusions on PMax + weekly Search CTR check; reduce PMax if Search drops &gt;20%.</p>
+        </div>
+      </div>
+      <div class="risk">
+        <div class="level low">Low</div>
+        <div>
+          <h4>Click fraud / bot traffic</h4>
+          <p>Boat tour space attracts some affiliate scrapers. <strong>Mitigation:</strong> Google's invalid-click filter (default on); evaluate ClickCease only if patterns warrant in Phase II.</p>
+        </div>
+      </div>
+      <div class="risk">
+        <div class="level high">Cert.</div>
+        <div>
+          <h4>Off-season ROAS collapses</h4>
+          <p>Algarve demand is seasonal. <strong>Mitigation:</strong> staged budget reduction — 25% Oct, 10% Nov, full pause Dec–Feb except Brand. Reassess in March.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASK / NEXT STEPS -->
+  <section class="ask">
+    <div class="inner">
+      <span class="smallcaps">The Ask</span>
+      <h2 class="obs">Approve the brief.<br/>Three steps <em>follow.</em></h2>
+
+      <div class="steps obs">
+        <div class="step">
+          <div class="step-num">i.</div>
+          <h3>Confirm starting budget</h3>
+          <p>Pick a number inside the €600 — €1,500 / month band. We can always scale up; we cannot un-spend what's already burned.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">ii.</div>
+          <h3>Authorise Phase 0</h3>
+          <p>One week of tracking setup — no media spend yet. This is the unsexy work that makes the rest possible.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">iii.</div>
+          <h3>Reconvene mid-June</h3>
+          <p>Phase II go / no-go review. We'll bring 30+ conversions of real data and a recommendation backed by it.</p>
+        </div>
+      </div>
+
+      <div class="signature">
+        <span>End of Brief</span>
+        <span class="right">— Atlantis Tours · Algarve · MMXXVI</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Confidential · Internal Use Only · Prepared 21 April 2026
+  </footer>
+
+</main>
+
+<script>
+  // Scroll-reveal — gentle fade up as sections enter the viewport
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll('.obs').forEach((el) => obs.observe(el));
+</script>
+
+</body>
+</html>
