@@ -8,8 +8,26 @@
       "youtubeMetadata": {
         "name": "Benagil Caves Speed Boat Tour with Atlantis Tours",
         "description": "Experience the iconic Benagil Cave and Algarve coastline by speedboat with Atlantis Tours from Portimão.",
-        "uploadDate": "2024-06-01",
-        "duration": "PT1M"
+        "uploadDate": "2022-09-30",
+        "duration": "PT3M38S"
+      }
+    },
+    "717754": {
+      "youtubeId": "KIxrKGdhZXc",
+      "youtubeMetadata": {
+        "name": "Luxury Sail Yacht Cruise with Atlantis Tours",
+        "description": "Sail along the Algarve coast aboard a luxury sailing yacht with Atlantis Tours from Portimão.",
+        "uploadDate": "2023-08-04",
+        "duration": "PT1M53S"
+      }
+    },
+    "718024": {
+      "youtubeId": "G4SNQW27O-Y",
+      "youtubeMetadata": {
+        "name": "Reef Fishing Tour in the Algarve with Atlantis Tours",
+        "description": "Half-day reef fishing experience off the Algarve coast with Atlantis Tours from Portimão.",
+        "uploadDate": "2022-12-15",
+        "duration": "PT2M46S"
       }
     }
   }
