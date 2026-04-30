@@ -1,3 +1,16 @@
 {
-  "byItemPk": {}
+  "homepage": {
+    "ambientClip": "/videos/homepage-hero.mp4"
+  },
+  "byItemPk": {
+    "717720": {
+      "youtubeId": "2htyB8DmCdo",
+      "youtubeMetadata": {
+        "name": "Benagil Caves Speed Boat Tour with Atlantis Tours",
+        "description": "Experience the iconic Benagil Cave and Algarve coastline by speedboat with Atlantis Tours from Portimão.",
+        "uploadDate": "2024-06-01",
+        "duration": "PT1M"
+      }
+    }
+  }
 }
