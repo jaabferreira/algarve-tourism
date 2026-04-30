@@ -99,7 +99,9 @@ const computedSizes = imgSizes ?? "100vw";
           const video = wrapper.querySelector<HTMLVideoElement>(".ambient-video__video");
           const src = wrapper.dataset.videoSrc;
           if (!video || !src || video.src) continue;
+          video.preload = "auto";
           video.src = src;
+          video.load();
           video.addEventListener(
             "canplay",
             () => {

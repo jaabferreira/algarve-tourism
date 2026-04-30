@@ -225,6 +225,17 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
       rgba(12, 53, 71, 0.55) 50%,
       rgba(14, 107, 122, 0.40) 100%
     );
+    transition: background 400ms ease;
+  }
+
+  /* When ambient video is playing, lighten the overlay so the video pops. */
+  .at-hero__bg-image:has(.ambient-video__video.is-playing) .at-hero__overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(10, 26, 42, 0.72) 0%,
+      rgba(12, 53, 71, 0.35) 55%,
+      rgba(14, 107, 122, 0.10) 100%
+    );
   }
 
   .at-hero__bg-gradient {
@@ -361,8 +372,11 @@ const showFloatCard = isAY && floatLabel && floatTitle && floatMeta;
   .at-hero__stats {
     position: relative;
     z-index: 2;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin-top: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .at-hero__stats-inner {
