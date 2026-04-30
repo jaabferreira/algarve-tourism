@@ -222,6 +222,7 @@ export interface TranslationStrings {
   "blog.tags": string;
   "blog.reading_time": string;
   "blog.related_tours": string;
+  "blog.about_author": string;
   "blog.all_posts": string;
   "blog.no_posts": string;
   "blog.page": string;
