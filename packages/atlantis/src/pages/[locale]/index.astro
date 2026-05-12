@@ -57,10 +57,16 @@ try {
 
 const marqueeText = t(locale, "marquee.atlantis");
 
-const blogPosts = (await getCollection("blog"))
+const allBlog = await getCollection("blog");
+const blogPosts = allBlog
   .filter((post) => post.data.locale === locale)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 3);
+
+const PILLAR_SLUG = "benagil-cave-tour-complete-guide";
+const pillarExists = allBlog.some(
+  (p) => p.data.locale === locale && p.slug.replace(`${p.data.locale}/`, "") === PILLAR_SLUG,
+);
 
 const trustItems = getTrustItems(locale);
 ---
@@ -137,7 +143,9 @@ const trustItems = getTrustItems(locale);
             <h2 class="section-title" set:html={t(locale, "home.blog_title")} />
           </div>
           <div class="section-header__links">
-            <a href={getLocalePath(locale, "/blog/benagil-cave-tour-complete-guide/")} class="see-all see-all--primary">{t(locale, "blog.start_here_cta")} &rarr;</a>
+            {pillarExists && (
+              <a href={getLocalePath(locale, `/blog/${PILLAR_SLUG}/`)} class="see-all see-all--primary">{t(locale, "blog.start_here_cta")} &rarr;</a>
+            )}
             <a href={`/${locale}/blog/`} class="see-all">{t(locale, "home.view_all_posts")} &rarr;</a>
           </div>
         </div>
