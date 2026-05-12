@@ -7,6 +7,8 @@ imageAlt: "Arcos de gruta marinha ao longo da costa algarvia perto de Benagil co
 locale: pt
 translationKey: benagil-vs-other-caves
 category: destinations
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 3
 tags:
   - benagil
   - caves

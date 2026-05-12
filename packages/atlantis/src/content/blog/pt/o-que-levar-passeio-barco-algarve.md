@@ -7,6 +7,8 @@ imageAlt: "Hóspedes relaxam no convés de um iate à vela na costa algarvia com
 locale: pt
 translationKey: what-to-pack-boat-tour
 category: travel-tips
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 6
 tags:
   - travel-tips
   - sailing

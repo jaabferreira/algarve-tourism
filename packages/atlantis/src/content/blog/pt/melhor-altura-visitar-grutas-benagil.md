@@ -5,6 +5,8 @@ excerpt: "Está a planear visitar a famosa gruta marinha de Benagil? Aqui está 
 locale: pt
 translationKey: best-time-benagil
 category: destinations
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 1
 tags:
   - benagil
   - caves

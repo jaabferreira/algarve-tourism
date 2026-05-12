@@ -7,6 +7,8 @@ imageAlt: "Luxury yacht cruising the Algarve coast at sunset with golden sky ref
 locale: en
 translationKey: sunset-cruises-guide
 category: seasonal
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 8
 tags:
   - seasonal
   - sunset

@@ -7,6 +7,8 @@ imageAlt: "Eau turquoise limpide de la réserve naturelle d'Alvor sur la côte d
 locale: fr
 translationKey: marine-life-spotters-guide
 category: marine-life
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 5
 tags:
   - marine-life
   - dolphins

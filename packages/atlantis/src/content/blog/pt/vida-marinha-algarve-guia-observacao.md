@@ -7,6 +7,8 @@ imageAlt: "Água turquesa transparente da reserva natural de Alvor na costa alga
 locale: pt
 translationKey: marine-life-spotters-guide
 category: marine-life
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 5
 tags:
   - marine-life
   - dolphins

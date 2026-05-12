@@ -7,6 +7,8 @@ imageAlt: "Delfines mulares nadando junto a un barco en la reserva natural de la
 locale: es
 translationKey: dolphin-watching-algarve
 category: marine-life
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 4
 tags:
   - dolphins
   - marine-life

@@ -7,6 +7,8 @@ imageAlt: "Huéspedes relajados en la cubierta de un velero frente a la costa de
 locale: es
 translationKey: what-to-pack-boat-tour
 category: travel-tips
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 6
 tags:
   - travel-tips
   - sailing

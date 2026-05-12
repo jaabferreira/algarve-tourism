@@ -7,6 +7,8 @@ imageAlt: "Guests relaxing on a sailing yacht deck off the Algarve coast with su
 locale: en
 translationKey: what-to-pack-boat-tour
 category: travel-tips
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 6
 tags:
   - travel-tips
   - sailing

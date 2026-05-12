@@ -7,6 +7,8 @@ imageAlt: "Voilier au mouillage dans une crique tranquille de l'Algarve au print
 locale: fr
 translationKey: algarve-spring-secret
 category: seasonal
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 7
 tags:
   - seasonal
   - travel-tips

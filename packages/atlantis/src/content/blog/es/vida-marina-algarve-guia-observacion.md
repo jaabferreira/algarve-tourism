@@ -7,6 +7,8 @@ imageAlt: "Agua turquesa cristalina de la reserva natural de Alvor en la costa d
 locale: es
 translationKey: marine-life-spotters-guide
 category: marine-life
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 5
 tags:
   - marine-life
   - dolphins

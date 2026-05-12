@@ -7,6 +7,8 @@ imageAlt: "Clear turquoise water of the Alvor nature reserve on the Algarve coas
 locale: en
 translationKey: marine-life-spotters-guide
 category: marine-life
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 5
 tags:
   - marine-life
   - dolphins

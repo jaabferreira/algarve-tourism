@@ -7,6 +7,8 @@ imageAlt: "Yate de lujo navegando por la costa del Algarve al atardecer con ciel
 locale: es
 translationKey: sunset-cruises-guide
 category: seasonal
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 8
 tags:
   - seasonal
   - sunset

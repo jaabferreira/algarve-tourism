@@ -7,6 +7,8 @@ imageAlt: "Passagers détendus sur le pont d'un voilier au large de la côte de 
 locale: fr
 translationKey: what-to-pack-boat-tour
 category: travel-tips
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 6
 tags:
   - travel-tips
   - sailing

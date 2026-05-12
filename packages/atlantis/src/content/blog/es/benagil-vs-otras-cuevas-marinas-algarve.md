@@ -7,6 +7,8 @@ imageAlt: "Arcos de cuevas marinas a lo largo de la costa del Algarve cerca de B
 locale: es
 translationKey: benagil-vs-other-caves
 category: destinations
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 3
 tags:
   - benagil
   - caves

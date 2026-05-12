@@ -7,6 +7,8 @@ imageAlt: "Roazes a nadar junto a um barco na reserva natural da ria de Alvor na
 locale: pt
 translationKey: dolphin-watching-algarve
 category: marine-life
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 4
 tags:
   - dolphins
   - marine-life

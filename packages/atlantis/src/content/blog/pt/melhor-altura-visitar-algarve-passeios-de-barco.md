@@ -7,6 +7,8 @@ imageAlt: "Iate à vela a navegar na costa algarvia num dia limpo e soalheiro co
 locale: pt
 translationKey: best-time-algarve-boat-tours
 category: travel-tips
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 2
 tags:
   - travel-tips
   - sailing

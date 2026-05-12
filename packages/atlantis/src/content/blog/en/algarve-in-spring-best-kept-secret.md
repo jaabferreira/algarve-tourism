@@ -7,6 +7,8 @@ imageAlt: "Sailing yacht at anchor in a quiet Algarve bay in spring with calm tu
 locale: en
 translationKey: algarve-spring-secret
 category: seasonal
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 7
 tags:
   - seasonal
   - travel-tips

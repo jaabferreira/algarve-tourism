@@ -7,6 +7,8 @@ imageAlt: "Sailing yacht cruising the Algarve coastline on a clear sunny day wit
 locale: en
 translationKey: best-time-algarve-boat-tours
 category: travel-tips
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 2
 tags:
   - travel-tips
   - sailing

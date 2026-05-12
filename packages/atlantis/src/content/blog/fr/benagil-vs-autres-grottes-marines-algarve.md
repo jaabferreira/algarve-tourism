@@ -7,6 +7,8 @@ imageAlt: "Arches de grottes marines le long de la côte de l'Algarve près de B
 locale: fr
 translationKey: benagil-vs-other-caves
 category: destinations
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 3
 tags:
   - benagil
   - caves

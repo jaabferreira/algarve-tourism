@@ -7,6 +7,8 @@ imageAlt: "Velero navegando por la costa del Algarve en un día claro y soleado 
 locale: es
 translationKey: best-time-algarve-boat-tours
 category: travel-tips
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 2
 tags:
   - travel-tips
   - sailing

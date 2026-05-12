@@ -7,6 +7,8 @@ imageAlt: "Bottlenose dolphins swimming alongside a boat in the Alvor lagoon nat
 locale: en
 translationKey: dolphin-watching-algarve
 category: marine-life
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 4
 tags:
   - dolphins
   - marine-life

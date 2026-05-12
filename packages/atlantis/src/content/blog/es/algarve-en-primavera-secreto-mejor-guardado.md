@@ -7,6 +7,8 @@ imageAlt: "Velero fondeado en una cala tranquila del Algarve en primavera con ag
 locale: es
 translationKey: algarve-spring-secret
 category: seasonal
+pillarSlug: guia-completo-cueva-benagil
+pillarOrder: 7
 tags:
   - seasonal
   - travel-tips

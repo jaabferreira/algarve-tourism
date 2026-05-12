@@ -7,6 +7,8 @@ imageAlt: "Voilier longeant la côte de l'Algarve par temps clair et ensoleillé
 locale: fr
 translationKey: best-time-algarve-boat-tours
 category: travel-tips
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 2
 tags:
   - travel-tips
   - sailing

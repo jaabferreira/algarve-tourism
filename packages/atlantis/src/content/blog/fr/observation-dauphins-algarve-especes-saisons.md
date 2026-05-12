@@ -7,6 +7,8 @@ imageAlt: "Grands dauphins nageant le long d'un bateau dans la réserve naturell
 locale: fr
 translationKey: dolphin-watching-algarve
 category: marine-life
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 4
 tags:
   - dolphins
   - marine-life

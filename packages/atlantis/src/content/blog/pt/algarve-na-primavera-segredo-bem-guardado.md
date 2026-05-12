@@ -7,6 +7,8 @@ imageAlt: "Iate à vela ancorado numa enseada sossegada do Algarve na primavera 
 locale: pt
 translationKey: algarve-spring-secret
 category: seasonal
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 7
 tags:
   - seasonal
   - travel-tips

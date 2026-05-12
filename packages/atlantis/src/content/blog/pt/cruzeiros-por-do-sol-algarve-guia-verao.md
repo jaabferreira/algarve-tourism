@@ -7,6 +7,8 @@ imageAlt: "Iate de luxo a navegar na costa algarvia ao pôr-do-sol com céu dour
 locale: pt
 translationKey: sunset-cruises-guide
 category: seasonal
+pillarSlug: guia-completo-gruta-benagil
+pillarOrder: 8
 tags:
   - seasonal
   - sunset

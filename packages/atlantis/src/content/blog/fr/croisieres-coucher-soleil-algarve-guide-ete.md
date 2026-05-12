@@ -7,6 +7,8 @@ imageAlt: "Yacht de luxe naviguant sur la côte de l'Algarve au coucher du solei
 locale: fr
 translationKey: sunset-cruises-guide
 category: seasonal
+pillarSlug: guide-complet-grotte-benagil
+pillarOrder: 8
 tags:
   - seasonal
   - sunset

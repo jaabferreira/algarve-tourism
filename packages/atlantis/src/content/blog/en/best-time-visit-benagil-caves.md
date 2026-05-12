@@ -5,6 +5,8 @@ excerpt: "Planning a visit to the famous Benagil sea cave? Here's everything you
 locale: en
 translationKey: best-time-benagil
 category: destinations
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 1
 tags:
   - benagil
   - caves

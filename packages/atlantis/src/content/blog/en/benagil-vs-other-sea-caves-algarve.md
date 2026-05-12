@@ -7,6 +7,8 @@ imageAlt: "Sea cave arches along the Algarve coast near Benagil with turquoise w
 locale: en
 translationKey: benagil-vs-other-caves
 category: destinations
+pillarSlug: benagil-cave-tour-complete-guide
+pillarOrder: 3
 tags:
   - benagil
   - caves
