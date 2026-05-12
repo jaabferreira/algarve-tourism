@@ -222,6 +222,13 @@ export interface TranslationStrings {
   "blog.tags": string;
   "blog.reading_time": string;
   "blog.related_tours": string;
+  "blog.part_of_guide": string;
+  "blog.in_this_guide": string;
+  "blog.faq_title": string;
+  "blog.related_guides": string;
+  "blog.related_guides_subtitle": string;
+  "blog.start_here": string;
+  "blog.start_here_cta": string;
   "blog.about_author": string;
   "blog.all_posts": string;
   "blog.no_posts": string;
