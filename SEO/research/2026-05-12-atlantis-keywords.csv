@@ -1,0 +1,121 @@
+Keyword,Lang,"Demand tier (H/M/L, est.)",GSC impr /90d,GSC avg pos,Intent,Cluster,Role (P=primary/S=secondary),Notes
+benagil cave tour,en,H,413,36.2,Commercial,C1,P,headline money kw; OTA-dominated; site ~p4
+benagil cave tours,en,H,79,19.7,Commercial,C1,S,
+benagil caves tour,en,M,,,Commercial,C1,S,
+benagil cave boat tour,en,M,,,Commercial,C1,S,
+benagil boat tour,en,M,49,29.0,Commercial,C1,S,
+boat tour benagil,en,M,,,Commercial,C1,S,
+benagil tour portimao,en,M,39,14.6,Commercial,C1,S,
+benagil cave tour from portimao,en,M,25,19.9,Commercial,C1,S,
+benagil cave tour portimao,en,L,9,10.6,Commercial,C1,S,
+visit benagil cave,en,M,,,Commercial,C1,S,
+benagil from portimao,en,L,,,Commercial,C1,S,
+accessible benagil tours,en,L,69,36.2,Commercial,C1,S,accessibility angle - dedicated content/FAQ could win this
+passeio grutas benagil,pt,M,,,Commercial,C1,P,PT primary
+grutas de benagil,pt,H,,,Mixed,C1,S,also info intent - careful
+passeio de barco benagil,pt,M,,,Commercial,C1,S,
+circuito grutas benagil,pt,L,,,Commercial,C1,S,matches our PT slug 'circuito-de-grutas-ate-benagil'
+cuevas de benagil tour,es,M,,,Commercial,C1,P,ES primary
+tour cuevas benagil,es,M,,,Commercial,C1,S,
+paseo en barco cuevas benagil,es,L,,,Commercial,C1,S,
+grottes de benagil tour,fr,M,,,Commercial,C1,P,FR primary
+excursion grottes benagil,fr,M,,,Commercial,C1,S,
+bateau grottes benagil,fr,L,,,Commercial,C1,S,
+boat tour portimao,en,M,36,6.6,Commercial,C2,P,EN primary; already p1
+portimao boat tours,en,M,91,8.6,Commercial,C2,S,
+boat trip portimao,en,L,51,12.2,Commercial,C2,S,
+boat tours portimao,en,L,35,6.9,Commercial,C2,S,
+boat tour algarve,en,M,37,25.0,Commercial,C2,S,
+algarve boat tours,en,M,65,~40,Commercial,C2,S,'algarve boat tours' 25 impr p39.6 + 'algarve boat trips' 40 impr p40.5
+algarve tours,en,H,376,39.4,Commercial,C2,S,broad; weak position
+bootstour portimao,de,H,1639,4.8,Commercial,C2,P,*** German - largest single non-brand demand; NO DE site; ~0.3% CTR ***
+portimao bootstour,de,M,44,2.5,Commercial,C2,S,German
+algarve bootstour,de,M,33,20.7,Commercial,C2,S,German
+algarve touren,de,L,15,17.1,Commercial,C2,S,German
+bateau portimao,fr,H,1578,5.8,Commercial,C2,P,*** French - 2nd largest non-brand demand; FR tour pages show EN FH copy; ~0.1% CTR ***
+excursion bateau portimao,fr,M,,,Commercial,C2,S,French
+excursion bateau algarve,fr,M,,,Commercial,C2,S,French
+paseo en barco portimao,es,M,222,13.0,Commercial,C2,P,"Spanish - meaningful demand, p13"
+paseo en barco algarve,es,L,,,Commercial,C2,S,Spanish
+excursion barco algarve,es,L,,,Commercial,C2,S,Spanish
+passeio de barco portimao,pt,M,,,Commercial,C2,P,PT primary
+passeio de barco algarve,pt,M,,,Commercial,C2,S,
+excursoes algarve,pt,M,80,4.5,Commercial,C2,S,'excursoes algarve' p4.5 - decent; 'algarve excursions' 41 impr p30 EN
+algarve private tours,en,M,72,15.1,Commercial,C2/C3,S,private-tour intent overlaps C3
+tour privado algarve,pt,M,71,7.8,Commercial,C2/C3,S,p7.8 - close to p1
+private yacht algarve,en,M,,,Transactional,C3,P,
+yacht charter algarve,en,M,,,Transactional,C3,S,
+private boat to benagil,en,M,,,Transactional,C3,S,bridges C1+C3 - distinct content angle
+private benagil cave tour,en,L,,,Transactional,C3,S,
+luxury yacht algarve,en,M,,,Transactional,C3,S,
+boat charter algarve,en,M,,,Transactional,C3,S,
+yacht rental algarve,en,L,,,Transactional,C3,S,
+algarve charters,en,L,20,66.9,Transactional,C3,S,ranking p67 - basically not ranking
+iate privado algarve,pt,L,,,Transactional,C3,P,PT
+aluguer barco portimao,pt,L,9,10.4,Transactional,C3,S,'alquiler barco portimao' ES 9 impr p10.4
+yate privado algarve,es,L,,,Transactional,C3,P,ES
+yacht prive algarve,fr,L,,,Transactional,C3,P,FR
+sailing trip algarve,en,M,,,Commercial,C4,P,
+sailing tour algarve,en,L,,,Commercial,C4,S,
+sunset cruise algarve,en,M,10,7.6,Commercial,C4,S,'algarve sunset cruise' p7.6 - close to p1
+sunset sailing algarve,en,L,,,Commercial,C4,S,
+algarve sailing,en,L,16,61.4,Commercial,C4,S,p61 - not ranking
+algarve sunset cruise,en,M,10,7.6,Commercial,C4,P,seasonal May-Sep
+veleiro algarve,pt,L,,,Commercial,C4,P,PT
+velero algarve,es,L,,,Commercial,C4,P,ES
+voilier algarve,fr,L,,,Commercial,C4,P,FR
+reef fishing algarve,en,L,,,Commercial,C5,P,
+fishing trip portimao,en,L,,,Commercial,C5,S,
+fishing tour algarve,en,L,,,Commercial,C5,S,
+fishing charter algarve,en,L,,,Commercial,C5,S,
+half day fishing algarve,en,L,,,Commercial,C5,S,
+family fishing algarve,en,L,,,Commercial,C5,S,kid-friendly angle
+pesca de fundo algarve,pt,L,,,Commercial,C5,P,PT
+pesca deportiva algarve,es,L,,,Commercial,C5,P,ES
+peche algarve,fr,L,,,Commercial,C5,P,FR
+alvor nature reserve,en,L,14,10.1,Mixed,C6,P,we sell this tour; barely ranks
+alvor caves,en,L,17,10.1,Mixed,C6,S,
+alvor boat trips,en,L,15,39.3,Commercial,C6,S,
+ria de alvor,pt,L,,,Info,C6,S,
+benagil and alvor tour,en,L,,,Commercial,C6,S,
+how to get to benagil cave,en,M,,,Info,C7,P,pillar primary
+how to visit benagil cave,en,M,,,Info,C7,S,
+benagil cave,en,H,,,Info,C7,S,huge head term; informational SERP
+benagil cave 2026,en,M,,,Info,C7,S,annual refresh angle
+can you swim in benagil cave,en,M,,,Info,C7,S,"answer = no, illegal since 2023 - strong featured-snippet target"
+benagil cave tickets,en,L,,,Info,C7,S,
+best time to visit benagil caves,en,M,13,16.8,Info,C7,S,already ~p17
+como chegar benagil,pt,L,,,Info,C7,P,PT
+como llegar a las cuevas de benagil,es,L,,,Info,C7,P,ES
+comment aller benagil,fr,L,,,Info,C7,P,FR
+algarve caves,en,M,22,31.2,Info,C8,P,
+algarve cave tours,en,M,24,19.3,Mixed,C8,S,
+benagil vs marinha,en,L,,,Info,C8,S,
+best sea caves algarve,en,L,,,Info,C8,S,
+algarve cave tour from portimao,en,L,,,Mixed,C8,S,
+best time to see dolphins in algarve,en,M,32,8.7,Info,C9,P,*** ~p8.7 - almost page 1 ***
+portimao dolphin watching,en,M,37,11.6,Mixed,C9,S,~p11.6 - close
+portimao dolphin tour,en,L,5,6.8,Commercial,C9,S,~p6.8
+dolphin watching algarve,en,M,,,Mixed,C9,S,
+dolphin watching portimao,en,L,,,Commercial,C9,S,
+best time to visit algarve,en,H,,,Info,C10,P,
+best time to visit algarve for boat tours,en,M,,,Info,C10,S,
+algarve in april,en,M,,,Info,C10,S,
+algarve in may,en,M,,,Info,C10,S,
+algarve en avril,fr,M,19,9.1,Info,C10,S,"FR - ~p9, close to p1"
+algarve weather may,en,M,,,Info,C10,S,
+what to wear on a boat tour algarve,en,L,,,Info,C11,P,
+what to bring on a boat tour,en,L,,,Info,C11,S,
+what to eat in the algarve,en,M,,,Info,C12,P,broad-ish; we target the boat-tour-adjacent angle
+portuguese seafood algarve,en,L,,,Info,C12,S,
+things to do in portimao,en,M,,,Info,C13,P,no page owns this
+portimao what to see,en,L,10,7.5,Info,C13,S,~p7.5 - close
+actividades en portimao,es,L,5,8.2,Info,C13,S,ES - ~p8
+portimao itinerary,en,L,,,Info,C13,S,
+arade river,en,L,48,11.7,Info,C14,P,product discontinued
+silves river cruise,en,L,20,6.7,Commercial,C14,S,p6.7 but we don't sell it anymore
+rio arade,pt,M,142,11.8,Info,C14,S,'arade' 142 impr p11.8
+onde nasce o rio arade,pt,L,93,10.6,Info,C14,S,
+travel agency portimao,en,L,,,Nav,C15,P,
+agence de voyage portugal algarve,fr,L,7,1.1,Nav,C15,S,FR - ranks p1
+algarve tour operator,en,L,9,13.2,Nav,C15,S,

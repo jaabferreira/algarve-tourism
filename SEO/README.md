@@ -54,7 +54,11 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 
 **Audits**
 - `SEO/audits/2026-05-12-atlantis-technical-onpage-audit.md` — technical + on-page audit (copy of `docs/seo/atlantis/2026-05-12-technical-onpage-audit.md`). Status: **fresh, backlog not yet started.**
-- `SEO/audits/2026-05-12-atlantis-organic-diagnosis.md` — "why results are lacking": GSC + GA4 live-data diagnosis on top of the audit above. Headline: ~92% of organic clicks are branded; money pages rank page 3–4; root cause = young site + zero off-site authority + a handful of fixable defects (hreflang 404s, redirect→404, truncated metas, stale GSC sitemaps). The real lever is off-page/citations + a content hub, not more on-page work.
+- `SEO/audits/2026-05-12-atlantis-organic-diagnosis.md` — "why results are lacking": GSC + GA4 live-data diagnosis on top of the audit above. Headline: ~92% of organic clicks are branded; money pages rank page 3–4; root cause = young site + zero off-site authority + a handful of fixable defects (hreflang 404s, redirect→404, truncated metas, stale GSC sitemaps). The real lever is off-page/citations + a content hub, not more on-page work. P0 defects fixed 2026-05-12 (commits `6fc810f` + `6b16e5b`); GSC sitemap cleanup done by the operator.
+
+**Research** (`SEO/research/`)
+- `2026-05-12-atlantis-keyword-map.md` (+ `…-keyword-clusters.csv`, `…-keywords.csv`) — keyword & topical map built from the Google Ads keyword corpus × Search Console. 16 clusters → pages, scored & prioritised. Top findings: biggest non-brand demand is **German then French** and there's **no German locale**; the headline term ("benagil cave tour") is a long game; several queries (dolphin cluster, multilingual boat-tour CTR, "things to do in Portimão") are quick wins. Feeds `pillar-content-architecture` + `content-brief-authoring`.
+- `2026-05-12-atlantis-competitor-analysis.md` — competitor SERP teardown. The real organic competitors are **OTA aggregators** (GetYourGuide/Viator/Tiqets/Headout/Civitatis) + **descriptive-domain operators** (carvoeirocaves, benagilexpress, 5emotions, algarexperience) — *not* the paid-campaign competitors (Dreamwave/Xride/etc are Albufeira-based, little organic overlap). Beat OTAs on long-tail/informational (content hub); close the operator gap via off-page + reviews; every competitor serves German. Confirms the diagnosis: the gap is authority + entity + a missing language, not on-page quality. Feeds `seo-offpage`.
 
 **Plans & specs** (in `docs/superpowers/`)
 | Doc | Topic | Status |
@@ -91,7 +95,13 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 
 **P2 — polish:** stop generating localized-slug duplicate tour URLs under non-PT locales · differentiate homepage title vs H1, add homepage body prose · trim `Product.image` arrays to ~5–8 · verify/remove `FAQPage` on `/reviews/` · single-hop apex redirect · expand FAQ question set · skipper-byline author schema on blog posts · sitemap hreflang consistency · confirm CWV in GSC.
 
-**Recommended next audits:** `seo-keyword` (build a keyword map from the Ads corpus + GSC) · `seo-content-audit` (keep/merge/redirect across ~13 blog posts + listings + taxonomy) · `seo-competitor` (vs Algarve Experience, Dreamwave, Xride, Algarve Discovery, Royal Nautic — same set bid on in Ads) · `seo-offpage` (the brand-vs-generic gap in GSC — "benagil cave tour" at pos 37.8, tour pages at pos 20+ — is most likely a backlink/authority gap; this is the highest-leverage un-run play).
+**Recommended next work:**
+- ✅ `seo-keyword` — done, see `research/2026-05-12-atlantis-keyword-map.md`.
+- ✅ `seo-competitor` — done, see `research/2026-05-12-atlantis-competitor-analysis.md`.
+- **`pillar-content-architecture` + `content-brief-authoring`** — turn the ~13 blog posts into the Benagil pillar (`benagil-cave-tour-complete-guide`) + cluster (caves comparison, dolphins, best-time, packing, a new "Benagil cave rules / can you swim" piece), all interlinked & funnelling to the 4 tour pages. The keyword map's "Phase 2".
+- **`seo-offpage`** — directory/citation/award-program + operator-profile + partner-link target list (use the link sources the competitor analysis identified). Still the highest-leverage un-run play; "benagil cave tour" won't move without it.
+- **A German `de` locale** — biggest measured non-brand demand, no current locale; a real i18n/build project (`internationalization` skill). Scope separately.
+- `seo-content-audit` (keep/merge/redirect across ~13 blog posts + listings + the `/tours/` vs `/tours/boats/` taxonomy overlap) — do as part of the pillar restructure.
 
 ## Skills installed (`.claude/skills/`)
 
