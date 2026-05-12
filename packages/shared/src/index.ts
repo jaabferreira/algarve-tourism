@@ -8,4 +8,5 @@ export { formatPrice, getFromPrice } from "./lib/prices.js";
 export { optimizeImageUrl } from "./lib/images.js";
 export { parseDescription } from "./lib/description.js";
 export type { ParsedDescription } from "./lib/description.js";
+export { truncateAtWord } from "./lib/text.js";
 export * from "./seo/structured-data.js";

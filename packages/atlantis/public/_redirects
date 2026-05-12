@@ -7,8 +7,6 @@
 # Old WordPress tour slugs → current tour slugs
 /en/tours/benagil /en/tours/benagil-caves-speed-boat-tour/ 301
 /pt/tours/benagil /pt/tours/circuito-de-grutas-ate-benagil/ 301
-/en/tours/rio-arade-silves /en/tours/arade-river-boat-tour-up-to-silves/ 301
-/pt/tours/rio-arade-silves /pt/tours/subida-do-rio-arade-ate-silves/ 301
 /en/tours/benagil-alvor /en/tours/benagil-caves-speed-boat-tour/ 301
 /pt/tours/benagil-alvor /pt/tours/circuito-de-grutas-ate-benagil/ 301
 /en/tours/yacht /en/tours/luxury-sail-yacht-cruise/ 301
@@ -22,10 +20,18 @@
 /en/tours/circuito-de-grutas-ate-benagil/ /en/tours/benagil-caves-speed-boat-tour/ 301
 /en/tours/benagil-e-reserva-natural-de-alvor/ /en/tours/benagil-caves-speed-boat-tour/ 301
 /en/tours/luxuoso-iate-a-vela/ /en/tours/luxury-sail-yacht-cruise/ 301
+/en/tours/luxuoso-iate-a-vela-meio-dia/ /en/tours/luxury-sail-yacht-cruise/ 301
+/pt/tours/luxuoso-iate-a-vela-meio-dia/ /pt/tours/luxuoso-iate-a-vela/ 301
 /en/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/ /en/tours/cranchi-yacht-cruise-to-the-benagil-caves/ 301
 /en/tours/pesca-de-fundo/ /en/tours/reef-fishing-tour/ 301
 
 # Discontinued products → tours index
+# (Arade/Silves river cruise is no longer offered — these used to chain to a
+#  now-deleted product page and 404. Send them to the tours listing instead.)
+/en/tours/rio-arade-silves /en/tours/ 301
+/pt/tours/rio-arade-silves /pt/tours/ 301
+/en/tours/arade-river-boat-tour-up-to-silves/ /en/tours/ 301
+/pt/tours/subida-do-rio-arade-ate-silves/ /pt/tours/ 301
 /en/tours/benagil-and-alvor-nature-reserve/ /en/tours/benagil-caves-speed-boat-tour/ 301
 /pt/tours/benagil-e-reserva-natural-de-alvor/ /pt/tours/circuito-de-grutas-ate-benagil/ 301
 /es/tours/benagil-and-alvor-nature-reserve/ /es/tours/benagil-caves-speed-boat-tour/ 301

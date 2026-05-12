@@ -1,6 +1,6 @@
 # SEO workspace
 
-This folder is the home for **SEO work** on the two tourism sites — separate from `GoogleAds/` (paid) and `packages/` / `docs/superpowers/` (development). It exists so the SEO skills (`seo-technical`, `seo-onpage`, `seo-keyword`, `seo-content-audit`, `seo-competitor`, `seo-aeo-geo`) have one place to:
+This folder is the home for **SEO work** on the two tourism sites — separate from `GoogleAds/` (paid) and `packages/` / `docs/superpowers/` (development). It exists so the SEO/content skills (see "Skills installed" below) have one place to:
 
 1. **read everything that matters for SEO** — site facts, code paths, access, prior audits, open backlog (this file is that index), and
 2. **write their outputs** — new audits → `SEO/audits/`, keyword/competitor research → `SEO/research/`, anything else → `SEO/<topic>/`.
@@ -47,13 +47,14 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 ## Data / access status
 
 - **GA4 Data API: available.** Property `533736679`, Atlantis measurement ID `G-YE21ZWJNY7`. Use the `ga4` CLI wrapper at `~/.local/bin/ga4` for all real-user metrics incl. Core Web Vitals (lab tests under-report CLS — trust CrUX/GA4 field data). See memory `reference_ga4_data_api_setup`.
-- **Search Console API: tooling built, activation pending.** `gsc` CLI wrapper at `~/.local/bin/gsc` (`gsc sites` / `top-queries` / `top-pages` / `query` / `page` / `sitemaps` / `inspect`); creds at `~/.gsc-credentials.json`, scope `webmasters.readonly` added to the shared OAuth re-auth (`~/.local/share/ga4-data/reauth.py`). Still needs: Search Console API enabled in GCP project `gen-lang-client-0088278126`, one re-auth run to mint the new scope, and the properties verified under `jose.ferreira.ptm2@gmail.com`. Once live, this unblocks `seo-keyword` (real queries) and `seo-traffic-diagnosis`. See memory `reference_gsc_api_setup`.
+- **Search Console API: available** (since 2026-05-12). `gsc` CLI wrapper at `~/.local/bin/gsc` — `gsc sites` / `top-queries <siteUrl>` / `top-pages` / `query` / `page <siteUrl> <pageUrl>` / `sitemaps` / `inspect`. The only verified property is **`sc-domain:atlantistours.pt`** (Domain property, siteOwner) — that's the `siteUrl` arg. **`algarveandyou.com` is NOT in Search Console** under this account; add + verify it to get A&Y organic data. Data lags ~2-3 days (`--fresh` for recent). Use this for query/CTR/position, indexation (`gsc inspect`), and sitemap status the way `ga4` is used for CWV. See memory `reference_gsc_api_setup`.
 - **Google Ads API: available** (customer `922-490-9849`, queryable via Python or the MCP `search` tool). The keyword corpus in `GoogleAds/atlantis/02-campaigns/*/keywords-and-rsa.md` is the starting universe for `seo-keyword` — same query set, feeds both organic and paid.
 
 ## SEO content index (nothing moved — these are pointers)
 
 **Audits**
-- `SEO/audits/2026-05-12-atlantis-technical-onpage-audit.md` — current technical + on-page audit (copy of `docs/seo/atlantis/2026-05-12-technical-onpage-audit.md`). Status: **fresh, backlog not yet started.**
+- `SEO/audits/2026-05-12-atlantis-technical-onpage-audit.md` — technical + on-page audit (copy of `docs/seo/atlantis/2026-05-12-technical-onpage-audit.md`). Status: **fresh, backlog not yet started.**
+- `SEO/audits/2026-05-12-atlantis-organic-diagnosis.md` — "why results are lacking": GSC + GA4 live-data diagnosis on top of the audit above. Headline: ~92% of organic clicks are branded; money pages rank page 3–4; root cause = young site + zero off-site authority + a handful of fixable defects (hreflang 404s, redirect→404, truncated metas, stale GSC sitemaps). The real lever is off-page/citations + a content hub, not more on-page work.
 
 **Plans & specs** (in `docs/superpowers/`)
 | Doc | Topic | Status |
@@ -74,10 +75,12 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 
 ## Open SEO backlog (from the 2026-05-12 audit — see that file for full detail)
 
-**P0 — high impact, low effort, all code-side**
-1. Fix tour-page hreflang — thread `localePaths` through `Layout` → `SEO.astro` as `alternateUrls` in `tours/[slug].astro`; check blog posts for the same bug.
-2. Fix tour meta descriptions — per-tour `seoTitle?`/`seoDescription?` overrides + word-boundary truncation fallback; reuse one value for `<meta>`/OG/Twitter/`Product.description`. (Hand-written drafts are in the audit appendix.)
-3. Enable HSTS on Cloudflare.
+**P0 — ✅ done in repo 2026-05-12 (not yet deployed/committed):**
+1. ✅ Tour-page hreflang — `localePaths` now threaded through `Layout` → `SEO.astro` as `alternateUrls` in `tours/[slug].astro`. Blog hreflang was already correct.
+2. ✅ Tour meta descriptions — `truncateAtWord` helper (`packages/shared/src/lib/text.ts`) + `packages/atlantis/src/lib/seo-overrides.ts` (hand-written EN + PT copy + `<title>` overrides for the 4 tours); one value feeds `<meta>`/OG/Twitter/`Product.description`. **TODO:** native ES + FR copy in `seo-overrides.ts`.
+3. ✅ HSTS — added `packages/atlantis/public/_headers`.
+   - Also done: `_redirects` `rio-arade-silves` → `/tours/` (was 301→404).
+   - Still open (manual): remove the stale 2025 `sitemap.xml` + the bogus tour-URL-as-sitemap entry from Search Console; single-hop apex redirect on Cloudflare. See `audits/2026-05-12-atlantis-organic-diagnosis.md` §4.
 
 **P1 — clear wins**
 4. `noindex,follow` blog tag pages + drop `/blog/tag/` from the sitemap `filter`; same for category pages without unique copy.
@@ -88,7 +91,18 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 
 **P2 — polish:** stop generating localized-slug duplicate tour URLs under non-PT locales · differentiate homepage title vs H1, add homepage body prose · trim `Product.image` arrays to ~5–8 · verify/remove `FAQPage` on `/reviews/` · single-hop apex redirect · expand FAQ question set · skipper-byline author schema on blog posts · sitemap hreflang consistency · confirm CWV in GSC.
 
-**Recommended next audits (not yet run):** `seo-keyword` (build a keyword map from the Ads corpus + GSC) · `seo-content-audit` (keep/merge/redirect across ~13 blog posts + listings + taxonomy) · `seo-traffic-diagnosis` (once a GSC export exists) · `seo-competitor` (vs Algarve Experience, Dreamwave, Xride, Algarve Discovery, Royal Nautic — same set bid on in Ads).
+**Recommended next audits:** `seo-keyword` (build a keyword map from the Ads corpus + GSC) · `seo-content-audit` (keep/merge/redirect across ~13 blog posts + listings + taxonomy) · `seo-competitor` (vs Algarve Experience, Dreamwave, Xride, Algarve Discovery, Royal Nautic — same set bid on in Ads) · `seo-offpage` (the brand-vs-generic gap in GSC — "benagil cave tour" at pos 37.8, tour pages at pos 20+ — is most likely a backlink/authority gap; this is the highest-leverage un-run play).
+
+## Skills installed (`.claude/skills/`)
+
+Skills are auto-discovered at session start. SEO/content/ads/growth set:
+
+- **SEO:** `seo-technical`, `seo-onpage`, `seo-keyword`, `seo-content-audit`, `seo-competitor`, `seo-aeo-geo`, `seo-offpage` (link building / digital PR / citations)
+- **Content:** `content-brief-authoring` (per-piece briefs that rank), `content-refresh-system` (the annual "2026"-in-titles refresh, content decay), `pillar-content-architecture` (turn the ~13 blog posts into a Benagil/Algarve-boat-tours hub-and-cluster to build topical authority), `landing-page-copy` (the 4 tour pages = organic money pages *and* ad landing pages)
+- **Conversion / paid:** `cro-optimization`, `paid-media-strategy`, `ads-creative-development`, `ads-performance-analytics`
+- **Technical:** `performance-optimization` (Core Web Vitals — pair with the `ga4` CLI for field data), `internationalization` (the broken-hreflang finding; 4-locale site), `security-baseline` (the missing HSTS / CSP)
+
+Not installed but available in the source repo (`github.com/rampstackco/claude-skills`): the 7-skill **Ahrefs-MCP SEO audit suite** (`seo-audit-orchestration`, `seo-traffic-diagnosis`, `seo-backlink-audit`, `seo-site-health-audit`, `seo-rank-tracking`, `seo-content-gap-audit`, `seo-keyword-gap-audit`) — they assume the Ahrefs MCP; worth adding if Ahrefs gets purchased.
 
 ## How to use this folder
 

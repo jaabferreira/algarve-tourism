@@ -6,6 +6,23 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-05-12 — Tour-page SEO defect fixes (the 4 landing pages)
+
+**What:** Code changes shipped to the 4 tour pages (= the Google Ads landing pages), from the organic SEO diagnosis (`SEO/audits/2026-05-12-atlantis-organic-diagnosis.md`):
+- **hreflang fixed** — EN/ES/FR tour pages now point their `hreflang="pt"` alternate at the real localized PT slug (`/pt/tours/circuito-de-grutas-ate-benagil/`) instead of a 404. Threaded the already-computed `localePaths` through `Layout` → `SEO.astro` `alternateUrls`.
+- **meta descriptions** — replaced the mid-word-truncated FareHarbor body fragment ("…explore the w") with hand-written copy for the 4 tours (EN + PT; ES/FR fall back to a word-boundary truncation, no longer cut mid-word). New `truncateAtWord` helper + `lib/seo-overrides.ts` map. Same value now used for `<meta>` / OG / Twitter / `Product.description` schema.
+- **`<title>` tweaks** — the 4 EN/PT tour titles now add "from Portimão" / "Half Day" etc. (differentiates from the H1).
+- **`_redirects`** — `rio-arade-silves` (+ PT) used to chain to a now-deleted product page → 404; repointed to `/tours/`.
+- **HSTS** — added `packages/atlantis/public/_headers` with `Strict-Transport-Security: max-age=31536000`.
+
+**Why:** Landing-page experience is a Quality Score input; the broken hreflang + broken-looking SERP snippet were also hurting *organic* CTR/visibility (see the diagnosis doc — site is ~92% branded-only). Marginal QS upside; meaningful organic upside. Not committed/deployed yet as of this entry.
+
+**Expected effect:** Cleaner SERP snippets for the 4 money pages (organic + as a landing-page-quality signal); Google can finally resolve the EN↔PT language cluster for the tour pages; no more 301→404 on the old river-cruise URLs. No direct change to ad serving.
+
+**Verify on/after 2026-05-26:** after deploy — `curl` a tour page to confirm hreflang/meta in prod; GSC URL Inspection on the PT tour URLs; watch the tour pages' organic position/CTR for the 4 money keywords; check QS hasn't regressed.
+
+---
+
 ## 2026-05-12 — 14-day performance review + restructure (paused 4 campaigns)
 
 **Context — the trigger:** Re-minted the expired Google Ads / GA4 OAuth tokens (the testing-mode app expires them ~weekly), pulled the first proper 14-day read (2026-04-28 → 2026-05-11), and it was bad: **€1,156.92 spent, 824 clicks, 4 conversions** (≈€289 CPA, ~0.5% conv rate). Cross-checked against GA4 — first-user attribution shows only **5** purchases ever touched a paid click (vs 4 session-scoped), and conversions are flat day-by-day with no step-up after the 2026-04-30 attribution fix → the "4" is roughly real, not a measurement artifact.
