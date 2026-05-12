@@ -10,3 +10,5 @@ export { parseDescription } from "./lib/description.js";
 export type { ParsedDescription } from "./lib/description.js";
 export { truncateAtWord } from "./lib/text.js";
 export * from "./seo/structured-data.js";
+export { buildPostBreadcrumb } from "./seo/breadcrumbs.js";
+export type { Crumb, PostBreadcrumbInput } from "./seo/breadcrumbs.js";
