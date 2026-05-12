@@ -107,14 +107,8 @@ const structuredData = [
     category: categoryLabel,
     tags: post.data.tags,
   }, locale),
-  buildBreadcrumbList(
-    config,
-    locale,
-    breadcrumbCrumbs.map((c) => ({ name: c.name, path: c.path })),
-  ),
-  ...(post.data.faqs && post.data.faqs.length > 0
-    ? [buildFAQPage(post.data.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
-    : []),
+  buildBreadcrumbList(config, locale, breadcrumbCrumbs),
+  ...(post.data.faqs && post.data.faqs.length > 0 ? [buildFAQPage(post.data.faqs)] : []),
 ];
 
 const items = loadItems(locale);
@@ -151,7 +145,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
             {i > 0 && <span class="post-hero__sep">/</span>}
             {i < breadcrumbCrumbs.length - 1
               ? <a href={getLocalePath(locale, crumb.path)}>{i === 0 ? config.name : crumb.name}</a>
-              : <span class="post-hero__current">{crumb.name}</span>}
+              : <span class="post-hero__current" aria-current="page">{crumb.name}</span>}
           </>
         ))}
       </nav>
