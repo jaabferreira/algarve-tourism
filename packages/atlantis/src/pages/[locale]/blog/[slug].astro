@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { Locale } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBlogPosting, buildBreadcrumbList, getLocalePath } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBlogPosting, buildBreadcrumbList, buildFAQPage, buildPostBreadcrumb, getLocalePath } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -9,6 +9,9 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import RelatedTours from "@algarve-tourism/shared/components/RelatedTours.astro";
 import AuthorBio from "@algarve-tourism/shared/components/AuthorBio.astro";
 import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
+import PillarCallout from "@algarve-tourism/shared/components/PillarCallout.astro";
+import HubClusterList from "@algarve-tourism/shared/components/HubClusterList.astro";
+import FaqBlock from "@algarve-tourism/shared/components/FaqBlock.astro";
 import { config, tagTourMap } from "../../../config.js";
 import { loadItems } from "../../../data.js";
 import { optimizeImageUrl } from "@algarve-tourism/shared";
@@ -53,6 +56,43 @@ for (const loc of config.locales as Locale[]) {
 
 const categoryLabel = t(locale, `blog.category.${post.data.category}` as any);
 
+// --- content-hub context ---------------------------------------------------
+// Cluster posts of THIS post (if any) → this post is the pillar.
+const clusterPosts = allPosts
+  .filter((p) => p.data.pillarSlug === slug && p.data.locale === locale)
+  .sort(
+    (a, b) =>
+      (a.data.pillarOrder ?? Number.MAX_SAFE_INTEGER) -
+        (b.data.pillarOrder ?? Number.MAX_SAFE_INTEGER) ||
+      a.data.date.localeCompare(b.data.date),
+  );
+const isPillar = clusterPosts.length > 0;
+const clusterEntries = clusterPosts.map((p) => ({
+  slug: p.slug.replace(`${p.data.locale}/`, ""),
+  title: p.data.title,
+}));
+
+// If THIS post is a cluster page, find its pillar post (same locale).
+const pillarPost = post.data.pillarSlug
+  ? allPosts.find(
+      (p) =>
+        p.data.locale === locale &&
+        p.slug.replace(`${p.data.locale}/`, "") === post.data.pillarSlug,
+    )
+  : undefined;
+const pillarRef = pillarPost
+  ? { slug: post.data.pillarSlug!, title: pillarPost.data.title }
+  : undefined;
+
+const breadcrumbCrumbs = buildPostBreadcrumb({
+  locale,
+  postTitle: post.data.title,
+  postSlug: slug,
+  isPillar,
+  pillar: pillarRef,
+  category: { slug: post.data.category, label: categoryLabel },
+});
+
 const structuredData = [
   buildBlogPosting(config, {
     title: post.data.title,
@@ -67,12 +107,14 @@ const structuredData = [
     category: categoryLabel,
     tags: post.data.tags,
   }, locale),
-  buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
-    { name: t(locale, "nav.blog"), path: "/blog/" },
-    { name: categoryLabel, path: `/blog/category/${post.data.category}/` },
-    { name: post.data.title, path: `/blog/${slug}/` },
-  ]),
+  buildBreadcrumbList(
+    config,
+    locale,
+    breadcrumbCrumbs.map((c) => ({ name: c.name, path: c.path })),
+  ),
+  ...(post.data.faqs && post.data.faqs.length > 0
+    ? [buildFAQPage(post.data.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
+    : []),
 ];
 
 const items = loadItems(locale);
@@ -104,11 +146,14 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
   <section class="post-hero">
     <div class="post-hero__inner container">
       <nav class="post-hero__breadcrumbs" aria-label="Breadcrumb">
-        <a href={getLocalePath(locale, "/")}>{config.name}</a>
-        <span class="post-hero__sep">/</span>
-        <a href={getLocalePath(locale, "/blog/")}>{t(locale, "nav.blog")}</a>
-        <span class="post-hero__sep">/</span>
-        <a href={getLocalePath(locale, `/blog/category/${post.data.category}/`)}>{categoryLabel}</a>
+        {breadcrumbCrumbs.map((crumb, i) => (
+          <>
+            {i > 0 && <span class="post-hero__sep">/</span>}
+            {i < breadcrumbCrumbs.length - 1
+              ? <a href={getLocalePath(locale, crumb.path)}>{i === 0 ? config.name : crumb.name}</a>
+              : <span class="post-hero__current">{crumb.name}</span>}
+          </>
+        ))}
       </nav>
       <span class="post-hero__badge">{categoryLabel}</span>
       <h1 class="post-hero__title">{post.data.title}</h1>
@@ -134,8 +179,17 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
   <article class="section-sm" data-reveal>
     <div class="container">
       <div class="post-content">
+        {pillarRef && (
+          <PillarCallout locale={locale} pillarSlug={pillarRef.slug} pillarTitle={pillarRef.title} />
+        )}
         <Content />
       </div>
+
+      {isPillar && <HubClusterList locale={locale} clusters={clusterEntries} />}
+
+      {post.data.faqs && post.data.faqs.length > 0 && (
+        <FaqBlock locale={locale} items={post.data.faqs} />
+      )}
 
       {tags.length > 0 && (
         <div class="post-tags">
@@ -214,6 +268,10 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
 
   .post-hero__breadcrumbs a:hover {
     color: var(--color-primary-light);
+  }
+
+  .post-hero__current {
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .post-hero__sep {
