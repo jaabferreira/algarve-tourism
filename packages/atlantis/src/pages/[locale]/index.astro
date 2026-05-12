@@ -136,7 +136,10 @@ const trustItems = getTrustItems(locale);
             <p class="section-label">{t(locale, "home.blog_label")}</p>
             <h2 class="section-title" set:html={t(locale, "home.blog_title")} />
           </div>
-          <a href={`/${locale}/blog/`} class="see-all">{t(locale, "home.view_all_posts")} &rarr;</a>
+          <div class="section-header__links">
+            <a href={getLocalePath(locale, "/blog/benagil-cave-tour-complete-guide/")} class="see-all see-all--primary">{t(locale, "blog.start_here_cta")} &rarr;</a>
+            <a href={`/${locale}/blog/`} class="see-all">{t(locale, "home.view_all_posts")} &rarr;</a>
+          </div>
         </div>
         <div class="blog-grid">
           {blogPosts.map((post) => (
@@ -203,6 +206,16 @@ const trustItems = getTrustItems(locale);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--space-6);
+  }
+  .section-header__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .see-all--primary {
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
   }
   @media (max-width: 768px) {
     .section-title {

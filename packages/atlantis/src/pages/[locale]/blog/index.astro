@@ -27,6 +27,11 @@ const posts = allPosts
 const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
 const pagePosts = posts.slice(0, POSTS_PER_PAGE);
 
+const PILLAR_SLUG = "benagil-cave-tour-complete-guide";
+const pillarPost = allPosts.find(
+  (p) => p.data.locale === locale && p.slug.replace(`${p.data.locale}/`, "") === PILLAR_SLUG,
+);
+
 const structuredData = [
   buildCollectionPage(config, locale, "/blog/", t(locale, "nav.blog"), t(locale, "blog.meta_description")),
   buildBreadcrumbList(config, locale, [
@@ -73,6 +78,14 @@ const structuredData = [
 
   <section class="section" data-reveal>
     <div class="container">
+      {pillarPost && (
+        <a class="blog-pillar-card" href={getLocalePath(locale, `/blog/${PILLAR_SLUG}/`)}>
+          <span class="blog-pillar-card__badge">{t(locale, "blog.start_here")}</span>
+          <h2 class="blog-pillar-card__title">{pillarPost.data.title}</h2>
+          <p class="blog-pillar-card__excerpt">{pillarPost.data.excerpt}</p>
+          <span class="blog-pillar-card__cta">{t(locale, "blog.start_here_cta")} &rarr;</span>
+        </a>
+      )}
       {pagePosts.length > 0 ? (
         <>
           <div class="blog-grid">
@@ -189,6 +202,54 @@ const structuredData = [
     background: var(--color-primary);
     color: #fff;
     border-color: var(--color-primary);
+  }
+
+  .blog-pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-8);
+    margin-bottom: var(--space-10);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .blog-pillar-card:hover {
+    box-shadow: 0 20px 40px -16px rgba(10, 26, 42, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .blog-pillar-card__badge {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-widest);
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .blog-pillar-card__title {
+    font-family: var(--font-accent), Georgia, serif;
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-regular);
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .blog-pillar-card__excerpt {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  .blog-pillar-card__cta {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
   }
 
   .blog-grid {
