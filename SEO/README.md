@@ -75,12 +75,12 @@ Nothing was moved out of `docs/` — the original plans/specs/audits stay where 
 
 ## Open SEO backlog (from the 2026-05-12 audit — see that file for full detail)
 
-**P0 — ✅ done in repo 2026-05-12 (not yet deployed/committed):**
-1. ✅ Tour-page hreflang — `localePaths` now threaded through `Layout` → `SEO.astro` as `alternateUrls` in `tours/[slug].astro`. Blog hreflang was already correct.
-2. ✅ Tour meta descriptions — `truncateAtWord` helper (`packages/shared/src/lib/text.ts`) + `packages/atlantis/src/lib/seo-overrides.ts` (hand-written EN + PT copy + `<title>` overrides for the 4 tours); one value feeds `<meta>`/OG/Twitter/`Product.description`. **TODO:** native ES + FR copy in `seo-overrides.ts`.
-3. ✅ HSTS — added `packages/atlantis/public/_headers`.
+**P0 — ✅ done in repo 2026-05-12 (commit `6fc810f` + follow-up):**
+1. ✅ Tour-page hreflang — `localePaths` now threaded through `Layout` → `SEO.astro` as `alternateUrls` in `tours/[slug].astro` (**both sites** — A&Y also localizes PT tour slugs, so it had the same bug). Blog hreflang was already correct on Atlantis; A&Y blog still passes no `alternateUrls` (follow-up, A&Y isn't in GSC yet).
+2. ✅ Tour meta descriptions — `truncateAtWord` helper (`packages/shared/src/lib/text.ts`, exported from `@algarve-tourism/shared`) + `packages/atlantis/src/lib/seo-overrides.ts` (hand-written copy + `<title>` overrides for the 4 Atlantis tours in **all 4 locales**); one value feeds `<meta>`/OG/Twitter/`Product.description`. A&Y tour pages use the `truncateAtWord` fallback (no per-tour copy yet).
+3. ✅ HSTS — added `_headers` (`max-age=31536000`) to **both sites**' `public/`.
    - Also done: `_redirects` `rio-arade-silves` → `/tours/` (was 301→404).
-   - Still open (manual): remove the stale 2025 `sitemap.xml` + the bogus tour-URL-as-sitemap entry from Search Console; single-hop apex redirect on Cloudflare. See `audits/2026-05-12-atlantis-organic-diagnosis.md` §4.
+   - Still open (manual): remove the stale 2025 `sitemap.xml` + the bogus tour-URL-as-sitemap entry from Search Console (kebab `⋮` menu on the sitemap row → "Remove sitemap"); single-hop apex redirect on Cloudflare (low value — 2 hops is fine for SEO). See `audits/2026-05-12-atlantis-organic-diagnosis.md` §4.
 
 **P1 — clear wins**
 4. `noindex,follow` blog tag pages + drop `/blog/tag/` from the sitemap `filter`; same for category pages without unique copy.

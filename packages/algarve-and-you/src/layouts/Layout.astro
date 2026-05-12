@@ -5,7 +5,7 @@ import '@fontsource-variable/dm-sans/wght.css';
 import '@fontsource-variable/dm-sans/wght-italic.css';
 import dmSansLatinUrl from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
 import PageLayout from '@algarve-tourism/shared/layouts/PageLayout.astro';
-import type { BrandConfig } from '@algarve-tourism/shared/types';
+import type { BrandConfig, Locale } from '@algarve-tourism/shared/types';
 
 interface Props {
   title: string;
@@ -18,6 +18,7 @@ interface Props {
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   publishedDate?: string;
   noindex?: boolean;
+  alternateUrls?: { locale: Locale; href: string }[];
   heroImage?: string;
 }
 

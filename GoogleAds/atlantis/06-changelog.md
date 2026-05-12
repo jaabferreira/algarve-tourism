@@ -10,8 +10,9 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 **What:** Code changes shipped to the 4 tour pages (= the Google Ads landing pages), from the organic SEO diagnosis (`SEO/audits/2026-05-12-atlantis-organic-diagnosis.md`):
 - **hreflang fixed** — EN/ES/FR tour pages now point their `hreflang="pt"` alternate at the real localized PT slug (`/pt/tours/circuito-de-grutas-ate-benagil/`) instead of a 404. Threaded the already-computed `localePaths` through `Layout` → `SEO.astro` `alternateUrls`.
-- **meta descriptions** — replaced the mid-word-truncated FareHarbor body fragment ("…explore the w") with hand-written copy for the 4 tours (EN + PT; ES/FR fall back to a word-boundary truncation, no longer cut mid-word). New `truncateAtWord` helper + `lib/seo-overrides.ts` map. Same value now used for `<meta>` / OG / Twitter / `Product.description` schema.
-- **`<title>` tweaks** — the 4 EN/PT tour titles now add "from Portimão" / "Half Day" etc. (differentiates from the H1).
+- **meta descriptions** — replaced the mid-word-truncated FareHarbor body fragment ("…explore the w") with hand-written copy for the 4 tours in **all 4 locales (EN/PT/ES/FR)**. New `truncateAtWord` helper + `lib/seo-overrides.ts` map. Same value now used for `<meta>` / OG / Twitter / `Product.description` schema. (Any future tour with no override falls back to a word-boundary truncation of the FareHarbor description — no longer cut mid-word.)
+- **`<title>` tweaks** — the 4 tour titles (all locales) now add "from Portimão" / "Half Day" etc. (differentiates from the H1).
+- **Algarve & You mirrored** — same `_headers` (HSTS) + tour-page `alternateUrls` fix + `truncateAtWord` meta wiring shipped to the A&Y site too (A&Y also localizes PT tour slugs, so it had the same hreflang-404 bug). A&Y tour pages don't get hand-written per-tour copy yet — they use the truncation fallback.
 - **`_redirects`** — `rio-arade-silves` (+ PT) used to chain to a now-deleted product page → 404; repointed to `/tours/`.
 - **HSTS** — added `packages/atlantis/public/_headers` with `Strict-Transport-Security: max-age=31536000`.
 

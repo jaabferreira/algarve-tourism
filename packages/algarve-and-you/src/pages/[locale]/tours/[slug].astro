@@ -1,6 +1,6 @@
 ---
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, parseDescription } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription, truncateAtWord } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -38,11 +38,16 @@ const widgetVariants = getVariants(item.pk, locale).map(withTransferLabel);
 
 const parsed = parseDescription(item.description_html);
 
+const metaDescription = truncateAtWord(
+  parsed.description ?? item.description_text ?? item.name,
+  160,
+);
+
 const productData = {
   "@context": "https://schema.org",
   "@type": ["Product", "TouristTrip"],
   name: item.name,
-  description: parsed.description?.slice(0, 160) ?? item.description_text,
+  description: metaDescription,
   image: item.images.map((img) => img.url),
   offers: {
     "@type": "Offer",
@@ -71,26 +76,32 @@ const breadcrumbData = buildBreadcrumbList(config, locale, [
 
 const structuredData = [productData, breadcrumbData];
 
+// Per-locale tour paths. A locale that localizes the slug needs the matched
+// slug, not the current one — otherwise hreflang points at a 404.
 const localePaths: Partial<Record<Locale, string>> = {};
+const alternateUrls: { locale: Locale; href: string }[] = [];
 for (const loc of config.locales as Locale[]) {
+  let localePath: string;
   if (loc === locale) {
-    localePaths[loc] = `/${loc}/tours/${item.slug}/`;
-    continue;
+    localePath = `/${loc}/tours/${item.slug}/`;
+  } else {
+    const match = loadItems(loc).find((i) => i.pk === item.pk);
+    localePath = match ? `/${loc}/tours/${match.slug}/` : `/${loc}/tours/`;
   }
-  const localeItems = loadItems(loc);
-  const match = localeItems.find((i) => i.pk === item.pk);
-  localePaths[loc] = match ? `/${loc}/tours/${match.slug}/` : `/${loc}/tours/`;
+  localePaths[loc] = localePath;
+  alternateUrls.push({ locale: loc, href: `https://www.${config.domain}${localePath}` });
 }
 ---
 
 <Layout
   title={item.name}
-  description={(parsed.description ?? item.description_text).slice(0, 160)}
+  description={metaDescription}
   image={item.image_url}
   locale={locale}
   path={`/tours/${item.slug}/`}
   config={config}
   structuredData={structuredData}
+  alternateUrls={alternateUrls}
   heroImage={item.images[0]?.url}
 >
   <Header slot="header" config={config} locale={locale} path={`/${locale}/tours/${item.slug}/`} localePaths={localePaths} />
