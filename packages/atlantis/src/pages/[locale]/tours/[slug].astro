@@ -1,12 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice, buildVideoObject, truncateAtWord } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice, buildVideoObject, truncateAtWord, optimizeImageUrl } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
 import ProductHero from "@algarve-tourism/shared/components/ProductHero.astro";
 import BookingWidget from "@algarve-tourism/shared/components/BookingWidget.astro";
 import ProductGrid from "@algarve-tourism/shared/components/ProductGrid.astro";
+import RelatedGuides from "@algarve-tourism/shared/components/RelatedGuides.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
@@ -18,6 +20,7 @@ import manualReviews from "../../../content/reviews/manual.json";
 import { getTrustItems } from "../../../lib/trust-items.js";
 import { getTourVideo } from "../../../lib/videos.js";
 import { getTourSeoOverride } from "../../../lib/seo-overrides.js";
+import { getTourRelatedGuides } from "../../../lib/tour-guides.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -38,6 +41,25 @@ const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 const parsed = parseDescription(item.description_html);
 
 const seoOverride = getTourSeoOverride(item.pk, locale);
+
+// "Plan your trip" — guide posts to surface for this tour (existing ones only).
+const guideSlugs = getTourRelatedGuides(item.pk);
+const blogPostsForLocale = await getCollection("blog", (p) => p.data.locale === locale);
+const relatedGuides = guideSlugs
+  .map((wantSlug) => {
+    const p = blogPostsForLocale.find(
+      (bp) => bp.slug.replace(`${bp.data.locale}/`, "") === wantSlug,
+    );
+    if (!p) return null;
+    return {
+      slug: wantSlug,
+      title: p.data.title,
+      excerpt: p.data.excerpt,
+      image: p.data.image ? optimizeImageUrl(p.data.image, 600) : undefined,
+    };
+  })
+  .filter((g): g is { slug: string; title: string; excerpt: string; image?: string } => g !== null);
+
 const metaTitle = seoOverride?.title ?? item.name;
 const metaDescription = truncateAtWord(
   seoOverride?.description ?? parsed.description ?? item.description_text ?? item.name,
@@ -285,6 +307,10 @@ for (const loc of config.locales as Locale[]) {
         <h2>{t(locale, "product.related")}</h2>
         <ProductGrid items={relatedItems} brand={config.brand} locale={locale} />
       </section>
+    )}
+
+    {relatedGuides.length > 0 && (
+      <RelatedGuides locale={locale} guides={relatedGuides} />
     )}
   </div>
 
