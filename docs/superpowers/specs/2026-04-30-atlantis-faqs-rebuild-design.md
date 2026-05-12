@@ -108,7 +108,7 @@ The `[slug].astro` page imports `loadTourFAQs(item.pk, locale)` and passes the r
 
 ### EN authoring (32 questions × 4 tours)
 
-1. **Claude drafts 32 EN Q&As** using the local Ads keyword data (`docs/ads/atlantis/02-campaigns/{benagil,cranchi-yacht,sail-yacht,reef-fishing}/keywords-and-rsa.md`) plus typical PAA patterns for boat/yacht/fishing tours. Answers ~40-80 words each. Draft committed to `by-tour.json` under each PK's `en` key.
+1. **Claude drafts 32 EN Q&As** using the local Ads keyword data (`GoogleAds/atlantis/02-campaigns/{benagil,cranchi-yacht,sail-yacht,reef-fishing}/keywords-and-rsa.md`) plus typical PAA patterns for boat/yacht/fishing tours. Answers ~40-80 words each. Draft committed to `by-tour.json` under each PK's `en` key.
 2. **User does manual PAA mining pass** (~20 min): incognito Google.com (location=Portugal) searches on seed queries — `"benagil cave tour"`, `"yacht charter portimão"`, `"reef fishing algarve"`, `"private yacht algarve"`, plus 1-2 long-tails per tour. Copy the People Also Ask questions, drop in chat.
 3. **Claude refines** — swaps any drafted question for closer-matching real PAA phrasing, updates JSON.
 4. **User reviews the final 32 EN Q&As for factual accuracy** — especially: prices, durations, what's included, departure points, cancellation specifics. Answers cross-checked against existing `description_html` for each tour.

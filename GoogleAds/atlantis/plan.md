@@ -4,18 +4,18 @@
 
 **Goal:** Launch a phased Google Ads program for Atlantis Tours that delivers ≥200% ROAS in Phase 1 and ≥400% ROAS in Phase 2, with conversion tracking verified before any euro is spent.
 
-**Architecture:** Most work is operational (Google Ads UI + FareHarbor dashboard + GA4 admin + Looker Studio). A small amount is code work in the Astro monorepo (landing-page audit, tracking-fallback listener). Every task is labelled `[JOSÉ]` (UI / dashboard work the user performs) or `[CLAUDE]` (code / document work the assistant performs). Deliverable files live under `docs/ads/atlantis/`.
+**Architecture:** Most work is operational (Google Ads UI + FareHarbor dashboard + GA4 admin + Looker Studio). A small amount is code work in the Astro monorepo (landing-page audit, tracking-fallback listener). Every task is labelled `[JOSÉ]` (UI / dashboard work the user performs) or `[CLAUDE]` (code / document work the assistant performs). Deliverable files live under `GoogleAds/atlantis/`.
 
 **Tech Stack:** Google Ads, Google Analytics 4, Google Tag (gtag.js, already installed at `packages/shared/src/layouts/PageLayout.astro:69-78`), FareHarbor Lightframe, Looker Studio, Astro monorepo.
 
-**Spec reference:** `docs/superpowers/specs/2026-04-21-atlantis-google-ads-design.md`
+**Spec reference:** `GoogleAds/atlantis/spec.md`
 
 ---
 
 ## File structure (what will be created)
 
 ```
-docs/ads/atlantis/
+GoogleAds/atlantis/
 ├── 00-launch-checklist.md                # pre-flight gate
 ├── 01-keywords/
 │   ├── brand.md                          # Campaign 1 keywords + match types
@@ -123,7 +123,7 @@ packages/atlantis/src/components/analytics/LightframePurchaseListener.astro
   ✅ If `purchase` fires with `value` populated → proceed to Task A3.
   ❌ If `purchase` is missing, or `value` is `0` / `null` → execute Task A7 (fallback listener) before proceeding.
 
-  Add a note to `docs/ads/atlantis/00-launch-checklist.md` recording which path was taken.
+  Add a note to `GoogleAds/atlantis/00-launch-checklist.md` recording which path was taken.
 
 - [ ] **Step 5: Refund the test booking**
 
@@ -146,7 +146,7 @@ packages/atlantis/src/components/analytics/LightframePurchaseListener.astro
   In `Settings → Account settings`:
   - **Currency:** EUR
   - **Timezone:** Europe/Lisbon
-  - **Customer ID:** note this down, write it in `docs/ads/atlantis/00-launch-checklist.md`
+  - **Customer ID:** note this down, write it in `GoogleAds/atlantis/00-launch-checklist.md`
   - **Business name:** Atlantis Tours
   - **Business website:** `https://atlantistours.pt`
 
@@ -237,7 +237,7 @@ packages/atlantis/src/components/analytics/LightframePurchaseListener.astro
 
 - [ ] **Step 4: Document the outcome**
 
-  Update `docs/ads/atlantis/00-launch-checklist.md` with: smoke test pass date, Customer ID, booking `transaction_id`, and the amount shown in Google Ads conversions column.
+  Update `GoogleAds/atlantis/00-launch-checklist.md` with: smoke test pass date, Customer ID, booking `transaction_id`, and the amount shown in Google Ads conversions column.
 
 ---
 
@@ -367,7 +367,7 @@ git commit -m "feat(atlantis): add Lightframe purchase fallback listener for GA4
 
 - [ ] **Step 2: Record findings in a table**
 
-  Create `docs/ads/atlantis/landing-page-audit.md` with a pass/fail matrix. One row per page × requirement.
+  Create `GoogleAds/atlantis/landing-page-audit.md` with a pass/fail matrix. One row per page × requirement.
 
 - [ ] **Step 3: Open issues for each fail**
 
@@ -401,7 +401,7 @@ For any page × requirement that fails, open a fix task. Typical fixes:
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/negatives-account.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/negatives-account.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -453,7 +453,7 @@ Updated weekly based on search-terms report (see `04-monitoring/ops-playbook.md`
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/negatives-account.md
+git add GoogleAds/atlantis/01-keywords/negatives-account.md
 git commit -m "docs(ads): add account-level negative keyword list"
 ```
 
@@ -463,7 +463,7 @@ git commit -m "docs(ads): add account-level negative keyword list"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/brand.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/brand.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -504,7 +504,7 @@ Single ad group. Mix of exact and phrase match. Purpose: defend the brand agains
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/brand.md
+git add GoogleAds/atlantis/01-keywords/brand.md
 git commit -m "docs(ads): add Brand campaign keywords"
 ```
 
@@ -514,7 +514,7 @@ git commit -m "docs(ads): add Brand campaign keywords"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/benagil-en.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/benagil-en.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -592,7 +592,7 @@ Four ad groups, STAG structure. All keywords phrase-match unless marked [exact].
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/benagil-en.md
+git add GoogleAds/atlantis/01-keywords/benagil-en.md
 git commit -m "docs(ads): add Benagil EN keyword set"
 ```
 
@@ -602,7 +602,7 @@ git commit -m "docs(ads): add Benagil EN keyword set"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/benagil-pt.md`, `benagil-es.md`, `benagil-fr.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/benagil-pt.md`, `benagil-es.md`, `benagil-fr.md`
 
 - [ ] **Step 1: Create `benagil-pt.md`**
 
@@ -701,7 +701,7 @@ Added in week 3 once EN baseline data exists. Native Portuguese — not auto-tra
 - [ ] **Step 4: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/benagil-pt.md docs/ads/atlantis/01-keywords/benagil-es.md docs/ads/atlantis/01-keywords/benagil-fr.md
+git add GoogleAds/atlantis/01-keywords/benagil-pt.md GoogleAds/atlantis/01-keywords/benagil-es.md GoogleAds/atlantis/01-keywords/benagil-fr.md
 git commit -m "docs(ads): add Benagil PT/ES/FR keyword seeds for week-3 expansion"
 ```
 
@@ -711,7 +711,7 @@ git commit -m "docs(ads): add Benagil PT/ES/FR keyword seeds for week-3 expansio
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/yacht-fishing.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/yacht-fishing.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -764,7 +764,7 @@ Two ad groups: luxury-yacht and reef-fishing. EN only.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/yacht-fishing.md
+git add GoogleAds/atlantis/01-keywords/yacht-fishing.md
 git commit -m "docs(ads): add Yacht & Fishing keywords"
 ```
 
@@ -774,7 +774,7 @@ git commit -m "docs(ads): add Yacht & Fishing keywords"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/01-keywords/pretrip.md`
+**Files:** Create `GoogleAds/atlantis/01-keywords/pretrip.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -812,7 +812,7 @@ Single ad group. Phrase match only. EN-language search UI (German users frequent
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/01-keywords/pretrip.md
+git add GoogleAds/atlantis/01-keywords/pretrip.md
 git commit -m "docs(ads): add Pre-trip Planners keywords"
 ```
 
@@ -822,7 +822,7 @@ git commit -m "docs(ads): add Pre-trip Planners keywords"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/brand.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/brand.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -866,7 +866,7 @@ Leave headlines 3–15 unpinned for Google to rotate.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/brand.md
+git add GoogleAds/atlantis/02-ad-copy/brand.md
 git commit -m "docs(ads): add Brand RSA copy"
 ```
 
@@ -876,7 +876,7 @@ git commit -m "docs(ads): add Brand RSA copy"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/benagil-generic.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/benagil-generic.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -918,7 +918,7 @@ No pins. Let Google rotate all 15 headlines against all queries.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/benagil-generic.md
+git add GoogleAds/atlantis/02-ad-copy/benagil-generic.md
 git commit -m "docs(ads): add Benagil generic RSA copy"
 ```
 
@@ -928,7 +928,7 @@ git commit -m "docs(ads): add Benagil generic RSA copy"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/benagil-speedboat.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/benagil-speedboat.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -966,7 +966,7 @@ Final URL: `https://atlantistours.pt/en/tours/benagil-caves-speed-boat-tour`.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/benagil-speedboat.md
+git add GoogleAds/atlantis/02-ad-copy/benagil-speedboat.md
 git commit -m "docs(ads): add Benagil Speedboat RSA copy"
 ```
 
@@ -976,7 +976,7 @@ git commit -m "docs(ads): add Benagil Speedboat RSA copy"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/benagil-cranchi.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/benagil-cranchi.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1014,7 +1014,7 @@ Final URL: `https://atlantistours.pt/en/tours/cranchi-yacht-cruise-to-the-benagi
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/benagil-cranchi.md
+git add GoogleAds/atlantis/02-ad-copy/benagil-cranchi.md
 git commit -m "docs(ads): add Cranchi Yacht RSA copy"
 ```
 
@@ -1024,7 +1024,7 @@ git commit -m "docs(ads): add Cranchi Yacht RSA copy"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/benagil-algarve-backstop.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/benagil-algarve-backstop.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1062,7 +1062,7 @@ Final URL: `https://atlantistours.pt/en/tours`.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/benagil-algarve-backstop.md
+git add GoogleAds/atlantis/02-ad-copy/benagil-algarve-backstop.md
 git commit -m "docs(ads): add Algarve backstop RSA copy"
 ```
 
@@ -1073,8 +1073,8 @@ git commit -m "docs(ads): add Algarve backstop RSA copy"
 **Owner:** [CLAUDE]
 
 **Files:**
-- Create `docs/ads/atlantis/02-ad-copy/luxury-sail.md`
-- Create `docs/ads/atlantis/02-ad-copy/reef-fishing.md`
+- Create `GoogleAds/atlantis/02-ad-copy/luxury-sail.md`
+- Create `GoogleAds/atlantis/02-ad-copy/reef-fishing.md`
 
 - [ ] **Step 1: Create `luxury-sail.md`**
 
@@ -1145,7 +1145,7 @@ Final URL: `https://atlantistours.pt/en/tours/reef-fishing-tour`.
 - [ ] **Step 3: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/luxury-sail.md docs/ads/atlantis/02-ad-copy/reef-fishing.md
+git add GoogleAds/atlantis/02-ad-copy/luxury-sail.md GoogleAds/atlantis/02-ad-copy/reef-fishing.md
 git commit -m "docs(ads): add Luxury Sail and Reef Fishing RSA copy"
 ```
 
@@ -1155,7 +1155,7 @@ git commit -m "docs(ads): add Luxury Sail and Reef Fishing RSA copy"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/02-ad-copy/pretrip.md`
+**Files:** Create `GoogleAds/atlantis/02-ad-copy/pretrip.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1193,7 +1193,7 @@ Final URL: `https://atlantistours.pt/en/tours/benagil-caves-speed-boat-tour`.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/02-ad-copy/pretrip.md
+git add GoogleAds/atlantis/02-ad-copy/pretrip.md
 git commit -m "docs(ads): add Pre-trip Planners RSA copy"
 ```
 
@@ -1204,11 +1204,11 @@ git commit -m "docs(ads): add Pre-trip Planners RSA copy"
 **Owner:** [CLAUDE]
 
 **Files:**
-- Create `docs/ads/atlantis/03-extensions/sitelinks.md`
-- Create `docs/ads/atlantis/03-extensions/callouts.md`
-- Create `docs/ads/atlantis/03-extensions/structured-snippets.md`
-- Create `docs/ads/atlantis/03-extensions/prices.md`
-- Create `docs/ads/atlantis/03-extensions/images.md`
+- Create `GoogleAds/atlantis/03-extensions/sitelinks.md`
+- Create `GoogleAds/atlantis/03-extensions/callouts.md`
+- Create `GoogleAds/atlantis/03-extensions/structured-snippets.md`
+- Create `GoogleAds/atlantis/03-extensions/prices.md`
+- Create `GoogleAds/atlantis/03-extensions/images.md`
 
 - [ ] **Step 1: Create `sitelinks.md`**
 
@@ -1297,7 +1297,7 @@ Avoid: text overlays, heavy filters, very dark scenes (Google rejects low-contra
 - [ ] **Step 6: Commit**
 
 ```bash
-git add docs/ads/atlantis/03-extensions/
+git add GoogleAds/atlantis/03-extensions/
 git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippets, prices, images)"
 ```
 
@@ -1321,7 +1321,7 @@ git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippet
 
   Tools → Shared Library → Negative keyword lists → + New list.
   Name: `Atlantis — Account Negatives`.
-  Paste content from `docs/ads/atlantis/01-keywords/negatives-account.md`. Save.
+  Paste content from `GoogleAds/atlantis/01-keywords/negatives-account.md`. Save.
 
 - [ ] **Step 2: Confirm the primary conversion is set**
 
@@ -1351,11 +1351,11 @@ git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippet
 - [ ] **Step 2: Create the single ad group**
 
   Ad group name: `brand-exact`.
-  Default bid: €0.40. Paste keywords from `docs/ads/atlantis/01-keywords/brand.md`.
+  Default bid: €0.40. Paste keywords from `GoogleAds/atlantis/01-keywords/brand.md`.
 
 - [ ] **Step 3: Create the RSA**
 
-  Headlines + descriptions + final URL from `docs/ads/atlantis/02-ad-copy/brand.md`. Apply pin strategy. Display path: `/official`.
+  Headlines + descriptions + final URL from `GoogleAds/atlantis/02-ad-copy/brand.md`. Apply pin strategy. Display path: `/official`.
 
 - [ ] **Step 4: Attach extensions**
 
@@ -1396,7 +1396,7 @@ git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippet
   - Name the ad group exactly as above.
   - Default bid: €0.80.
   - Paste keywords from the respective section of `benagil-en.md`.
-  - Create one RSA using the matching file from `docs/ads/atlantis/02-ad-copy/` (`benagil-generic.md` / `benagil-speedboat.md` / `benagil-cranchi.md` / `benagil-algarve-backstop.md`).
+  - Create one RSA using the matching file from `GoogleAds/atlantis/02-ad-copy/` (`benagil-generic.md` / `benagil-speedboat.md` / `benagil-cranchi.md` / `benagil-algarve-backstop.md`).
   - Final URL per the ad-copy file.
 
 - [ ] **Step 3: Attach extensions (campaign level)**
@@ -1485,7 +1485,7 @@ git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippet
 
 - [ ] **Step 3: Log QA outcome**
 
-  Update `docs/ads/atlantis/00-launch-checklist.md` with the QA date and any caveats.
+  Update `GoogleAds/atlantis/00-launch-checklist.md` with the QA date and any caveats.
 
 ---
 
@@ -1501,7 +1501,7 @@ git commit -m "docs(ads): add ad extension content (sitelinks, callouts, snippet
 
 **Owner:** [JOSÉ] (build it in Looker), [CLAUDE] (write the config doc)
 
-**Files:** Create `docs/ads/atlantis/04-monitoring/looker-studio-config.md`
+**Files:** Create `GoogleAds/atlantis/04-monitoring/looker-studio-config.md`
 
 - [ ] **Step 1 [CLAUDE]: Write the Looker Studio config document**
 
@@ -1564,7 +1564,7 @@ Looker Studio → Share → Schedule email → every Monday 09:00 Europe/Lisbon 
 - [ ] **Step 4 [CLAUDE]: Commit the config doc**
 
 ```bash
-git add docs/ads/atlantis/04-monitoring/looker-studio-config.md
+git add GoogleAds/atlantis/04-monitoring/looker-studio-config.md
 git commit -m "docs(ads): add Looker Studio dashboard configuration"
 ```
 
@@ -1574,7 +1574,7 @@ git commit -m "docs(ads): add Looker Studio dashboard configuration"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/04-monitoring/ops-playbook.md`
+**Files:** Create `GoogleAds/atlantis/04-monitoring/ops-playbook.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1638,7 +1638,7 @@ See `../spec` §incrementality. In month 2, pause all campaigns in one Algarve m
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/04-monitoring/ops-playbook.md
+git add GoogleAds/atlantis/04-monitoring/ops-playbook.md
 git commit -m "docs(ads): add operations playbook for daily/weekly/monthly cadence"
 ```
 
@@ -1658,7 +1658,7 @@ git commit -m "docs(ads): add operations playbook for daily/weekly/monthly caden
 
 - [ ] **Step 1: Final pre-flight**
 
-  Open `docs/ads/atlantis/00-launch-checklist.md` (written incrementally through Phase 0 + Work Stream D). Confirm every line is checked:
+  Open `GoogleAds/atlantis/00-launch-checklist.md` (written incrementally through Phase 0 + Work Stream D). Confirm every line is checked:
 
   - [ ] Phase 0 smoke test passed (Task A5) — real conversion recorded in Google Ads with EUR value
   - [ ] `purchase` events firing in GA4 consistently for 7+ days with no missing `value`
@@ -1701,7 +1701,7 @@ git commit -m "docs(ads): add operations playbook for daily/weekly/monthly caden
 
 - [ ] **Step 4: Log launch timestamp**
 
-  Note exact launch time in `docs/ads/atlantis/00-launch-checklist.md`.
+  Note exact launch time in `GoogleAds/atlantis/00-launch-checklist.md`.
 
 ---
 
@@ -1739,7 +1739,7 @@ git commit -m "docs(ads): add operations playbook for daily/weekly/monthly caden
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/05-phase2/trigger-checklist.md`
+**Files:** Create `GoogleAds/atlantis/05-phase2/trigger-checklist.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1772,7 +1772,7 @@ See `pmax-assets.md` for the launch steps.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/05-phase2/trigger-checklist.md
+git add GoogleAds/atlantis/05-phase2/trigger-checklist.md
 git commit -m "docs(ads): add Phase 2 trigger checklist"
 ```
 
@@ -1782,7 +1782,7 @@ git commit -m "docs(ads): add Phase 2 trigger checklist"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/05-phase2/pmax-assets.md`
+**Files:** Create `GoogleAds/atlantis/05-phase2/pmax-assets.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1864,7 +1864,7 @@ If it drops more → reduce PMax budget by 50% and re-evaluate.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/05-phase2/pmax-assets.md
+git add GoogleAds/atlantis/05-phase2/pmax-assets.md
 git commit -m "docs(ads): add PMax asset group preparation guide"
 ```
 
@@ -1874,7 +1874,7 @@ git commit -m "docs(ads): add PMax asset group preparation guide"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/05-phase2/customer-match-prep.md`
+**Files:** Create `GoogleAds/atlantis/05-phase2/customer-match-prep.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1922,7 +1922,7 @@ Re-upload the list every 90 days to keep it fresh. Automate if possible.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/05-phase2/customer-match-prep.md
+git add GoogleAds/atlantis/05-phase2/customer-match-prep.md
 git commit -m "docs(ads): add Customer Match preparation guide"
 ```
 
@@ -1938,7 +1938,7 @@ git commit -m "docs(ads): add Customer Match preparation guide"
 
 **Owner:** [CLAUDE]
 
-**Files:** Create `docs/ads/atlantis/00-launch-checklist.md`
+**Files:** Create `GoogleAds/atlantis/00-launch-checklist.md`
 
 - [ ] **Step 1: Create the file with this content**
 
@@ -1961,7 +1961,7 @@ Updated incrementally through the launch process. Final green state = go-live.
 ## Phase 1 Build: Work Streams B + C + D
 
 - [ ] **B1** Landing page audit — all 5 pages × 5 requirements passing
-- [ ] **C1–C14** All asset files committed under `docs/ads/atlantis/`
+- [ ] **C1–C14** All asset files committed under `GoogleAds/atlantis/`
 - [ ] **D1** Shared negative list created and attached to all campaigns
 - [ ] **D2–D5** All 4 campaigns built, all ads approved by Google
 - [ ] **D6** Pre-launch QA checklist complete
@@ -2002,7 +2002,7 @@ Updated incrementally through the launch process. Final green state = go-live.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/ads/atlantis/00-launch-checklist.md
+git add GoogleAds/atlantis/00-launch-checklist.md
 git commit -m "docs(ads): initialise master launch checklist"
 ```
 

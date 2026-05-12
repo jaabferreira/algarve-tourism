@@ -6,6 +6,35 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-05-12 — 14-day performance review + restructure (paused 4 campaigns)
+
+**Context — the trigger:** Re-minted the expired Google Ads / GA4 OAuth tokens (the testing-mode app expires them ~weekly), pulled the first proper 14-day read (2026-04-28 → 2026-05-11), and it was bad: **€1,156.92 spent, 824 clicks, 4 conversions** (≈€289 CPA, ~0.5% conv rate). Cross-checked against GA4 — first-user attribution shows only **5** purchases ever touched a paid click (vs 4 session-scoped), and conversions are flat day-by-day with no step-up after the 2026-04-30 attribution fix → the "4" is roughly real, not a measurement artifact.
+
+**Diagnosis (three compounding problems):**
+1. **Quality Score 1–3 on nearly every money keyword** (`benagil cave` QS 3 @ €2.45 avg CPC; `algarve fishing` QS 3; competitor terms `xride`/`dreamwave algarve` QS 1 @ €3–4.60 CPC) vs `atlantis tours` brand QS 10. Google charges ~inversely to QS, so we're paying 2–3× per click. Causes: 13-day-old account (expected-CTR seeded low), the Apr 21–30 zero-conversions period (lightframe leak) that torched ad rank, mobile CrUX CLS 0.12, slightly loose phrase match. Note the Benagil **bids are only €1.80 (EN) / €1.20 (localized)** — that's *not* an over-bid; the €2.45 avg CPC is the €1.80 bid × the +30% in-Algarve geo boost. Cutting bids at QS 3 would just de-serve the ads, so **no bid changes** — QS recovery (time + the page fixes already shipped) is the lever.
+2. **7 campaigns on €80/day → all starved.** Impression share lost *to budget*: Benagil 90%, Cranchi 90%, Sail 86%, Competitors 86%. The four niche campaigns (Competitors, Cranchi, Sail, Reef) burned **€448 combined for 0 conversions** and essentially zero booking-funnel activity — money spent learning nothing.
+3. **Paid traffic opens the FareHarbor widget and bails at 5× the organic rate.** GA4 funnel (cpc vs organic, 14d): sessions 818 / 594 → viewed-tour-detail 92 / 134 → opened booking widget 87 / 99 → form_start 30 / 35 → add_to_cart 14 / 30 → **purchase 4 / 15**. Widget-open→book: 4.6% (paid) vs 15% (organic). The tour *pages* are fine (92→87 = 95% open the widget); the leaks are (a) only 11% of paid clicks reach a tour detail at all (the Generic & Competitors campaigns dumped clicks on the `/tours/` category list, not a tour page) and (b) the 87→4 widget collapse. **Not availability** (user confirmed: overbooking allowed, never sold out) — so it's price-comparison bail / lightframe friction / looser paid intent. Flagged for separate investigation.
+
+**What changed (via API, this date):**
+- **Paused 4 campaigns:** `BRAND — Competitors` (€74.50 → 0 conv, structurally QS 1–2), `NB — Cranchi Yacht` (€148.71 → 0 conv), `NB — Sail Yacht` (€80.60 → 0 conv), `NB — Reef Fishing` (€143.69 → 0 conv; also Albufeira-intent search terms vs Portimão departure). Frees ~€30/day. (Reef's organic blog content from 2026-04-30 is unaffected.)
+- **Added 3 negative keywords to NB - Benagil** (it already had 42): `taruga` (BROAD), `ophelia` (BROAD) — competitor boats appearing in the search-term report — and `from faro` (PHRASE) — wrong region. Now 45 negatives.
+- **Repointed the 4 `NB — Algarve Generic` ads' final URLs** from `/[locale]/tours/` (category list) to the Benagil tour page per locale: EN/ES/FR → `…/tours/benagil-caves-speed-boat-tour/`, PT → `…/tours/circuito-de-grutas-ate-benagil/`. Generic ad strength on ES was AVERAGE; a specific high-converting tour page (with reviews + booking widget) should lift relevance/QS over a list page.
+
+**What was deliberately NOT changed (and why):**
+- **No Benagil bid cut** — see point 1; €1.80 bid at QS 3 is already near the serving floor.
+- **No budget reallocation yet** — daily spend drops €80 → €50 (Brand €5 + Benagil €30 + Generic €15); the freed ~€30/day stays unspent for ~1 week so next week's read isn't muddied by a simultaneous budget change. Reassess after the Generic-URL fix + funnel investigation.
+- **No match-type tightening on `benagil cave` phrase** — the existing 45-negative list already filters bad matches; converting to exact would cut volume we can't afford to lose.
+- **Generic wrong-city keywords** (`boat tour lagos/albufeira/carvoeiro/lagoa` + PT/ES/FR equivalents) left alone pending operational input on pickup radius — Carvoeiro/Lagoa are next to Benagil so arguably on-target; Lagos has its own caves so probably not.
+- **Still Manual CPC** — Smart Bidding needs ≥30 conv; we have ~5.
+
+**Expected effect:** Daily burn drops ~38% with no loss of the campaigns that actually have a funnel. Slightly cheaper/more-relevant Generic clicks once the new landing pages season. Benagil unchanged structurally — its recovery depends on QS climbing and the widget-collapse fix, not on this change.
+
+**Verify on/after 2026-05-26:** pull conversions + QS + impression share for Brand/Benagil/Generic; check GA4 cpc funnel for Generic (do the repointed URLs lift view_item_description / view_book_form rates?); decide budget reallocation; open the widget-open→book investigation (price vs lightframe UX vs intent). Re-mint OAuth tokens first (they'll have expired again).
+
+**Honest retro:** launching 7 campaigns day-one at this budget was wrong (should've been Brand + Benagil + Generic, expand later); the Competitors campaign should never have launched at this stage (lowest-ROI campaign type that exists); QS/landing-page alignment should have been sorted before the spend ramped, not after. Defensible: Manual CPC for a new account, search-only, the geo adjustments, the Brand campaign (QS 10, profitable).
+
+---
+
 ## 2026-04-30 — Hero video on landing pages (homepage + Benagil)
 
 **What:**
@@ -199,6 +228,6 @@ See memory note `project_atlantis_cls_investigation.md`.
 - FareHarbor → GA4 measurement ID linked (`G-YE21ZWJNY7`)
 - GA4 ↔ Google Ads account linked
 - `purchase` conversion action imported into Google Ads
-- 9 asset docs written (`docs/ads/atlantis/`)
+- 9 asset docs written (`GoogleAds/atlantis/`)
 
-**Why:** Foundation for the manual-CPC Phase 1 launch. See `docs/superpowers/specs/2026-04-21-atlantis-google-ads-design.md` and `docs/superpowers/plans/2026-04-21-atlantis-google-ads.md`.
+**Why:** Foundation for the manual-CPC Phase 1 launch. See `GoogleAds/atlantis/spec.md` and `GoogleAds/atlantis/plan.md`.

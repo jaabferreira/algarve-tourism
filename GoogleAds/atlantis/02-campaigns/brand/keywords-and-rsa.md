@@ -264,7 +264,7 @@ Use these in the `BRAND — FR` ad group.
 
 ## Asset extensions (apply at campaign level)
 
-Sitelinks, callouts, structured snippets, call extension, and location extension are **shared across the entire account** — those will be defined in `docs/ads/atlantis/04-extensions/`. The brand campaign uses all of them.
+Sitelinks, callouts, structured snippets, call extension, and location extension are **shared across the entire account** — those will be defined in `GoogleAds/atlantis/03-extensions/`. The brand campaign uses all of them.
 
 The one extension worth calling out here:
 

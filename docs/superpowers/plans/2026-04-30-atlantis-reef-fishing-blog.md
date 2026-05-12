@@ -25,7 +25,7 @@
 | `packages/shared/src/i18n/locales/es.json` | Add `blog.about_author` key (ES) |
 | `packages/shared/src/i18n/locales/fr.json` | Add `blog.about_author` key (FR) |
 | `packages/shared/src/i18n/types.ts` | Add `"blog.about_author"` to `TranslationKey` union (if file exists; otherwise skip) |
-| `docs/ads/atlantis/06-changelog.md` | Append rollout entry |
+| `GoogleAds/atlantis/06-changelog.md` | Append rollout entry |
 
 ### New files
 | File | Responsibility |
@@ -903,7 +903,7 @@ git commit -m "content(blog): add PT/ES/FR translations of reef fishing post 2"
 ## Task 11: End-to-end verification + Ads changelog entry
 
 **Files:**
-- Modify: `docs/ads/atlantis/06-changelog.md`
+- Modify: `GoogleAds/atlantis/06-changelog.md`
 
 - [ ] **Step 1: Final build check**
 
@@ -954,7 +954,7 @@ Stop the dev server.
 
 - [ ] **Step 6: Append a changelog entry**
 
-Open `docs/ads/atlantis/06-changelog.md`. Add this entry **at the top** (above all existing entries):
+Open `GoogleAds/atlantis/06-changelog.md`. Add this entry **at the top** (above all existing entries):
 
 ```markdown
 ## 2026-04-30 — Reef fishing blog posts published
@@ -971,7 +971,7 @@ Open `docs/ads/atlantis/06-changelog.md`. Add this entry **at the top** (above a
 - [ ] **Step 7: Commit and push**
 
 ```bash
-git add docs/ads/atlantis/06-changelog.md
+git add GoogleAds/atlantis/06-changelog.md
 git commit -m "docs(ads): log reef fishing blog publish in changelog"
 git push
 ```

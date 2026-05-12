@@ -36,7 +36,7 @@ The spec keeps scope tight: 8 markdown files (2 posts × 4 locales), a 2-field s
 
 **Existing blog state:** 11 posts × 4 locales, all dated 2026-04-15/16, organised across five categories (`destinations`, `travel-tips`, `marine-life`, `local-culture`, `seasonal`). Reef fishing currently has two adjacent posts — `fishing-traditions-algarve-coast` (cultural framing) and `portuguese-coastal-cuisine-algarve` (eating the catch) — but no practical "what is a reef fishing trip" content.
 
-**Tour facts** (sourced from `docs/ads/atlantis/02-campaigns/reef-fishing/keywords-and-rsa.md`):
+**Tour facts** (sourced from `GoogleAds/atlantis/02-campaigns/reef-fishing/keywords-and-rsa.md`):
 - Duration: 4 hours
 - Departure: Portimão Naval Club, Cais de São Francisco (distinct from Benagil/yacht docks — common point of confusion)
 - Reef: ~5 km offshore
@@ -222,7 +222,7 @@ Manual verification after implementation, before merge:
 
 - Single PR or commit covering all 8 markdown files + schema change + structured-data change + AuthorBio component + page render change + author photo asset.
 - Deploy via the existing Cloudflare Pages workflow on push.
-- After deploy, log an entry in `docs/ads/atlantis/06-changelog.md` noting the new landing-adjacent content (per the project rule, since blog content can affect Reef Fishing campaign Quality Score and landing-page-experience signals).
+- After deploy, log an entry in `GoogleAds/atlantis/06-changelog.md` noting the new landing-adjacent content (per the project rule, since blog content can affect Reef Fishing campaign Quality Score and landing-page-experience signals).
 
 ## Open questions / future work
 

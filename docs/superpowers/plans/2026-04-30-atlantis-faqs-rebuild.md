@@ -799,11 +799,11 @@ Replaces the 32 placeholder Q&As in `by-tour.json` with hand-written, query-matc
 - Modify: `packages/atlantis/src/content/faqs/by-tour.json`
 
 **Source material to draw from:**
-- `docs/ads/atlantis/02-campaigns/benagil/keywords-and-rsa.md` (Benagil keywords)
-- `docs/ads/atlantis/02-campaigns/cranchi-yacht/keywords-and-rsa.md`
-- `docs/ads/atlantis/02-campaigns/sail-yacht/keywords-and-rsa.md`
-- `docs/ads/atlantis/02-campaigns/reef-fishing/keywords-and-rsa.md`
-- `docs/ads/atlantis/02-campaigns/algarve-generic/keywords-and-rsa.md` (cross-tour query patterns)
+- `GoogleAds/atlantis/02-campaigns/benagil/keywords-and-rsa.md` (Benagil keywords)
+- `GoogleAds/atlantis/02-campaigns/cranchi-yacht/keywords-and-rsa.md`
+- `GoogleAds/atlantis/02-campaigns/sail-yacht/keywords-and-rsa.md`
+- `GoogleAds/atlantis/02-campaigns/reef-fishing/keywords-and-rsa.md`
+- `GoogleAds/atlantis/02-campaigns/algarve-generic/keywords-and-rsa.md` (cross-tour query patterns)
 - The tour's own `description_html` (loaded via `loadItems`) — for factual cross-checking
 
 - [ ] **Step 1: Draft 32 EN questions + answers**
@@ -951,7 +951,7 @@ Cloudflare Pages auto-deploys. Watch the build log; verify the deploy succeeds.
 
 - [ ] **Step 6: Log the change in the Ads changelog**
 
-Open `docs/ads/atlantis/06-changelog.md` and prepend a new entry at the top:
+Open `GoogleAds/atlantis/06-changelog.md` and prepend a new entry at the top:
 
 ```markdown
 ## 2026-04-30 — Per-tour FAQ blocks shipped (EN)
@@ -974,7 +974,7 @@ those exact phrasings).
 Commit:
 
 ```bash
-git add docs/ads/atlantis/06-changelog.md
+git add GoogleAds/atlantis/06-changelog.md
 git commit -m "docs(ads): log Phase 1a FAQ-blocks ship to changelog
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
@@ -1166,7 +1166,7 @@ git push origin master
 
 - [ ] **Step 6: Log Phase 1b ship in changelog**
 
-Append entry to top of `docs/ads/atlantis/06-changelog.md`:
+Append entry to top of `GoogleAds/atlantis/06-changelog.md`:
 
 ```markdown
 ## 2026-XX-XX — Per-tour FAQ translations shipped (PT/ES/FR)
@@ -1350,7 +1350,7 @@ git push origin master
 
 - [ ] **Step 6: Log Phase 1c ship in changelog**
 
-Append entry at top of `docs/ads/atlantis/06-changelog.md`:
+Append entry at top of `GoogleAds/atlantis/06-changelog.md`:
 
 ```markdown
 ## 2026-XX-XX — /faq page minimal rewrite
