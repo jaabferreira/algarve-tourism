@@ -1,0 +1,58 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface ClusterEntry {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  locale: Locale;
+  clusters: ClusterEntry[];
+}
+
+const { locale, clusters } = Astro.props;
+---
+
+{clusters.length > 0 && (
+  <nav class="hub-clusters" aria-label={t(locale, "blog.in_this_guide")}>
+    <h2 class="hub-clusters__title">{t(locale, "blog.in_this_guide")}</h2>
+    <ol class="hub-clusters__list">
+      {clusters.map((c) => (
+        <li>
+          <a href={getLocalePath(locale, `/blog/${c.slug}/`)}>{c.title}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .hub-clusters {
+    max-width: 720px;
+    margin: var(--space-10) auto;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border, rgba(0, 0, 0, 0.08));
+    border-radius: var(--radius-md, 8px);
+    background: var(--color-surface, #fff);
+  }
+  .hub-clusters__title {
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-4);
+  }
+  .hub-clusters__list {
+    margin: 0;
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .hub-clusters__list a {
+    color: var(--color-text, inherit);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .hub-clusters__list a:hover { color: var(--color-accent, #1AABB8); }
+</style>

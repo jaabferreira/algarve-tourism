@@ -1,0 +1,46 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface Props {
+  locale: Locale;
+  pillarSlug: string;
+  pillarTitle: string;
+}
+
+const { locale, pillarSlug, pillarTitle } = Astro.props;
+const href = getLocalePath(locale, `/blog/${pillarSlug}/`);
+---
+
+<aside class="pillar-callout">
+  <span class="pillar-callout__label">{t(locale, "blog.part_of_guide")}</span>
+  <a class="pillar-callout__link" href={href}>{pillarTitle}</a>
+</aside>
+
+<style>
+  .pillar-callout {
+    max-width: 720px;
+    margin: 0 auto var(--space-8);
+    padding: var(--space-4) var(--space-5);
+    border-left: 3px solid var(--color-accent, #1AABB8);
+    background: var(--color-surface-muted, rgba(26, 171, 184, 0.06));
+    border-radius: var(--radius-md, 8px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .pillar-callout__label {
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted, #5a6b73);
+  }
+  .pillar-callout__link {
+    font-weight: 600;
+    color: var(--color-text, inherit);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .pillar-callout__link:hover { color: var(--color-accent, #1AABB8); }
+</style>

@@ -1,0 +1,55 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  locale: Locale;
+  items: FaqItem[];
+}
+
+const { locale, items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="faq-block" aria-label={t(locale, "blog.faq_title")}>
+    <h2 class="faq-block__title">{t(locale, "blog.faq_title")}</h2>
+    <div class="faq-block__list">
+      {items.map((it) => (
+        <details class="faq-block__item">
+          <summary>{it.question}</summary>
+          <div class="faq-block__answer" set:html={it.answer} />
+        </details>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .faq-block {
+    max-width: 720px;
+    margin: var(--space-12) auto 0;
+  }
+  .faq-block__title {
+    font-size: var(--text-xl);
+    margin: 0 0 var(--space-5);
+  }
+  .faq-block__item {
+    border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.08));
+    padding: var(--space-4) 0;
+  }
+  .faq-block__item summary {
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+  }
+  .faq-block__item summary::-webkit-details-marker { display: none; }
+  .faq-block__answer {
+    margin-top: var(--space-3);
+    color: var(--color-text-muted, #4a5a62);
+  }
+</style>

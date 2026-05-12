@@ -1,0 +1,64 @@
+---
+import type { Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface GuideEntry {
+  slug: string;
+  title: string;
+  excerpt: string;
+  image?: string;
+}
+
+interface Props {
+  locale: Locale;
+  guides: GuideEntry[];
+}
+
+const { locale, guides } = Astro.props;
+const shown = guides.slice(0, 3);
+---
+
+{shown.length > 0 && (
+  <section class="related-guides">
+    <h2 class="related-guides__title">{t(locale, "blog.related_guides")}</h2>
+    <p class="related-guides__subtitle">{t(locale, "blog.related_guides_subtitle")}</p>
+    <div class="related-guides__grid">
+      {shown.map((g) => (
+        <a class="related-guides__card" href={getLocalePath(locale, `/blog/${g.slug}/`)}>
+          {g.image && <img src={g.image} alt="" loading="lazy" class="related-guides__img" />}
+          <span class="related-guides__card-title">{g.title}</span>
+          <span class="related-guides__card-excerpt">{g.excerpt}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-guides {
+    margin-top: var(--space-12);
+  }
+  .related-guides__title { font-size: var(--text-xl); margin: 0 0 var(--space-1); }
+  .related-guides__subtitle { color: var(--color-text-muted, #5a6b73); margin: 0 0 var(--space-6); }
+  .related-guides__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-5);
+  }
+  .related-guides__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border, rgba(0, 0, 0, 0.08));
+    border-radius: var(--radius-md, 8px);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.15s ease;
+  }
+  .related-guides__card:hover { border-color: var(--color-accent, #1AABB8); }
+  .related-guides__img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm, 6px); }
+  .related-guides__card-title { font-weight: 600; }
+  .related-guides__card-excerpt { font-size: var(--text-sm); color: var(--color-text-muted, #5a6b73); }
+</style>
