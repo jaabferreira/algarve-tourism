@@ -1,0 +1,85 @@
+From,To,Direction,Anchor text (suggested),Status
+benagil-cave-tour-complete-guide,how-to-visit-benagil-cave (NEW),pillar->cluster (top-down),getting to the Benagil cave,planned
+benagil-cave-tour-complete-guide,can-you-swim-benagil-cave (NEW),pillar->cluster (top-down),the current rules on swimming into the cave,planned
+benagil-cave-tour-complete-guide,best-time-visit-benagil-caves (EXPAND),pillar->cluster (top-down),the best time of year and day to visit,planned
+benagil-cave-tour-complete-guide,benagil-vs-other-sea-caves-algarve,pillar->cluster (top-down),how Benagil compares to Marinha and the rest,planned
+benagil-cave-tour-complete-guide,dolphin-watching-algarve-species-seasons,pillar->cluster (top-down),dolphin watching off this coast,planned
+benagil-cave-tour-complete-guide,marine-life-algarve-coast-spotters-guide,pillar->cluster (top-down),the wider marine life you might see,planned
+benagil-cave-tour-complete-guide,what-to-pack-algarve-boat-tour,pillar->cluster (top-down),what to pack,planned
+benagil-cave-tour-complete-guide,best-time-visit-algarve-boat-tours,pillar->cluster (top-down),a month-by-month look at Algarve boat-tour season,planned
+benagil-cave-tour-complete-guide,algarve-in-spring-best-kept-secret,pillar->cluster (top-down),why spring is the smart pick,planned
+benagil-cave-tour-complete-guide,sunset-cruises-algarve-summer-guide,pillar->cluster (top-down),a sunset cruise instead,planned
+benagil-cave-tour-complete-guide,"benagil-cave-tour-with-kids (NEW, Phase 2)",pillar->cluster (top-down),visiting with kids,planned (Phase 2)
+benagil-cave-tour-complete-guide,reef-fishing-algarve-what-to-expect,pillar->satellite (loose),a half-day reef fishing trip,planned
+benagil-cave-tour-complete-guide,portuguese-coastal-cuisine-algarve,pillar->standalone (loose),what to eat afterwards,planned
+how-to-visit-benagil-cave (NEW),benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",complete Benagil Cave Tour guide,planned
+can-you-swim-benagil-cave (NEW),benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",complete Benagil Cave Tour guide,planned
+best-time-visit-benagil-caves (EXPAND),benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",complete Benagil Cave Tour guide,planned
+best-time-visit-algarve-boat-tours,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",our Benagil Cave Tour guide,planned
+benagil-vs-other-sea-caves-algarve,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",our complete guide to the Benagil cave tour,planned
+dolphin-watching-algarve-species-seasons,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",the full Benagil Cave Tour guide,planned
+marine-life-algarve-coast-spotters-guide,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",our Benagil Cave Tour guide,planned
+what-to-pack-algarve-boat-tour,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",the complete Benagil Cave Tour guide,planned
+algarve-in-spring-best-kept-secret,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",our Benagil Cave Tour guide,planned
+sunset-cruises-algarve-summer-guide,benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",the Benagil Cave Tour guide,planned
+"benagil-cave-tour-with-kids (NEW, Phase 2)",benagil-cave-tour-complete-guide,"cluster->pillar (bottom-up, intro+closing)",complete Benagil Cave Tour guide,planned (Phase 2)
+how-to-visit-benagil-cave (NEW),can-you-swim-benagil-cave (NEW),cluster<->cluster (lateral),whether you can still swim into the cave,planned
+can-you-swim-benagil-cave (NEW),how-to-visit-benagil-cave (NEW),cluster<->cluster (lateral),how to get to the cave,planned
+best-time-visit-algarve-boat-tours,best-time-visit-benagil-caves (EXPAND),"cluster->cluster (lateral, directional)",the best time to visit Benagil specifically,planned
+best-time-visit-benagil-caves (EXPAND),best-time-visit-algarve-boat-tours,cluster->cluster (lateral),the broader Algarve boat-tour season,planned
+dolphin-watching-algarve-species-seasons,marine-life-algarve-coast-spotters-guide,cluster<->cluster (lateral),the rest of the Algarve coast's marine life,planned
+marine-life-algarve-coast-spotters-guide,dolphin-watching-algarve-species-seasons,cluster<->cluster (lateral),dolphin watching specifically,planned
+benagil-vs-other-sea-caves-algarve,dolphin-watching-algarve-species-seasons,cluster->cluster (lateral),the dolphins you pass on the way,planned
+benagil-vs-other-sea-caves-algarve,how-to-visit-benagil-cave (NEW),cluster->cluster (lateral),how to get to Benagil once you've picked it,planned
+algarve-in-spring-best-kept-secret,sunset-cruises-algarve-summer-guide,cluster<->cluster (lateral),a spring sunset cruise,planned
+sunset-cruises-algarve-summer-guide,algarve-in-spring-best-kept-secret,cluster<->cluster (lateral),why spring evenings are best,planned
+algarve-in-spring-best-kept-secret,best-time-visit-algarve-boat-tours,cluster->cluster (lateral),the full month-by-month picture,planned
+reef-fishing-algarve-what-to-expect,reef-fishing-portimao-half-day-guide,satellite<->satellite (lateral),where we meet you in Portimão,planned
+reef-fishing-portimao-half-day-guide,reef-fishing-algarve-what-to-expect,satellite<->satellite (lateral),what a reef fishing trip is actually like,planned
+fishing-traditions-algarve-coast,reef-fishing-algarve-what-to-expect,satellite->satellite (lateral),reef fishing today,planned
+reef-fishing-algarve-what-to-expect,fishing-traditions-algarve-coast,satellite->satellite (lateral),the coast's fishing traditions,planned
+portuguese-coastal-cuisine-algarve,fishing-traditions-algarve-coast,standalone->satellite (loose),the Algarve's fishing heritage,planned
+how-to-visit-benagil-cave (NEW),tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the small-group Benagil speedboat tour from Portimao,planned
+can-you-swim-benagil-cave (NEW),tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,our Benagil speedboat tour,planned
+best-time-visit-benagil-caves (EXPAND),tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
+dolphin-watching-algarve-species-seasons,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the speedboat tour (dolphins often spotted),planned
+benagil-vs-other-sea-caves-algarve,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
+benagil-vs-other-sea-caves-algarve,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,a private Cranchi yacht to Benagil,planned
+sunset-cruises-algarve-summer-guide,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour,our luxury sail-yacht sunset cruise,planned
+sunset-cruises-algarve-summer-guide,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,the Cranchi yacht sunset option,planned
+algarve-in-spring-best-kept-secret,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour,a spring sailing cruise,planned
+algarve-in-spring-best-kept-secret,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
+what-to-pack-algarve-boat-tour,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour (one of four),any of our boat tours,planned
+what-to-pack-algarve-boat-tour,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour (one of four),sail-yacht cruise,planned
+what-to-pack-algarve-boat-tour,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour (one of four),Cranchi yacht day,planned
+what-to-pack-algarve-boat-tour,tour:reef-fishing-tour (PK 718024),cluster->tour (one of four),reef fishing trip,planned
+marine-life-algarve-coast-spotters-guide,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the speedboat tour,planned
+marine-life-algarve-coast-spotters-guide,tour:reef-fishing-tour (PK 718024),cluster->tour,a reef fishing trip,planned
+reef-fishing-algarve-what-to-expect,tour:reef-fishing-tour (PK 718024),satellite->tour,our half-day reef fishing trip,planned
+reef-fishing-portimao-half-day-guide,tour:reef-fishing-tour (PK 718024),satellite->tour,the reef fishing trip from Portimao,planned
+fishing-traditions-algarve-coast,tour:reef-fishing-tour (PK 718024),satellite->tour,a reef fishing trip today,planned
+fishing-traditions-algarve-coast,tour:restaurant-allgarbe (PK 718031) / meal-included tours,satellite->tour,Restaurant Allgarbe,planned
+portuguese-coastal-cuisine-algarve,tour:restaurant-allgarbe (PK 718031) / meal-included tours,standalone->tour,Restaurant Allgarbe / the Benagil + meal tours,planned
+benagil-cave-tour-complete-guide,tour:benagil-caves-speed-boat-tour (PK 717720),pillar->tour (primary CTA),the small-group Benagil speedboat tour,planned
+benagil-cave-tour-complete-guide,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),pillar->tour,a private Cranchi yacht trip,planned
+benagil-cave-tour-complete-guide,tour:luxury-sail-yacht-cruise (PK 717754),pillar->tour,the sail-yacht cruise,planned
+tour:benagil-caves-speed-boat-tour (PK 717720),benagil-cave-tour-complete-guide,tour->guide (Plan your trip block),Benagil Cave Tour guide,planned
+tour:benagil-caves-speed-boat-tour (PK 717720),how-to-visit-benagil-cave (NEW),tour->guide,how to visit the Benagil cave,planned
+tour:benagil-caves-speed-boat-tour (PK 717720),can-you-swim-benagil-cave (NEW),tour->guide,can you swim into the cave?,planned
+tour:benagil-caves-speed-boat-tour (PK 717720),best-time-visit-benagil-caves (EXPAND),tour->guide,best time to visit,planned
+tour:benagil-caves-speed-boat-tour (PK 717720),dolphin-watching-algarve-species-seasons,tour->guide,dolphin watching,planned
+tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-cave-tour-complete-guide,tour->guide,Benagil Cave Tour guide,planned
+tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-vs-other-sea-caves-algarve,tour->guide,which Algarve cave to visit,planned
+tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises,planned
+tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),best-time-visit-benagil-caves (EXPAND),tour->guide,best time to visit,planned
+tour:luxury-sail-yacht-cruise (PK 717754),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises in the Algarve,planned
+tour:luxury-sail-yacht-cruise (PK 717754),algarve-in-spring-best-kept-secret,tour->guide,the Algarve in spring,planned
+tour:luxury-sail-yacht-cruise (PK 717754),what-to-pack-algarve-boat-tour,tour->guide,what to pack,planned
+tour:reef-fishing-tour (PK 718024),reef-fishing-algarve-what-to-expect,tour->guide,what to expect on a reef fishing trip,planned
+tour:reef-fishing-tour (PK 718024),reef-fishing-portimao-half-day-guide,tour->guide,a skipper's half-day guide,planned
+tour:reef-fishing-tour (PK 718024),fishing-traditions-algarve-coast,tour->guide,fishing traditions of the Algarve,planned
+tour:benagil-and-alvor-nature-reserve (PK 717728),benagil-vs-other-sea-caves-algarve,tour->guide,Benagil vs the other Algarve caves (incl. Alvor),planned
+tour:benagil-and-alvor-nature-reserve (PK 717728),marine-life-algarve-coast-spotters-guide,tour->guide,marine life of the Algarve coast,planned
+tour:benagil-and-alvor-nature-reserve (PK 717728),benagil-cave-tour-complete-guide,tour->guide,Benagil Cave Tour guide,planned
+page:homepage,benagil-cave-tour-complete-guide,site->pillar (surface),Planning a Benagil trip? Start here,planned
+page:/blog/ index,benagil-cave-tour-complete-guide,site->pillar (pinned/featured),Benagil Cave Tour: the complete guide,planned
