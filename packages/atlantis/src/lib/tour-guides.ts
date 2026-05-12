@@ -32,7 +32,7 @@ const GUIDES_BY_PK: Record<number, string[]> = {
     "reef-fishing-portimao-half-day-guide",
     "fishing-traditions-algarve-coast",
   ],
-  // Benagil and Alvor Nature Reserve
+  // Benagil and Alvor Nature Reserve — not yet a published item (not in config.fh.itemPks), so this entry is currently inert
   717728: [
     "benagil-vs-other-sea-caves-algarve",
     "marine-life-algarve-coast-spotters-guide",
