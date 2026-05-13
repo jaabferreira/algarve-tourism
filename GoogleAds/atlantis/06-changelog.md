@@ -6,6 +6,55 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-05-12 — Content-hub site wiring (Benagil pillar/cluster, FAQ schema, tour→guide links)
+
+**What:** Shipped the site-side wiring for the Benagil content hub (branch `feat/atlantis-content-hub`, plan `docs/superpowers/plans/2026-05-12-atlantis-content-hub-wiring.md`) — no URL changes. The 4 tour pages (= the Google Ads landing pages) gain a "Plan your trip" block linking to the relevant guide posts; blog posts gain hub-aware breadcrumbs, a "Part of our complete guide" callout (cluster pages), an "In this guide" cluster list (the pillar), and `FAQPage` JSON-LD + a visible FAQ block when a post defines `faqs`. 8 existing blog posts were marked as cluster pages of the `benagil-cave-tour-complete-guide` pillar (locale-aware), and the pillar is pinned on the blog index + homepage.
+
+**Why:** Topical-authority signals + more internal links into the tour (landing) pages; sets up the content workstream (pillar rewrite, new posts, FAQ content) to land on a structure that already exists.
+
+**Expected effect:** Clearer pillar/cluster structure for crawlers; a few more internal links pointing at `/tours/benagil-caves-speed-boat-tour/` and the other 3 tour pages; FAQ rich-result eligibility on guide posts once `faqs` content is added. No paid-account changes; landing-page content/markup change only.
+
+**Verify on/after 2026-06-23:** GSC — has the pillar (`/en/blog/benagil-cave-tour-complete-guide/`) started accumulating impressions; are the 8 cluster posts showing the breadcrumb in SERP; any change in tour-page internal-link signals. (Content not written yet, so don't expect ranking movement from this alone — this is the scaffold.)
+
+---
+
+## 2026-05-12 — Paid strategy decision (defensive brand + time-boxed Benagil probation) + cheap structural fixes
+
+**Context — the trigger:** Second-pass diagnosis using the `ads-performance-analytics` / `paid-media-strategy` frameworks, on top of the 14-day review below. Two corrections / additions to that review's picture:
+
+1. **The "4 conversions" attribution caveat is mostly resolved — and the big "Direct" purchase bucket is real, not a leak.** Pulled purchases by date: *through 2026-04-29* every booking shows `atlantistours.pt / referral` (the FareHarbor lightframe self-referral artifact); *from 2026-05-01 on* that bucket vanishes and purchases split cleanly — `(direct)/(none)` ≈ **walk-ins** (tourists scan the on-site QR code → land on the site → book on the spot; José confirmed), `google / organic`, `google / cpc`, `bing`, `chatgpt`. So the **2026-04-30 unwanted-referrals fix worked**, and from 2026-05-01 the channel split is trustworthy. Clean 12-day window (05-01→12): ≈45 bookings total — walk-ins ≈21, organic ≈17, **paid ≈4**, other ≈3. Residual gap only: a paid click that converts on a *return visit days later* still won't carry the `gclid` through the FareHarbor frame, so multi-session paid bookings stay invisible (second-order; logged as a to-do).
+2. **Of the 4 paid conversions in the clean window, 1 is genuinely non-brand.** 2 were on the query "atlantis tours" (Brand); 1 on "atlantis tours portimao" (a brand query that *leaked into the Generic campaign* — that campaign's only "conversions" are brand-query leakage; the €894.74 one on 2026-05-02 was this); leaving exactly **1 non-brand booking on ≈€330 of Benagil spend**. Organic (≈2.8% session conv) and walk-ins (€0 marginal cost) carry the business; paid converts ~5× worse than organic on the same pages.
+
+**Strategy decision (the `paid-media-strategy` verdict):** the original "fund €80–115/day across 7 campaigns" hypothesis is **falsified at that magnitude**. Re-scope paid to **defensive brand + a time-boxed Benagil probation** — not a growth channel. Target structure:
+
+| Campaign | Decision | Budget | Measured on |
+|---|---|---|---|
+| Brand Atlantis Tours | keep — permanent | €5/day | *not* CPA — Auction Insights: are OTAs/competitors on our name? |
+| NB - Benagil Cave Tour | keep — **on probation, hard deadline** | €25–30/day | CPA trend + non-brand booking count — **kill rule ↓** |
+| NB — Algarve Generic | keep — short leash | €10–15/day | did today's repoint help in 2–3 wk? next on the block |
+| Cranchi / Sail / Reef / Competitors | stay paused | €0 | yacht demand, if any, becomes an ad group inside Generic — never standalone; competitor-brand bidding never returns |
+
+≈ €40–50/day total (where the 14-day-review restructure already left it; this just adds the exit). **Pre-committed kill rule: on 2026-06-30, pull Benagil's numbers since 2026-05-13 — if it has *not* produced ≥3 non-brand bookings *and* CPA is *not* trending under ~€60, pause it.** No relitigating; after that, paid = Brand only. Rationale for probation-not-kill-now: intent is genuinely clean (not junk queries), QS is artificially low on a ~3-week-old account and recovers with age + the 2026-04-29/30 page fixes + today's URL fix, and the €400 Google Ads credit (expires 2026-06-21) is better spent inside a bounded test than left on the table. Probation cost ≈€1,000 over 7 weeks, capped.
+
+The honest strategic context (recorded so we don't relitigate): a single boat-tour operator is in the same auctions as GetYourGuide / Viator / Civitatis — huge QS, deep budgets, and they often resell *our own tours* at a markup. Paid's realistic ceiling here is "break-even-ish on Benagil + brand defense", not growth. If the probation fails, the high-leverage moves are scaling the QR/walk-in funnel (more QR codes — hotels, marina, partner businesses, our own boats), the FareHarbor booking-flow CRO (the form_start→add_to_cart collapse), and organic — not "try paid harder".
+
+**What changed (via API, this date):**
+- **8 ad final URLs apex → www.** The site 301-redirects `atlantistours.pt/*` → `www.atlantistours.pt/*` site-wide (Cloudflare Pages canonical = `www`), so any ad pointing at the apex took a redirect hop on landing (slower page, QS drag, small `gclid`-loss risk). Fixed the **4 Brand ads** (`atlantistours.pt/[locale]/` → `www.atlantistours.pt/[locale]/`) and the **4 Generic ads** (the Benagil/circuito tour-page URLs they were repointed to *earlier today* — that repoint used the apex host). The 4 Benagil ads already pointed at `www.` — left alone.
+- **Brand max CPC €1.50 → €0.80** on all 4 Brand ad groups. The bid had drifted to €1.50 (launch plan was €0.50) and avg CPC was running €1.10 — i.e. there's real competitive pressure on the brand auction (an OTA or competitor bidding ~€0.90+). €0.80 is a conservative first cut: with QS 10 it should comfortably hold position 1 over a low-QS competitor, while capping spend. Will dial lower (toward €0.50) once Auction Insights confirms.
+- **Added negative keyword `atlantis` (BROAD) to NB — Algarve Generic** (criterion `…~10031510`; it had 23 negatives, now 24). Routes all brand queries to the Brand campaign (QS 10, homepage landing) instead of letting them inflate Generic's apparent performance. "atlantis tours portimao" is already eligible in the Brand campaign, so no volume lost — just relabelled correctly.
+
+**What was NOT changed yet (to-do list, no owner assigned):**
+- **Add a UTM to the on-site QR code** (`?utm_source=qr_kiosk&utm_medium=walkin` or similar) so walk-ins land in their own GA4 bucket instead of sitting in `(direct)/(none)` with genuine direct web traffic. Cheap; makes every future channel analysis cleaner.
+- **Pull Google Ads → Auction Insights on the brand term** to see who's bidding on "atlantis tours" — if it's GetYourGuide/Viator reselling Atlantis at a markup, that's a business conversation, not just an ads one. Then decide whether Brand max CPC can go to €0.50.
+- **Close the residual paid-attribution gap:** check whether the FareHarbor lightframe / GA4 integration can pass the `gclid` through (FareHarbor's GA4 settings + GA4 cross-domain config), so return-visit paid bookings stop being invisible. Smaller job than first thought — the main self-referral leak is already fixed.
+- **Budgets not yet set to the table above** — the 14-day-review restructure left it at ≈€50/day; verify/adjust the Brand €5 / Benagil €25–30 / Generic €10–15 split when convenient.
+
+**Expected effect:** Brand & Generic ads stop bouncing through a 301 on landing — marginal QS/CWV improvement, slightly fewer dropped `gclid`s. Brand spend roughly halves (or, if it loses some impression share to the competitor, we'll see it and step the bid back up). Generic's reported conversions drop toward its true (≈0) non-brand rate, making the kill decision honest.
+
+**Verify on/after 2026-06-30:** apply the Benagil kill rule (pull conv + CPA since 2026-05-13; ≥3 non-brand bookings AND CPA trending <€60 → keep, else pause). Also check: did Brand hold position 1 at €0.80 (Auction Insights / top-IS)? did the URL fix coincide with any QS movement? is Generic now showing ~0 conv (= confirms it was brand leakage)? Re-mint OAuth tokens first.
+
+---
+
 ## 2026-05-12 — Tour-page SEO defect fixes (the 4 landing pages)
 
 **What:** Code changes shipped to the 4 tour pages (= the Google Ads landing pages), from the organic SEO diagnosis (`SEO/audits/2026-05-12-atlantis-organic-diagnosis.md`):
