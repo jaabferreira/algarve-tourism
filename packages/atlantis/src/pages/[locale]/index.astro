@@ -144,7 +144,7 @@ const trustItems = getTrustItems(locale);
           </div>
           <div class="section-header__links">
             {pillarExists && (
-              <a href={getLocalePath(locale, `/blog/${PILLAR_SLUG}/`)} class="see-all see-all--primary">{t(locale, "blog.start_here_cta")} &rarr;</a>
+              <a href={getLocalePath(locale, `/blog/${PILLAR_SLUG}/`)} class="see-all">{t(locale, "blog.start_here_cta")} &rarr;</a>
             )}
             <a href={`/${locale}/blog/`} class="see-all">{t(locale, "home.view_all_posts")} &rarr;</a>
           </div>
@@ -220,10 +220,6 @@ const trustItems = getTrustItems(locale);
     align-items: center;
     gap: var(--space-4);
     flex-wrap: wrap;
-  }
-  .see-all--primary {
-    font-weight: var(--weight-semibold);
-    color: var(--color-primary);
   }
   @media (max-width: 768px) {
     .section-title {
