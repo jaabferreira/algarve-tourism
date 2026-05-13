@@ -2,7 +2,7 @@
 
 **Living tracker** for the Benagil content hub (`SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` is the design; this file is "what's done / what's next"). Update the checkboxes as work lands; don't rewrite the architecture doc.
 
-**Current state (2026-05-13):** site-side wiring shipped on branch `feat/atlantis-content-hub` — **PR #2**. The content workstream is the bulk of the remaining work.
+**Current state (2026-05-13):** site-side wiring shipped + all 3 known wiring gaps closed on branch `feat/atlantis-content-hub` — **PR #2** is now wiring-complete. The content workstream is the bulk of the remaining work.
 
 **If you're a fresh agent picking this up, read in this order:**
 1. This file (the "what to do next" tracker)
@@ -15,26 +15,23 @@ Memory pointers (auto-loaded for the operator's Claude sessions): `project_atlan
 
 ---
 
-## 1. Site-wiring — ✅ shipped + 3 minor follow-ups
+## 1. Site-wiring — ✅ shipped (complete)
 
-**Shipped on `feat/atlantis-content-hub`** (PR #2, commits `6a886a9..a6f5129`):
+**Shipped on `feat/atlantis-content-hub`** (PR #2):
 - ✅ i18n strings for pillar callout / "In this guide" / FAQ title / "Plan your trip" / "Start here" in en/pt/es/fr
 - ✅ `pillarSlug` / `pillarOrder` / `faqs` fields on the blog content schema (`packages/atlantis/src/content/config.ts`)
 - ✅ `buildPostBreadcrumb()` shared helper (TDD'd) — `Home › <pillar> › <post>` for cluster posts, `Home › Blog › <pillar>` for the pillar, unchanged otherwise
-- ✅ `getTourRelatedGuides(pk)` + `TOUR_GUIDE_PKS` (TDD'd) in `packages/atlantis/src/lib/tour-guides.ts`
+- ✅ `getTourRelatedGuides(pk)` + `TOUR_GUIDE_PKS` (TDD'd) in `packages/atlantis/src/lib/tour-guides.ts` — keyed by `translationKey` (locale-independent)
 - ✅ Shared components: `PillarCallout`, `HubClusterList` ("In this guide"), `FaqBlock` (`<details>` Q&A), `RelatedGuides` (tour-page "Plan your trip" cards)
 - ✅ `blog/[slug].astro` rewired — breadcrumb (visible + JSON-LD), pillar/cluster rendering, `FAQPage` JSON-LD when `faqs:` is set
-- ✅ `tours/[slug].astro` — "Plan your trip" block on each tour page
-- ✅ Pillar pinned as a "Start here" card on `/blog/`, linked from the homepage (guarded to locales where the translation exists)
+- ✅ `tours/[slug].astro` — "Plan your trip" block on every tour page in every locale (resolves by `translationKey`)
+- ✅ Pillar pinned as a "Start here" card on `/blog/`, linked from the homepage (guarded to locales where the translation exists); pillar excluded from the regular post grid on `/blog/` + paginated `/blog/page/N/`
 - ✅ 8 existing cluster posts assigned `pillarSlug` (locale-specific) + `pillarOrder` 1–8 in all locales where the translation exists
 
-**Pending follow-ups:**
-- ⏳ **Rekey `tour-guides.ts` by `translationKey`** (instead of EN slug) so the "Plan your trip" block also renders on `/pt/`, `/es/`, `/fr/` tour pages. Currently EN-only because pt/es/fr blog posts have localized slugs that don't match the EN-keyed map.
-  - File: `packages/atlantis/src/lib/tour-guides.ts` (and its test); also update the resolver in `packages/atlantis/src/pages/[locale]/tours/[slug].astro` to match by `translationKey` instead of bare slug.
-- ⏳ **Exclude the pillar from the regular post grid on `/blog/`** — currently the Benagil pillar renders twice (in the "Start here" card AND in the post grid). Filter `pagePosts` to skip `PILLAR_SLUG`.
-  - File: `packages/atlantis/src/pages/[locale]/blog/index.astro`.
-- ⏳ **Drop the no-op `.see-all--primary` class** on the homepage — it duplicates the global `.see-all` rule exactly, so it adds nothing visually. Either drop it or give it real distinguishing treatment (e.g. underline / weight bump).
-  - File: `packages/atlantis/src/pages/[locale]/index.astro` (the `<style>` block).
+**Previously-pending follow-ups (all closed in this round):**
+- ✅ **Rekey `tour-guides.ts` by `translationKey`** — done. `tours/[slug].astro` now matches `bp.data.translationKey === wantKey` and links to the post's actual localized slug; the "Plan your trip" block renders on `/pt/`, `/es/`, `/fr/` tour pages too.
+- ✅ **Exclude the pillar from the regular post grid on `/blog/`** — done in `blog/index.astro` AND `blog/page/[page].astro` so totalPages + page slices line up.
+- ✅ **Drop the no-op `.see-all--primary` class** — done. Removed both the class on the homepage link and the duplicate CSS rule. The "Start here →" / "Read the complete guide →" link text already differentiates the CTA from "View all posts →".
 
 ---
 
