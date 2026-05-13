@@ -1,0 +1,195 @@
+# Benagil content hub — build status & next steps
+
+**Living tracker** for the Benagil content hub (`SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` is the design; this file is "what's done / what's next"). Update the checkboxes as work lands; don't rewrite the architecture doc.
+
+**Current state (2026-05-13):** site-side wiring shipped on branch `feat/atlantis-content-hub` — **PR #2**. The content workstream is the bulk of the remaining work.
+
+**If you're a fresh agent picking this up, read in this order:**
+1. This file (the "what to do next" tracker)
+2. `SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` §2 (per-piece scope), §4 (link graph), §5 (pillar/cluster anatomy), §8 (build backlog rationale)
+3. `SEO/content-hub/2026-05-12-atlantis-benagil-hub-links.csv` (the editorial in-body link inventory — 84 rows)
+4. `SEO/research/2026-05-12-atlantis-keyword-map.md` (which queries each piece owns)
+5. `docs/superpowers/plans/2026-05-12-atlantis-content-hub-wiring.md` (historical — what shipped, and the post-mortem "Follow-ups" section near the bottom)
+
+Memory pointers (auto-loaded for the operator's Claude sessions): `project_atlantis_keyword_competitor`, `project_atlantis_organic_diagnosis`, `feedback_opus_for_writing` (Opus subagents draft, Sonnet does schema/translation plumbing).
+
+---
+
+## 1. Site-wiring — ✅ shipped + 3 minor follow-ups
+
+**Shipped on `feat/atlantis-content-hub`** (PR #2, commits `6a886a9..a6f5129`):
+- ✅ i18n strings for pillar callout / "In this guide" / FAQ title / "Plan your trip" / "Start here" in en/pt/es/fr
+- ✅ `pillarSlug` / `pillarOrder` / `faqs` fields on the blog content schema (`packages/atlantis/src/content/config.ts`)
+- ✅ `buildPostBreadcrumb()` shared helper (TDD'd) — `Home › <pillar> › <post>` for cluster posts, `Home › Blog › <pillar>` for the pillar, unchanged otherwise
+- ✅ `getTourRelatedGuides(pk)` + `TOUR_GUIDE_PKS` (TDD'd) in `packages/atlantis/src/lib/tour-guides.ts`
+- ✅ Shared components: `PillarCallout`, `HubClusterList` ("In this guide"), `FaqBlock` (`<details>` Q&A), `RelatedGuides` (tour-page "Plan your trip" cards)
+- ✅ `blog/[slug].astro` rewired — breadcrumb (visible + JSON-LD), pillar/cluster rendering, `FAQPage` JSON-LD when `faqs:` is set
+- ✅ `tours/[slug].astro` — "Plan your trip" block on each tour page
+- ✅ Pillar pinned as a "Start here" card on `/blog/`, linked from the homepage (guarded to locales where the translation exists)
+- ✅ 8 existing cluster posts assigned `pillarSlug` (locale-specific) + `pillarOrder` 1–8 in all locales where the translation exists
+
+**Pending follow-ups:**
+- ⏳ **Rekey `tour-guides.ts` by `translationKey`** (instead of EN slug) so the "Plan your trip" block also renders on `/pt/`, `/es/`, `/fr/` tour pages. Currently EN-only because pt/es/fr blog posts have localized slugs that don't match the EN-keyed map.
+  - File: `packages/atlantis/src/lib/tour-guides.ts` (and its test); also update the resolver in `packages/atlantis/src/pages/[locale]/tours/[slug].astro` to match by `translationKey` instead of bare slug.
+- ⏳ **Exclude the pillar from the regular post grid on `/blog/`** — currently the Benagil pillar renders twice (in the "Start here" card AND in the post grid). Filter `pagePosts` to skip `PILLAR_SLUG`.
+  - File: `packages/atlantis/src/pages/[locale]/blog/index.astro`.
+- ⏳ **Drop the no-op `.see-all--primary` class** on the homepage — it duplicates the global `.see-all` rule exactly, so it adds nothing visually. Either drop it or give it real distinguishing treatment (e.g. underline / weight bump).
+  - File: `packages/atlantis/src/pages/[locale]/index.astro` (the `<style>` block).
+
+---
+
+## 2. Content workstream — the meat (ordered by priority, per architecture §8.B)
+
+Each piece below is one `content-brief-authoring` run → Opus draft → translate → commit. The architecture doc §2 has scope/word-count, §5 has anatomy (TL;DR 150–250w on pillar; 40–60w answer paragraph under each H2; FAQ section with `FAQPage` schema where it fits).
+
+### Pillar — rewrite
+
+- [ ] **`benagil-cave-tour-complete-guide`** — EXPAND ~1,060w → ~3,500w (~3,000–4,000)
+  - Files (all 4 locales already exist):
+    - `packages/atlantis/src/content/blog/en/benagil-cave-tour-complete-guide.md`
+    - `packages/atlantis/src/content/blog/pt/guia-completo-gruta-benagil.md`
+    - `packages/atlantis/src/content/blog/es/guia-completo-cueva-benagil.md`
+    - `packages/atlantis/src/content/blog/fr/guide-complet-grotte-benagil.md`
+  - Workflow: brief → EN draft (Opus) → review → translate to pt/es/fr (Sonnet OK) → commit
+  - Anatomy: hero · TL;DR (150–250w, AI-citation friendly) · 10–12 H2s each with a 40–60w answer paragraph + "for the full picture, see [cluster]" depth link · FAQ section (`faqs:` frontmatter, lights up the `FAQPage` JSON-LD already wired) · skipper byline · closing/next-step CTA
+  - In-body links — per `…-hub-links.csv` § "pillar → cluster"
+  - Frontmatter: keep existing; **do NOT** set `pillarSlug` on the pillar itself (it's auto-detected as the pillar because clusters point at it)
+  - Reference: architecture §2 (CL1–CL10 facet list), §5a (pillar anatomy)
+
+### Phase 1 clusters — the highest-leverage pieces (order matters)
+
+- [ ] **CL2 — "Can You Swim Into the Benagil Cave? The 2023 Rules, Explained"** — NEW, ~900–1,100w
+  - Slug (EN): `can-you-swim-benagil-cave` · localized slugs for pt/es/fr (use the architecture's `how-to-visit-…` convention as a model when briefing)
+  - Files: 4 new files under `packages/atlantis/src/content/blog/{en,pt,es,fr}/`
+  - Targets `can you swim in benagil cave` — clean yes/no, **featured-snippet target**
+  - Frontmatter MUST include:
+    ```yaml
+    pillarSlug: <locale-specific pillar slug>   # see Section 4 below
+    pillarOrder: 0   # sorts above the existing 1–8 in "In this guide"
+    translationKey: can-you-swim-benagil
+    ```
+  - Strong candidate for `faqs:` frontmatter — the whole post is Q&A territory
+  - Skipper byline · in-body links per CSV § "CL2"
+
+- [ ] **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)"** — NEW, ~1,500w
+  - Slug (EN): `how-to-visit-benagil-cave` · localized for pt/es/fr
+  - Files: 4 new files
+  - Absorbs the "from Portimão vs Carvoeiro vs Lagos" facet — extract from pillar
+  - Frontmatter:
+    ```yaml
+    pillarSlug: <locale-specific>
+    pillarOrder: 0
+    translationKey: how-to-visit-benagil
+    ```
+  - Skipper byline · in-body links per CSV § "CL1"
+
+- [ ] **CL3 — "Best Time to Visit the Benagil Caves"** — EXPAND 296w stub → ~1,200w
+  - Files (EN+PT already exist; ES/FR do NOT — create as part of the rewrite OR defer to Phase 2):
+    - `packages/atlantis/src/content/blog/en/best-time-visit-benagil-caves.md`
+    - `packages/atlantis/src/content/blog/pt/melhor-altura-visitar-grutas-benagil.md`
+    - *(ES/FR translations don't exist yet — flag as a separate task or do alongside)*
+  - Frontmatter already has `pillarSlug` + `pillarOrder: 1` ✅
+  - **De-dup rule:** this cluster *owns* "best time to visit Benagil"; CL4 must defer to it (architecture §2)
+  - In-body links per CSV § "CL3"
+
+- [ ] **CL6 refresh — `dolphin-watching-algarve-species-seasons`** — DEEPEN (the "almost page 1" quick win; already ~pos 7–12)
+  - Files: 4 locales already exist + already have `pillarSlug`/`pillarOrder: 4` ✅
+  - Add: species table · month-by-month sighting chart · stronger ethical-operator section · FAQ section (`faqs:`)
+  - In-body links per CSV § "CL6"
+
+- [ ] **CL5 refresh — `benagil-vs-other-sea-caves-algarve`** — EXPAND
+  - Files: 4 locales already exist + already have `pillarSlug`/`pillarOrder: 3` ✅
+  - Add: Alvor / Ria de Alvor section (ties to the Benagil+Alvor product, keyword cluster C6) · comparison table with `ItemList` schema
+  - In-body links per CSV § "CL5"
+
+### Phase 1 de-dup edits
+
+- [ ] **CL4 / CL9 de-dup** — trim Benagil-specific overlap; wire down-links to CL3
+  - `best-time-visit-algarve-boat-tours` (CL4, pillarOrder: 2 ✅) — broad timing, link DOWN to CL3 for the cave detail
+  - `algarve-in-spring-best-kept-secret` (CL9, pillarOrder: 7 ✅) — defer month-grid to CL4
+  - Files: 4 locales each (en/pt/es/fr — all exist for both)
+  - In-body links per CSV § "CL4" + "CL9"
+
+### Phase 1 light refreshes (mostly link-graph updates)
+
+- [ ] **CL7 — `marine-life-algarve-coast-spotters-guide`** — light refresh; add bottom-up pillar callout + in-body tour link + lateral CL6/CL7 distinction
+- [ ] **CL8 — `what-to-pack-algarve-boat-tour`** — light refresh; year bump; bottom-up pillar callout + lateral links per §4
+- [ ] **CL10 — `sunset-cruises-algarve-summer-guide`** — light refresh; bottom-up pillar callout + lateral links per §4
+- [ ] **Fishing satellite trio** (`reef-fishing-algarve-what-to-expect`, `reef-fishing-portimao-half-day-guide`, `fishing-traditions-algarve-coast`) — light refresh; the lateral links *between* the three; loose link in from the pillar's "other ways to experience this coast" section
+- [ ] **Cuisine standalone** (`portuguese-coastal-cuisine-algarve`) — one link in from the pillar's "after the tour" section; that's enough
+
+(All Phase 1 light-refresh files already exist in 4 locales and don't need `pillarSlug` changes — fishing/cuisine are NOT clusters of this hub.)
+
+### Phase 2
+
+- [ ] **CL11 — "Benagil Cave Tour With Kids: A Family Guide"** — NEW, ~1,200w
+  - Slug (EN): `benagil-cave-tour-with-kids` · localized for pt/es/fr
+  - Files: 4 new files
+  - Frontmatter:
+    ```yaml
+    pillarSlug: <locale-specific>
+    pillarOrder: 9   # sorts after the existing 1–8
+    translationKey: benagil-with-kids
+    ```
+  - "Is benagil cave tour suitable for children / babies / non-swimmers" · life-jacket policy · which tour · what they'll love
+  - Strong `faqs:` candidate · skipper byline · in-body links per CSV § "CL11"
+
+### Phase 3 / future (only when GSC shows demand)
+
+- [ ] CL12-slot facets: "Benagil cave photography & the skylight" · "Where to stay near Benagil" · "Benagil cave by yacht: the private option" (bridges to keyword cluster C3)
+- [ ] **"Things to Do in Portimão"** — NEW ~2,000w local hub page, keyword cluster C13 (its own small hub, linked from the pillar — separate scope, lower priority)
+
+### Cross-cutting tasks (do alongside the pieces)
+
+- [ ] **Add `faqs:` frontmatter** to: pillar + CL2 + CL1 + CL6 (refresh) + CL5 (refresh) + CL11 — the pieces where Q&A is the dominant mode. This lights up the `FAQPage` JSON-LD + the visible `<details>` FAQ block (both already wired; both render nothing until `faqs:` is populated). Shape per piece:
+  ```yaml
+  faqs:
+    - question: "Can you swim into the Benagil cave from a boat tour?"
+      answer: "No — since the 2023 rules…"
+    - question: "..."
+      answer: "..."
+  ```
+- [ ] **In-body cross-links** — walk `SEO/content-hub/2026-05-12-atlantis-benagil-hub-links.csv` and add the editorial links flagged "Status: planned" inside each piece's body as it's rewritten. The structural links (pillar/cluster breadcrumbs, "In this guide" list, "Plan your trip" tour block, "Part of our complete guide" callout) are already wired — this is just the in-paragraph links the writer weaves into prose.
+
+---
+
+## 3. Strategic follow-ups (separate workstreams — not blocked by the hub)
+
+These run in parallel; the hub on its own doesn't win the head terms.
+
+- [ ] **`seo-offpage`** — directory / award-program / operator-profile / partner-link target list (use the link sources the competitor analysis identified). The diagnosis ([`project_atlantis_organic_diagnosis`](file:///home/jferreira/.claude/projects/-home-jferreira-Work-projects-algarve-and-you-new/memory/project_atlantis_organic_diagnosis.md)) named this as the highest-leverage un-run play. "Benagil cave tour" doesn't move off page 3–4 without it.
+- [ ] **German `de` locale** (`internationalization` skill) — biggest measured non-brand demand (`bootstour portimao` = 1,639 GSC impressions/90d at avg pos 4.8) with no `de` site to convert it. Every operator competitor (carvoeirocaves, benagilexpress, algarexperience) serves German. See [`project_atlantis_keyword_competitor`](file:///home/jferreira/.claude/projects/-home-jferreira-Work-projects-algarve-and-you-new/memory/project_atlantis_keyword_competitor.md). Scope as its own spec/plan.
+- [ ] **`/benagil-cave-guide/` URL migration** — deliberately **deferred** (architecture doc §3). Migration risk on a young site > URL-signal gain today. Revisit in ~12 months when domain age + authority make the consolidation worth the risk.
+
+---
+
+## 4. The locale-specific `pillarSlug` rule (read this before assigning frontmatter)
+
+`blog/[slug].astro` resolves a post's pillar by `allPosts.find(p => p.data.locale === locale && p.slug.replace(\`${p.data.locale}/\`, "") === post.data.pillarSlug)`. Because blog posts have **localized slugs**, `pillarSlug` must be the bare slug of the pillar **in that locale**:
+
+| Locale | `pillarSlug` value | Pillar file |
+|---|---|---|
+| `en` | `benagil-cave-tour-complete-guide` | `packages/atlantis/src/content/blog/en/benagil-cave-tour-complete-guide.md` |
+| `pt` | `guia-completo-gruta-benagil` | `packages/atlantis/src/content/blog/pt/guia-completo-gruta-benagil.md` |
+| `es` | `guia-completo-cueva-benagil` | `packages/atlantis/src/content/blog/es/guia-completo-cueva-benagil.md` |
+| `fr` | `guide-complet-grotte-benagil` | `packages/atlantis/src/content/blog/fr/guide-complet-grotte-benagil.md` |
+
+`pillarOrder` is locale-independent (an integer; smaller sorts first; unset → last). Suggested values:
+- `0` — for CL1 ("how to visit") and CL2 ("can you swim") so they sort to the top of "In this guide"
+- `1–8` — already assigned to the 8 existing Phase-1 clusters (see architecture §2)
+- `9` — CL11 ("with kids")
+
+---
+
+## 5. Maintenance
+
+- [ ] **Quarterly:** audit `SEO/content-hub/2026-05-12-atlantis-benagil-hub-links.csv` for broken links / anchor drift / missing connections (architecture §7)
+- [ ] **Annual (Jan/Feb):** pillar refresh — bump "2026"→"…", recheck SERP, update access rules + prices, refresh cluster callouts (architecture §7)
+- [ ] **Owner:** José (durable single owner across a multi-year horizon — drafting can be delegated to Opus subagents per `feedback_opus_for_writing`; *ownership of what gets refreshed/added* stays with one person)
+
+---
+
+## 6. After it ships — verification
+
+- On/after **~6 weeks post-pillar-launch**: re-check GSC positions on the cluster head queries (`benagil cave tour`, `best time to see dolphins in algarve`, `can you swim in benagil cave`, `algarve sunset cruise`, etc.) using `gsc top-queries sc-domain:atlantistours.pt --days 90 --limit 250`. Compare to the pre-launch baseline in `SEO/research/2026-05-12-atlantis-keywords.csv`.
+- **Won't move on its own**: the head term "benagil cave tour" (page 3–4 to page 1) needs the `seo-offpage` work in parallel. The hub creates the page worth ranking; off-page authority gets it ranked.
