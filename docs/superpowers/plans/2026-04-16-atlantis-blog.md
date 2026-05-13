@@ -35,6 +35,8 @@
 | `packages/atlantis/src/pages/rss.xml.ts` | Remove (replaced by per-locale) |
 | `packages/atlantis/src/content/blog/en/welcome.md` | Update with new frontmatter fields |
 | `packages/atlantis/public/_redirects` | Add /rss.xml -> /en/rss.xml redirect |
+| `packages/algarve-and-you/src/pages/rss.xml.ts` | Remove (replaced by per-locale) |
+| `packages/algarve-and-you/public/_redirects` | Add /rss.xml -> /en/rss.xml redirect |
 
 ### New files
 | File | Responsibility |
@@ -45,6 +47,7 @@
 | `packages/atlantis/src/pages/[locale]/blog/category/[category]/index.astro` | Category index page |
 | `packages/atlantis/src/pages/[locale]/blog/tag/[tag]/index.astro` | Tag index page |
 | `packages/atlantis/src/pages/[locale]/rss.xml.ts` | Per-locale RSS feed |
+| `packages/algarve-and-you/src/pages/[locale]/rss.xml.ts` | Per-locale RSS feed for AY |
 
 ---
 
@@ -1591,13 +1594,13 @@ git commit -m "feat(blog): add tag index pages"
 
 - [ ] **Step 1: Add blog imports and data loading**
 
-In `packages/atlantis/src/pages/[locale]/index.astro`, add these imports at the top (after the existing imports):
+In `packages/atlantis/src/pages/[locale]/index.astro`, add this import immediately after the existing `import Marquee from "@algarve-tourism/shared/components/Marquee.astro";` line (currently line 12):
 
 ```typescript
 import BlogCard from "@algarve-tourism/shared/components/BlogCard.astro";
 ```
 
-Add this data loading after the `marqueeText` variable (around line 55):
+Add this data loading immediately after the `const marqueeText = t(locale, "marquee.atlantis");` line (currently line 54):
 
 ```typescript
 // Latest blog posts
@@ -1609,7 +1612,7 @@ const blogPosts = (await getCollection("blog"))
 
 - [ ] **Step 2: Add the blog section to the template**
 
-In the same file, add this section after the reviews section (before the `<Footer>` tag):
+In the same file, insert this block between the closing `)}` of the `topReviews` section (currently line 137) and the `<Footer slot="footer" ... />` line (currently line 139):
 
 ```astro
   {blogPosts.length > 0 && (
@@ -1661,14 +1664,19 @@ git commit -m "feat(blog): add latest blog posts section to Atlantis homepage"
 
 ---
 
-### Task 13: Update RSS Feeds to Per-Locale
+### Task 13: Update RSS Feeds to Per-Locale (Atlantis + AY)
+
+Both brands migrate from `/rss.xml` to `/${locale}/rss.xml` so the new SEO alternate-link (introduced in Task 4) resolves correctly on both sites.
 
 **Files:**
 - Create: `packages/atlantis/src/pages/[locale]/rss.xml.ts`
 - Delete: `packages/atlantis/src/pages/rss.xml.ts`
 - Modify: `packages/atlantis/public/_redirects`
+- Create: `packages/algarve-and-you/src/pages/[locale]/rss.xml.ts`
+- Delete: `packages/algarve-and-you/src/pages/rss.xml.ts`
+- Modify: `packages/algarve-and-you/public/_redirects`
 
-- [ ] **Step 1: Create per-locale RSS feed**
+- [ ] **Step 1: Create per-locale RSS feed for Atlantis**
 
 Create `packages/atlantis/src/pages/[locale]/rss.xml.ts`:
 
@@ -1704,26 +1712,77 @@ export async function GET(context: APIContext) {
 }
 ```
 
-- [ ] **Step 2: Delete the old RSS feed file**
+- [ ] **Step 2: Delete the old Atlantis RSS feed**
 
 ```bash
-rm packages/atlantis/src/pages/rss.xml.ts
+git rm packages/atlantis/src/pages/rss.xml.ts
 ```
 
-- [ ] **Step 3: Add redirect for old RSS URL**
+- [ ] **Step 3: Add redirect for old Atlantis RSS URL**
 
-In `packages/atlantis/public/_redirects`, add this redirect at the top of the file (after any existing header comments):
+In `packages/atlantis/public/_redirects`, add this redirect at the top of the file (directly after the `# Locale redirect` / `/ /en/ 301` block, before the `# Old WordPress tour slugs` section):
 
 ```
+# RSS per-locale migration
 /rss.xml  /en/rss.xml  301
 ```
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 4: Create per-locale RSS feed for Algarve & You**
+
+Create `packages/algarve-and-you/src/pages/[locale]/rss.xml.ts`:
+
+```typescript
+import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
+import { LOCALES } from "@algarve-tourism/shared";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+export async function GET(context: APIContext) {
+  const locale = context.params.locale as string;
+  const posts = await getCollection("blog");
+  const localePosts = posts
+    .filter((post) => post.data.locale === locale)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+  return rss({
+    title: config.name,
+    description: config.tagline,
+    site: context.site!.toString(),
+    items: localePosts.map((post) => ({
+      title: post.data.title,
+      description: post.data.excerpt,
+      pubDate: new Date(post.data.date),
+      link: `/${locale}/blog/${post.slug.replace(`${locale}/`, "")}/`,
+    })),
+  });
+}
+```
+
+- [ ] **Step 5: Delete the old AY RSS feed**
 
 ```bash
-git add packages/atlantis/src/pages/[locale]/rss.xml.ts packages/atlantis/public/_redirects
-git rm packages/atlantis/src/pages/rss.xml.ts
-git commit -m "feat(blog): move RSS to per-locale feeds, redirect old URL"
+git rm packages/algarve-and-you/src/pages/rss.xml.ts
+```
+
+- [ ] **Step 6: Add redirect for old AY RSS URL**
+
+In `packages/algarve-and-you/public/_redirects`, add this redirect at the top of the file (directly after the first line `/ /en/ 301`):
+
+```
+# RSS per-locale migration
+/rss.xml  /en/rss.xml  301
+```
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add packages/atlantis/src/pages/[locale]/rss.xml.ts packages/atlantis/public/_redirects packages/algarve-and-you/src/pages/[locale]/rss.xml.ts packages/algarve-and-you/public/_redirects
+git commit -m "feat(blog): move RSS to per-locale feeds on both brands, redirect old URLs"
 ```
 
 ---
