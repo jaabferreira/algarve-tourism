@@ -167,25 +167,47 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
 </style>
 
 <script>
-  // Scroll reveal
+  // Scroll reveal — fade elements in as they enter the viewport.
+  // Defensive race-fix: after kicking off the IntersectionObserver, we also do
+  // an rAF pass that manually reveals any element whose bounding rect already
+  // overlaps the viewport. This avoids a race where the observer's first
+  // callback fires with a wrong intersection ratio because image/font loads
+  // are still shifting layout — without this, elements above the fold can
+  // get stuck at opacity:0 until the user triggers a reflow (e.g. by zooming).
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reveal = (el: HTMLElement) => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    };
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).style.opacity = '1';
-            (entry.target as HTMLElement).style.transform = 'translateY(0)';
+            reveal(entry.target as HTMLElement);
             observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      (el as HTMLElement).style.opacity = '0';
-      (el as HTMLElement).style.transform = 'translateY(20px)';
-      (el as HTMLElement).style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    elements.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       observer.observe(el);
+    });
+    // After first paint, reveal anything already in viewport — bypasses the
+    // observer race on initial layout.
+    requestAnimationFrame(() => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < viewportHeight && rect.bottom > 0) {
+          reveal(el);
+          observer.unobserve(el);
+        }
+      });
     });
   }
 </script>

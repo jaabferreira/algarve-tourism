@@ -160,6 +160,12 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
             <span>{post.data.readingTime} {t(locale, "blog.reading_time")}</span>
           </>
         )}
+        {post.data.author && (
+          <>
+            <span class="post-hero__dot">·</span>
+            <span class="post-hero__author">{t(locale, "blog.by_author")} {post.data.author}</span>
+          </>
+        )}
       </div>
     </div>
   </section>
@@ -170,7 +176,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
     </div>
   )}
 
-  <article class="section-sm" data-reveal>
+  <article class="section-sm">
     <div class="container">
       <div class="post-content">
         {pillarRef && (
