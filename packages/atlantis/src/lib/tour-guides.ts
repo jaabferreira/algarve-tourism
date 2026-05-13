@@ -1,48 +1,56 @@
 /**
- * "Plan your trip" — guide-post slugs to surface on each tour page, keyed by FareHarbor item PK.
+ * "Plan your trip" — guide blog posts to surface on each tour page, keyed by FareHarbor item PK.
+ *
+ * Values are blog-post `translationKey` strings (locale-independent), NOT bare slugs.
+ * Because pt/es/fr posts have localized slugs, keying on `translationKey` is the only
+ * way the same map renders on every locale's tour page.
+ *
+ * The resolver in `pages/[locale]/tours/[slug].astro` matches each value against
+ * `bp.data.translationKey` and links to the post's actual localized slug.
+ *
  * Source: SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md §4e.
- * NOTE: `how-to-visit-benagil-cave` and `can-you-swim-benagil-cave` are planned new posts;
- * the RelatedGuides component filters to posts that exist, so unwritten slugs are simply skipped.
+ * NOTE: `how-to-visit-benagil` and `can-you-swim-benagil` are planned new posts;
+ * `RelatedGuides` filters to posts that exist, so unwritten keys are simply skipped.
  */
 const GUIDES_BY_PK: Record<number, string[]> = {
   // Benagil Caves Speed Boat Tour (€20 entry product)
   717720: [
-    "benagil-cave-tour-complete-guide",
-    "how-to-visit-benagil-cave",
-    "can-you-swim-benagil-cave",
-    "best-time-visit-benagil-caves",
-    "dolphin-watching-algarve-species-seasons",
+    "benagil-cave-complete-guide",
+    "how-to-visit-benagil",
+    "can-you-swim-benagil",
+    "best-time-benagil",
+    "dolphin-watching-algarve",
   ],
   // Cranchi Yacht Cruise to the Benagil Caves (private)
   720028: [
-    "benagil-cave-tour-complete-guide",
-    "benagil-vs-other-sea-caves-algarve",
-    "sunset-cruises-algarve-summer-guide",
-    "best-time-visit-benagil-caves",
+    "benagil-cave-complete-guide",
+    "benagil-vs-other-caves",
+    "sunset-cruises-guide",
+    "best-time-benagil",
   ],
   // Luxury Sail Yacht Cruise
   717754: [
-    "sunset-cruises-algarve-summer-guide",
-    "algarve-in-spring-best-kept-secret",
-    "what-to-pack-algarve-boat-tour",
+    "sunset-cruises-guide",
+    "algarve-spring-secret",
+    "what-to-pack-boat-tour",
   ],
   // Reef Fishing Tour
   718024: [
     "reef-fishing-algarve-what-to-expect",
-    "reef-fishing-portimao-half-day-guide",
-    "fishing-traditions-algarve-coast",
+    "reef-fishing-portimao-guide",
+    "fishing-traditions-algarve",
   ],
   // Benagil and Alvor Nature Reserve — not yet a published item (not in config.fh.itemPks), so this entry is currently inert
   717728: [
-    "benagil-vs-other-sea-caves-algarve",
-    "marine-life-algarve-coast-spotters-guide",
-    "benagil-cave-tour-complete-guide",
+    "benagil-vs-other-caves",
+    "marine-life-spotters-guide",
+    "benagil-cave-complete-guide",
   ],
 };
 
 export const TOUR_GUIDE_PKS: number[] = Object.keys(GUIDES_BY_PK).map(Number);
 
-/** Guide-post slugs to show in the "Plan your trip" block for the given FareHarbor item PK. */
+/** Blog-post `translationKey`s to show in the "Plan your trip" block for the given FareHarbor item PK. */
 export function getTourRelatedGuides(itemPk: number | string): string[] {
   return GUIDES_BY_PK[Number(itemPk)] ?? [];
 }
