@@ -11,12 +11,20 @@ import CTABanner from "@algarve-tourism/shared/components/CTABanner.astro";
 import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.astro";
 import { config, blogCategories } from "../../../../config.js";
 
+// Mirror the pillar exclusion in blog/index.astro so totalPages + page slices line up.
+// Inlined (not lifted to a helper) because Astro extracts getStaticPaths into a separate
+// module at build time, so top-level frontmatter consts/functions aren't in scope there.
 export async function getStaticPaths() {
+  const PILLAR_SLUG = "benagil-cave-tour-complete-guide";
   const perPage = 9;
   const allPosts = await getCollection("blog");
 
   return LOCALES.flatMap((locale) => {
-    const localePosts = allPosts.filter((p) => p.data.locale === locale);
+    const localePosts = allPosts.filter(
+      (p) =>
+        p.data.locale === locale &&
+        p.slug.replace(`${p.data.locale}/`, "") !== PILLAR_SLUG,
+    );
     const totalPages = Math.ceil(localePosts.length / perPage);
 
     return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
@@ -26,13 +34,18 @@ export async function getStaticPaths() {
 }
 
 const POSTS_PER_PAGE = 9;
+const PILLAR_SLUG = "benagil-cave-tour-complete-guide";
 const locale = Astro.params.locale as Locale;
 const currentPage = Number(Astro.params.page);
 const toursHref = getLocalePath(locale, "/tours/");
 
 const allPosts = await getCollection("blog");
 const posts = allPosts
-  .filter((post) => post.data.locale === locale)
+  .filter(
+    (post) =>
+      post.data.locale === locale &&
+      post.slug.replace(`${post.data.locale}/`, "") !== PILLAR_SLUG,
+  )
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);

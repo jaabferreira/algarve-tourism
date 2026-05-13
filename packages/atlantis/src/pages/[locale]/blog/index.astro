@@ -20,17 +20,19 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const toursHref = getLocalePath(locale, "/tours/");
 const allPosts = await getCollection("blog");
-const posts = allPosts
-  .filter((post) => post.data.locale === locale)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
-const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
-const pagePosts = posts.slice(0, POSTS_PER_PAGE);
 
 const PILLAR_SLUG = "benagil-cave-tour-complete-guide";
 const pillarPost = allPosts.find(
   (p) => p.data.locale === locale && p.slug.replace(`${p.data.locale}/`, "") === PILLAR_SLUG,
 );
+
+// Exclude the pillar from the regular grid — it's pinned above as the "Start here" card.
+const posts = allPosts
+  .filter((post) => post.data.locale === locale && post.id !== pillarPost?.id)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
+const pagePosts = posts.slice(0, POSTS_PER_PAGE);
 
 const structuredData = [
   buildCollectionPage(config, locale, "/blog/", t(locale, "nav.blog"), t(locale, "blog.meta_description")),
