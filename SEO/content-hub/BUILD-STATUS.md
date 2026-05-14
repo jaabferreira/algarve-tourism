@@ -2,7 +2,7 @@
 
 **Living tracker** for the Benagil content hub (`SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` is the design; this file is "what's done / what's next"). Update the checkboxes as work lands; don't rewrite the architecture doc.
 
-**Current state (2026-05-13):** site-side wiring shipped + all 3 known wiring gaps closed on branch `feat/atlantis-content-hub` — **PR #2** is now wiring-complete. The content workstream is the bulk of the remaining work.
+**Current state (2026-05-14):** site-side wiring shipped (PR #2 wiring-complete), pillar rewrite landed (en/pt/es/fr · ~3.5k–4.1k w/locale · 10-Q FAQ · 15 in-body links · skipper byline + data-reveal race fix), **and CL2 — "Can You Swim Into the Benagil Cave?" — landed in 4 locales** (~1.1k words/locale · 7 FAQs · 5 in-body links · featured-snippet target). Branch `feat/atlantis-content-hub` pushed; CF Pages rebuilds on push. **Next:** CL1 (needed to resolve the CL2 lateral 404), then CL3/CL6/CL5 deepening + the de-dups + light refreshes.
 
 **If you're a fresh agent picking this up, read in this order:**
 1. This file (the "what to do next" tracker)
@@ -41,32 +41,11 @@ Each piece below is one `content-brief-authoring` run → Opus draft → transla
 
 ### Pillar — rewrite
 
-- [ ] **`benagil-cave-tour-complete-guide`** — EXPAND ~1,060w → ~3,500w (~3,000–4,000)
-  - Files (all 4 locales already exist):
-    - `packages/atlantis/src/content/blog/en/benagil-cave-tour-complete-guide.md`
-    - `packages/atlantis/src/content/blog/pt/guia-completo-gruta-benagil.md`
-    - `packages/atlantis/src/content/blog/es/guia-completo-cueva-benagil.md`
-    - `packages/atlantis/src/content/blog/fr/guide-complet-grotte-benagil.md`
-  - Workflow: brief → EN draft (Opus) → review → translate to pt/es/fr (Sonnet OK) → commit
-  - Anatomy: hero · TL;DR (150–250w, AI-citation friendly) · 10–12 H2s each with a 40–60w answer paragraph + "for the full picture, see [cluster]" depth link · FAQ section (`faqs:` frontmatter, lights up the `FAQPage` JSON-LD already wired) · skipper byline · closing/next-step CTA
-  - In-body links — per `…-hub-links.csv` § "pillar → cluster"
-  - Frontmatter: keep existing; **do NOT** set `pillarSlug` on the pillar itself (it's auto-detected as the pillar because clusters point at it)
-  - Reference: architecture §2 (CL1–CL10 facet list), §5a (pillar anatomy)
+- [x] **`benagil-cave-tour-complete-guide`** — ✅ shipped 2026-05-14 (commits `319a175` + `867a2c5`). EN 3,578w · PT 4,046w · ES 4,088w · FR 4,129w. 14 H2s · 10-Q FAQ block with `FAQPage` JSON-LD · TL;DR (~220w) · skipper byline (Nuno Albino) · 15 in-body links · brief at `SEO/content-hub/briefs/pillar-benagil-cave-tour-complete-guide-brief.md`.
 
 ### Phase 1 clusters — the highest-leverage pieces (order matters)
 
-- [ ] **CL2 — "Can You Swim Into the Benagil Cave? The 2023 Rules, Explained"** — NEW, ~900–1,100w
-  - Slug (EN): `can-you-swim-benagil-cave` · localized slugs for pt/es/fr (use the architecture's `how-to-visit-…` convention as a model when briefing)
-  - Files: 4 new files under `packages/atlantis/src/content/blog/{en,pt,es,fr}/`
-  - Targets `can you swim in benagil cave` — clean yes/no, **featured-snippet target**
-  - Frontmatter MUST include:
-    ```yaml
-    pillarSlug: <locale-specific pillar slug>   # see Section 4 below
-    pillarOrder: 0   # sorts above the existing 1–8 in "In this guide"
-    translationKey: can-you-swim-benagil
-    ```
-  - Strong candidate for `faqs:` frontmatter — the whole post is Q&A territory
-  - Skipper byline · in-body links per CSV § "CL2"
+- [x] **CL2 — "Can You Swim Into the Benagil Cave?"** — ✅ shipped 2026-05-14. EN/PT/ES/FR · ~1.1k words/locale · 7 FAQs (FAQPage JSON-LD) · 7 H2s · 5 in-body links · skipper byline (Nuno Albino) · pillarOrder: 0 (sorts top of pillar "In this guide") · brief at `SEO/content-hub/briefs/cluster-can-you-swim-benagil-cave-brief.md`. **Note:** lateral link to CL1 (`how-to-visit-benagil-cave`) is intentionally drafted with the target slug now — will 404 until CL1 ships next.
 
 - [ ] **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)"** — NEW, ~1,500w
   - Slug (EN): `how-to-visit-benagil-cave` · localized for pt/es/fr
