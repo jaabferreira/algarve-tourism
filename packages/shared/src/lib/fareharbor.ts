@@ -38,7 +38,7 @@ const CATEGORY_RULES: [RegExp, string][] = [
   [/Transfer/i, "transfers"],
   [/Passeio de (?:dia inteiro|meio dia)|Dia inteiro O Melhor/i, "land-tours"],
   [/Restaurante|Noite (?:de Fado|Árabe|Espanhola)|Chef em Casa/i, "gastronomy"],
-  [/Centro de Check|Check-in Centre|Massagens|Ginásio|Guardar Bagagem|BEM ESTAR/i, "spa"],
+  [/Centro de Check|Check-in Centre|Massagens|Ginásio|Guardar Bagagem|BEM ESTAR|Duche|Vestiário|Shower|Changing Room/i, "spa"],
 ];
 
 function categorizeItem(item: FHItem): string {
