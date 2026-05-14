@@ -16,7 +16,7 @@ tags:
 readingTime: 5
 translationKey: can-you-swim-benagil
 pillarSlug: guia-completo-gruta-benagil
-pillarOrder: 0
+pillarOrder: 0.5
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
 faqs:

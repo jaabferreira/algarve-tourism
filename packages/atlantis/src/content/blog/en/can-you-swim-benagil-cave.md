@@ -16,7 +16,7 @@ tags:
 readingTime: 5
 translationKey: can-you-swim-benagil
 pillarSlug: benagil-cave-tour-complete-guide
-pillarOrder: 0
+pillarOrder: 0.5
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
 faqs:

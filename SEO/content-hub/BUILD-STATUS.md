@@ -2,7 +2,7 @@
 
 **Living tracker** for the Benagil content hub (`SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` is the design; this file is "what's done / what's next"). Update the checkboxes as work lands; don't rewrite the architecture doc.
 
-**Current state (2026-05-14):** site-side wiring shipped (PR #2 wiring-complete), pillar rewrite landed (en/pt/es/fr · ~3.5k–4.1k w/locale · 10-Q FAQ · 15 in-body links · skipper byline + data-reveal race fix), **and CL2 — "Can You Swim Into the Benagil Cave?" — landed in 4 locales** (~1.1k words/locale · 7 FAQs · 5 in-body links · featured-snippet target). Branch `feat/atlantis-content-hub` pushed; CF Pages rebuilds on push. **Next:** CL1 (needed to resolve the CL2 lateral 404), then CL3/CL6/CL5 deepening + the de-dups + light refreshes.
+**Current state (2026-05-14):** site-side wiring shipped (PR #2 wiring-complete), pillar rewrite landed (en/pt/es/fr · ~3.5k–4.1k w/locale · 10-Q FAQ · 15 in-body links · skipper byline + data-reveal race fix), **CL2 — "Can You Swim Into the Benagil Cave?" — landed in 4 locales** (~1.1k w/locale · 7 FAQs · featured-snippet target · pillarOrder 0.5), **and CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)" — landed in 4 locales** (~1.7k–2.0k w/locale · 8 FAQs · year-stamped freshness piece · pillarOrder 0 = first in "In this guide"). Pillar "In this guide" now sorts: CL1 → CL2 → CL3 → CL4 → CL5 → CL6 → CL7 → CL8 → CL9 → CL10. Branch `feat/atlantis-content-hub` pushed; CF Pages rebuilds on push. **Next:** CL3 (expand 296w stub → 1,200w + create ES/FR translations), then CL6 deepen, then CL5 expand, then the de-dups + light refreshes.
 
 **If you're a fresh agent picking this up, read in this order:**
 1. This file (the "what to do next" tracker)
@@ -47,17 +47,7 @@ Each piece below is one `content-brief-authoring` run → Opus draft → transla
 
 - [x] **CL2 — "Can You Swim Into the Benagil Cave?"** — ✅ shipped 2026-05-14. EN/PT/ES/FR · ~1.1k words/locale · 7 FAQs (FAQPage JSON-LD) · 7 H2s · 5 in-body links · skipper byline (Nuno Albino) · pillarOrder: 0 (sorts top of pillar "In this guide") · brief at `SEO/content-hub/briefs/cluster-can-you-swim-benagil-cave-brief.md`. **Note:** lateral link to CL1 (`how-to-visit-benagil-cave`) is intentionally drafted with the target slug now — will 404 until CL1 ships next.
 
-- [ ] **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)"** — NEW, ~1,500w
-  - Slug (EN): `how-to-visit-benagil-cave` · localized for pt/es/fr
-  - Files: 4 new files
-  - Absorbs the "from Portimão vs Carvoeiro vs Lagos" facet — extract from pillar
-  - Frontmatter:
-    ```yaml
-    pillarSlug: <locale-specific>
-    pillarOrder: 0
-    translationKey: how-to-visit-benagil
-    ```
-  - Skipper byline · in-body links per CSV § "CL1"
+- [x] **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)"** — ✅ shipped 2026-05-14. EN ~1.7k · PT ~1.9k · ES ~2.0k · FR ~2.0k · 8 FAQs (FAQPage JSON-LD) · 11 H2s (10 body + closing) · 4 in-body links · year-stamped freshness piece · skipper byline (Nuno Albino) · pillarOrder: 0 (first in pillar's "In this guide") · brief at `SEO/content-hub/briefs/cluster-how-to-visit-benagil-cave-brief.md`. Lateral CL1↔CL2 link graph now closed in all 4 locales (CL2's brief-acceptable 404 is resolved).
 
 - [ ] **CL3 — "Best Time to Visit the Benagil Caves"** — EXPAND 296w stub → ~1,200w
   - Files (EN+PT already exist; ES/FR do NOT — create as part of the rewrite OR defer to Phase 2):
