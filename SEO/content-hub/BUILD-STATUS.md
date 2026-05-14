@@ -2,7 +2,7 @@
 
 **Living tracker** for the Benagil content hub (`SEO/content-hub/2026-05-12-atlantis-benagil-hub-architecture.md` is the design; this file is "what's done / what's next"). Update the checkboxes as work lands; don't rewrite the architecture doc.
 
-**Current state (2026-05-14):** site-side wiring shipped (PR #2 wiring-complete), pillar rewrite landed (en/pt/es/fr · ~3.5k–4.1k w/locale · 10-Q FAQ · 15 in-body links · skipper byline + data-reveal race fix), **CL2 — "Can You Swim Into the Benagil Cave?" — landed in 4 locales** (~1.1k w/locale · 7 FAQs · featured-snippet target · pillarOrder 0.5), **and CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)" — landed in 4 locales** (~1.7k–2.0k w/locale · 8 FAQs · year-stamped freshness piece · pillarOrder 0 = first in "In this guide"). Pillar "In this guide" now sorts: CL1 → CL2 → CL3 → CL4 → CL5 → CL6 → CL7 → CL8 → CL9 → CL10. Branch `feat/atlantis-content-hub` pushed; CF Pages rebuilds on push. **Next:** CL3 (expand 296w stub → 1,200w + create ES/FR translations), then CL6 deepen, then CL5 expand, then the de-dups + light refreshes.
+**Current state (2026-05-14):** site-side wiring shipped (PR #2 wiring-complete), pillar rewrite landed (en/pt/es/fr · ~3.5k–4.1k w/locale · 10-Q FAQ · 15 in-body links · skipper byline + data-reveal race fix), **CL2 — "Can You Swim Into the Benagil Cave?" — landed in 4 locales** (~1.1k w/locale · 7 FAQs · featured-snippet target · pillarOrder 0.5), **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)" — landed in 4 locales** (~1.7k–2.0k w/locale · 8 FAQs · year-stamped freshness piece · pillarOrder 0 = first in "In this guide"), **and CL3 — "Best Time to Visit the Benagil Caves" — landed in 4 locales** (EN ~1.3k · PT/ES/FR ~1.6–1.7k · 7 FAQs · month-by-month + tide + skylight-geometry piece · pillarOrder 1 · ES+FR created from scratch, EN+PT stubs replaced). Pillar "In this guide" now sorts: CL1 → CL2 → CL3 → CL4 → CL5 → CL6 → CL7 → CL8 → CL9 → CL10. Branch `feat/atlantis-content-hub` pushed; CF Pages rebuilds on push. **Next:** CL6 deepen (the "almost page 1" quick win), then CL5 expand, then the de-dups + light refreshes.
 
 **If you're a fresh agent picking this up, read in this order:**
 1. This file (the "what to do next" tracker)
@@ -49,14 +49,7 @@ Each piece below is one `content-brief-authoring` run → Opus draft → transla
 
 - [x] **CL1 — "How to Get to the Benagil Cave (and What's Changed in 2026)"** — ✅ shipped 2026-05-14. EN ~1.7k · PT ~1.9k · ES ~2.0k · FR ~2.0k · 8 FAQs (FAQPage JSON-LD) · 11 H2s (10 body + closing) · 4 in-body links · year-stamped freshness piece · skipper byline (Nuno Albino) · pillarOrder: 0 (first in pillar's "In this guide") · brief at `SEO/content-hub/briefs/cluster-how-to-visit-benagil-cave-brief.md`. Lateral CL1↔CL2 link graph now closed in all 4 locales (CL2's brief-acceptable 404 is resolved).
 
-- [ ] **CL3 — "Best Time to Visit the Benagil Caves"** — EXPAND 296w stub → ~1,200w
-  - Files (EN+PT already exist; ES/FR do NOT — create as part of the rewrite OR defer to Phase 2):
-    - `packages/atlantis/src/content/blog/en/best-time-visit-benagil-caves.md`
-    - `packages/atlantis/src/content/blog/pt/melhor-altura-visitar-grutas-benagil.md`
-    - *(ES/FR translations don't exist yet — flag as a separate task or do alongside)*
-  - Frontmatter already has `pillarSlug` + `pillarOrder: 1` ✅
-  - **De-dup rule:** this cluster *owns* "best time to visit Benagil"; CL4 must defer to it (architecture §2)
-  - In-body links per CSV § "CL3"
+- [x] **CL3 — "Best Time to Visit the Benagil Caves"** — ✅ shipped 2026-05-14. EN ~1.3k · PT ~1.6k · ES ~1.7k · FR ~1.7k · 7 FAQs (FAQPage JSON-LD) · 7 content H2s + 1 closing H2 · month-by-month comparison table (April–September H3s + Oct–March prose) · 4 in-body links (pillar↑ lede, commercial speedboat in H2 #7, pillar↑ closing, CL4 lateral in closing) · skipper byline (Nuno Albino) · pillarOrder: 1 (third in pillar's "In this guide" after CL1 · CL2) · ES+FR created from scratch (slugs `mejor-epoca-visitar-cuevas-benagil` and `meilleure-periode-visiter-grottes-benagil`); EN+PT stubs replaced · `seasonality` tag added · brief at `SEO/content-hub/briefs/cluster-best-time-visit-benagil-caves-brief.md`. Skylight-term convention fix applied across PT/ES/FR (translator's `claraboia/claraboya` → pillar's established `abertura/ouverture`). De-dup rule: CL3 owns "best time to visit Benagil"; CL4 must defer (architecture §2).
 
 - [ ] **CL6 refresh — `dolphin-watching-algarve-species-seasons`** — DEEPEN (the "almost page 1" quick win; already ~pos 7–12)
   - Files: 4 locales already exist + already have `pillarSlug`/`pillarOrder: 4` ✅
