@@ -1,0 +1,7 @@
+
+https://www.atlantistours.pt/sitemap-index.xml
+  lastSubmitted : 2026-04-16T11:26:51.197Z
+  lastDownloaded: 2026-05-10T09:31:42.590Z
+  isPending     : False   isSitemapsIndex: True
+  errors        : 0   warnings: 0
+    [web] submitted=186  indexed=0
