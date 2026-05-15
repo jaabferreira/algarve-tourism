@@ -1,6 +1,6 @@
 ---
 title: "Qué Llevar Para un Tour en Barco en el Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Lista de preparación de un patrón para cualquier paseo en barco en el Algarve — tour en cueva, crucero en velero o jornada de pesca. Qué llevar, qué dejar en el hotel, y los pequeños objetos que todo el mundo olvida hasta que se arrepiente."
 image: "https://cdn.filestackcontent.com/b0G3IVy0TViGEFerersQ"
 imageAlt: "Huéspedes relajados en la cubierta de un velero frente a la costa del Algarve con gafas de sol y toallas"
@@ -23,7 +23,7 @@ relatedTourSlugs:
 
 Cada semana vemos a alguien subir al barco con una sudadera de algodón que va a pasar las próximas tres horas mojada, o con un sombrero grande de paja que estará en el mar antes de salir del puerto. El sol del Algarve y la brisa del Atlántico son ambos más fuertes de lo que la gente espera, y un poco de previsión al hacer la maleta es la diferencia entre "gran mañana" y "me he quemado y el móvil ha muerto".
 
-Aquí la lista que damos a nuestros huéspedes cuando preguntan.
+Aquí la lista que damos a nuestros huéspedes cuando preguntan. Para la perspectiva más amplia de planificación de viaje a Benagil en sí, consulta [la guía completa del tour por la cueva de Benagil](/es/blog/guia-completo-cueva-benagil/); esta es la compañera práctica sobre el equipo.
 
 ## Lo Esencial
 
@@ -109,4 +109,4 @@ Nuestro [Tour en Lancha a las Cuevas de Benagil](/es/tours/benagil-caves-speed-b
 
 Las previsiones del tiempo en el Algarve son fiables a 48 horas pero vagas más allá. Si tu tour es dentro de unos días, simplemente revisa las condiciones marítimas el día anterior. Los operadores te contactan proactivamente si necesitan reprogramar — todos nuestros huéspedes reciben un WhatsApp directo si algo cambia.
 
-¿Dudas sobre equipo para tu tour concreto, o si una condición médica afecta lo que debes llevar? Escríbenos antes del viaje — siempre es más fácil resolver antes que en el muelle.
+¿Dudas sobre equipo para tu tour concreto, o si una condición médica afecta lo que debes llevar? Escríbenos antes del viaje — siempre es más fácil resolver antes que en el muelle. Y para todo lo demás sobre visitar la famosa cueva, [la guía completa del tour por la cueva de Benagil](/es/blog/guia-completo-cueva-benagil/) es la pieza central.

@@ -1,6 +1,6 @@
 ---
 title: "Fishing Traditions of the Algarve Coast"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Long before tourism arrived, the Algarve was a working coastline of small-boat fishermen, salt flats, and tuna traps. Here is the story of those traditions, what survives today, and how you can still experience a piece of it from a boat."
 image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
 imageAlt: "Traditional fishing boat on calm water off the Algarve coast at golden hour"
@@ -84,4 +84,4 @@ Both are the Algarve. We'd argue the second one is worth making time for.
 
 ## Keep Exploring
 
-If this side of the coast interests you, pair a morning [reef fishing tour](/en/tours/reef-fishing-tour/) with an afternoon visiting Olhão market. For those with more time, a day in the eastern Algarve — Tavira, Santa Luzia, Culatra Island — rounds out the picture. And when you come back for dinner, order the octopus.
+If this side of the coast interests you, pair a morning [reef fishing tour](/en/tours/reef-fishing-tour/) with an afternoon visiting Olhão market. For what an actual fishing morning looks like on the water, see [reef fishing in the Algarve — what to expect](/en/blog/reef-fishing-algarve-what-to-expect/); for the local Portimão logistics, [reef fishing from Portimão](/en/blog/reef-fishing-portimao-half-day-guide/) covers the dock-side detail. For those with more time, a day in the eastern Algarve — Tavira, Santa Luzia, Culatra Island — rounds out the picture. And when you come back for dinner, order the octopus.

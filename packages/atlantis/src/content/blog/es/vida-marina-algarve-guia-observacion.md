@@ -1,6 +1,6 @@
 ---
 title: "Vida Marina en la Costa del Algarve: Guía de Observación"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Más allá de los delfines, la costa del Algarve alberga pulpos, aves marinas, peces luna y visitantes ocasionales de aguas profundas. Aquí una guía de campo sobre lo que realmente puedes ver desde un barco, y dónde mirar."
 image: "https://cdn.filestackcontent.com/JzY1MVCyRuuqhAyd5MqL"
 imageAlt: "Agua turquesa cristalina de la reserva natural de Alvor en la costa del Algarve, rico hábitat marino para aves y peces"
@@ -22,7 +22,7 @@ relatedTourSlugs:
 
 La mayoría de visitantes del Algarve vienen por las cuevas y las playas. Pasa unas horas en el agua y te darás cuenta de que la costa es también un hábitat marino rico y sorprendentemente diverso — parte mar abierto atlántico, parte ría protegida, parte arrecife rocoso. Si sabes dónde mirar, casi todo paseo en barco incluye más fauna de la que anuncia el folleto.
 
-Aquí una guía de campo sobre lo que realmente vive en esta costa, desde los sospechosos habituales hasta los visitantes raros que merecen un segundo vistazo.
+Aquí una guía de campo sobre lo que realmente vive en esta costa, desde los sospechosos habituales hasta los visitantes raros que merecen un segundo vistazo. Para todo lo demás sobre visitar la famosa cueva en sí, consulta [nuestra guía completa del tour por la cueva de Benagil](/es/blog/guia-completo-cueva-benagil/); esta pieza es la hermana de la vida silvestre.
 
 ## Delfines (la estrella)
 
@@ -129,4 +129,4 @@ Y cuando algo aparezca, quédate en silencio y observa. La peor forma de ver fau
 
 Cualquiera de nuestros [tours en barco por el Algarve](/es/tours/) pasa por hábitat donde puedes ver gran parte de lo anterior. En mañanas tranquilas, la [ruta por las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) suele ofrecer delfines, rayas y aves marinas además de la geología costera.
 
-¿Hay una especie concreta que te gustaría ver? Escríbenos al reservar — a veces podemos programar una salida en torno a condiciones de marea o luz que suben tus posibilidades.
+¿Hay una especie concreta que te gustaría ver? Escríbenos al reservar — a veces podemos programar una salida en torno a condiciones de marea o luz que suben tus posibilidades. Para todo lo demás sobre Benagil y el resto de la costa de las cuevas, [nuestra guía completa del tour por la cueva de Benagil](/es/blog/guia-completo-cueva-benagil/) es la pieza central.

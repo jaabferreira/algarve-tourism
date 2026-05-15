@@ -1,6 +1,6 @@
 ---
 title: "O Que Levar Para um Passeio de Barco no Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Lista de preparação feita por capitães para qualquer passeio de barco no Algarve — tour às grutas, cruzeiro à vela ou dia de pesca. O que levar, o que deixar no hotel, e os pequenos objectos que toda a gente se esquece até se arrepender."
 image: "https://cdn.filestackcontent.com/b0G3IVy0TViGEFerersQ"
 imageAlt: "Hóspedes relaxam no convés de um iate à vela na costa algarvia com óculos de sol e toalhas"
@@ -23,7 +23,7 @@ relatedTourSlugs:
 
 Todas as semanas vemos alguém entrar no barco com uma camisola de algodão que vai passar as próximas três horas molhada, ou com um enorme chapéu de palha que vai estar no mar antes de sairmos do porto. O sol do Algarve e a brisa do Atlântico são ambos mais fortes do que se espera, e um pouco de previsão na bagagem faz a diferença entre "manhã óptima" e "queimei-me e o telemóvel morreu".
 
-Aqui fica a lista que damos aos nossos hóspedes quando perguntam.
+Aqui fica a lista que damos aos nossos hóspedes quando perguntam. Para a perspectiva mais ampla de planeamento da viagem a Benagil em si, consulte [o guia completo do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/); este é o complemento prático sobre o kit.
 
 ## O Essencial
 
@@ -109,4 +109,4 @@ O nosso [Circuito de Grutas até Benagil](/pt/tours/circuito-de-grutas-ate-benag
 
 As previsões meteorológicas no Algarve são fiáveis 48 horas antes mas vagas depois disso. Se o seu tour é daqui a alguns dias, basta acompanhar as condições marítimas no dia anterior. Os operadores contactam-no proactivamente se precisarem de remarcar — todos os nossos hóspedes recebem uma mensagem directa de WhatsApp se algo mudar.
 
-Dúvidas sobre equipamento para o seu tour em concreto, ou se uma condição médica afecta o que deve levar? Envie-nos mensagem antes da viagem — é sempre mais fácil resolver antes do que no cais.
+Dúvidas sobre equipamento para o seu tour em concreto, ou se uma condição médica afecta o que deve levar? Envie-nos mensagem antes da viagem — é sempre mais fácil resolver antes do que no cais. E para tudo o resto sobre visitar a famosa gruta, [o guia completo do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/) é a peça central.

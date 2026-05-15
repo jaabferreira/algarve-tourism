@@ -1,6 +1,6 @@
 ---
 title: "Tradições de Pesca da Costa Algarvia"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Muito antes do turismo, o Algarve era uma costa de trabalho — pescadores de pequenos barcos, salinas e armações de atum. Aqui fica a história dessas tradições, o que sobrevive hoje e como ainda se pode experimentar uma parte delas a partir de um barco."
 image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
 imageAlt: "Barco de pesca tradicional em água calma na costa algarvia à hora dourada"
@@ -84,4 +84,4 @@ Ambas são o Algarve. Diríamos que a segunda vale a pena fazer tempo para ela.
 
 ## Continue a Explorar
 
-Se este lado da costa lhe interessa, combine uma manhã de [tour de pesca de fundo](/pt/tours/pesca-de-fundo/) com uma tarde no mercado de Olhão. Para quem tiver mais tempo, um dia no sotavento — Tavira, Santa Luzia, Culatra — arredonda o quadro. E quando voltar para o jantar, peça polvo.
+Se este lado da costa lhe interessa, combine uma manhã de [tour de pesca de fundo](/pt/tours/pesca-de-fundo/) com uma tarde no mercado de Olhão. Para ver como uma manhã de pesca realmente é na água, consulte [pesca de fundo no Algarve — o que esperar](/pt/blog/pesca-de-fundo-algarve-o-que-esperar/); para a logística local de Portimão, [pesca de fundo a partir de Portimão](/pt/blog/pesca-de-fundo-portimao-meio-dia/) cobre o detalhe do cais. Para quem tiver mais tempo, um dia no sotavento — Tavira, Santa Luzia, Culatra — arredonda o quadro. E quando voltar para o jantar, peça polvo.

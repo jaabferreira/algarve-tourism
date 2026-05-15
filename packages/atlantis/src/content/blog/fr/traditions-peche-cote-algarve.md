@@ -1,6 +1,6 @@
 ---
 title: "Traditions de Pêche de la Côte de l'Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Bien avant le tourisme, l'Algarve était une côte de travail — pêcheurs en petits bateaux, salines et madragues à thon. Voici l'histoire de ces traditions, ce qui survit aujourd'hui et comment vous pouvez encore en vivre une partie depuis un bateau."
 image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
 imageAlt: "Bateau de pêche traditionnel sur une eau calme au large de la côte de l'Algarve à l'heure dorée"
@@ -84,4 +84,4 @@ Les deux sont l'Algarve. Nous dirions que la seconde mérite qu'on prenne le tem
 
 ## Continuez à Explorer
 
-Si ce côté de la côte vous intéresse, associez une matinée de [tour de pêche](/fr/tours/reef-fishing-tour/) avec un après-midi au marché d'Olhão. Pour ceux qui ont plus de temps, une journée dans l'est de l'Algarve — Tavira, Santa Luzia, île de Culatra — complète le tableau. Et quand vous rentrez pour dîner, commandez du poulpe.
+Si ce côté de la côte vous intéresse, associez une matinée de [tour de pêche](/fr/tours/reef-fishing-tour/) avec un après-midi au marché d'Olhão. Pour voir à quoi ressemble vraiment une matinée de pêche sur l'eau, consultez [la pêche au récif en Algarve — à quoi s'attendre](/fr/blog/peche-recif-algarve-quoi-attendre/) ; pour la logistique locale de Portimão, [la pêche au récif depuis Portimão](/fr/blog/peche-recif-portimao-demi-journee/) couvre le détail du quai. Pour ceux qui ont plus de temps, une journée dans l'est de l'Algarve — Tavira, Santa Luzia, île de Culatra — complète le tableau. Et quand vous rentrez pour dîner, commandez du poulpe.

@@ -1,6 +1,6 @@
 ---
 title: "Tradiciones Pesqueras de la Costa del Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Mucho antes de que llegara el turismo, el Algarve era una costa de trabajo — pescadores de barcos pequeños, salinas y almadrabas de atún. Aquí la historia de esas tradiciones, lo que sobrevive hoy y cómo todavía puedes vivir parte de ello desde un barco."
 image: "https://cdn.filestackcontent.com/Q0bJWhgFSRKE5lrs5jpf"
 imageAlt: "Barco de pesca tradicional en aguas tranquilas frente a la costa del Algarve a la hora dorada"
@@ -84,4 +84,4 @@ Ambas son el Algarve. Diríamos que la segunda merece dedicarle tiempo.
 
 ## Sigue Explorando
 
-Si este lado de la costa te interesa, combina una mañana de [tour de pesca](/es/tours/reef-fishing-tour/) con una tarde en el mercado de Olhão. Para quien tenga más tiempo, un día en el Algarve oriental — Tavira, Santa Luzia, Isla de Culatra — redondea la imagen. Y cuando vuelvas a cenar, pide pulpo.
+Si este lado de la costa te interesa, combina una mañana de [tour de pesca](/es/tours/reef-fishing-tour/) con una tarde en el mercado de Olhão. Para ver cómo es realmente una mañana de pesca en el agua, consulta [pesca de fondo en el Algarve — qué esperar](/es/blog/pesca-de-fondo-algarve-que-esperar/); para la logística local de Portimão, [pesca de fondo desde Portimão](/es/blog/pesca-de-fondo-portimao-medio-dia/) cubre el detalle del muelle. Para quien tenga más tiempo, un día en el Algarve oriental — Tavira, Santa Luzia, Isla de Culatra — redondea la imagen. Y cuando vuelvas a cenar, pide pulpo.

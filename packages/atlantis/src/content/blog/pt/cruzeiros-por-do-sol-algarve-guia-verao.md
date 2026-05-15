@@ -1,6 +1,6 @@
 ---
 title: "Cruzeiros ao Pôr-do-Sol no Algarve: Guia de Verão"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Um cruzeiro ao pôr-do-sol na costa algarvia vale cada cliché. Aqui fica como escolher o barco certo, o momento certo e a noite certa — além do que realmente acontece num bom cruzeiro."
 image: "https://cdn.filestackcontent.com/fvkdjmHEQOGSCQYAfjx3"
 imageAlt: "Iate de luxo a navegar na costa algarvia ao pôr-do-sol com céu dourado a reflectir no mar calmo"
@@ -23,7 +23,7 @@ relatedTourSlugs:
 
 Um cruzeiro ao pôr-do-sol está em todas as listas de férias do Algarve por um motivo: entrega. A água acalma no final do dia, a luz torna-se dourada, as falésias brilham com tons laranja, e três horas num barco transformam-se na recordação que leva para casa.
 
-Mas nem todos os "cruzeiros ao pôr-do-sol" são iguais. Alguns são experiências apressadas de champanhe e fotografia; outros são a versão lenta e adequada, que vale a pena planear a sua semana em torno deles. Aqui fica como distinguir os dois e escolher o certo.
+Mas nem todos os "cruzeiros ao pôr-do-sol" são iguais. Alguns são experiências apressadas de champanhe e fotografia; outros são a versão lenta e adequada, que vale a pena planear a sua semana em torno deles. Aqui fica como distinguir os dois e escolher o certo. Para tudo o resto sobre visitar a famosa gruta durante o dia, consulte [o guia do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/); esta peça é a contraparte do entardecer.
 
 ## O Que Acontece Num Bom Cruzeiro ao Pôr-do-Sol
 
@@ -70,7 +70,7 @@ Horas aproximadas do pôr-do-sol na costa central algarvia:
 
 Os horários de partida dos barcos ajustam-se ao longo da época. A chave é que os barcos saiam aproximadamente 2,5 horas antes do pôr-do-sol, para que se tenha um cruzeiro lento completo dentro da hora mágica, e não uma corrida para chegar antes do escuro.
 
-**Junho e início de Julho** são os meses de pôr-do-sol de pico porque os dias são mais longos e as condições mais fiáveis. Setembro é mais sossegado mas a luz é sem dúvida mais rica.
+**Junho e início de Julho** são os meses de pôr-do-sol de pico porque os dias são mais longos e as condições mais fiáveis. Setembro é mais sossegado mas a luz é sem dúvida mais rica. E para a época intermédia subvalorizada, [porque as noites de primavera são as melhores](/pt/blog/algarve-na-primavera-segredo-bem-guardado/) cobre o caso do pôr-do-sol primaveril por inteiro.
 
 ## A Luz Conta Mais do Que o Próprio Pôr-do-Sol
 
@@ -130,4 +130,4 @@ Perfeitamente possível e muitas vezes encantador, especialmente para famílias 
 
 Os horários de pôr-do-sol são o único período do verão em que reservar antecipadamente paga mesmo. Se tem datas em mente e quer a nossa recomendação honesta sobre qual barco, qual horário e qual noite, [entre em contacto](/pt/contact/) — aconselhamos a melhor opção para o seu grupo mesmo que outro operador tenha o barco certo.
 
-Um bom cruzeiro ao pôr-do-sol no Algarve é a tarde de que vai falar durante anos. Vale a pena fazer bem.
+Um bom cruzeiro ao pôr-do-sol no Algarve é a tarde de que vai falar durante anos. Vale a pena fazer bem. Para tudo o resto sobre visitar Benagil e a costa das grutas, [o nosso guia completo do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/) é a peça central.

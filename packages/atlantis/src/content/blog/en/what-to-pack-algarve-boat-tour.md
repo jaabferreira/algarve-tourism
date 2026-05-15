@@ -1,6 +1,6 @@
 ---
 title: "What to Pack for a Boat Tour in the Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "A skipper's packing list for any Algarve boat trip — cave tour, sailing cruise, or fishing day. What to bring, what to leave at the hotel, and the small items people always forget until they regret it."
 image: "https://cdn.filestackcontent.com/b0G3IVy0TViGEFerersQ"
 imageAlt: "Guests relaxing on a sailing yacht deck off the Algarve coast with sunglasses and towels"
@@ -23,7 +23,7 @@ relatedTourSlugs:
 
 Every week we watch someone step onto the boat in a cotton hoodie that's about to spend the next three hours wet, or with a giant straw hat that will be in the sea before we clear the harbour. The Algarve sun and the Atlantic breeze are both stronger than people expect, and a small amount of packing forethought is the difference between "great morning" and "I got sunburned and my phone died."
 
-Here is the list we give our guests when they ask.
+Here is the list we give our guests when they ask. For the wider trip-planning picture on Benagil itself, see [the complete Benagil Cave Tour guide](/en/blog/benagil-cave-tour-complete-guide/); this is the practical-kit companion.
 
 ## The Essentials
 
@@ -109,4 +109,4 @@ Our [Benagil Caves Speed Boat Tour](/en/tours/benagil-caves-speed-boat-tour/) ac
 
 Weather forecasts in the Algarve are reliable 48 hours out but vague beyond. If your tour is a few days away, just keep an eye on marine conditions the day before. Operators will proactively contact you if they need to reschedule — all our guests get a direct WhatsApp message from us if anything changes.
 
-Questions about gear for your specific tour, or whether a medical condition affects what you should bring? Message us before your trip — always easier to sort out things in advance than on the dock.
+Questions about gear for your specific tour, or whether a medical condition affects what you should bring? Message us before your trip — always easier to sort out things in advance than on the dock. And for everything else about visiting the famous cave, [the complete Benagil Cave Tour guide](/en/blog/benagil-cave-tour-complete-guide/) is the hub piece.

@@ -1,6 +1,6 @@
 ---
 title: "Marine Life of the Algarve Coast: A Spotter's Guide"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Beyond the dolphins, the Algarve coast hosts octopus, seabirds, sunfish, and occasional visitors from deeper water. Here's a practical field guide to what you might actually see from a boat, and where to look."
 image: "https://cdn.filestackcontent.com/JzY1MVCyRuuqhAyd5MqL"
 imageAlt: "Clear turquoise water of the Alvor nature reserve on the Algarve coast, rich marine habitat for seabirds and fish"
@@ -22,7 +22,7 @@ relatedTourSlugs:
 
 Most visitors to the Algarve come for the caves and the beaches. Spend a few hours on the water and you realise the coastline is also a rich, surprisingly diverse marine habitat — part Atlantic open sea, part protected estuary, part rocky reef. If you know where to look, almost every boat trip includes more wildlife than the brochure advertises.
 
-Here's a field guide to what actually lives off this coast, from the usual suspects to the rare visitors worth looking twice for.
+Here's a field guide to what actually lives off this coast, from the usual suspects to the rare visitors worth looking twice for. For everything else about visiting the famous cave itself, see [our complete Benagil Cave Tour guide](/en/blog/benagil-cave-tour-complete-guide/); this piece is the wildlife sibling.
 
 ## Dolphins (the headline act)
 
@@ -129,4 +129,4 @@ And when something does show up, go quiet and watch. The worst way to see marine
 
 Any of our [Algarve boat tours](/en/tours/) pass through habitat where you might see most of what's above. On calm mornings, the [Benagil cave route](/en/tours/benagil-caves-speed-boat-tour/) regularly turns up dolphins, rays, and seabirds alongside the coastal geology.
 
-Got a specific species you're hoping to see? Message us when booking — we can sometimes time a departure around tidal or light conditions that boost your odds.
+Got a specific species you're hoping to see? Message us when booking — we can sometimes time a departure around tidal or light conditions that boost your odds. For everything else about Benagil and the rest of the cave coast, [our complete Benagil Cave Tour guide](/en/blog/benagil-cave-tour-complete-guide/) is the hub piece.

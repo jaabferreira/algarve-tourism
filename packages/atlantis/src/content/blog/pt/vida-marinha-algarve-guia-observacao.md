@@ -1,6 +1,6 @@
 ---
 title: "Vida Marinha na Costa Algarvia: Guia de Observação"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Para além dos golfinhos, a costa algarvia alberga polvos, aves marinhas, peixes-lua e visitantes ocasionais das águas profundas. Aqui fica um guia de campo prático sobre o que se pode realmente ver a partir de um barco, e onde olhar."
 image: "https://cdn.filestackcontent.com/JzY1MVCyRuuqhAyd5MqL"
 imageAlt: "Água turquesa transparente da reserva natural de Alvor na costa algarvia, habitat marinho rico em aves e peixes"
@@ -22,7 +22,7 @@ relatedTourSlugs:
 
 A maioria dos visitantes do Algarve vem pelas grutas e pelas praias. Passe algumas horas na água e percebe que o litoral é também um habitat marinho rico e surpreendentemente diverso — parte mar aberto atlântico, parte ria protegida, parte recife rochoso. Se souber onde olhar, quase todos os passeios de barco incluem mais vida selvagem do que o folheto anuncia.
 
-Aqui fica um guia de campo sobre o que realmente vive nesta costa, dos suspeitos habituais aos visitantes raros que merecem um segundo olhar.
+Aqui fica um guia de campo sobre o que realmente vive nesta costa, dos suspeitos habituais aos visitantes raros que merecem um segundo olhar. Para tudo o resto sobre visitar a famosa gruta em si, consulte [o nosso guia completo do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/); esta peça é a irmã da vida selvagem.
 
 ## Golfinhos (a atracção principal)
 
@@ -129,4 +129,4 @@ E quando algo aparece, fique em silêncio e observe. A pior forma de ver vida ma
 
 Qualquer um dos nossos [tours de barco no Algarve](/pt/tours/) passa por habitat onde pode ver grande parte do que está acima. Em manhãs calmas, a [rota pelas grutas de Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) costuma oferecer golfinhos, raias e aves marinhas para além da geologia costeira.
 
-Tem uma espécie específica que gostaria de ver? Envie mensagem ao reservar — por vezes podemos agendar uma saída em torno de condições de maré ou luz que aumentem as suas hipóteses.
+Tem uma espécie específica que gostaria de ver? Envie mensagem ao reservar — por vezes podemos agendar uma saída em torno de condições de maré ou luz que aumentem as suas hipóteses. Para tudo o resto sobre Benagil e o restante da costa das grutas, [o nosso guia completo do tour à gruta de Benagil](/pt/blog/guia-completo-gruta-benagil/) é a peça central.

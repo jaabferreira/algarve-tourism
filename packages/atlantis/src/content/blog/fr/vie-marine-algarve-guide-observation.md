@@ -1,6 +1,6 @@
 ---
 title: "Vie Marine de la Côte de l'Algarve : Guide d'Observation"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Au-delà des dauphins, la côte de l'Algarve abrite poulpes, oiseaux marins, poissons-lunes et visiteurs occasionnels des eaux profondes. Voici un guide de terrain pratique sur ce que vous pouvez réellement voir depuis un bateau, et où regarder."
 image: "https://cdn.filestackcontent.com/JzY1MVCyRuuqhAyd5MqL"
 imageAlt: "Eau turquoise limpide de la réserve naturelle d'Alvor sur la côte de l'Algarve, riche habitat marin pour oiseaux et poissons"
@@ -22,7 +22,7 @@ relatedTourSlugs:
 
 La plupart des visiteurs de l'Algarve viennent pour les grottes et les plages. Passez quelques heures sur l'eau et vous réaliserez que la côte est aussi un habitat marin riche et étonnamment diversifié — moitié mer ouverte atlantique, moitié estuaire protégé, moitié récif rocheux. Si vous savez où regarder, presque toute sortie en bateau inclut plus de faune que ce que la brochure annonce.
 
-Voici un guide de terrain sur ce qui vit vraiment sur cette côte, des suspects habituels aux visiteurs rares qui méritent un second regard.
+Voici un guide de terrain sur ce qui vit vraiment sur cette côte, des suspects habituels aux visiteurs rares qui méritent un second regard. Pour tout le reste sur la visite de la grotte célèbre elle-même, consultez [notre guide complet du tour à la grotte de Benagil](/fr/blog/guide-complet-grotte-benagil/) ; cette pièce est la sœur faune.
 
 ## Les Dauphins (la tête d'affiche)
 
@@ -129,4 +129,4 @@ Et quand quelque chose apparaît, restez silencieux et observez. La pire façon 
 
 N'importe lequel de nos [tours en bateau en Algarve](/fr/tours/) passe par des habitats où vous pourriez voir la plupart de ce qui précède. Les matins calmes, la [route des grottes de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) offre régulièrement dauphins, raies et oiseaux marins en plus de la géologie côtière.
 
-Une espèce spécifique que vous espérez voir ? Écrivez-nous au moment de la réservation — nous pouvons parfois programmer un départ autour de conditions de marée ou de lumière qui augmentent vos chances.
+Une espèce spécifique que vous espérez voir ? Écrivez-nous au moment de la réservation — nous pouvons parfois programmer un départ autour de conditions de marée ou de lumière qui augmentent vos chances. Pour tout le reste sur Benagil et le reste de la côte des grottes, [notre guide complet du tour à la grotte de Benagil](/fr/blog/guide-complet-grotte-benagil/) est la pièce centrale.

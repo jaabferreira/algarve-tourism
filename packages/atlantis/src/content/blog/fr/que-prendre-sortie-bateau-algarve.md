@@ -1,6 +1,6 @@
 ---
 title: "Que Prendre Pour une Sortie en Bateau en Algarve"
-date: "2026-04-16"
+date: "2026-05-15"
 excerpt: "Liste de préparation de skipper pour toute sortie en bateau en Algarve — tour en grotte, croisière en voilier ou journée de pêche. Quoi apporter, quoi laisser à l'hôtel, et les petits objets que tout le monde oublie jusqu'à le regretter."
 image: "https://cdn.filestackcontent.com/b0G3IVy0TViGEFerersQ"
 imageAlt: "Passagers détendus sur le pont d'un voilier au large de la côte de l'Algarve avec lunettes de soleil et serviettes"
@@ -23,7 +23,7 @@ relatedTourSlugs:
 
 Chaque semaine, nous voyons quelqu'un monter sur le bateau avec un sweat en coton qui va passer les trois heures suivantes trempé, ou un grand chapeau de paille qui sera à la mer avant la sortie du port. Le soleil de l'Algarve et la brise atlantique sont tous deux plus forts que prévu, et un peu d'anticipation fait la différence entre "super matinée" et "coup de soleil et téléphone mort".
 
-Voici la liste qu'on donne à nos clients quand ils demandent.
+Voici la liste qu'on donne à nos clients quand ils demandent. Pour la perspective plus large de planification du voyage à Benagil elle-même, consultez [le guide complet du tour à la grotte de Benagil](/fr/blog/guide-complet-grotte-benagil/) ; ceci est la pièce compagne pratique sur l'équipement.
 
 ## L'Essentiel
 
@@ -109,4 +109,4 @@ Notre [Tour en Vedette aux Grottes de Benagil](/fr/tours/benagil-caves-speed-boa
 
 Les prévisions en Algarve sont fiables 48 heures à l'avance mais floues au-delà. Si votre tour est dans quelques jours, surveillez juste les conditions maritimes la veille. Les opérateurs vous contactent proactivement s'il faut reprogrammer — tous nos clients reçoivent un WhatsApp direct si quelque chose change.
 
-Questions sur l'équipement pour votre tour précis, ou sur une condition médicale qui affecte ce que vous devez apporter ? Écrivez-nous avant le voyage — toujours plus facile de régler ça avant qu'au quai.
+Questions sur l'équipement pour votre tour précis, ou sur une condition médicale qui affecte ce que vous devez apporter ? Écrivez-nous avant le voyage — toujours plus facile de régler ça avant qu'au quai. Et pour tout le reste sur la visite de la grotte célèbre, [le guide complet du tour à la grotte de Benagil](/fr/blog/guide-complet-grotte-benagil/) est la pièce centrale.
