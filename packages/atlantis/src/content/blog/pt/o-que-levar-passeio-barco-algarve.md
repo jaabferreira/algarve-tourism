@@ -13,7 +13,7 @@ tags:
   - travel-tips
   - sailing
   - family
-author: Atlantis Tours
+author: Nuno Albino
 readingTime: 5
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil

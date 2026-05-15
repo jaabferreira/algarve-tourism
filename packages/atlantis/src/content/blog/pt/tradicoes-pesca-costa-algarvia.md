@@ -11,7 +11,7 @@ tags:
   - local-culture
   - fishing
   - travel-tips
-author: Atlantis Tours
+author: Nuno Albino
 readingTime: 7
 relatedTourSlugs:
   - pesca-de-fundo

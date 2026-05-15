@@ -13,7 +13,7 @@ tags:
   - travel-tips
   - sailing
   - family
-author: Atlantis Tours
+author: Nuno Albino
 readingTime: 5
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour

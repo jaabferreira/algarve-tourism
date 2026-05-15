@@ -9,7 +9,7 @@
 /pt/tours/benagil /pt/tours/circuito-de-grutas-ate-benagil/ 301
 /en/tours/benagil-alvor /en/tours/benagil-caves-speed-boat-tour/ 301
 /pt/tours/benagil-alvor /pt/tours/circuito-de-grutas-ate-benagil/ 301
-/en/tours/yacht /en/tours/luxury-sail-yacht-cruise/ 301
+/en/tours/yacht /en/tours/private-sail-yacht-cruise/ 301
 /pt/tours/yacht /pt/tours/luxuoso-iate-a-vela/ 301
 /en/tours/reef-fishing /en/tours/reef-fishing-tour/ 301
 /pt/tours/reef-fishing /pt/tours/pesca-de-fundo/ 301
@@ -19,11 +19,20 @@
 # Old PT slugs on EN locale → new EN slugs (slug pipeline fix 2026-04-16)
 /en/tours/circuito-de-grutas-ate-benagil/ /en/tours/benagil-caves-speed-boat-tour/ 301
 /en/tours/benagil-e-reserva-natural-de-alvor/ /en/tours/benagil-caves-speed-boat-tour/ 301
-/en/tours/luxuoso-iate-a-vela/ /en/tours/luxury-sail-yacht-cruise/ 301
-/en/tours/luxuoso-iate-a-vela-meio-dia/ /en/tours/luxury-sail-yacht-cruise/ 301
+/en/tours/luxuoso-iate-a-vela/ /en/tours/private-sail-yacht-cruise/ 301
+/en/tours/luxuoso-iate-a-vela-meio-dia/ /en/tours/private-sail-yacht-cruise/ 301
 /pt/tours/luxuoso-iate-a-vela-meio-dia/ /pt/tours/luxuoso-iate-a-vela/ 301
-/en/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/ /en/tours/cranchi-yacht-cruise-to-the-benagil-caves/ 301
+/en/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/ /en/tours/private-yacht-cruise-to-the-benagil-caves/ 301
 /en/tours/pesca-de-fundo/ /en/tours/reef-fishing-tour/ 301
+
+# Cranchi/luxury-yacht rename → private-* (2026-04+) — previous canonical slugs
+# that GSC may have indexed before the rename. Redirect to current canonical.
+/en/tours/luxury-sail-yacht-cruise/ /en/tours/private-sail-yacht-cruise/ 301
+/es/tours/luxury-sail-yacht-cruise/ /es/tours/private-sail-yacht-cruise/ 301
+/fr/tours/luxury-sail-yacht-cruise/ /fr/tours/private-sail-yacht-cruise/ 301
+/en/tours/cranchi-yacht-cruise-to-the-benagil-caves/ /en/tours/private-yacht-cruise-to-the-benagil-caves/ 301
+/es/tours/cranchi-yacht-cruise-to-the-benagil-caves/ /es/tours/private-yacht-cruise-to-the-benagil-caves/ 301
+/fr/tours/cranchi-yacht-cruise-to-the-benagil-caves/ /fr/tours/private-yacht-cruise-to-the-benagil-caves/ 301
 
 # Discontinued products → tours index
 # (Arade/Silves river cruise is no longer offered — these used to chain to a
