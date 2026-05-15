@@ -161,9 +161,9 @@ Leave loose hats, fragile sunglasses, and anything non-waterproof at the hotel. 
 
 ## Visiting With Kids and Less Confident Swimmers
 
-Speedboat trips to Benagil are usually fine for children from around age 3 to 5, depending on the operator. Life jackets are provided and mandatory for every guest on board. Babies and toddlers under 3 are a no on most speedboats; the slower Cranchi motor yacht is the better pick for very young children, pregnant guests, or anyone with a back condition that doesn't like chop.
+We don't set a minimum age on any of our boats — unlike most Algarve operators, who anchor at 4 or 5. Any age welcome on the speedboat, sail yacht, and private Cranchi; under-2s travel with a signed waiver. Life jackets are mandatory and we carry the standard kid range on every boat, with toddler and baby sizes on the private boats with prior notice. The right boat changes with age — the speedboat for everyday family trips, the sail yacht for the gentlest motion (it anchors outside the cave), the Cranchi for cave entry with shade and a washroom — but the answer to "can my child come" is yes.
 
-For non-swimmers: you don't need to swim to enter the cave on a boat tour. The boat goes in, you stay on board, you take your photos, and the boat comes out. The swim stop later in the tour is optional — non-swimmers stay in the boat with the skipper while everyone else jumps in. The cave itself, on a calm day, is no rougher than the harbour. We're writing a dedicated family guide for the cluster; until then, the speedboat tour page has our current age and seating policy.
+For non-swimmers: you don't need to swim to enter the cave on a boat tour. The boat goes in, you stay on board, you take your photos, and the boat comes out. The swim stop later in the tour is optional — non-swimmers stay in the boat with the skipper while everyone else jumps in. The cave itself, on a calm day, is no rougher than the harbour. For the full family-specific picture — age-by-age recommendations, the swim stop with kids, motion sickness, what to pack — see [our family guide to the Benagil cave tour](/en/blog/benagil-cave-tour-with-kids/).
 
 ## After the Tour: Where to Eat, the Other Side of the Coast
 

@@ -95,7 +95,7 @@ For phones, wallets, car keys, sunglasses case, sunscreen. Even if the boat has 
 - Snacks and a small toy for the boat ride back (when the post-swim crash hits)
 - A life jacket isn't something you need to bring — all operators carry certified child sizes, but it's worth confirming before booking if you have a toddler or baby
 
-Our [Benagil Caves Speed Boat Tour](/en/tours/benagil-caves-speed-boat-tour/) accepts children from age four; [our sailing tours](/en/tours/private-sail-yacht-cruise/) accept younger kids because the boat motion is gentler.
+Our [Benagil Caves Speed Boat Tour](/en/tours/benagil-caves-speed-boat-tour/) takes any age — there's no minimum; [our sailing tours](/en/tours/private-sail-yacht-cruise/) are the gentler-motion option for sensitive kids. For the full picture on travelling with children — age-by-age recommendations, the swim stop, motion sickness, the under-2 waiver — see [our Benagil cave tour with kids guide](/en/blog/benagil-cave-tour-with-kids/).
 
 ## Morning vs Sunset Trip Tweaks
 

@@ -95,7 +95,7 @@ Para telemóveis, carteiras, chaves do carro, estojo dos óculos, protector sola
 - Snacks e brinquedo pequeno para a viagem de regresso (quando chega o cansaço pós-banho)
 - Colete salva-vidas não precisa de trazer — todos os operadores têm tamanhos de criança certificados, mas confirme antes de reservar se tiver bebé ou criança pequena
 
-O nosso [Circuito de Grutas até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) aceita crianças a partir dos quatro anos; os [passeios à vela](/pt/tours/luxuoso-iate-a-vela/) aceitam mais pequenos porque o movimento do barco é mais suave.
+O nosso [Circuito de Grutas até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) aceita qualquer idade — não há mínimo; os [passeios à vela](/pt/tours/luxuoso-iate-a-vela/) são a opção de movimento mais suave para crianças sensíveis. Para a perspectiva completa sobre viajar com crianças — recomendações idade a idade, a paragem para banho, enjoo, a declaração para menores de 2 anos — veja [o nosso guia para o passeio à gruta de Benagil com crianças](/pt/blog/passeio-gruta-benagil-com-criancas/).
 
 ## Ajustes Entre Manhã e Pôr-do-Sol
 

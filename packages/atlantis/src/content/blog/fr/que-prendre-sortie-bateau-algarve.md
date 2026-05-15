@@ -95,7 +95,7 @@ Pour téléphone, portefeuille, clés, étui à lunettes, crème solaire. Même 
 - Snacks et petit jouet pour le retour (quand le contrecoup post-baignade arrive)
 - Le gilet de sauvetage n'est pas à apporter — tous les opérateurs ont des tailles enfant certifiées, mais vérifiez avant de réserver si vous avez un bébé ou tout-petit
 
-Notre [Tour en Vedette aux Grottes de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) accepte les enfants à partir de 4 ans ; nos [tours en voilier](/fr/tours/private-sail-yacht-cruise/) acceptent les plus petits car le mouvement est plus doux.
+Notre [Tour en Vedette aux Grottes de Benagil](/fr/tours/benagil-caves-speed-boat-tour/) accepte tout âge — pas de minimum ; nos [tours en voilier](/fr/tours/private-sail-yacht-cruise/) sont l'option au mouvement le plus doux pour les enfants sensibles. Pour le tableau complet sur les sorties avec enfants — recommandations par tranche d'âge, l'arrêt baignade, mal de mer, la décharge pour les moins de 2 ans — voir [notre guide pour la sortie à la grotte de Benagil avec enfants](/fr/blog/tour-grotte-benagil-avec-enfants/).
 
 ## Ajustements Matin vs Coucher du Soleil
 

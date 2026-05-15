@@ -95,7 +95,7 @@ Para móvil, cartera, llaves del coche, estuche de gafas, crema solar. Incluso s
 - Snacks y juguete pequeño para la vuelta (cuando llega el bajón post-baño)
 - No necesitas traer chaleco — todos los operadores tienen tallas infantiles certificadas, pero confirma antes si tienes un bebé o un niño pequeño
 
-Nuestro [Tour en Lancha a las Cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) acepta niños desde 4 años; los [tours en velero](/es/tours/private-sail-yacht-cruise/) aceptan a los más pequeños porque el movimiento del barco es más suave.
+Nuestro [Tour en Lancha a las Cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) acepta cualquier edad — no hay mínimo; los [tours en velero](/es/tours/private-sail-yacht-cruise/) son la opción de movimiento más suave para niños sensibles. Para el panorama completo sobre viajar con niños — recomendaciones por edad, la parada de baño, mareos, la declaración para menores de 2 años — ve [nuestra guía para el tour a la cueva de Benagil con niños](/es/blog/tour-cueva-benagil-con-ninos/).
 
 ## Ajustes Mañana vs Atardecer
 
