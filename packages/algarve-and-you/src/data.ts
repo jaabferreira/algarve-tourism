@@ -9,6 +9,47 @@ const FH_LOCALE_MAP: Record<string, string> = {
   pt: "pt",
 };
 
+// Per-category display order overrides. Items listed by pk appear first
+// in the given order; anything else keeps the FH API order after them.
+const CATEGORY_ORDER: Record<string, number[]> = {
+  spa: [
+    718494, // Centro de Check in - Guardar Bagagem (featured)
+    718514, // Centro de Check in - Ginásio
+    730255, // Área de Duche e Vestiário
+    718481, // Check-in Centre - BEM ESTAR - Circuito Zen
+    718509, // Massagens
+  ],
+};
+
+function applyCategoryOrder(items: NormalizedItem[]): NormalizedItem[] {
+  const byCategory = new Map<string, NormalizedItem[]>();
+  for (const item of items) {
+    const list = byCategory.get(item.category) ?? [];
+    list.push(item);
+    byCategory.set(item.category, list);
+  }
+
+  for (const [category, order] of Object.entries(CATEGORY_ORDER)) {
+    const list = byCategory.get(category);
+    if (!list) continue;
+    const rank = new Map<number, number>(order.map((pk, i) => [pk, i]));
+    list.sort((a: NormalizedItem, b: NormalizedItem) => {
+      const ra = rank.get(a.pk) ?? Number.POSITIVE_INFINITY;
+      const rb = rank.get(b.pk) ?? Number.POSITIVE_INFINITY;
+      return ra - rb;
+    });
+  }
+
+  const result: NormalizedItem[] = [];
+  const seen = new Set<string>();
+  for (const item of items) {
+    if (seen.has(item.category)) continue;
+    seen.add(item.category);
+    result.push(...(byCategory.get(item.category) ?? []));
+  }
+  return result;
+}
+
 function findDataFile(locale: Locale): string | null {
   const fhLang = FH_LOCALE_MAP[locale] ?? "en";
   const filename = `atlantistours.${fhLang}.json`;
@@ -40,7 +81,7 @@ export function loadItems(locale: Locale = "en"): NormalizedItem[] {
       const allowed = new Set(config.fh.itemPks);
       items = items.filter((item) => allowed.has(item.pk));
     }
-    return items;
+    return applyCategoryOrder(items);
   } catch {
     return [];
   }
