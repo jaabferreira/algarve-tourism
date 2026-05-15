@@ -17,8 +17,8 @@ tags:
 author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
-  - cranchi-yacht-cruise-to-the-benagil-caves
-  - luxury-sail-yacht-cruise
+  - private-yacht-cruise-to-the-benagil-caves
+  - private-sail-yacht-cruise
 ---
 
 Une croisière au coucher du soleil figure sur toutes les listes de vacances en Algarve pour une raison : ça fonctionne. L'eau se calme en fin de journée, la lumière devient dorée, les falaises s'illuminent en orange, et trois heures sur un bateau deviennent le souvenir avec lequel vous rentrez.
@@ -47,11 +47,11 @@ Rapides, efficaces, 1,5 à 2 heures. Généralement un arrêt, puis boucle de re
 
 ### Yachts et Vedettes Cabine au Coucher du Soleil
 
-Le classique. Un yacht comme notre [Cranchi Yacht aux Grottes de Benagil](/fr/tours/cranchi-yacht-cruise-to-the-benagil-caves/) a un pont spacieux, une vraie cabine, des canapés en dessous, et la vitesse pour couvrir assez de côte que cela ressemble à une vraie croisière et non à un tour du port. Généralement 3 heures, avec vraie pause baignade et boissons. Idéal pour couples, petits groupes, occasions spéciales.
+Le classique. Un yacht comme notre [Cranchi Yacht aux Grottes de Benagil](/fr/tours/private-yacht-cruise-to-the-benagil-caves/) a un pont spacieux, une vraie cabine, des canapés en dessous, et la vitesse pour couvrir assez de côte que cela ressemble à une vraie croisière et non à un tour du port. Généralement 3 heures, avec vraie pause baignade et boissons. Idéal pour couples, petits groupes, occasions spéciales.
 
 ### Croisières en Voilier au Coucher du Soleil
 
-La version la plus silencieuse — moteurs coupés après la sortie du port, seulement vent et vagues. Rythme plus lent, durées plus longues (souvent 3,5 à 4 heures), moins de monde. Notre [Croisière en Voilier de Luxe](/fr/tours/luxury-sail-yacht-cruise/) dans sa version coucher du soleil est ce que la plupart de nos clients qui reviennent choisissent quand ils veulent la version la plus complète.
+La version la plus silencieuse — moteurs coupés après la sortie du port, seulement vent et vagues. Rythme plus lent, durées plus longues (souvent 3,5 à 4 heures), moins de monde. Notre [Croisière en Voilier de Luxe](/fr/tours/private-sail-yacht-cruise/) dans sa version coucher du soleil est ce que la plupart de nos clients qui reviennent choisissent quand ils veulent la version la plus complète.
 
 ### Catamarans
 

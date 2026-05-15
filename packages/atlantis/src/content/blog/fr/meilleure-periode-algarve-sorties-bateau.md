@@ -17,8 +17,8 @@ author: Atlantis Tours
 readingTime: 7
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
-  - cranchi-yacht-cruise-to-the-benagil-caves
+  - private-sail-yacht-cruise
+  - private-yacht-cruise-to-the-benagil-caves
 ---
 
 "Quand devrais-je venir ?" est la question qu'on nous pose le plus. La réponse honnête dépend de ce que vous voulez optimiser — chaleur, prix, photos de grotte, plages vides ou observation de dauphins. Voici comment chaque mois en Algarve se ressent quand vos plans tournent autour de l'eau.
@@ -51,7 +51,7 @@ L'affluence monte après la mi-mai mais reste très gérable. C'est aussi la der
 
 Ambiance plein été sans la chaleur d'août. Journées longues (coucher de soleil après 21h00), eau agréable pour nager (20–22 °C), l'afflux touristique n'a pas encore atteint son sommet. Les sorties en voilier deviennent particulièrement gratifiantes — brises régulières l'après-midi, soleil fiable.
 
-Notre [Croisière en Voilier de Luxe](/fr/tours/luxury-sail-yacht-cruise/) se remplit plus vite en juin et début juillet pour une raison : les conditions sont idéales, mais la foule n'est pas encore là.
+Notre [Croisière en Voilier de Luxe](/fr/tours/private-sail-yacht-cruise/) se remplit plus vite en juin et début juillet pour une raison : les conditions sont idéales, mais la foule n'est pas encore là.
 
 **Idéal pour :** familles, amateurs de voile, tous ceux qui veulent l'été sans les prix d'août.
 

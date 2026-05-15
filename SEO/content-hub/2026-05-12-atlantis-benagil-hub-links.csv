@@ -44,14 +44,14 @@ can-you-swim-benagil-cave (NEW),tour:benagil-caves-speed-boat-tour (PK 717720),c
 best-time-visit-benagil-caves (EXPAND),tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
 dolphin-watching-algarve-species-seasons,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the speedboat tour (dolphins often spotted),planned
 benagil-vs-other-sea-caves-algarve,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
-benagil-vs-other-sea-caves-algarve,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,a private Cranchi yacht to Benagil,planned
-sunset-cruises-algarve-summer-guide,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour,our luxury sail-yacht sunset cruise,planned
-sunset-cruises-algarve-summer-guide,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,the Cranchi yacht sunset option,planned
-algarve-in-spring-best-kept-secret,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour,a spring sailing cruise,planned
+benagil-vs-other-sea-caves-algarve,tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,a private Cranchi yacht to Benagil,planned
+sunset-cruises-algarve-summer-guide,tour:private-sail-yacht-cruise (PK 717754),cluster->tour,our luxury sail-yacht sunset cruise,planned
+sunset-cruises-algarve-summer-guide,tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour,the Cranchi yacht sunset option,planned
+algarve-in-spring-best-kept-secret,tour:private-sail-yacht-cruise (PK 717754),cluster->tour,a spring sailing cruise,planned
 algarve-in-spring-best-kept-secret,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the Benagil speedboat tour,planned
 what-to-pack-algarve-boat-tour,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour (one of four),any of our boat tours,planned
-what-to-pack-algarve-boat-tour,tour:luxury-sail-yacht-cruise (PK 717754),cluster->tour (one of four),sail-yacht cruise,planned
-what-to-pack-algarve-boat-tour,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour (one of four),Cranchi yacht day,planned
+what-to-pack-algarve-boat-tour,tour:private-sail-yacht-cruise (PK 717754),cluster->tour (one of four),sail-yacht cruise,planned
+what-to-pack-algarve-boat-tour,tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),cluster->tour (one of four),Cranchi yacht day,planned
 what-to-pack-algarve-boat-tour,tour:reef-fishing-tour (PK 718024),cluster->tour (one of four),reef fishing trip,planned
 marine-life-algarve-coast-spotters-guide,tour:benagil-caves-speed-boat-tour (PK 717720),cluster->tour,the speedboat tour,planned
 marine-life-algarve-coast-spotters-guide,tour:reef-fishing-tour (PK 718024),cluster->tour,a reef fishing trip,planned
@@ -61,20 +61,20 @@ fishing-traditions-algarve-coast,tour:reef-fishing-tour (PK 718024),satellite->t
 fishing-traditions-algarve-coast,tour:restaurant-allgarbe (PK 718031) / meal-included tours,satellite->tour,Restaurant Allgarbe,planned
 portuguese-coastal-cuisine-algarve,tour:restaurant-allgarbe (PK 718031) / meal-included tours,standalone->tour,Restaurant Allgarbe / the Benagil + meal tours,planned
 benagil-cave-tour-complete-guide,tour:benagil-caves-speed-boat-tour (PK 717720),pillar->tour (primary CTA),the small-group Benagil speedboat tour,planned
-benagil-cave-tour-complete-guide,tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),pillar->tour,a private Cranchi yacht trip,planned
-benagil-cave-tour-complete-guide,tour:luxury-sail-yacht-cruise (PK 717754),pillar->tour,the sail-yacht cruise,planned
+benagil-cave-tour-complete-guide,tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),pillar->tour,a private Cranchi yacht trip,planned
+benagil-cave-tour-complete-guide,tour:private-sail-yacht-cruise (PK 717754),pillar->tour,the sail-yacht cruise,planned
 tour:benagil-caves-speed-boat-tour (PK 717720),benagil-cave-tour-complete-guide,tour->guide (Plan your trip block),Benagil Cave Tour guide,planned
 tour:benagil-caves-speed-boat-tour (PK 717720),how-to-visit-benagil-cave (NEW),tour->guide,how to visit the Benagil cave,planned
 tour:benagil-caves-speed-boat-tour (PK 717720),can-you-swim-benagil-cave (NEW),tour->guide,can you swim into the cave?,planned
 tour:benagil-caves-speed-boat-tour (PK 717720),best-time-visit-benagil-caves (EXPAND),tour->guide,best time to visit,planned
 tour:benagil-caves-speed-boat-tour (PK 717720),dolphin-watching-algarve-species-seasons,tour->guide,dolphin watching,planned
-tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-cave-tour-complete-guide,tour->guide,Benagil Cave Tour guide,planned
-tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-vs-other-sea-caves-algarve,tour->guide,which Algarve cave to visit,planned
-tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises,planned
-tour:cranchi-yacht-cruise-to-the-benagil-caves (PK 720028),best-time-visit-benagil-caves (EXPAND),tour->guide,best time to visit,planned
-tour:luxury-sail-yacht-cruise (PK 717754),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises in the Algarve,planned
-tour:luxury-sail-yacht-cruise (PK 717754),algarve-in-spring-best-kept-secret,tour->guide,the Algarve in spring,planned
-tour:luxury-sail-yacht-cruise (PK 717754),what-to-pack-algarve-boat-tour,tour->guide,what to pack,planned
+tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-cave-tour-complete-guide,tour->guide,Benagil Cave Tour guide,planned
+tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),benagil-vs-other-sea-caves-algarve,tour->guide,which Algarve cave to visit,planned
+tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises,planned
+tour:private-yacht-cruise-to-the-benagil-caves (PK 720028),best-time-visit-benagil-caves (EXPAND),tour->guide,best time to visit,planned
+tour:private-sail-yacht-cruise (PK 717754),sunset-cruises-algarve-summer-guide,tour->guide,sunset cruises in the Algarve,planned
+tour:private-sail-yacht-cruise (PK 717754),algarve-in-spring-best-kept-secret,tour->guide,the Algarve in spring,planned
+tour:private-sail-yacht-cruise (PK 717754),what-to-pack-algarve-boat-tour,tour->guide,what to pack,planned
 tour:reef-fishing-tour (PK 718024),reef-fishing-algarve-what-to-expect,tour->guide,what to expect on a reef fishing trip,planned
 tour:reef-fishing-tour (PK 718024),reef-fishing-portimao-half-day-guide,tour->guide,a skipper's half-day guide,planned
 tour:reef-fishing-tour (PK 718024),fishing-traditions-algarve-coast,tour->guide,fishing traditions of the Algarve,planned

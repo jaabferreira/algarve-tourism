@@ -17,8 +17,8 @@ tags:
 author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
-  - cranchi-yacht-cruise-to-the-benagil-caves
-  - luxury-sail-yacht-cruise
+  - private-yacht-cruise-to-the-benagil-caves
+  - private-sail-yacht-cruise
 ---
 
 A sunset cruise is on every Algarve holiday list for a reason: it delivers. The water calms at the end of the day, the light turns gold, the cliffs glow orange, and three hours on a boat becomes the memory you come home with.
@@ -47,11 +47,11 @@ Fast, efficient, 1.5 to 2 hours. Usually one stop, then a quick loop back. Best 
 
 ### Yacht and Motor Cruiser Sunset Trips
 
-The classic. A yacht like our [Cranchi Yacht Cruise to the Benagil Caves](/en/tours/cranchi-yacht-cruise-to-the-benagil-caves/) has a spacious deck, a proper cabin, sofas below, and the speed to cover enough coast to feel like a real cruise rather than a lap around the marina. Usually 3 hours total, with a proper swim stop and drinks. Best for couples, small groups, special occasions.
+The classic. A yacht like our [Cranchi Yacht Cruise to the Benagil Caves](/en/tours/private-yacht-cruise-to-the-benagil-caves/) has a spacious deck, a proper cabin, sofas below, and the speed to cover enough coast to feel like a real cruise rather than a lap around the marina. Usually 3 hours total, with a proper swim stop and drinks. Best for couples, small groups, special occasions.
 
 ### Sailing Yacht Sunset Trips
 
-The quietest version — engines off once you clear the marina, just wind and waves. Slower pace, longer durations (often 3.5–4 hours), fewer people. Our [Luxury Sail Yacht Cruise](/en/tours/luxury-sail-yacht-cruise/) in its sunset slot is the option that most of our returning guests pick when they want the fullest version of the experience.
+The quietest version — engines off once you clear the marina, just wind and waves. Slower pace, longer durations (often 3.5–4 hours), fewer people. Our [Luxury Sail Yacht Cruise](/en/tours/private-sail-yacht-cruise/) in its sunset slot is the option that most of our returning guests pick when they want the fullest version of the experience.
 
 ### Catamarans
 

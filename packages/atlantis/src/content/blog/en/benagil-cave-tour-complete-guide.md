@@ -15,7 +15,7 @@ author: Nuno Albino
 readingTime: 15
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - cranchi-yacht-cruise-to-the-benagil-caves
+  - private-yacht-cruise-to-the-benagil-caves
 faqs:
   - question: "Can you swim into the Benagil cave?"
     answer: >
@@ -126,11 +126,11 @@ What it is: a 2.5 to 3-hour guided trip launching from Benagil beach, paddling t
 
 ### Cranchi motor yacht (private)
 
-What it is: a 38ft motor yacht with deck space, shade, a washroom, and a flybridge — runs as a private charter for groups up to 11. Clears the ~2.5m arch and enters the cave like a speedboat does, but with the comfort of a yacht. Best for: families, small groups celebrating something, anyone who wants the cave with deck space and a half-day swim stop. Cost: €€€ (private charter). Cave entry: yes. Duration: half-day or full-day. Weather sensitivity: handles chop better than a speedboat but still cancels in serious swell. This is [a private Cranchi yacht trip](/en/tours/cranchi-yacht-cruise-to-the-benagil-caves/).
+What it is: a 38ft motor yacht with deck space, shade, a washroom, and a flybridge — runs as a private charter for groups up to 11. Clears the ~2.5m arch and enters the cave like a speedboat does, but with the comfort of a yacht. Best for: families, small groups celebrating something, anyone who wants the cave with deck space and a half-day swim stop. Cost: €€€ (private charter). Cave entry: yes. Duration: half-day or full-day. Weather sensitivity: handles chop better than a speedboat but still cancels in serious swell. This is [a private Cranchi yacht trip](/en/tours/private-yacht-cruise-to-the-benagil-caves/).
 
 ### Luxury sail yacht (cave from outside)
 
-What it is: a tall-mast sail yacht running as a private charter — long, slow, beautiful days on the water, with sails up when the wind cooperates. The mast is the limiting factor and the boat cannot clear the cave arch, so the sail yacht anchors outside the cave and guests photograph the skylight from the water. Best for: a slower, sail-driven day on the coast where the cave is one of the stops, not the headline. Cost: €€€. Cave entry: no — anchors outside. Duration: half-day or full-day. This is [the sail-yacht cruise](/en/tours/luxury-sail-yacht-cruise/). Be clear with yourself before you book: if you want to be *inside* the cave, the sail yacht isn't the right boat.
+What it is: a tall-mast sail yacht running as a private charter — long, slow, beautiful days on the water, with sails up when the wind cooperates. The mast is the limiting factor and the boat cannot clear the cave arch, so the sail yacht anchors outside the cave and guests photograph the skylight from the water. Best for: a slower, sail-driven day on the coast where the cave is one of the stops, not the headline. Cost: €€€. Cave entry: no — anchors outside. Duration: half-day or full-day. This is [the sail-yacht cruise](/en/tours/private-sail-yacht-cruise/). Be clear with yourself before you book: if you want to be *inside* the cave, the sail yacht isn't the right boat.
 
 ## Benagil vs the Other Algarve Sea Caves
 
@@ -177,12 +177,12 @@ Book direct with the operator. OTA listings on Viator, GetYourGuide, and Civitat
 
 What's usually included on a Benagil speedboat tour: the boat itself, fuel, life jackets, insurance, a soft drink or two, and — on most operators — a swim stop in a quiet bay between Benagil and Marinha. What's *not* typically included: hotel transfers, food beyond a token drink, professional photos, or a dedicated photographer (you're shooting on your own phone, which is why the waterproof pouch matters). Some operators bundle a swim tour, an Alvor nature-reserve loop, or a sunset return; check the inclusions on the tour page before you book.
 
-We run [the small-group Benagil speedboat tour](/en/tours/benagil-caves-speed-boat-tour/) as the default option, [a private Cranchi yacht trip](/en/tours/cranchi-yacht-cruise-to-the-benagil-caves/) for groups who want the cave with more deck space, and [the sail-yacht cruise](/en/tours/luxury-sail-yacht-cruise/) for a slower sail-driven day on the coast (no cave entry on that one — the mast doesn't clear the arch). If you want a softer pace and you're flexible on dates, [a sunset cruise instead](/en/blog/sunset-cruises-algarve-summer-guide/) is the option a lot of returning guests choose for their second day on the water.
+We run [the small-group Benagil speedboat tour](/en/tours/benagil-caves-speed-boat-tour/) as the default option, [a private Cranchi yacht trip](/en/tours/private-yacht-cruise-to-the-benagil-caves/) for groups who want the cave with more deck space, and [the sail-yacht cruise](/en/tours/private-sail-yacht-cruise/) for a slower sail-driven day on the coast (no cave entry on that one — the mast doesn't clear the arch). If you want a softer pace and you're flexible on dates, [a sunset cruise instead](/en/blog/sunset-cruises-algarve-summer-guide/) is the option a lot of returning guests choose for their second day on the water.
 
 ## Ready to See It in Person?
 
 If you have a morning free during your Algarve trip, a Benagil cave tour is the easiest "wow" the south coast offers. Small boats sell out fastest in summer — book a day or two ahead in May and September, four or five days ahead for July and August.
 
-If you're ready to book, [the small-group Benagil speedboat tour](/en/tours/benagil-caves-speed-boat-tour/) is the default we'd point most guests at, and [a private Cranchi yacht trip](/en/tours/cranchi-yacht-cruise-to-the-benagil-caves/) is the upgrade for families and small groups. If you're still planning and want to dial in the date, [the best time of year and day to visit](/en/blog/best-time-visit-benagil-caves/) is the cluster piece for that. If you haven't yet decided whether Benagil or one of the quieter caves fits your trip, read [how Benagil compares to Marinha and the rest](/en/blog/benagil-vs-other-sea-caves-algarve/) first.
+If you're ready to book, [the small-group Benagil speedboat tour](/en/tours/benagil-caves-speed-boat-tour/) is the default we'd point most guests at, and [a private Cranchi yacht trip](/en/tours/private-yacht-cruise-to-the-benagil-caves/) is the upgrade for families and small groups. If you're still planning and want to dial in the date, [the best time of year and day to visit](/en/blog/best-time-visit-benagil-caves/) is the cluster piece for that. If you haven't yet decided whether Benagil or one of the quieter caves fits your trip, read [how Benagil compares to Marinha and the rest](/en/blog/benagil-vs-other-sea-caves-algarve/) first.
 
 Have specific questions about access, cancellation policies, or which departure fits your travel group? Message us directly — we run these tours and will answer honestly, even if our schedule doesn't fit yours.

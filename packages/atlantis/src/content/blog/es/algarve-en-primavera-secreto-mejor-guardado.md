@@ -17,7 +17,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
+  - private-sail-yacht-cruise
 ---
 
 Pregunta a una agencia de viajes cuándo visitar el Algarve y te dirán julio o agosto. Pregunta a alguien que vive aquí y te dirá primavera.
@@ -55,7 +55,7 @@ Todos nuestros [tours en cueva](/es/tours/benagil-caves-speed-boat-tour/) salen 
 - **Menos barcos** dentro de la cueva en cada momento. Es común tener la cámara entera para ti en abril o principios de mayo.
 - **Avistamientos de delfines** aumentan drásticamente desde mediados de abril a medida que los grupos vuelven a acercarse a costa.
 
-Los tours en velero también vuelven por completo a partir de abril. El [Crucero Luxuoso en Velero](/es/tours/luxury-sail-yacht-cruise/) encaja especialmente bien en primavera: brisas ligeras fiables por la tarde, mar tranquilo y suficiente sol para cubierta sin el calor de agosto.
+Los tours en velero también vuelven por completo a partir de abril. El [Crucero Luxuoso en Velero](/es/tours/private-sail-yacht-cruise/) encaja especialmente bien en primavera: brisas ligeras fiables por la tarde, mar tranquilo y suficiente sol para cubierta sin el calor de agosto.
 
 ## La Costa de las Flores Silvestres
 

@@ -17,7 +17,7 @@ author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
+  - private-sail-yacht-cruise
   - reef-fishing-tour
 ---
 
@@ -95,7 +95,7 @@ Para móvil, cartera, llaves del coche, estuche de gafas, crema solar. Incluso s
 - Snacks y juguete pequeño para la vuelta (cuando llega el bajón post-baño)
 - No necesitas traer chaleco — todos los operadores tienen tallas infantiles certificadas, pero confirma antes si tienes un bebé o un niño pequeño
 
-Nuestro [Tour en Lancha a las Cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) acepta niños desde 4 años; los [tours en velero](/es/tours/luxury-sail-yacht-cruise/) aceptan a los más pequeños porque el movimiento del barco es más suave.
+Nuestro [Tour en Lancha a las Cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) acepta niños desde 4 años; los [tours en velero](/es/tours/private-sail-yacht-cruise/) aceptan a los más pequeños porque el movimiento del barco es más suave.
 
 ## Ajustes Mañana vs Atardecer
 

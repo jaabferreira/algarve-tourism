@@ -17,8 +17,8 @@ author: Atlantis Tours
 readingTime: 7
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
-  - cranchi-yacht-cruise-to-the-benagil-caves
+  - private-sail-yacht-cruise
+  - private-yacht-cruise-to-the-benagil-caves
 ---
 
 "¿Cuándo debería ir?" es la pregunta que más nos hacen. La respuesta honesta depende de qué quieras optimizar — calor, precio, fotos en la cueva, playas vacías o avistamientos de delfines. Aquí te explicamos cómo se siente cada mes en el Algarve cuando tus planes giran alrededor del agua.
@@ -51,7 +51,7 @@ La afluencia crece a partir de mediados de mayo pero sigue siendo muy manejable.
 
 Ambiente de pleno verano sin el calor de agosto. Los días son largos (atardeceres después de las 21:00), el agua está agradable para nadar (20–22 °C), y la afluencia no ha alcanzado su pico. Los tours en velero se vuelven especialmente gratificantes — brisas consistentes por la tarde, sol fiable.
 
-Nuestro [Crucero Luxuoso en Velero](/es/tours/luxury-sail-yacht-cruise/) se agota más rápido en junio y principios de julio por una razón: las condiciones son ideales, pero no ha llegado la avalancha.
+Nuestro [Crucero Luxuoso en Velero](/es/tours/private-sail-yacht-cruise/) se agota más rápido en junio y principios de julio por una razón: las condiciones son ideales, pero no ha llegado la avalancha.
 
 **Ideal para:** familias, navegantes, todos los que quieren verano sin los precios de agosto.
 

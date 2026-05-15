@@ -15,7 +15,7 @@ author: Nuno Albino
 readingTime: 15
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - cranchi-yacht-cruise-to-the-benagil-caves
+  - private-yacht-cruise-to-the-benagil-caves
 faqs:
   - question: "¿Se puede entrar nadando a la cueva de Benagil?"
     answer: >
@@ -126,11 +126,11 @@ Qué es: una salida guiada de 2,5 a 3 horas saliendo de la playa de Benagil, pas
 
 ### Yate a motor Cranchi (privado)
 
-Qué es: un yate a motor de 38 pies con espacio de cubierta, sombra, baño y flybridge — opera como chárter privado para grupos de hasta 11. Pasa el arco de ~2,5 m y entra en la cueva como lo hace una lancha, pero con la comodidad de un yate. Ideal para: familias, grupos pequeños celebrando algo, cualquiera que quiera la cueva con espacio de cubierta y una parada de baño de media jornada. Coste: €€€ (chárter privado). Entrada en la cueva: sí. Duración: media o jornada completa. Sensibilidad al tiempo: maneja mejor el oleaje que una lancha pero también cancela con mar serio. Este es [un crucero privado en yate Cranchi](/es/tours/cranchi-yacht-cruise-to-the-benagil-caves/).
+Qué es: un yate a motor de 38 pies con espacio de cubierta, sombra, baño y flybridge — opera como chárter privado para grupos de hasta 11. Pasa el arco de ~2,5 m y entra en la cueva como lo hace una lancha, pero con la comodidad de un yate. Ideal para: familias, grupos pequeños celebrando algo, cualquiera que quiera la cueva con espacio de cubierta y una parada de baño de media jornada. Coste: €€€ (chárter privado). Entrada en la cueva: sí. Duración: media o jornada completa. Sensibilidad al tiempo: maneja mejor el oleaje que una lancha pero también cancela con mar serio. Este es [un crucero privado en yate Cranchi](/es/tours/private-yacht-cruise-to-the-benagil-caves/).
 
 ### Yate de vela de lujo (cueva desde fuera)
 
-Qué es: un yate de vela de mástil alto operando como chárter privado — días largos y lentos en el agua, con velas izadas cuando el viento ayuda. El mástil es el factor limitante y el barco no pasa el arco de la cueva, así que el yate de vela fondea fuera y los huéspedes fotografían la abertura desde el agua. Ideal para: un día más lento, a vela, en la costa, donde la cueva es una parada, no el titular. Coste: €€€. Entrada en la cueva: no — fondea fuera. Duración: media o jornada completa. Este es [el crucero en yate de vela](/es/tours/luxury-sail-yacht-cruise/). Sé claro contigo mismo antes de reservar: si quieres estar *dentro* de la cueva, el yate de vela no es el barco adecuado.
+Qué es: un yate de vela de mástil alto operando como chárter privado — días largos y lentos en el agua, con velas izadas cuando el viento ayuda. El mástil es el factor limitante y el barco no pasa el arco de la cueva, así que el yate de vela fondea fuera y los huéspedes fotografían la abertura desde el agua. Ideal para: un día más lento, a vela, en la costa, donde la cueva es una parada, no el titular. Coste: €€€. Entrada en la cueva: no — fondea fuera. Duración: media o jornada completa. Este es [el crucero en yate de vela](/es/tours/private-sail-yacht-cruise/). Sé claro contigo mismo antes de reservar: si quieres estar *dentro* de la cueva, el yate de vela no es el barco adecuado.
 
 ## Benagil vs las Otras Cuevas Marinas del Algarve
 
@@ -177,12 +177,12 @@ Reserva directamente con el operador. Las listas en Viator, GetYourGuide y Civit
 
 Lo que normalmente está incluido en un tour en lancha rápida a Benagil: el propio barco, combustible, chalecos salvavidas, seguro, una o dos bebidas y — en la mayoría de los operadores — una parada de baño en una cala tranquila entre Benagil y Marinha. Lo que *no* suele estar incluido: traslados al hotel, comida más allá de una bebida simbólica, fotos profesionales o un fotógrafo dedicado (estás disparando con tu propio móvil, por eso la funda estanca importa). Algunos operadores empaquetan un tour de natación, una vuelta por la reserva natural de Alvor, o un regreso al atardecer; comprueba las inclusiones en la página del tour antes de reservar.
 
-Operamos [el tour en lancha rápida a las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) como opción por defecto, [un crucero privado en yate Cranchi](/es/tours/cranchi-yacht-cruise-to-the-benagil-caves/) para grupos que quieren la cueva con más espacio de cubierta, y [el crucero en yate de vela](/es/tours/luxury-sail-yacht-cruise/) para un día más lento a vela en la costa (sin entrada a la cueva en ese — el mástil no pasa el arco). Si quieres un ritmo más suave y eres flexible con las fechas, [un crucero al atardecer como alternativa](/es/blog/cruceros-atardecer-algarve-guia-verano/) es la opción que muchos huéspedes que repiten escogen para su segundo día en el agua.
+Operamos [el tour en lancha rápida a las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) como opción por defecto, [un crucero privado en yate Cranchi](/es/tours/private-yacht-cruise-to-the-benagil-caves/) para grupos que quieren la cueva con más espacio de cubierta, y [el crucero en yate de vela](/es/tours/private-sail-yacht-cruise/) para un día más lento a vela en la costa (sin entrada a la cueva en ese — el mástil no pasa el arco). Si quieres un ritmo más suave y eres flexible con las fechas, [un crucero al atardecer como alternativa](/es/blog/cruceros-atardecer-algarve-guia-verano/) es la opción que muchos huéspedes que repiten escogen para su segundo día en el agua.
 
 ## ¿Listo Para Verla en Persona?
 
 Si tienes una mañana libre durante tu viaje al Algarve, un tour a la cueva de Benagil es el "wow" más fácil que ofrece la costa sur. Los barcos pequeños se llenan primero en verano — reserva con uno o dos días de antelación en mayo y septiembre, cuatro o cinco días de antelación en julio y agosto.
 
-Si estás listo para reservar, [el tour en lancha rápida a las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) es la opción por defecto a la que apuntaríamos a la mayoría de los huéspedes, y [un crucero privado en yate Cranchi](/es/tours/cranchi-yacht-cruise-to-the-benagil-caves/) es la mejora para familias y grupos pequeños. Si todavía estás decidiendo si Benagil o una de las cuevas más tranquilas encaja en tu viaje, lee [cómo se compara Benagil con Marinha y el resto](/es/blog/benagil-vs-otras-cuevas-marinas-algarve/) primero.
+Si estás listo para reservar, [el tour en lancha rápida a las cuevas de Benagil](/es/tours/benagil-caves-speed-boat-tour/) es la opción por defecto a la que apuntaríamos a la mayoría de los huéspedes, y [un crucero privado en yate Cranchi](/es/tours/private-yacht-cruise-to-the-benagil-caves/) es la mejora para familias y grupos pequeños. Si todavía estás decidiendo si Benagil o una de las cuevas más tranquilas encaja en tu viaje, lee [cómo se compara Benagil con Marinha y el resto](/es/blog/benagil-vs-otras-cuevas-marinas-algarve/) primero.
 
 ¿Preguntas específicas sobre acceso, políticas de cancelación o qué salida encaja con tu grupo? Escríbenos directamente — nosotros operamos estos tours y responderemos con honestidad, incluso si nuestro horario no coincide con el tuyo.

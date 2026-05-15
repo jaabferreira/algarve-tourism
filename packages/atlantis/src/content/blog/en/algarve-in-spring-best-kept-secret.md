@@ -17,7 +17,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
+  - private-sail-yacht-cruise
 ---
 
 Ask a travel agent when to visit the Algarve and they'll say July or August. Ask anyone who actually lives here and they'll say spring.
@@ -55,7 +55,7 @@ All our [cave tours](/en/tours/benagil-caves-speed-boat-tour/) run from April on
 - **Fewer boats** in the cave at any one time. It's common to have the chamber entirely to yourself in April or early May.
 - **Dolphin sightings** pick up dramatically from mid-April onwards as pods return closer to shore.
 
-Sailing tours also fully resume from April. The [Luxury Sail Yacht Cruise](/en/tours/luxury-sail-yacht-cruise/) is particularly well-suited to spring: reliable light afternoon breezes, calm seas, and enough sun for the deck without the August heat.
+Sailing tours also fully resume from April. The [Luxury Sail Yacht Cruise](/en/tours/private-sail-yacht-cruise/) is particularly well-suited to spring: reliable light afternoon breezes, calm seas, and enough sun for the deck without the August heat.
 
 ## The Wildflower Coastline
 

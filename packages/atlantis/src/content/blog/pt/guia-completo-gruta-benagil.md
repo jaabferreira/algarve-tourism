@@ -15,7 +15,7 @@ author: Nuno Albino
 readingTime: 15
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
-  - cranchi-yacht-cruise-ate-as-grutas-de-benagil
+  - iate-privado-para-as-grutas-de-benagil
 faqs:
   - question: "Pode entrar-se a nado na gruta de Benagil?"
     answer: >
@@ -126,7 +126,7 @@ O que é: uma saída guiada de 2,5 a 3 horas a partir da praia de Benagil, a pas
 
 ### Iate a motor Cranchi (privado)
 
-O que é: um iate a motor de 38 pés com espaço de convés, sombra, casa de banho e flybridge — opera como charter privado para grupos até 11. Passa o arco de cerca de 2,5 m e entra na gruta como uma lancha, mas com o conforto de um iate. Ideal para: famílias, pequenos grupos a celebrar algo, ou qualquer pessoa que queira a gruta com espaço de convés e uma paragem de meia-manhã para banho. Custo: €€€ (charter privado). Entrada na gruta: sim. Duração: meio-dia ou dia inteiro. Sensibilidade meteorológica: lida melhor com ondulação do que uma lancha mas cancela em mar bravo. Este é [um cruzeiro privado em iate Cranchi](/pt/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/).
+O que é: um iate a motor de 38 pés com espaço de convés, sombra, casa de banho e flybridge — opera como charter privado para grupos até 11. Passa o arco de cerca de 2,5 m e entra na gruta como uma lancha, mas com o conforto de um iate. Ideal para: famílias, pequenos grupos a celebrar algo, ou qualquer pessoa que queira a gruta com espaço de convés e uma paragem de meia-manhã para banho. Custo: €€€ (charter privado). Entrada na gruta: sim. Duração: meio-dia ou dia inteiro. Sensibilidade meteorológica: lida melhor com ondulação do que uma lancha mas cancela em mar bravo. Este é [um cruzeiro privado em iate Cranchi](/pt/tours/iate-privado-para-as-grutas-de-benagil/).
 
 ### Iate à vela de luxo (gruta por fora)
 
@@ -177,12 +177,12 @@ Reserve directamente com o operador. As listagens em Viator, GetYourGuide e Civi
 
 O que normalmente está incluído num tour de lancha rápida a Benagil: o próprio barco, combustível, coletes salva-vidas, seguro, uma ou duas bebidas e — na maior parte dos operadores — uma paragem para banho numa enseada calma entre Benagil e Marinha. O que *não* costuma estar incluído: transferes de hotel, comida para além de uma bebida simbólica, fotografias profissionais ou um fotógrafo dedicado (está a fotografar com o seu telemóvel, e é por isso que a bolsa estanque conta). Alguns operadores juntam um tour de natação, uma volta pela reserva natural de Alvor, ou um regresso ao pôr-do-sol; confirme as inclusões na página do tour antes de reservar.
 
-Operamos [o circuito de grutas em pequeno grupo até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) como opção por defeito, [um cruzeiro privado em iate Cranchi](/pt/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/) para grupos que querem a gruta com mais espaço de convés, e [o cruzeiro em iate à vela](/pt/tours/luxuoso-iate-a-vela/) para um dia mais lento à vela na costa (sem entrada na gruta nesse, o mastro não passa o arco). Se quiser um ritmo mais suave e for flexível nas datas, [um cruzeiro ao pôr-do-sol em alternativa](/pt/blog/cruzeiros-por-do-sol-algarve-guia-verao/) é a opção que muitos hóspedes que regressam escolhem para o segundo dia no mar.
+Operamos [o circuito de grutas em pequeno grupo até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) como opção por defeito, [um cruzeiro privado em iate Cranchi](/pt/tours/iate-privado-para-as-grutas-de-benagil/) para grupos que querem a gruta com mais espaço de convés, e [o cruzeiro em iate à vela](/pt/tours/luxuoso-iate-a-vela/) para um dia mais lento à vela na costa (sem entrada na gruta nesse, o mastro não passa o arco). Se quiser um ritmo mais suave e for flexível nas datas, [um cruzeiro ao pôr-do-sol em alternativa](/pt/blog/cruzeiros-por-do-sol-algarve-guia-verao/) é a opção que muitos hóspedes que regressam escolhem para o segundo dia no mar.
 
 ## Pronto Para Ver Pessoalmente?
 
 Se tem uma manhã livre durante a sua viagem ao Algarve, um tour à gruta de Benagil é o "uau" mais fácil de encontrar na costa sul. Os barcos pequenos esgotam primeiro no verão — reserve com um ou dois dias de antecedência em Maio e Setembro, quatro ou cinco dias de antecedência em Julho e Agosto.
 
-Se está pronto para reservar, [o circuito de grutas em pequeno grupo até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) é a opção por defeito que apontaríamos à maior parte dos hóspedes, e [um cruzeiro privado em iate Cranchi](/pt/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/) é o upgrade para famílias e pequenos grupos. Se ainda está a planear e quer afinar a data, [a melhor altura do ano e do dia para visitar](/pt/blog/melhor-altura-visitar-grutas-benagil/) é a peça do cluster para isso. Se ainda não decidiu se Benagil ou uma das grutas mais sossegadas se encaixa na sua viagem, leia [como Benagil se compara à Marinha e ao resto](/pt/blog/benagil-vs-outras-grutas-marinhas-algarve/) primeiro.
+Se está pronto para reservar, [o circuito de grutas em pequeno grupo até Benagil](/pt/tours/circuito-de-grutas-ate-benagil/) é a opção por defeito que apontaríamos à maior parte dos hóspedes, e [um cruzeiro privado em iate Cranchi](/pt/tours/iate-privado-para-as-grutas-de-benagil/) é o upgrade para famílias e pequenos grupos. Se ainda está a planear e quer afinar a data, [a melhor altura do ano e do dia para visitar](/pt/blog/melhor-altura-visitar-grutas-benagil/) é a peça do cluster para isso. Se ainda não decidiu se Benagil ou uma das grutas mais sossegadas se encaixa na sua viagem, leia [como Benagil se compara à Marinha e ao resto](/pt/blog/benagil-vs-outras-grutas-marinhas-algarve/) primeiro.
 
 Tem dúvidas específicas sobre acesso, políticas de cancelamento ou qual a saída que melhor se adapta ao seu grupo? Envie-nos mensagem directa — somos nós que operamos estes tours e respondemos honestamente, mesmo que o nosso horário não se alinhe com o seu.

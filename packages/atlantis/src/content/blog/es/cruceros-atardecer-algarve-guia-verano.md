@@ -17,8 +17,8 @@ tags:
 author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
-  - cranchi-yacht-cruise-to-the-benagil-caves
-  - luxury-sail-yacht-cruise
+  - private-yacht-cruise-to-the-benagil-caves
+  - private-sail-yacht-cruise
 ---
 
 Un crucero al atardecer está en toda lista de vacaciones del Algarve por una razón: funciona. El agua se calma al final del día, la luz se vuelve dorada, los acantilados se iluminan de naranja, y tres horas en un barco se convierten en el recuerdo con el que vuelves a casa.
@@ -47,11 +47,11 @@ Rápidos, eficientes, 1,5 a 2 horas. Suele ser una parada y vuelta. Ideal para q
 
 ### Yates y Motor Cruceros al Atardecer
 
-El clásico. Un yate como nuestro [Cranchi Yacht a las Cuevas de Benagil](/es/tours/cranchi-yacht-cruise-to-the-benagil-caves/) tiene cubierta amplia, cabina adecuada, sofás abajo, y velocidad suficiente para cubrir costa y que se sienta un crucero de verdad, no una vuelta al puerto. Normalmente 3 horas, con buena parada para nadar y bebidas. Ideal para parejas, grupos pequeños, ocasiones especiales.
+El clásico. Un yate como nuestro [Cranchi Yacht a las Cuevas de Benagil](/es/tours/private-yacht-cruise-to-the-benagil-caves/) tiene cubierta amplia, cabina adecuada, sofás abajo, y velocidad suficiente para cubrir costa y que se sienta un crucero de verdad, no una vuelta al puerto. Normalmente 3 horas, con buena parada para nadar y bebidas. Ideal para parejas, grupos pequeños, ocasiones especiales.
 
 ### Cruceros en Velero al Atardecer
 
-La versión más silenciosa — motores apagados al salir del puerto, solo viento y olas. Ritmo más lento, duraciones más largas (a menudo 3,5–4 horas), menos gente. Nuestro [Crucero Luxuoso en Velero](/es/tours/luxury-sail-yacht-cruise/) en versión atardecer es la que la mayoría de nuestros huéspedes que repiten eligen cuando quieren la versión más completa.
+La versión más silenciosa — motores apagados al salir del puerto, solo viento y olas. Ritmo más lento, duraciones más largas (a menudo 3,5–4 horas), menos gente. Nuestro [Crucero Luxuoso en Velero](/es/tours/private-sail-yacht-cruise/) en versión atardecer es la que la mayoría de nuestros huéspedes que repiten eligen cuando quieren la versión más completa.
 
 ### Catamaranes
 

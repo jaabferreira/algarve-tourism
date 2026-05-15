@@ -17,7 +17,7 @@ tags:
 author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
-  - cranchi-yacht-cruise-ate-as-grutas-de-benagil
+  - iate-privado-para-as-grutas-de-benagil
   - luxuoso-iate-a-vela
 ---
 
@@ -47,7 +47,7 @@ Rápidos, eficientes, 1,5 a 2 horas. Normalmente uma paragem, depois um circuito
 
 ### Iates e Cruzeiros a Motor ao Pôr-do-Sol
 
-O clássico. Um iate como o nosso [Cranchi Yacht até às Grutas de Benagil](/pt/tours/cranchi-yacht-cruise-ate-as-grutas-de-benagil/) tem um convés espaçoso, cabine própria, sofás por baixo e velocidade suficiente para cobrir costa que chega para parecer um verdadeiro cruzeiro e não uma volta à marina. Normalmente 3 horas no total, com uma paragem de banho adequada e bebidas. Ideal para casais, pequenos grupos, ocasiões especiais.
+O clássico. Um iate como o nosso [Cranchi Yacht até às Grutas de Benagil](/pt/tours/iate-privado-para-as-grutas-de-benagil/) tem um convés espaçoso, cabine própria, sofás por baixo e velocidade suficiente para cobrir costa que chega para parecer um verdadeiro cruzeiro e não uma volta à marina. Normalmente 3 horas no total, com uma paragem de banho adequada e bebidas. Ideal para casais, pequenos grupos, ocasiões especiais.
 
 ### Cruzeiros em Iate à Vela ao Pôr-do-Sol
 

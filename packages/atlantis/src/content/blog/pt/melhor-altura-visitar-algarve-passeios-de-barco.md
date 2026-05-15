@@ -18,7 +18,7 @@ readingTime: 7
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil
   - luxuoso-iate-a-vela
-  - cranchi-yacht-cruise-ate-as-grutas-de-benagil
+  - iate-privado-para-as-grutas-de-benagil
 ---
 
 "Quando devo ir?" é a pergunta que mais nos fazem. A resposta honesta depende do que quer optimizar — calor, preço, fotografias nas grutas, praias vazias, ou observação de golfinhos. Aqui fica como cada mês no Algarve se sente, quando os seus planos giram à volta da água.

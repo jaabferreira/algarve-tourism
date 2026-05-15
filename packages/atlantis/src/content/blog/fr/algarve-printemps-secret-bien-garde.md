@@ -17,7 +17,7 @@ author: Atlantis Tours
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
+  - private-sail-yacht-cruise
 ---
 
 Demandez à une agence de voyage quand visiter l'Algarve et on vous dira juillet ou août. Demandez à quelqu'un qui vit ici et on vous dira printemps.
@@ -55,7 +55,7 @@ Tous nos [tours en grotte](/fr/tours/benagil-caves-speed-boat-tour/) sortent à 
 - **Moins de bateaux** dans la grotte à chaque instant. Il est courant d'avoir la chambre entière pour soi en avril ou début mai.
 - **Observations de dauphins** augmentent fortement à partir de mi-avril à mesure que les groupes se rapprochent de la côte.
 
-Les sorties en voilier reprennent aussi complètement à partir d'avril. La [Croisière en Voilier de Luxe](/fr/tours/luxury-sail-yacht-cruise/) convient particulièrement au printemps : brises légères fiables l'après-midi, mer calme et assez de soleil pour le pont sans la chaleur d'août.
+Les sorties en voilier reprennent aussi complètement à partir d'avril. La [Croisière en Voilier de Luxe](/fr/tours/private-sail-yacht-cruise/) convient particulièrement au printemps : brises légères fiables l'après-midi, mer calme et assez de soleil pour le pont sans la chaleur d'août.
 
 ## La Côte des Fleurs Sauvages
 

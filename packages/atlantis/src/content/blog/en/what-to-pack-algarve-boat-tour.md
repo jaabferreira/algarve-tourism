@@ -17,7 +17,7 @@ author: Atlantis Tours
 readingTime: 5
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour
-  - luxury-sail-yacht-cruise
+  - private-sail-yacht-cruise
   - reef-fishing-tour
 ---
 
@@ -95,7 +95,7 @@ For phones, wallets, car keys, sunglasses case, sunscreen. Even if the boat has 
 - Snacks and a small toy for the boat ride back (when the post-swim crash hits)
 - A life jacket isn't something you need to bring — all operators carry certified child sizes, but it's worth confirming before booking if you have a toddler or baby
 
-Our [Benagil Caves Speed Boat Tour](/en/tours/benagil-caves-speed-boat-tour/) accepts children from age four; [our sailing tours](/en/tours/luxury-sail-yacht-cruise/) accept younger kids because the boat motion is gentler.
+Our [Benagil Caves Speed Boat Tour](/en/tours/benagil-caves-speed-boat-tour/) accepts children from age four; [our sailing tours](/en/tours/private-sail-yacht-cruise/) accept younger kids because the boat motion is gentler.
 
 ## Morning vs Sunset Trip Tweaks
 
