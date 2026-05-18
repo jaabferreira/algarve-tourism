@@ -12,6 +12,155 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const email = "atlantistours@buyalgarveproperties.com";
+const deletionPath = `/${locale}/data-deletion/`;
+
+const whatsappByLocale: Record<string, {
+  heading: string;
+  intro: string;
+  collectHeading: string;
+  collectBody: string;
+  collectItems: string[];
+  purposeHeading: string;
+  purposeBody: string;
+  purposeItems: string[];
+  basisHeading: string;
+  basisBody: string;
+  processorHeading: string;
+  processorBody: string;
+  optOutHeading: string;
+  optOutBody: string;
+  retentionHeading: string;
+  retentionBody: string;
+  deletionHeading: string;
+  deletionBody: string;
+}> = {
+  en: {
+    heading: "WhatsApp & Messaging (Atlantis Bridge)",
+    intro: "We operate a WhatsApp Business account through our internal messaging service, <strong>Atlantis Bridge</strong>, to communicate with guests before, during, and after their experience. Messages are delivered via the WhatsApp Business Platform, which is operated by Meta Platforms Ireland Limited.",
+    collectHeading: "What we collect via WhatsApp",
+    collectBody: "When you contact us on WhatsApp, or when we contact you about a booking, we process:",
+    collectItems: [
+      "Your phone number and WhatsApp display name",
+      "The content of messages you send to us, and the messages we send to you",
+      "Message metadata (timestamps, delivery and read status)",
+      "Any media you choose to share (photos, documents, voice notes)",
+    ],
+    purposeHeading: "Why we use WhatsApp",
+    purposeBody: "We use WhatsApp messaging for:",
+    purposeItems: [
+      "<strong>Transactional messages</strong> — booking confirmations, meeting-point details, departure reminders, weather-related changes, and post-experience follow-ups",
+      "<strong>Customer support</strong> — replying to questions you send us before, during, or after your booking",
+      "<strong>Promotional messages and partner recommendations</strong> — including offers, seasonal updates, and curated cross-sell recommendations such as partner restaurants in Portimão and the surrounding area. These are sent only if you have opted in",
+    ],
+    basisHeading: "Legal basis",
+    basisBody: "Transactional messages are sent on the basis of contract performance (delivering the experience you booked). Customer support replies are sent on the basis of our legitimate interest in answering your queries. Promotional and partner-recommendation messages are sent only on the basis of your explicit consent, which you may withdraw at any time.",
+    processorHeading: "Third-party processor",
+    processorBody: "Messages are routed through the WhatsApp Business Platform operated by Meta Platforms Ireland Limited (Merrion Road, Dublin 4, D04 X2K5, Ireland). Meta processes message content, phone numbers, and metadata under its own privacy policy, which can be reviewed at <a href=\"https://www.whatsapp.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">whatsapp.com/legal/privacy-policy</a>.",
+    optOutHeading: "How to opt out",
+    optOutBody: "You can stop receiving promotional WhatsApp messages from us at any time by replying <strong>STOP</strong> to any of our messages, or by emailing us. Transactional messages tied to an active booking will still be sent because they are necessary to deliver the experience you reserved.",
+    retentionHeading: "WhatsApp message retention",
+    retentionBody: "We retain WhatsApp conversations for up to 24 months after your last interaction with us, so we can resolve disputes, honour return-guest preferences, and meet record-keeping obligations. Messages tied to a specific booking are retained alongside the booking record for the period required by Portuguese tax law (currently 10 years for financial records).",
+    deletionHeading: "Deleting your data",
+    deletionBody: "You can request deletion of your WhatsApp data and all other personal data we hold about you at any time. Full step-by-step instructions are available on our",
+  },
+  pt: {
+    heading: "WhatsApp e Mensagens (Atlantis Bridge)",
+    intro: "Operamos uma conta WhatsApp Business através do nosso serviço interno de mensagens, <strong>Atlantis Bridge</strong>, para comunicar com os hóspedes antes, durante e após a sua experiência. As mensagens são entregues através da Plataforma WhatsApp Business, operada pela Meta Platforms Ireland Limited.",
+    collectHeading: "O que recolhemos via WhatsApp",
+    collectBody: "Quando nos contacta no WhatsApp, ou quando o contactamos sobre uma reserva, processamos:",
+    collectItems: [
+      "O seu número de telefone e nome de apresentação no WhatsApp",
+      "O conteúdo das mensagens que nos envia e das mensagens que lhe enviamos",
+      "Metadados das mensagens (data/hora, estado de entrega e leitura)",
+      "Quaisquer ficheiros que escolha partilhar (fotografias, documentos, notas de voz)",
+    ],
+    purposeHeading: "Porque usamos o WhatsApp",
+    purposeBody: "Utilizamos o WhatsApp para:",
+    purposeItems: [
+      "<strong>Mensagens transacionais</strong> — confirmações de reserva, detalhes do ponto de encontro, lembretes de partida, alterações por motivos meteorológicos e seguimento pós-experiência",
+      "<strong>Apoio ao cliente</strong> — resposta a perguntas que nos envia antes, durante ou após a sua reserva",
+      "<strong>Mensagens promocionais e recomendações de parceiros</strong> — incluindo ofertas, novidades sazonais e recomendações cruzadas de parceiros, tais como restaurantes parceiros em Portimão e região. Apenas enviadas se tiver dado o seu consentimento",
+    ],
+    basisHeading: "Base legal",
+    basisBody: "As mensagens transacionais são enviadas com base na execução do contrato (entrega da experiência reservada). As respostas de apoio ao cliente são enviadas com base no nosso interesse legítimo em responder às suas dúvidas. As mensagens promocionais e de recomendação de parceiros só são enviadas com base no seu consentimento expresso, que pode retirar a qualquer momento.",
+    processorHeading: "Subcontratante terceiro",
+    processorBody: "As mensagens são encaminhadas através da Plataforma WhatsApp Business, operada pela Meta Platforms Ireland Limited (Merrion Road, Dublin 4, D04 X2K5, Irlanda). A Meta trata o conteúdo das mensagens, números de telefone e metadados ao abrigo da sua própria política de privacidade, disponível em <a href=\"https://www.whatsapp.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">whatsapp.com/legal/privacy-policy</a>.",
+    optOutHeading: "Como cancelar a subscrição",
+    optOutBody: "Pode deixar de receber mensagens promocionais nossas no WhatsApp a qualquer momento respondendo <strong>STOP</strong> a qualquer das nossas mensagens, ou enviando-nos um email. As mensagens transacionais relativas a uma reserva ativa continuarão a ser enviadas por serem necessárias à execução da experiência reservada.",
+    retentionHeading: "Retenção de mensagens do WhatsApp",
+    retentionBody: "Conservamos as conversas do WhatsApp até 24 meses após a sua última interação connosco, para podermos resolver litígios, respeitar preferências de hóspedes recorrentes e cumprir obrigações de manutenção de registos. As mensagens associadas a uma reserva específica são conservadas juntamente com o registo da reserva pelo período exigido pela legislação fiscal portuguesa (atualmente 10 anos para registos financeiros).",
+    deletionHeading: "Eliminação dos seus dados",
+    deletionBody: "Pode solicitar a eliminação dos seus dados do WhatsApp e de todos os outros dados pessoais que detenhamos a seu respeito a qualquer momento. As instruções completas, passo a passo, estão disponíveis na nossa",
+  },
+  es: {
+    heading: "WhatsApp y Mensajería (Atlantis Bridge)",
+    intro: "Operamos una cuenta de WhatsApp Business a través de nuestro servicio interno de mensajería, <strong>Atlantis Bridge</strong>, para comunicarnos con los huéspedes antes, durante y después de su experiencia. Los mensajes se entregan a través de la Plataforma WhatsApp Business, operada por Meta Platforms Ireland Limited.",
+    collectHeading: "Qué recopilamos a través de WhatsApp",
+    collectBody: "Cuando nos contacta por WhatsApp, o cuando le contactamos sobre una reserva, tratamos:",
+    collectItems: [
+      "Su número de teléfono y nombre de visualización en WhatsApp",
+      "El contenido de los mensajes que nos envía y de los que le enviamos",
+      "Metadatos de los mensajes (marcas de tiempo, estado de entrega y lectura)",
+      "Cualquier archivo que decida compartir (fotografías, documentos, notas de voz)",
+    ],
+    purposeHeading: "Por qué usamos WhatsApp",
+    purposeBody: "Utilizamos WhatsApp para:",
+    purposeItems: [
+      "<strong>Mensajes transaccionales</strong> — confirmaciones de reserva, detalles del punto de encuentro, recordatorios de salida, cambios por motivos meteorológicos y seguimiento posterior",
+      "<strong>Atención al cliente</strong> — respuesta a las preguntas que nos envía antes, durante o después de su reserva",
+      "<strong>Mensajes promocionales y recomendaciones de socios</strong> — incluyendo ofertas, novedades de temporada y recomendaciones cruzadas como restaurantes asociados en Portimão y alrededores. Solo se envían si ha dado su consentimiento",
+    ],
+    basisHeading: "Base legal",
+    basisBody: "Los mensajes transaccionales se envían sobre la base de la ejecución del contrato (prestación de la experiencia reservada). Las respuestas de atención al cliente se envían sobre la base de nuestro interés legítimo en responder a sus consultas. Los mensajes promocionales y de recomendación de socios solo se envían sobre la base de su consentimiento expreso, que puede retirar en cualquier momento.",
+    processorHeading: "Encargado de tratamiento de terceros",
+    processorBody: "Los mensajes se enrutan a través de la Plataforma WhatsApp Business, operada por Meta Platforms Ireland Limited (Merrion Road, Dublin 4, D04 X2K5, Irlanda). Meta trata el contenido de los mensajes, los números de teléfono y los metadatos en virtud de su propia política de privacidad, disponible en <a href=\"https://www.whatsapp.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">whatsapp.com/legal/privacy-policy</a>.",
+    optOutHeading: "Cómo darse de baja",
+    optOutBody: "Puede dejar de recibir mensajes promocionales nuestros en WhatsApp en cualquier momento respondiendo <strong>STOP</strong> a cualquiera de nuestros mensajes, o enviándonos un correo electrónico. Los mensajes transaccionales vinculados a una reserva activa se seguirán enviando porque son necesarios para la prestación de la experiencia reservada.",
+    retentionHeading: "Conservación de mensajes de WhatsApp",
+    retentionBody: "Conservamos las conversaciones de WhatsApp hasta 24 meses tras su última interacción con nosotros, para poder resolver disputas, respetar preferencias de huéspedes recurrentes y cumplir obligaciones de mantenimiento de registros. Los mensajes vinculados a una reserva específica se conservan junto con el registro de la reserva durante el período exigido por la legislación fiscal portuguesa (actualmente 10 años para registros financieros).",
+    deletionHeading: "Eliminación de sus datos",
+    deletionBody: "Puede solicitar la eliminación de sus datos de WhatsApp y de cualquier otro dato personal que tengamos sobre usted en cualquier momento. Las instrucciones completas, paso a paso, están disponibles en nuestra",
+  },
+  fr: {
+    heading: "WhatsApp et Messagerie (Atlantis Bridge)",
+    intro: "Nous exploitons un compte WhatsApp Business via notre service interne de messagerie, <strong>Atlantis Bridge</strong>, pour communiquer avec les clients avant, pendant et après leur expérience. Les messages sont acheminés via la Plateforme WhatsApp Business, exploitée par Meta Platforms Ireland Limited.",
+    collectHeading: "Ce que nous collectons via WhatsApp",
+    collectBody: "Lorsque vous nous contactez sur WhatsApp, ou lorsque nous vous contactons au sujet d’une réservation, nous traitons :",
+    collectItems: [
+      "Votre numéro de téléphone et votre nom d’affichage WhatsApp",
+      "Le contenu des messages que vous nous envoyez et de ceux que nous vous envoyons",
+      "Les métadonnées des messages (horodatages, état de remise et de lecture)",
+      "Tout fichier que vous choisissez de partager (photos, documents, notes vocales)",
+    ],
+    purposeHeading: "Pourquoi nous utilisons WhatsApp",
+    purposeBody: "Nous utilisons WhatsApp pour :",
+    purposeItems: [
+      "<strong>Messages transactionnels</strong> — confirmations de réservation, détails du point de rendez-vous, rappels de départ, modifications liées à la météo et suivi après l’expérience",
+      "<strong>Service client</strong> — réponses aux questions que vous nous envoyez avant, pendant ou après votre réservation",
+      "<strong>Messages promotionnels et recommandations de partenaires</strong> — incluant offres, nouveautés saisonnières et recommandations croisées telles que restaurants partenaires à Portimão et alentours. Envoyés uniquement si vous y avez consenti",
+    ],
+    basisHeading: "Base légale",
+    basisBody: "Les messages transactionnels sont envoyés sur la base de l’exécution du contrat (livraison de l’expérience réservée). Les réponses du service client sont envoyées sur la base de notre intérêt légitime à répondre à vos questions. Les messages promotionnels et les recommandations de partenaires sont envoyés uniquement sur la base de votre consentement explicite, que vous pouvez retirer à tout moment.",
+    processorHeading: "Sous-traitant tiers",
+    processorBody: "Les messages transitent par la Plateforme WhatsApp Business, exploitée par Meta Platforms Ireland Limited (Merrion Road, Dublin 4, D04 X2K5, Irlande). Meta traite le contenu des messages, les numéros de téléphone et les métadonnées au titre de sa propre politique de confidentialité, consultable sur <a href=\"https://www.whatsapp.com/legal/privacy-policy\" target=\"_blank\" rel=\"noopener noreferrer\">whatsapp.com/legal/privacy-policy</a>.",
+    optOutHeading: "Comment se désinscrire",
+    optOutBody: "Vous pouvez cesser de recevoir nos messages promotionnels sur WhatsApp à tout moment en répondant <strong>STOP</strong> à l’un de nos messages, ou en nous envoyant un e-mail. Les messages transactionnels liés à une réservation active continueront d’être envoyés car ils sont nécessaires à l’exécution de l’expérience réservée.",
+    retentionHeading: "Conservation des messages WhatsApp",
+    retentionBody: "Nous conservons les conversations WhatsApp jusqu’à 24 mois après votre dernière interaction avec nous, afin de pouvoir résoudre les litiges, respecter les préférences des clients fidèles et satisfaire aux obligations de tenue de registres. Les messages liés à une réservation spécifique sont conservés avec le dossier de réservation pendant la durée exigée par la législation fiscale portugaise (actuellement 10 ans pour les registres financiers).",
+    deletionHeading: "Suppression de vos données",
+    deletionBody: "Vous pouvez demander la suppression de vos données WhatsApp et de toutes les autres données personnelles que nous détenons à votre sujet à tout moment. Les instructions complètes, étape par étape, sont disponibles sur notre",
+  },
+};
+
+const deletionLinkLabel: Record<string, string> = {
+  en: "Data Deletion page",
+  pt: "página de Eliminação de Dados",
+  es: "página de Eliminación de Datos",
+  fr: "page de Suppression des Données",
+};
+
+const wa = whatsappByLocale[locale] ?? whatsappByLocale.en;
+const deletionLabel = deletionLinkLabel[locale] ?? deletionLinkLabel.en;
 ---
 
 <Layout
@@ -46,7 +195,38 @@ const email = "atlantistours@buyalgarveproperties.com";
         <li><strong>FareHarbor</strong> — booking management and payment processing</li>
         <li><strong>Cloudflare</strong> — website hosting and performance</li>
         <li><strong>Google Analytics</strong> — anonymous website usage statistics</li>
+        <li><strong>Meta Platforms Ireland (WhatsApp Business Platform)</strong> — messaging delivery via our Atlantis Bridge service</li>
       </ul>
+
+      <h2 id="whatsapp">{wa.heading}</h2>
+      <p set:html={wa.intro} />
+
+      <h3>{wa.collectHeading}</h3>
+      <p>{wa.collectBody}</p>
+      <ul>
+        {wa.collectItems.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h3>{wa.purposeHeading}</h3>
+      <p>{wa.purposeBody}</p>
+      <ul>
+        {wa.purposeItems.map((item) => <li set:html={item} />)}
+      </ul>
+
+      <h3>{wa.basisHeading}</h3>
+      <p>{wa.basisBody}</p>
+
+      <h3>{wa.processorHeading}</h3>
+      <p set:html={wa.processorBody} />
+
+      <h3>{wa.optOutHeading}</h3>
+      <p set:html={wa.optOutBody} />
+
+      <h3>{wa.retentionHeading}</h3>
+      <p>{wa.retentionBody}</p>
+
+      <h3>{wa.deletionHeading}</h3>
+      <p>{wa.deletionBody} <a href={deletionPath}>{deletionLabel}</a>.</p>
 
       <h2>{t(locale, "privacy.your_rights")}</h2>
       <p>{t(locale, "privacy.your_rights_body")} <a href={`mailto:${email}`}>{email}</a>.</p>
@@ -65,6 +245,7 @@ const email = "atlantistours@buyalgarveproperties.com";
 <style>
   .page-content { max-width: 680px; margin-top: var(--space-8); line-height: var(--leading-relaxed); color: var(--color-text-body); }
   .page-content h2 { margin-top: var(--space-8); margin-bottom: var(--space-3); }
+  .page-content h3 { margin-top: var(--space-6); margin-bottom: var(--space-2); }
   .page-content ul { padding-left: var(--space-6); margin-top: var(--space-2); }
   .page-content li { margin-bottom: var(--space-2); }
 </style>

@@ -1,0 +1,272 @@
+---
+import type { Locale } from "@algarve-tourism/shared";
+import { LOCALES } from "@algarve-tourism/shared";
+import Layout from "../../layouts/Layout.astro";
+import Header from "@algarve-tourism/shared/components/Header.astro";
+import Footer from "@algarve-tourism/shared/components/Footer.astro";
+import { config } from "../../config.js";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const email = "atlantistours@buyalgarveproperties.com";
+const rawWhatsapp = config.social.whatsapp;
+const whatsappNumber = rawWhatsapp.replace(/^(\+\d{3})(\d{3})(\d{3})(\d{3}).*$/, "$1 $2 $3 $4");
+
+type Section = { heading: string; body?: string; items?: string[] };
+
+const contentByLocale: Record<string, {
+  title: string;
+  description: string;
+  intro: string;
+  sections: Section[];
+}> = {
+  en: {
+    title: "Data Deletion Instructions",
+    description: "How to request deletion of your personal data held by Atlantis Tours, including data collected via WhatsApp.",
+    intro: "Atlantis Tours (P4Y Services — Mediação Imobiliária, Lda) respects your right under the GDPR and Portuguese law to request the deletion of personal data we hold about you. This page tells you exactly how to make that request and what to expect.",
+    sections: [
+      {
+        heading: "1. What you can ask us to delete",
+        body: "On your request, we will delete personal data we hold about you, including:",
+        items: [
+          "Your name, email address, phone number, and any other contact details",
+          "WhatsApp message history exchanged with our Atlantis Bridge service, including media you have shared",
+          "Marketing and partner-recommendation preferences (opt-in/opt-out state)",
+          "Website analytics identifiers tied to your sessions, where these can be linked to you",
+        ],
+      },
+      {
+        heading: "2. How to submit a deletion request",
+        body: "You can request deletion through any of the following channels. Use the one that is easiest for you:",
+        items: [
+          `<strong>Email</strong> — write to <a href="mailto:${email}?subject=Data%20deletion%20request">${email}</a> with the subject line \"Data deletion request\". Include the phone number, email, or booking reference associated with your data so we can locate it.`,
+          `<strong>WhatsApp</strong> — reply <strong>DELETE</strong> to any message we have sent you via Atlantis Bridge, or send <strong>DELETE</strong> to our WhatsApp Business number (${whatsappNumber}). To also stop receiving promotional messages without deleting your booking history, reply <strong>STOP</strong> instead.`,
+          "<strong>Postal mail</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
+        ],
+      },
+      {
+        heading: "3. Identity verification",
+        body: "To protect your privacy, we may ask you to confirm your identity before processing the request. We will only request information that is strictly necessary (for example, the email or phone number used in the original booking) and will not require copies of identity documents unless the law obliges us to.",
+      },
+      {
+        heading: "4. Response time",
+        body: "We will acknowledge your request within 5 business days and complete deletion within 30 days, in line with Article 12(3) of the GDPR. If your request is particularly complex we may extend this period by a further two months and will explain why.",
+      },
+      {
+        heading: "5. What we are legally required to keep",
+        body: "Portuguese tax and maritime law requires us to retain certain records even after a deletion request:",
+        items: [
+          "Booking and invoice records for 10 years, as required by the Portuguese tax authority (Autoridade Tributária)",
+          "Passenger manifests and safety logs for the period required by RNAAT (Registo Nacional dos Agentes de Animação Turística) regulations",
+          "Records strictly necessary to defend or pursue legal claims, for as long as those claims remain enforceable",
+        ],
+      },
+      {
+        heading: "6. Confirmation",
+        body: "Once your deletion is complete we will send you a written confirmation by email (or by your preferred channel) listing what has been deleted and what has been retained under the legal exceptions above.",
+      },
+      {
+        heading: "7. Complaints",
+        body: `If you are not satisfied with how we handle your request, you have the right to lodge a complaint with the Portuguese data protection authority — <a href="https://www.cnpd.pt/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.`,
+      },
+    ],
+  },
+  pt: {
+    title: "Instruções para Eliminação de Dados",
+    description: "Como solicitar a eliminação dos seus dados pessoais detidos pela Atlantis Tours, incluindo os dados recolhidos via WhatsApp.",
+    intro: "A Atlantis Tours (P4Y Services — Mediação Imobiliária, Lda) respeita o seu direito, ao abrigo do RGPD e da legislação portuguesa, a solicitar a eliminação dos dados pessoais que detenhamos a seu respeito. Esta página explica exatamente como fazer esse pedido e o que pode esperar.",
+    sections: [
+      {
+        heading: "1. O que pode pedir-nos para eliminar",
+        body: "Mediante pedido, eliminaremos os dados pessoais que detemos a seu respeito, incluindo:",
+        items: [
+          "O seu nome, endereço de email, número de telefone e quaisquer outros dados de contacto",
+          "Histórico de mensagens do WhatsApp trocadas com o nosso serviço Atlantis Bridge, incluindo ficheiros que tenha partilhado",
+          "Preferências de marketing e de recomendações de parceiros (estado de opt-in/opt-out)",
+          "Identificadores de análise web associados às suas sessões, quando estes possam ser ligados a si",
+        ],
+      },
+      {
+        heading: "2. Como submeter um pedido de eliminação",
+        body: "Pode solicitar a eliminação através de qualquer um dos seguintes canais. Utilize aquele que lhe for mais conveniente:",
+        items: [
+          `<strong>Email</strong> — escreva para <a href="mailto:${email}?subject=Pedido%20de%20elimina%C3%A7%C3%A3o%20de%20dados">${email}</a> com o assunto \"Pedido de eliminação de dados\". Indique o número de telefone, email ou referência de reserva associada aos seus dados para que possamos localizá-los.`,
+          `<strong>WhatsApp</strong> — responda <strong>DELETE</strong> a qualquer mensagem que lhe tenhamos enviado via Atlantis Bridge, ou envie <strong>DELETE</strong> para o nosso número WhatsApp Business (${whatsappNumber}). Para apenas deixar de receber mensagens promocionais, sem eliminar o histórico de reservas, responda <strong>STOP</strong>.`,
+          "<strong>Correio postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
+        ],
+      },
+      {
+        heading: "3. Verificação de identidade",
+        body: "Para proteger a sua privacidade, poderemos pedir-lhe que confirme a sua identidade antes de processar o pedido. Solicitaremos apenas a informação estritamente necessária (por exemplo, o email ou telefone utilizado na reserva original) e não exigiremos cópias de documentos de identidade, salvo quando a lei nos obrigar.",
+      },
+      {
+        heading: "4. Prazo de resposta",
+        body: "Acusaremos a receção do seu pedido no prazo de 5 dias úteis e concluiremos a eliminação no prazo de 30 dias, em conformidade com o artigo 12.º, n.º 3 do RGPD. Se o pedido for particularmente complexo, poderemos prorrogar este prazo por mais dois meses e explicar-lhe-emos a razão.",
+      },
+      {
+        heading: "5. O que somos legalmente obrigados a conservar",
+        body: "A legislação fiscal e marítima portuguesa obriga-nos a conservar determinados registos mesmo após um pedido de eliminação:",
+        items: [
+          "Registos de reservas e faturas durante 10 anos, conforme exigido pela Autoridade Tributária portuguesa",
+          "Manifestos de passageiros e registos de segurança pelo período exigido pelo RNAAT (Registo Nacional dos Agentes de Animação Turística)",
+          "Registos estritamente necessários para defender ou exercer direitos em processos legais, enquanto esses direitos forem exigíveis",
+        ],
+      },
+      {
+        heading: "6. Confirmação",
+        body: "Após a conclusão da eliminação, enviar-lhe-emos uma confirmação por escrito por email (ou pelo canal de sua preferência) com a indicação do que foi eliminado e do que foi conservado ao abrigo das exceções legais acima.",
+      },
+      {
+        heading: "7. Reclamações",
+        body: `Caso não esteja satisfeito com a forma como tratamos o seu pedido, tem o direito de apresentar reclamação junto da autoridade portuguesa de proteção de dados — <a href="https://www.cnpd.pt/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.`,
+      },
+    ],
+  },
+  es: {
+    title: "Instrucciones para la Eliminación de Datos",
+    description: "Cómo solicitar la eliminación de sus datos personales en poder de Atlantis Tours, incluidos los datos recopilados a través de WhatsApp.",
+    intro: "Atlantis Tours (P4Y Services — Mediação Imobiliária, Lda) respeta su derecho, conforme al RGPD y a la legislación portuguesa, a solicitar la eliminación de los datos personales que tengamos sobre usted. Esta página le explica exactamente cómo realizar esa solicitud y qué puede esperar.",
+    sections: [
+      {
+        heading: "1. Qué puede pedirnos que eliminemos",
+        body: "A petición suya, eliminaremos los datos personales que tengamos sobre usted, incluyendo:",
+        items: [
+          "Su nombre, dirección de correo electrónico, número de teléfono y cualquier otro dato de contacto",
+          "Historial de mensajes de WhatsApp intercambiados con nuestro servicio Atlantis Bridge, incluidos los archivos que haya compartido",
+          "Preferencias de marketing y de recomendaciones de socios (estado de opt-in/opt-out)",
+          "Identificadores analíticos del sitio web vinculados a sus sesiones, cuando puedan asociarse con usted",
+        ],
+      },
+      {
+        heading: "2. Cómo enviar una solicitud de eliminación",
+        body: "Puede solicitar la eliminación a través de cualquiera de los siguientes canales. Utilice el que le resulte más cómodo:",
+        items: [
+          `<strong>Correo electrónico</strong> — escriba a <a href="mailto:${email}?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20datos">${email}</a> con el asunto \"Solicitud de eliminación de datos\". Indique el número de teléfono, correo electrónico o referencia de reserva asociada a sus datos para que podamos localizarlos.`,
+          `<strong>WhatsApp</strong> — responda <strong>DELETE</strong> a cualquier mensaje que le hayamos enviado a través de Atlantis Bridge, o envíe <strong>DELETE</strong> a nuestro número de WhatsApp Business (${whatsappNumber}). Para dejar de recibir solo los mensajes promocionales, sin eliminar el historial de reservas, responda <strong>STOP</strong>.`,
+          "<strong>Correo postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
+        ],
+      },
+      {
+        heading: "3. Verificación de identidad",
+        body: "Para proteger su privacidad, podremos pedirle que confirme su identidad antes de tramitar la solicitud. Solicitaremos únicamente la información estrictamente necesaria (por ejemplo, el correo o teléfono usado en la reserva original) y no requeriremos copia de documentos de identidad salvo que la ley nos obligue.",
+      },
+      {
+        heading: "4. Plazo de respuesta",
+        body: "Acusaremos recibo de su solicitud en un plazo de 5 días hábiles y completaremos la eliminación en un plazo de 30 días, conforme al artículo 12.3 del RGPD. Si la solicitud es particularmente compleja podremos ampliar este plazo dos meses más y le explicaremos el motivo.",
+      },
+      {
+        heading: "5. Qué estamos legalmente obligados a conservar",
+        body: "La legislación fiscal y marítima portuguesa nos obliga a conservar determinados registros incluso tras una solicitud de eliminación:",
+        items: [
+          "Registros de reservas y facturas durante 10 años, conforme lo exige la Autoridad Tributaria portuguesa",
+          "Manifiestos de pasajeros y registros de seguridad durante el período exigido por el RNAAT (Registro Nacional de Agentes de Animación Turística)",
+          "Registros estrictamente necesarios para ejercer o defender acciones legales, mientras dichas acciones sigan siendo exigibles",
+        ],
+      },
+      {
+        heading: "6. Confirmación",
+        body: "Una vez completada la eliminación le enviaremos una confirmación escrita por correo electrónico (o por el canal de su preferencia) indicando qué ha sido eliminado y qué se ha conservado por las excepciones legales anteriores.",
+      },
+      {
+        heading: "7. Reclamaciones",
+        body: `Si no está satisfecho con la forma en que tramitamos su solicitud, tiene derecho a presentar una reclamación ante la autoridad portuguesa de protección de datos — <a href="https://www.cnpd.pt/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.`,
+      },
+    ],
+  },
+  fr: {
+    title: "Instructions pour la Suppression des Données",
+    description: "Comment demander la suppression de vos données personnelles détenues par Atlantis Tours, y compris celles collectées via WhatsApp.",
+    intro: "Atlantis Tours (P4Y Services — Mediação Imobiliária, Lda) respecte votre droit, en vertu du RGPD et de la législation portugaise, à demander la suppression des données personnelles que nous détenons à votre sujet. Cette page explique précisément comment effectuer cette demande et à quoi vous attendre.",
+    sections: [
+      {
+        heading: "1. Ce que vous pouvez nous demander de supprimer",
+        body: "Sur demande, nous supprimerons les données personnelles que nous détenons à votre sujet, notamment :",
+        items: [
+          "Vos nom, adresse e-mail, numéro de téléphone et toute autre coordonnée",
+          "L’historique des messages WhatsApp échangés avec notre service Atlantis Bridge, y compris les fichiers que vous avez partagés",
+          "Vos préférences marketing et recommandations partenaires (état d’opt-in/opt-out)",
+          "Les identifiants analytiques du site web liés à vos sessions, lorsqu’ils peuvent vous être rattachés",
+        ],
+      },
+      {
+        heading: "2. Comment soumettre une demande de suppression",
+        body: "Vous pouvez demander la suppression par l’un des canaux suivants. Utilisez celui qui vous convient le mieux :",
+        items: [
+          `<strong>E-mail</strong> — écrivez à <a href="mailto:${email}?subject=Demande%20de%20suppression%20de%20donn%C3%A9es">${email}</a> avec l’objet \"Demande de suppression de données\". Indiquez le numéro de téléphone, l’e-mail ou la référence de réservation associée à vos données afin que nous puissions les localiser.`,
+          `<strong>WhatsApp</strong> — répondez <strong>DELETE</strong> à n’importe quel message que nous vous avons envoyé via Atlantis Bridge, ou envoyez <strong>DELETE</strong> à notre numéro WhatsApp Business (${whatsappNumber}). Pour cesser uniquement de recevoir les messages promotionnels, sans supprimer votre historique de réservation, répondez <strong>STOP</strong>.`,
+          "<strong>Courrier postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
+        ],
+      },
+      {
+        heading: "3. Vérification d’identité",
+        body: "Pour protéger votre vie privée, nous pourrons vous demander de confirmer votre identité avant de traiter la demande. Nous ne demanderons que les informations strictement nécessaires (par exemple l’e-mail ou le téléphone utilisé lors de la réservation initiale) et n’exigerons aucune copie de pièce d’identité sauf obligation légale.",
+      },
+      {
+        heading: "4. Délai de réponse",
+        body: "Nous accuserons réception de votre demande sous 5 jours ouvrables et procéderons à la suppression sous 30 jours, conformément à l’article 12, paragraphe 3 du RGPD. Si votre demande est particulièrement complexe, nous pourrons prolonger ce délai de deux mois supplémentaires et nous vous en expliquerons la raison.",
+      },
+      {
+        heading: "5. Ce que nous sommes légalement tenus de conserver",
+        body: "La législation fiscale et maritime portugaise nous oblige à conserver certains registres même après une demande de suppression :",
+        items: [
+          "Les registres de réservations et factures pendant 10 ans, comme l’exige l’administration fiscale portugaise (Autoridade Tributária)",
+          "Les manifestes de passagers et registres de sécurité pendant la durée exigée par le RNAAT (Registo Nacional dos Agentes de Animação Turística)",
+          "Les registres strictement nécessaires pour faire valoir ou défendre des droits en justice, tant que ces droits restent exécutoires",
+        ],
+      },
+      {
+        heading: "6. Confirmation",
+        body: "Une fois la suppression effectuée, nous vous adresserons une confirmation écrite par e-mail (ou par le canal de votre choix) précisant ce qui a été supprimé et ce qui a été conservé au titre des exceptions légales ci-dessus.",
+      },
+      {
+        heading: "7. Réclamations",
+        body: `Si vous n’êtes pas satisfait du traitement de votre demande, vous avez le droit d’introduire une réclamation auprès de l’autorité portugaise de protection des données — <a href="https://www.cnpd.pt/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.`,
+      },
+    ],
+  },
+};
+
+const content = contentByLocale[locale] ?? contentByLocale.en;
+---
+
+<Layout
+  title={content.title}
+  description={content.description}
+  locale={locale}
+  path="/data-deletion/"
+  config={config}
+>
+  <Header slot="header" config={config} locale={locale} path={`/${locale}/data-deletion/`} />
+
+  <section class="section container" style={`padding-top: calc(var(--header-height) + var(--space-12))`}>
+    <h1>{content.title}</h1>
+    <div class="page-content">
+      <p class="intro">{content.intro}</p>
+
+      {content.sections.map((section) => (
+        <Fragment>
+          <h2>{section.heading}</h2>
+          {section.body && <p set:html={section.body} />}
+          {section.items && (
+            <ul>
+              {section.items.map((item) => <li set:html={item} />)}
+            </ul>
+          )}
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" config={config} locale={locale} />
+</Layout>
+
+<style>
+  .page-content { max-width: 680px; margin-top: var(--space-8); line-height: var(--leading-relaxed); color: var(--color-text-body); }
+  .page-content .intro { font-size: var(--font-size-lg, 1.125rem); margin-bottom: var(--space-6); }
+  .page-content h2 { margin-top: var(--space-8); margin-bottom: var(--space-3); }
+  .page-content ul { padding-left: var(--space-6); margin-top: var(--space-2); }
+  .page-content li { margin-bottom: var(--space-2); }
+</style>
