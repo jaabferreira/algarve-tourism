@@ -12,8 +12,6 @@ export function getStaticPaths() {
 
 const locale = Astro.params.locale as Locale;
 const email = "atlantistours@buyalgarveproperties.com";
-const rawWhatsapp = config.social.whatsapp;
-const whatsappNumber = rawWhatsapp.replace(/^(\+\d{3})(\d{3})(\d{3})(\d{3}).*$/, "$1 $2 $3 $4");
 
 type Section = { heading: string; body?: string; items?: string[] };
 
@@ -43,7 +41,6 @@ const contentByLocale: Record<string, {
         body: "You can request deletion through any of the following channels. Use the one that is easiest for you:",
         items: [
           `<strong>Email</strong> — write to <a href="mailto:${email}?subject=Data%20deletion%20request">${email}</a> with the subject line \"Data deletion request\". Include the phone number, email, or booking reference associated with your data so we can locate it.`,
-          `<strong>WhatsApp</strong> — reply <strong>DELETE</strong> to any message we have sent you via Atlantis Bridge, or send <strong>DELETE</strong> to our WhatsApp Business number (${whatsappNumber}). To also stop receiving promotional messages without deleting your booking history, reply <strong>STOP</strong> instead.`,
           "<strong>Postal mail</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
         ],
       },
@@ -94,7 +91,6 @@ const contentByLocale: Record<string, {
         body: "Pode solicitar a eliminação através de qualquer um dos seguintes canais. Utilize aquele que lhe for mais conveniente:",
         items: [
           `<strong>Email</strong> — escreva para <a href="mailto:${email}?subject=Pedido%20de%20elimina%C3%A7%C3%A3o%20de%20dados">${email}</a> com o assunto \"Pedido de eliminação de dados\". Indique o número de telefone, email ou referência de reserva associada aos seus dados para que possamos localizá-los.`,
-          `<strong>WhatsApp</strong> — responda <strong>DELETE</strong> a qualquer mensagem que lhe tenhamos enviado via Atlantis Bridge, ou envie <strong>DELETE</strong> para o nosso número WhatsApp Business (${whatsappNumber}). Para apenas deixar de receber mensagens promocionais, sem eliminar o histórico de reservas, responda <strong>STOP</strong>.`,
           "<strong>Correio postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
         ],
       },
@@ -145,7 +141,6 @@ const contentByLocale: Record<string, {
         body: "Puede solicitar la eliminación a través de cualquiera de los siguientes canales. Utilice el que le resulte más cómodo:",
         items: [
           `<strong>Correo electrónico</strong> — escriba a <a href="mailto:${email}?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20datos">${email}</a> con el asunto \"Solicitud de eliminación de datos\". Indique el número de teléfono, correo electrónico o referencia de reserva asociada a sus datos para que podamos localizarlos.`,
-          `<strong>WhatsApp</strong> — responda <strong>DELETE</strong> a cualquier mensaje que le hayamos enviado a través de Atlantis Bridge, o envíe <strong>DELETE</strong> a nuestro número de WhatsApp Business (${whatsappNumber}). Para dejar de recibir solo los mensajes promocionales, sin eliminar el historial de reservas, responda <strong>STOP</strong>.`,
           "<strong>Correo postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
         ],
       },
@@ -196,7 +191,6 @@ const contentByLocale: Record<string, {
         body: "Vous pouvez demander la suppression par l’un des canaux suivants. Utilisez celui qui vous convient le mieux :",
         items: [
           `<strong>E-mail</strong> — écrivez à <a href="mailto:${email}?subject=Demande%20de%20suppression%20de%20donn%C3%A9es">${email}</a> avec l’objet \"Demande de suppression de données\". Indiquez le numéro de téléphone, l’e-mail ou la référence de réservation associée à vos données afin que nous puissions les localiser.`,
-          `<strong>WhatsApp</strong> — répondez <strong>DELETE</strong> à n’importe quel message que nous vous avons envoyé via Atlantis Bridge, ou envoyez <strong>DELETE</strong> à notre numéro WhatsApp Business (${whatsappNumber}). Pour cesser uniquement de recevoir les messages promotionnels, sans supprimer votre historique de réservation, répondez <strong>STOP</strong>.`,
           "<strong>Courrier postal</strong> — P4Y Services, Rua Sophia Mello Breyner, Lote 43, Fracção C, 8200-084 Albufeira, Portugal.",
         ],
       },
