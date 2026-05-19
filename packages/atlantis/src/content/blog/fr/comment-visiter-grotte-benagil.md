@@ -7,6 +7,8 @@ date: "2026-05-14"
 image: "https://cdn.filestackcontent.com/KrQCqauLRe2bmZ68HqQs"
 imageAlt: "Lumière du soleil traversant l'ouverture naturelle au plafond et éclairant la plage de sable à l'intérieur de la grotte marine de l'Algar de Benagil"
 author: "Nuno Albino"
+authorBio: "Nuno Albino skippe les bateaux d'Atlantis Tours depuis Portimão depuis 2018, en menant des sorties de pêche au récif, des charters à voile et des journées à bord du yacht Cranchi. Il a grandi sur cette côte."
+authorImage: "/authors/nuno-albino.jpg"
 category: "destinations"
 tags:
   - benagil

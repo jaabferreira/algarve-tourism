@@ -7,6 +7,8 @@ date: "2026-05-14"
 image: "https://cdn.filestackcontent.com/KrQCqauLRe2bmZ68HqQs"
 imageAlt: "Luz solar entrando por la abertura natural del techo sobre la playa de arena en el interior de la cueva marina del Algar de Benagil"
 author: "Nuno Albino"
+authorBio: "Nuno Albino patronea los barcos de Atlantis Tours desde Portimão desde 2018, llevando salidas de pesca de fondo, charters de vela y jornadas a bordo del yate Cranchi. Creció en esta costa."
+authorImage: "/authors/nuno-albino.jpg"
 category: "destinations"
 tags:
   - benagil

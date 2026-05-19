@@ -7,6 +7,8 @@ date: "2026-05-15"
 image: "https://cdn.filestackcontent.com/btJvs7ETdSHHh2QskU2g"
 imageAlt: "Delfines mulares surfeando la ola de proa junto a una lancha de Atlantis Tours en la costa del Algarve"
 author: "Nuno Albino"
+authorBio: "Nuno Albino patronea los barcos de Atlantis Tours desde Portimão desde 2018, llevando salidas de pesca de fondo, charters de vela y jornadas a bordo del yate Cranchi. Creció en esta costa."
+authorImage: "/authors/nuno-albino.jpg"
 category: "marine-life"
 tags:
   - dolphins

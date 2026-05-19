@@ -7,6 +7,8 @@ date: "2026-05-14"
 image: "https://cdn.filestackcontent.com/KrQCqauLRe2bmZ68HqQs"
 imageAlt: "Sunlight streaming through the natural skylight onto the sandy beach inside the Algar de Benagil sea cave"
 author: "Nuno Albino"
+authorBio: "Nuno Albino has skippered the Atlantis Tours boats out of Portimão since 2018, running reef fishing trips, sail charters, and Cranchi yacht days. He grew up on this coast."
+authorImage: "/authors/nuno-albino.jpg"
 category: "destinations"
 tags:
   - benagil

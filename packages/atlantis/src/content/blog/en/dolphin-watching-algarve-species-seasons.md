@@ -7,6 +7,8 @@ date: "2026-05-15"
 image: "https://cdn.filestackcontent.com/btJvs7ETdSHHh2QskU2g"
 imageAlt: "Bottlenose dolphins riding the wake alongside an Atlantis Tours speedboat off the Algarve coast"
 author: "Nuno Albino"
+authorBio: "Nuno Albino has skippered the Atlantis Tours boats out of Portimão since 2018, running reef fishing trips, sail charters, and Cranchi yacht days. He grew up on this coast."
+authorImage: "/authors/nuno-albino.jpg"
 category: "marine-life"
 tags:
   - dolphins

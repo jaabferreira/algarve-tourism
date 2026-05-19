@@ -7,6 +7,8 @@ date: "2026-05-15"
 image: "https://cdn.filestackcontent.com/btJvs7ETdSHHh2QskU2g"
 imageAlt: "Roazes a surfar a onda de proa ao lado de uma lancha da Atlantis Tours na costa algarvia"
 author: "Nuno Albino"
+authorBio: "Nuno Albino é skipper dos barcos Atlantis Tours em Portimão desde 2018, conduzindo passeios de pesca, charters de vela e dias a bordo do iate Cranchi. Cresceu nesta costa."
+authorImage: "/authors/nuno-albino.jpg"
 category: "marine-life"
 tags:
   - dolphins

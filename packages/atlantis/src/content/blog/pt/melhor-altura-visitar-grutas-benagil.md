@@ -7,6 +7,8 @@ date: "2026-05-14"
 image: "https://cdn.filestackcontent.com/KrQCqauLRe2bmZ68HqQs"
 imageAlt: "Luz do sol a entrar pela abertura natural sobre a praia de areia no interior da gruta marinha do Algar de Benagil"
 author: "Nuno Albino"
+authorBio: "Nuno Albino é skipper dos barcos Atlantis Tours em Portimão desde 2018, conduzindo passeios de pesca, charters de vela e dias a bordo do iate Cranchi. Cresceu nesta costa."
+authorImage: "/authors/nuno-albino.jpg"
 category: "destinations"
 tags:
   - benagil

@@ -15,6 +15,8 @@ tags:
   - family
   - travel-tips
 author: "Nuno Albino"
+authorBio: "Nuno Albino skippe les bateaux d'Atlantis Tours depuis Portimão depuis 2018, en menant des sorties de pêche au récif, des charters à voile et des journées à bord du yacht Cranchi. Il a grandi sur cette côte."
+authorImage: "/authors/nuno-albino.jpg"
 readingTime: 6
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour

@@ -12,6 +12,8 @@ tags:
   - caves
   - travel-tips
 author: Nuno Albino
+authorBio: "Nuno Albino has skippered the Atlantis Tours boats out of Portimão since 2018, running reef fishing trips, sail charters, and Cranchi yacht days. He grew up on this coast."
+authorImage: "/authors/nuno-albino.jpg"
 readingTime: 15
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour

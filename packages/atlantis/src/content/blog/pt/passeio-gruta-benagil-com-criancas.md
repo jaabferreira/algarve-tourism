@@ -15,6 +15,8 @@ tags:
   - family
   - travel-tips
 author: "Nuno Albino"
+authorBio: "Nuno Albino é skipper dos barcos Atlantis Tours em Portimão desde 2018, conduzindo passeios de pesca, charters de vela e dias a bordo do iate Cranchi. Cresceu nesta costa."
+authorImage: "/authors/nuno-albino.jpg"
 readingTime: 6
 relatedTourSlugs:
   - circuito-de-grutas-ate-benagil

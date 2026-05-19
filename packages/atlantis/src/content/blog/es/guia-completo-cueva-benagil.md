@@ -12,6 +12,8 @@ tags:
   - caves
   - travel-tips
 author: Nuno Albino
+authorBio: "Nuno Albino patronea los barcos de Atlantis Tours desde Portimão desde 2018, llevando salidas de pesca de fondo, charters de vela y jornadas a bordo del yate Cranchi. Creció en esta costa."
+authorImage: "/authors/nuno-albino.jpg"
 readingTime: 15
 relatedTourSlugs:
   - benagil-caves-speed-boat-tour

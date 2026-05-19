@@ -7,6 +7,8 @@ date: "2026-05-15"
 image: "https://cdn.filestackcontent.com/btJvs7ETdSHHh2QskU2g"
 imageAlt: "Grands dauphins surfant la vague d'étrave aux côtés d'une vedette d'Atlantis Tours sur la côte de l'Algarve"
 author: "Nuno Albino"
+authorBio: "Nuno Albino skippe les bateaux d'Atlantis Tours depuis Portimão depuis 2018, en menant des sorties de pêche au récif, des charters à voile et des journées à bord du yacht Cranchi. Il a grandi sur cette côte."
+authorImage: "/authors/nuno-albino.jpg"
 category: "marine-life"
 tags:
   - dolphins
