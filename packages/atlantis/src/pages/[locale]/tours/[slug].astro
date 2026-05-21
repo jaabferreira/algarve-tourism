@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, parseDescription, formatPrice, buildVideoObject, truncateAtWord, optimizeImageUrl } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, buildFHEmbedUrl, parseDescription, formatPrice, buildVideoObject, truncateAtWord, optimizeImageUrl } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -139,10 +139,12 @@ if (tourVideo?.youtubeId && tourVideo.youtubeMetadata) {
   );
 }
 
-const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
-const fhUrl =
-  `https://fareharbor.com/embeds/book/${config.fh.shortname}/items/${item.pk}/` +
-  `?full-items=yes&cf-${SOURCE_SITE_CF_ID}=atlantis-tours`;
+const fhUrl = buildFHEmbedUrl({
+  companyShortname: config.fh.shortname,
+  siteSource: "atlantis-tours",
+  domain: config.domain,
+  itemPk: item.pk,
+});
 
 // Per-locale tour paths. PT (and any locale that localizes the slug) needs the
 // matched slug, not the current one — otherwise hreflang points at a 404.
@@ -282,6 +284,7 @@ for (const loc of config.locales as Locale[]) {
         <BookingWidget
           item={item}
           companyShortname={config.fh.shortname}
+          domain={config.domain}
           locale={locale}
           siteSource="atlantis-tours"
           variants={getVariants(item.pk, locale)}

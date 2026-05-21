@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { normalizeItem } from "./fareharbor.js";
+import { buildFHEmbedUrl, normalizeItem } from "./fareharbor.js";
 import type { FHItem } from "../types.js";
 
 const mockItem: FHItem = {
@@ -78,5 +78,60 @@ describe("normalizeItem()", () => {
     const noPrice = { ...mockItem, customer_prototypes: [] };
     const result = normalizeItem(noPrice, "boats");
     expect(result.price_from).toBe(0);
+  });
+});
+
+describe("buildFHEmbedUrl()", () => {
+  it("builds a per-item embed for an Atlantis tour with the atlantis affiliate", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "atlantis-tours",
+      domain: "atlantistours.pt",
+      itemPk: 717720,
+    });
+
+    expect(url).toBe(
+      "https://fareharbor.com/embeds/book/atlantistours/items/717720/" +
+        "?button-tags=atlantistours.pt&ref=atlantistours.pt&asn=atlantis-tours-eur&full-items=yes",
+    );
+  });
+
+  it("builds a per-item embed for an Algarve & You tour with the any affiliate", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "any",
+      domain: "algarveandyou.com",
+      itemPk: 718024,
+    });
+
+    expect(url).toBe(
+      "https://fareharbor.com/embeds/book/atlantistours/items/718024/" +
+        "?button-tags=algarveandyou.com&ref=algarveandyou.com&asn=any-eur&full-items=yes",
+    );
+  });
+
+  it("builds a company-wide embed with a flow id and no item path", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "atlantis-tours",
+      domain: "atlantistours.pt",
+      flow: "1602637",
+    });
+
+    expect(url).toBe(
+      "https://fareharbor.com/embeds/book/atlantistours/" +
+        "?button-tags=atlantistours.pt&ref=atlantistours.pt&asn=atlantis-tours-eur&full-items=yes&flow=1602637",
+    );
+  });
+
+  it("never emits the dead cf- custom-field param", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "any",
+      domain: "algarveandyou.com",
+      itemPk: 718024,
+    });
+
+    expect(url).not.toContain("cf-");
   });
 });

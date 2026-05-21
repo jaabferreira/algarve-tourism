@@ -2,22 +2,21 @@
 import type { Locale, NormalizedItem, SiteSource } from "../types.js";
 import { t } from "../i18n/index.js";
 import { formatPrice } from "../lib/prices.js";
+import { buildFHEmbedUrl } from "../lib/fareharbor.js";
 
 interface Props {
   item: NormalizedItem;
   companyShortname: string;
+  domain: string;
   locale: Locale;
   siteSource: SiteSource;
   variants?: NormalizedItem[];
 }
 
-const { item, companyShortname, locale, siteSource, variants = [] } = Astro.props;
-
-const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
+const { item, companyShortname, domain, locale, siteSource, variants = [] } = Astro.props;
 
 const fhUrl = (pk: number) =>
-  `https://fareharbor.com/embeds/book/${companyShortname}/items/${pk}/` +
-  `?full-items=yes&cf-${SOURCE_SITE_CF_ID}=${siteSource}`;
+  buildFHEmbedUrl({ companyShortname, siteSource, domain, itemPk: pk });
 
 const allOptions = variants.length > 0 ? [item, ...variants] : [];
 ---

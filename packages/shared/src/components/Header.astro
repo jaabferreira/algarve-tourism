@@ -3,6 +3,7 @@ import type { BrandConfig, Locale, SiteSource } from "../types.js";
 import type { TranslationKey } from "../i18n/types.js";
 import { t } from "../i18n/index.js";
 import { getLocalePath } from "../config.js";
+import { buildFHEmbedUrl } from "../lib/fareharbor.js";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const BRAND_TO_SITE_SOURCE: Record<BrandConfig["brand"], SiteSource> = {
@@ -42,11 +43,13 @@ const navItems: NavItem[] =
       ];
 
 const ctaLabel = t(locale, "nav.book_now");
-const SOURCE_SITE_CF_ID = import.meta.env.PUBLIC_FH_SOURCE_SITE_CF_ID;
 const siteSource = BRAND_TO_SITE_SOURCE[config.brand];
-const ctaHref =
-  `https://fareharbor.com/embeds/book/${config.fh.shortname}/` +
-  `?full-items=yes&flow=${config.fh.flow}&cf-${SOURCE_SITE_CF_ID}=${siteSource}`;
+const ctaHref = buildFHEmbedUrl({
+  companyShortname: config.fh.shortname,
+  siteSource,
+  domain: config.domain,
+  flow: config.fh.flow,
+});
 
 const phone = config.social.phone;
 const phoneHref = phone ? `tel:${phone.replace(/[^+0-9]/g, "")}` : null;
