@@ -6,25 +6,30 @@
 
 ## Problem
 
-FareHarbor needs visibility of completed bookings as conversions. Today they are
-invisible: the booking happens inside FareHarbor's lightframe on `fareharbor.com`,
-and that session never reaches either site's GA4 property.
+Both sites have **no cookie-consent solution at all**. `gtag.js` fires
+unconditionally on every page load (`PageLayout.astro`), and FareHarbor already
+loads each site's GA4 property inside its booking lightframe — so booking data
+already reaches GA4 (this is what produced the `fareharbor.com` referral leak fixed
+on 2026-04-30). None of that collection is gated on consent.
 
-FareHarbor's GA4 integration fixes this — it forwards booking events
-(`view_item_description`, `add_to_cart`, `purchase` with value/currency/quantity)
-into the partner's GA4 property. But for that pipeline to be legal and to function,
-FareHarbor must be able to read a **cookie-consent signal** from the parent page.
+Per FareHarbor's "Cookies under privacy laws" article, Portugal / Spain / France /
+Germany are all **Category 1 (opt-in)** — analytics cookies must not load until the
+user consents. With no consent solution on the page, FareHarbor's booking system
+cannot tell whether the visitor consented, so it loads GA4 cookies regardless — a
+stated non-compliance risk. The booking/analytics data is being collected; it is
+being collected unlawfully.
 
-Both sites currently have **no consent solution at all**: `gtag.js` fires
-unconditionally on every page load (`PageLayout.astro`). Per FareHarbor's "Cookies
-under privacy laws" article, Portugal / Spain / France / Germany are all
-**Category 1 (opt-in)** — analytics cookies must not load until the user consents.
-With no consent solution, FareHarbor cannot tell whether the visitor consented, so
-it loads GA4 cookies regardless — a stated non-compliance risk.
+This is a **compliance** deliverable, not a conversion-visibility one — the banner
+makes data the sites already collect lawful, and lets FareHarbor's integration
+respect the visitor's choice. For consenting visitors nothing changes; for
+non-consenting visitors, data (including their bookings) shifts from observed to
+modeled.
 
 FareHarbor integrates only with: OneTrust, Complianz, Cookiebot, iubenda,
 **Google Consent Mode v2** (including custom solutions that implement it), and
-legacy Cookie Law Info. CookieYes is explicitly unsupported.
+legacy Cookie Law Info. CookieYes is explicitly unsupported. FareHarbor's GA4
+integration script "respects cookie consent" — but only when a supported consent
+signal exists on the page for it to read.
 
 ## Goal
 
@@ -206,12 +211,14 @@ cookie-policy page — the privacy page already has the section, so this is YAGN
 Executed by the site owner (has FareHarbor dashboard + GA4 Admin access). The
 implementation plan will carry these as a final verification checklist.
 
-1. **FareHarbor dashboard — connect GA4.** For each FareHarbor dashboard, enter the
-   site's GA4 Measurement ID so FareHarbor forwards ecommerce events into that
-   property. Exact navigation per FareHarbor's "Setting up GA4 to work with
-   FareHarbor" article (recommend downloading it for the precise click-path);
-   general path: Dashboard → Settings → integrations → Google Analytics. IDs:
-   `G-YE21ZWJNY7` (Atlantis), `G-GZJJYPE72L` (A&Y).
+1. **FareHarbor dashboard — verify the GA4 connection.** FareHarbor already loads
+   GA4 in the lightframe, so a connection exists. Confirm each FareHarbor dashboard
+   has the correct GA4 Measurement ID and is on FareHarbor's current GA4 integration
+   (the structured ecommerce events listed above — `view_item_description`,
+   `add_to_cart`, `purchase`, etc.). Exact navigation per FareHarbor's "Setting up
+   GA4 to work with FareHarbor" article; general path: Dashboard → Settings →
+   integrations → Google Analytics. IDs: `G-YE21ZWJNY7` (Atlantis),
+   `G-GZJJYPE72L` (A&Y).
 2. **GA4 Admin — cross-domain.** In each GA4 property: Admin → Data Streams → the web
    stream → Configure tag settings → Configure your domains → add `fareharbor.com`
    alongside the site domain. Enables session continuity into the lightframe.
