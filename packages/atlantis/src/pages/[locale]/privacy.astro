@@ -234,8 +234,14 @@ const deletionLabel = deletionLinkLabel[locale] ?? deletionLinkLabel.en;
       <h2>{t(locale, "privacy.data_retention")}</h2>
       <p>{t(locale, "privacy.data_retention_body")}</p>
 
-      <h2>{t(locale, "privacy.cookies")}</h2>
+      <h2 id="cookies">{t(locale, "privacy.cookies")}</h2>
       <p>{t(locale, "privacy.cookies_body")}</p>
+      <ul>
+        <li set:html={t(locale, "privacy.cookies_necessary")} />
+        <li set:html={t(locale, "privacy.cookies_analytics")} />
+        <li set:html={t(locale, "privacy.cookies_marketing")} />
+      </ul>
+      <p>{t(locale, "privacy.cookies_manage")}</p>
     </div>
   </section>
 
