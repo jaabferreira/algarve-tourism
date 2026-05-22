@@ -1,5 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import type { BrandConfig, Locale } from '../types';
 import { optimizeImageUrl, optimizeImageSrcset } from '../lib/images';
 
@@ -70,6 +71,41 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
   />
   {config.analytics.gtag && (
     <>
+      {/* Consent Mode v2 — must run before gtag('config'). Non-essential
+          storage defaults to denied; a valid `aty_consent` cookie upgrades it.
+          The 'v1|' prefix MUST match CONSENT_VERSION in lib/consent.ts. */}
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          functionality_storage: 'granted',
+          security_storage: 'granted',
+          wait_for_update: 500
+        });
+        gtag('set', 'ads_data_redaction', true);
+        gtag('set', 'url_passthrough', true);
+        try {
+          var fhMatch = document.cookie.match(/(?:^|; )aty_consent=([^;]*)/);
+          if (fhMatch) {
+            var fhConsent = decodeURIComponent(fhMatch[1]);
+            if (fhConsent.indexOf('v1|') === 0) {
+              var fhA = fhConsent.indexOf('analytics=1') !== -1 ? 'granted' : 'denied';
+              var fhM = fhConsent.indexOf('marketing=1') !== -1 ? 'granted' : 'denied';
+              gtag('consent', 'update', {
+                analytics_storage: fhA,
+                ad_storage: fhM,
+                ad_user_data: fhM,
+                ad_personalization: fhM
+              });
+              document.documentElement.setAttribute('data-consent', 'set');
+            }
+          }
+        } catch (e) {}
+      </script>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${config.analytics.gtag}`}></script>
       <script define:vars={{ gtagId: config.analytics.gtag }}>
         window.dataLayer = window.dataLayer || [];
@@ -157,6 +193,7 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
       setTimeout(load, 30000);
     })();
   </script>
+  {config.analytics.gtag && <CookieConsent config={config} locale={locale as Locale} />}
 </body>
 </html>
 
