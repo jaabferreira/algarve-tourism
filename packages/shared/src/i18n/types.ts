@@ -245,6 +245,28 @@ export interface TranslationStrings {
   "home.blog_label": string;
   "home.blog_title": string;
   "home.view_all_posts": string;
+
+  "consent.banner_text": string;
+  "consent.accept_all": string;
+  "consent.reject_all": string;
+  "consent.customize": string;
+  "consent.policy_link": string;
+  "consent.prefs_title": string;
+  "consent.prefs_intro": string;
+  "consent.cat_necessary": string;
+  "consent.cat_necessary_desc": string;
+  "consent.always_on": string;
+  "consent.cat_analytics": string;
+  "consent.cat_analytics_desc": string;
+  "consent.cat_marketing": string;
+  "consent.cat_marketing_desc": string;
+  "consent.save": string;
+  "consent.close": string;
+  "footer.cookie_settings": string;
+  "privacy.cookies_necessary": string;
+  "privacy.cookies_analytics": string;
+  "privacy.cookies_marketing": string;
+  "privacy.cookies_manage": string;
 }
 
 export type TranslationKey = keyof TranslationStrings;
