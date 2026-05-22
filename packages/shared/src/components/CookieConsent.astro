@@ -97,6 +97,16 @@ const cookieDetailsHref = `${getLocalePath(locale, "/privacy/")}#cookies`;
     gap: var(--space-6);
     flex-wrap: wrap;
     padding: var(--space-4) var(--space-6);
+    /* A fixed bottom:0 element anchors to the layout viewport, so on mobile its
+       lower edge hides behind the retractable URL bar. --cookie-vv-offset (fed
+       by the script from the Visual Viewport API) lifts the content clear of
+       it; env() handles the iOS home indicator. */
+    padding-bottom: calc(
+      var(--space-4) + env(safe-area-inset-bottom, 0px) +
+        var(--cookie-vv-offset, 0px)
+    );
+    max-height: 90svh;
+    overflow-y: auto;
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
     box-shadow: var(--shadow-lg);
@@ -168,6 +178,12 @@ const cookieDetailsHref = `${getLocalePath(locale, "/privacy/")}#cookies`;
     align-items: center;
     justify-content: center;
     padding: var(--space-4);
+    /* Same viewport offset as the banner — keeps the centered dialog inside the
+       visible area when the mobile URL bar is showing. */
+    padding-bottom: calc(
+      var(--space-4) + env(safe-area-inset-bottom, 0px) +
+        var(--cookie-vv-offset, 0px)
+    );
   }
 
   .cookie-prefs[hidden] {
@@ -184,7 +200,7 @@ const cookieDetailsHref = `${getLocalePath(locale, "/privacy/")}#cookies`;
     position: relative;
     width: 100%;
     max-width: 460px;
-    max-height: 85vh;
+    max-height: 85svh;
     overflow-y: auto;
     background: var(--color-surface);
     border-radius: var(--radius-lg);
@@ -391,5 +407,25 @@ const cookieDetailsHref = `${getLocalePath(locale, "/privacy/")}#cookies`;
     document
       .querySelectorAll("[data-cookie-settings]")
       .forEach((el) => el.addEventListener("click", openModal));
+
+    // Keep the banner and modal clear of the mobile browser's dynamic URL bar.
+    // A `position: fixed; bottom: 0` element anchors to the layout viewport, so
+    // its lower edge sits behind the retractable URL bar until the visitor
+    // scrolls. Publish the hidden-below gap as --cookie-vv-offset, which the
+    // banner's and modal's `padding-bottom` consume.
+    function syncViewportOffset(): void {
+      const vv = window.visualViewport;
+      if (!vv) return;
+      const hidden = Math.max(
+        0,
+        document.documentElement.clientHeight - vv.height - vv.offsetTop,
+      );
+      root.style.setProperty("--cookie-vv-offset", hidden + "px");
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", syncViewportOffset);
+      window.visualViewport.addEventListener("scroll", syncViewportOffset);
+      syncViewportOffset();
+    }
   }
 </script>
