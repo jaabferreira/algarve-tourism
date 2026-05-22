@@ -6,6 +6,16 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-05-22 — Cookie consent + Google Consent Mode v2 shipped on both sites
+
+**What:** Added a custom cookie-consent banner wired to Google Consent Mode v2 across both sites (shared `CookieConsent` component). `analytics_storage`, `ad_storage`, `ad_user_data`, and `ad_personalization` now default to **denied** and only flip to `granted` when the visitor accepts. The banner offers Accept all / Reject all / Customize; the choice persists in the `aty_consent` cookie (180 days); a footer "Cookie settings" link reopens it.
+
+**Why:** FareHarbor onboarding item 5 — both sites had no consent solution, so GA4 cookies (and FareHarbor's lightframe analytics) loaded without consent, a GDPR exposure in PT/ES/FR. Consent Mode v2 is FareHarbor-supported and is also Google's EEA requirement for ad tracking.
+
+**Expected effect:** for non-consenting EU visitors, GA4/Ads data shifts from observed to modeled (cookieless pings + conversion modeling); consenting visitors are unchanged. Expect a step-down in observed users/sessions and a modeled share in conversions from the deploy date — this is a measurement-basis change, **not** a campaign regression; do not read it as one.
+
+**Verify on/after:** 2026-06-05 — in GA4 DebugView confirm the consent state reflects the banner choice; check the consented/modeled split in GA4's consent reporting.
+
 ## 2026-05-20 — FareHarbor: Benagil cave price €20 → €19; site redeployed to publish it
 
 **What:** Benagil cave tour direct price lowered **€20.00 → €19.00/pax** in FareHarbor (item `pk 717720`; Adult/Child/Baby customer types now €17.92 ex-tax / €19.00 incl-tax). Forced a Cloudflare Pages rebuild (empty commit `2e702d5` → `master`) so the landing page publishes the new price — the prior build (2026-05-19) had shipped a stale 2026-05-15 FH price snapshot. (~20 other FH items were re-priced the same day, but they are duplicate/variant items the website does not surface — no landing-page effect.)
