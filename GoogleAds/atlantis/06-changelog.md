@@ -6,6 +6,88 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-05-20 — FareHarbor: Benagil cave price €20 → €19; site redeployed to publish it
+
+**What:** Benagil cave tour direct price lowered **€20.00 → €19.00/pax** in FareHarbor (item `pk 717720`; Adult/Child/Baby customer types now €17.92 ex-tax / €19.00 incl-tax). Forced a Cloudflare Pages rebuild (empty commit `2e702d5` → `master`) so the landing page publishes the new price — the prior build (2026-05-19) had shipped a stale 2026-05-15 FH price snapshot. (~20 other FH items were re-priced the same day, but they are duplicate/variant items the website does not surface — no landing-page effect.)
+
+**Why:** the site bakes FH prices in at build time (`fetch-fh.ts` → gitignored `shared/data/*.json`), so a price change in FareHarbor does nothing until the site is rebuilt + redeployed. Re: the 2026-05-19 Finding 2 — the direct-vs-GYG price gap is the diagnosed conversion blocker on the Benagil non-brand campaign.
+
+**Expected effect:** `/en/tours/benagil-caves-speed-boat-tour/` and `/pt/tours/circuito-de-grutas-ate-benagil/` now show "from €19.00". This closes only ~€1 of the ~€6–7 gap to GetYourGuide (€13–14/pax) — it does **not** resolve the Finding-2 price-gap diagnosis; expect the Benagil non-brand campaign to keep converting near-zero on relative price.
+
+**Verify on/after:** done 2026-05-20 — live page confirmed serving €19.00.
+
+## 2026-05-19 — Diagnosis: GYG hijacks brand + direct price ~30% above GYG (the real reason Benagil converts zero)
+
+**No account / site changes this date.** This is a finding entry — the diagnosis behind 0 non-brand conversions on €311 of spend over 6 days. Action is paused pending a business decision on direct pricing.
+
+**Context — the 6-day probation read (2026-05-13 → 2026-05-18):**
+
+| Campaign | Spend | Clicks | CTR | Avg CPC | Conv (Ads) | Budget-lost IS | Rank-lost IS |
+|---|---|---|---|---|---|---|---|
+| Brand Atlantis Tours | €31.08 | 47 | **38.5%** | €0.66 | 1 (€100) | 67.8% | 8.2% |
+| NB - Benagil Cave Tour | €188.10 | 100 | **19.1%** | €1.88 | 0 | **90.0%** | 0.6% |
+| NB — Algarve Generic | €91.93 | 122 | 10.7% | €0.75 | 0 | 75.2% | 18.8% |
+| (4 paused) | — | — | — | — | — | — | — |
+
+GA4 (warehouse) corroborates: only **2 paid bookings (€140 revenue)** across all paid in the window — both look brand. The 2026-05-12 changes did what they were designed to do mechanically: **Brand avg CPC halved** (€1.10 → €0.66) under the new €0.80 cap; **Benagil CTR climbed to 19.1%** (excellent for non-brand — QS is genuinely recovering); **Generic clicks now ~all non-brand** (the "atlantis" negative + URL repoint worked — but Generic is converting near zero, confirming the brand-leakage hypothesis from 2026-05-12). So none of the structural reads from the original 14-day diagnosis are wrong; we have less brand-leakage masking and cleaner data, which is what surfaced the two new findings below.
+
+**Finding 1 — GetYourGuide outshows Atlantis 2.4× on its own brand name.** Pulled Auction Insights on `Brand Atlantis Tours` (last 7 and 30 days). The picture:
+
+| Domain | IS (7d) | Overlap | Position above us | Top of page | Outranking |
+|---|---|---|---|---|---|
+| **getyourguide.com** | **57.56%** | 77.69% | **18.09%** | 86.01% | 20.43% |
+| viator.com | 31.83% | 40.50% | 2.04% | 59.88% | 23.58% |
+| **You (Atlantis)** | **23.77%** | — | — | 89.26% | — |
+| booking.com | 17.88% | 23.97% | 3.45% | 59.34% | 23.58% |
+| 5emotionsalgarve.com (local op.) | <10% | 11.57% | 14.29% | 74.36% | 23.38% |
+
+Reads: (a) our €0.80 max CPC is fine — when we serve, we're at #1 (89% top-of-page, 68.6% abs-top). (b) **The 68% budget-lost IS is because of the €5/day cap, not the bid** — every brand-search hour we're maxed out, GYG buys the auction. (c) GYG is bidding our brand name aggressively. They're reselling our tours (see Finding 2 for why this matters double).
+
+**Finding 2 — direct price is €20/pax; GYG sells the same tour at €13-14/pax (~30% cheaper).** José confirmed today: the operator is intentionally running aggressive GYG pricing to win volume there. The result on the Google paid funnel — reconstructed step-by-step:
+
+1. User searches `benagil cave tour` (or one of 40 equivalents — the search-term report is genuinely clean, this isn't a matching problem)
+2. User clicks Atlantis ad (we pay €1.88 average CPC)
+3. User lands on `/tours/benagil-caves-speed-boat-tour/`, opens the FH widget, sees **€20/pax**
+4. User alt-tabs back to the SERP, sees the GYG ad listing the same tour
+5. User books on GYG at **€13-14/pax**
+6. Atlantis pays ~25% commission to GYG on a booking we just paid Google to send to GYG
+
+The "widget collapse" we couldn't find in the UX (José walked through it manually and found nothing wrong) **isn't a UX problem — it's a price-shopping bounce that completes off-site**. That's why it didn't show up: the booking happens; it just doesn't happen on FH. This explains the 5× paid-vs-organic widget→book gap from the 2026-05-12 entry, why the clean search-term report converts zero, and why QS improvements (CTR 19% is genuinely good) aren't moving conversions.
+
+**Unit-economics math:** at €20 direct vs €13.50 GYG (mid-point):
+- Direct net per pax: €20 × (1 − 6% FH fee) = **€18.80**
+- GYG net per pax: €13.50 × (1 − 25% commission) = **€10.12**
+- Margin loss per pax pushed direct→GYG: ~€8.70
+- Add €1.88 paid CPC for the click: ~€19 of theoretical margin lost per paid-acquired booking that converts on GYG instead of direct
+
+**In incrementality terms, Benagil paid is currently negative-incremental.** We're not buying lost demand; we're paying Google to redirect demand we would have captured for free (or via GYG at the normal commission rate) into a channel that costs us more per booking. The original probation thesis (QS recovery + page fixes + URL repoint → CPA trends down) is mechanically true but irrelevant: no QS climb can fix a 30% price gap on a comparison-shoppable product.
+
+**Three paths (the pending decision):**
+
+1. **Match GYG on direct.** Move FH price to ~€14/pax. Costs ~€5/pax of margin on captive bookings (walk-ins, organic, brand — ~43 of the recent 45 bookings) but unlocks the paid channel. Standard direct-vs-OTA rate-parity practice. **José's instinct, pending boss approval.**
+1a. **Match GYG via promo-code only.** Site price stays €20; paid ads include a discount code (e.g. `SHORE14`). Preserves walk-in margin (most price-inelastic segment); restores paid funnel. Cleaner option if the bosses are hesitant about a blanket cut.
+2. **Pause non-brand paid now.** Accept the GYG-cheaper architecture as load-bearing; keep Brand only (the auction-insights case for brand defense stands either way). Saves ~€40/day of likely-negative-incremental spend. Don't burn through to 2026-06-30 verifying what we already understand.
+3. **Defer the call.** Season is running, print collateral is out, GYG pricing locked for now. Run probation to 2026-06-30 as planned, accept it will almost certainly fail, revisit the whole pricing architecture in October before next season.
+
+**Reframed kill rule:** the 2026-05-12 rule (≥3 non-brand bookings AND CPA <€60 by 2026-06-30) was set without the price-gap data. With it, the rule is structurally falsified — we know why it will fail. New rule: **decision contingent on the price call, not on calendar.** If pricing is matched (path 1 or 1a), run the probation 4 weeks from the price change and re-evaluate. If pricing stays as-is (path 2 or 3), the question is whether to pause now or burn the credit; recommend pausing.
+
+**Not changed this date (and why):**
+- **Brand budget €5/day stays.** Auction Insights argues for raising it (~€10/day captures another 50% of brand IS; defending against GYG brand-bidding has clean ROI at ~€20/booking saved in commission). José: "do nothing here for now." Logged as a pending move; revisit after price decision.
+- **No GetYourGuide takedown request sent.** Discussed but not actioned — GYG is a partner, brand-bidding takedown is a partner-support email (proof of trademark, request brand-term exclusion from their paid campaigns). Mixed success rate with GYG. Worth doing whenever priorities allow.
+- **No Benagil pause.** Holding pending the price call.
+
+**To-do parked from this session (no owners):**
+- Boss conversation on the GYG-vs-direct pricing architecture (José owns; outcome drives the path 1 vs 2 vs 3 decision above).
+- Send GYG partner-support brand-bidding takedown request (and Google Ads trademark complaint on `5emotionsalgarve.com` if they're using "Atlantis" in ad copy).
+- QR-code UTM (`?utm_source=qr_kiosk&utm_medium=walkin`) — still parked to next season per José; "everything is printed now."
+
+**Verify on/after:** depends on the price decision.
+- *If price match ships:* re-pull Benagil 14 days after the change; expect non-brand conversion rate to lift toward organic's ~2.8% session conv (currently 0 / 100 clicks = 0%). CPA target: trend under €60.
+- *If pricing unchanged:* no verification needed — pause Benagil now or at 2026-06-30 per the original kill rule (we already know the answer).
+- *Brand budget revisit:* re-pull Auction Insights and Brand budget-lost IS in 2 weeks regardless.
+
+---
+
 ## 2026-05-12 — Content-hub site wiring (Benagil pillar/cluster, FAQ schema, tour→guide links)
 
 **What:** Shipped the site-side wiring for the Benagil content hub (branch `feat/atlantis-content-hub`, plan `docs/superpowers/plans/2026-05-12-atlantis-content-hub-wiring.md`) — no URL changes. The 4 tour pages (= the Google Ads landing pages) gain a "Plan your trip" block linking to the relevant guide posts; blog posts gain hub-aware breadcrumbs, a "Part of our complete guide" callout (cluster pages), an "In this guide" cluster list (the pillar), and `FAQPage` JSON-LD + a visible FAQ block when a post defines `faqs`. 8 existing blog posts were marked as cluster pages of the `benagil-cave-tour-complete-guide` pillar (locale-aware), and the pillar is pinned on the blog index + homepage.
