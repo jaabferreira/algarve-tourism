@@ -1,0 +1,395 @@
+---
+import type { BrandConfig, Locale } from "../types.js";
+import { t } from "../i18n/index.js";
+import { getLocalePath } from "../config.js";
+
+interface Props {
+  config: BrandConfig;
+  locale: Locale;
+}
+
+const { config, locale } = Astro.props;
+const brand = config.brand;
+const cookieDetailsHref = `${getLocalePath(locale, "/privacy/")}#cookies`;
+---
+
+<div class="cookie" data-brand={brand}>
+  <div class="cookie-banner" role="region" aria-label={t(locale, "consent.prefs_title")}>
+    <p class="cookie-banner__text">
+      {t(locale, "consent.banner_text")}
+      <a href={cookieDetailsHref}>{t(locale, "consent.policy_link")}</a>
+    </p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent-customize>
+        {t(locale, "consent.customize")}
+      </button>
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent-reject>
+        {t(locale, "consent.reject_all")}
+      </button>
+      <button type="button" class="cookie-btn cookie-btn--solid" data-consent-accept>
+        {t(locale, "consent.accept_all")}
+      </button>
+    </div>
+  </div>
+
+  <div class="cookie-prefs" hidden>
+    <div class="cookie-prefs__backdrop" data-consent-close></div>
+    <div
+      class="cookie-prefs__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookie-prefs-title"
+    >
+      <div class="cookie-prefs__head">
+        <h2 id="cookie-prefs-title">{t(locale, "consent.prefs_title")}</h2>
+        <button
+          type="button"
+          class="cookie-prefs__close"
+          data-consent-close
+          aria-label={t(locale, "consent.close")}
+        >&times;</button>
+      </div>
+      <p class="cookie-prefs__intro">{t(locale, "consent.prefs_intro")}</p>
+
+      <div class="cookie-cat">
+        <div class="cookie-cat__row">
+          <span class="cookie-cat__name">{t(locale, "consent.cat_necessary")}</span>
+          <span class="cookie-cat__lock">{t(locale, "consent.always_on")}</span>
+        </div>
+        <p class="cookie-cat__desc">{t(locale, "consent.cat_necessary_desc")}</p>
+      </div>
+
+      <label class="cookie-cat">
+        <div class="cookie-cat__row">
+          <span class="cookie-cat__name">{t(locale, "consent.cat_analytics")}</span>
+          <input type="checkbox" data-consent-toggle="analytics" />
+        </div>
+        <p class="cookie-cat__desc">{t(locale, "consent.cat_analytics_desc")}</p>
+      </label>
+
+      <label class="cookie-cat">
+        <div class="cookie-cat__row">
+          <span class="cookie-cat__name">{t(locale, "consent.cat_marketing")}</span>
+          <input type="checkbox" data-consent-toggle="marketing" />
+        </div>
+        <p class="cookie-cat__desc">{t(locale, "consent.cat_marketing_desc")}</p>
+      </label>
+
+      <div class="cookie-prefs__actions">
+        <button type="button" class="cookie-btn cookie-btn--solid" data-consent-save>
+          {t(locale, "consent.save")}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Banner — fixed to the viewport bottom, so it never causes layout shift. */
+  .cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* The PageLayout head bootstrap sets data-consent="set" when a valid cookie
+     exists — keeps returning visitors from ever seeing a banner flash. */
+  :global(html[data-consent="set"]) .cookie-banner {
+    display: none;
+  }
+
+  .cookie-banner__text {
+    flex: 1 1 320px;
+    margin: 0;
+    font-size: 13px;
+    line-height: var(--leading-normal);
+    color: var(--color-text-body);
+  }
+
+  .cookie-banner__text a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .cookie-btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .cookie-btn--ghost:hover {
+    background: var(--color-bg);
+  }
+
+  .cookie-btn--solid {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .cookie-btn--solid:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+
+  /* Preferences modal */
+  .cookie-prefs {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .cookie-prefs[hidden] {
+    display: none;
+  }
+
+  .cookie-prefs__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 26, 42, 0.55);
+  }
+
+  .cookie-prefs__dialog {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-6);
+  }
+
+  .cookie-prefs__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .cookie-prefs__head h2 {
+    margin: 0;
+    font-size: 18px;
+    font-family: var(--font-display);
+  }
+
+  .cookie-prefs__close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    padding: 0 var(--space-1);
+  }
+
+  .cookie-prefs__intro {
+    margin: var(--space-3) 0 var(--space-5);
+    font-size: 13px;
+    line-height: var(--leading-normal);
+    color: var(--color-text-body);
+  }
+
+  .cookie-cat {
+    display: block;
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  label.cookie-cat {
+    cursor: pointer;
+  }
+
+  .cookie-cat__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .cookie-cat__name {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .cookie-cat__lock {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .cookie-cat__desc {
+    margin: var(--space-2) 0 0;
+    font-size: 13px;
+    line-height: var(--leading-normal);
+    color: var(--color-text-body);
+  }
+
+  .cookie-cat input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .cookie-prefs__actions {
+    margin-top: var(--space-5);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 560px) {
+    .cookie-banner__actions {
+      width: 100%;
+    }
+    .cookie-banner__actions .cookie-btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>
+
+<script>
+  import { serializeConsent, parseConsent, toConsentSignals } from "../lib/consent.js";
+
+  const COOKIE_NAME = "aty_consent";
+  const COOKIE_MAX_AGE = 60 * 60 * 24 * 180; // 180 days
+
+  function readConsentCookie(): string | null {
+    const match = document.cookie.match(/(?:^|; )aty_consent=([^;]*)/);
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function writeConsentCookie(value: string): void {
+    document.cookie =
+      COOKIE_NAME +
+      "=" +
+      encodeURIComponent(value) +
+      "; path=/; max-age=" +
+      COOKIE_MAX_AGE +
+      "; SameSite=Lax; Secure";
+  }
+
+  function gtag(): void {
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    // eslint-disable-next-line prefer-rest-params
+    w.dataLayer.push(arguments);
+  }
+
+  const root = document.querySelector<HTMLElement>(".cookie");
+  if (root) {
+    const modal = root.querySelector<HTMLElement>(".cookie-prefs");
+    const dialog = root.querySelector<HTMLElement>(".cookie-prefs__dialog");
+    const analyticsToggle = root.querySelector<HTMLInputElement>(
+      '[data-consent-toggle="analytics"]',
+    );
+    const marketingToggle = root.querySelector<HTMLInputElement>(
+      '[data-consent-toggle="marketing"]',
+    );
+    let lastFocused: HTMLElement | null = null;
+
+    function applyConsent(choice: { analytics: boolean; marketing: boolean }): void {
+      gtag("consent", "update", toConsentSignals(choice));
+      writeConsentCookie(serializeConsent(choice));
+      document.documentElement.setAttribute("data-consent", "set");
+      closeModal();
+    }
+
+    function trapFocus(event: KeyboardEvent): void {
+      if (event.key === "Escape") {
+        closeModal();
+        return;
+      }
+      if (event.key !== "Tab" || !dialog) return;
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>("button, input, a[href]"),
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    function openModal(): void {
+      const stored = parseConsent(readConsentCookie());
+      if (analyticsToggle) analyticsToggle.checked = stored ? stored.analytics : false;
+      if (marketingToggle) marketingToggle.checked = stored ? stored.marketing : false;
+      lastFocused = document.activeElement as HTMLElement;
+      modal?.removeAttribute("hidden");
+      dialog?.querySelector<HTMLElement>("button, input")?.focus();
+      document.addEventListener("keydown", trapFocus);
+    }
+
+    function closeModal(): void {
+      if (!modal || modal.hasAttribute("hidden")) return;
+      modal.setAttribute("hidden", "");
+      document.removeEventListener("keydown", trapFocus);
+      lastFocused?.focus();
+    }
+
+    root
+      .querySelector("[data-consent-accept]")
+      ?.addEventListener("click", () =>
+        applyConsent({ analytics: true, marketing: true }),
+      );
+    root
+      .querySelector("[data-consent-reject]")
+      ?.addEventListener("click", () =>
+        applyConsent({ analytics: false, marketing: false }),
+      );
+    root
+      .querySelector("[data-consent-customize]")
+      ?.addEventListener("click", openModal);
+    root.querySelector("[data-consent-save]")?.addEventListener("click", () =>
+      applyConsent({
+        analytics: Boolean(analyticsToggle?.checked),
+        marketing: Boolean(marketingToggle?.checked),
+      }),
+    );
+    root
+      .querySelectorAll("[data-consent-close]")
+      .forEach((el) => el.addEventListener("click", closeModal));
+
+    // The footer "Cookie settings" button lives outside this component.
+    document
+      .querySelectorAll("[data-cookie-settings]")
+      .forEach((el) => el.addEventListener("click", openModal));
+  }
+</script>
