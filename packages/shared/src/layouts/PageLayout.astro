@@ -173,18 +173,59 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
   )}
   <script>
     // Defer FareHarbor's autolightframe bundle (~1.3 MB) until the visitor
-    // actually engages. Booking links still work before load — they fall
-    // back to FH's hosted checkout page instead of the modal lightframe.
+    // actually engages. A capture-phase click handler intercepts FH booking
+    // links so a first-interaction click (e.g. header Book Now on a fresh
+    // load) still opens the lightframe instead of navigating away while the
+    // FH script is mid-flight.
     (() => {
-      let loaded = false;
+      let loadInitiated = false;
+      const FH_LINK_SELECTOR = 'a[href*="fareharbor.com/embeds/book"]';
+      const syntheticClicks = new WeakSet();
+
       const load = () => {
-        if (loaded) return;
-        loaded = true;
+        if (loadInitiated) return;
+        loadInitiated = true;
         const s = document.createElement('script');
         s.src = 'https://fareharbor.com/embeds/api/v1/?autolightframe=yes';
         s.async = true;
         document.body.appendChild(s);
       };
+
+      const fhReady = () =>
+        typeof (window as any).FH?.open === 'function';
+
+      window.addEventListener(
+        'click',
+        (e) => {
+          const target = e.target as Element | null;
+          const link = target?.closest(FH_LINK_SELECTOR) as HTMLAnchorElement | null;
+          if (!link) return;
+          if (syntheticClicks.has(link)) {
+            syntheticClicks.delete(link);
+            return; // re-dispatched click: let FH's delegated handler take over
+          }
+          if (fhReady()) return; // FH bound — autolightframe will intercept
+          e.preventDefault();
+          e.stopPropagation();
+          load();
+          const start = Date.now();
+          const tryClick = () => {
+            if (fhReady()) {
+              syntheticClicks.add(link);
+              link.click();
+              return;
+            }
+            if (Date.now() - start > 5000) {
+              window.location.href = link.href; // give up — fall back to navigation
+              return;
+            }
+            setTimeout(tryClick, 50);
+          };
+          tryClick();
+        },
+        true,
+      );
+
       const events = ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'];
       events.forEach((e) => addEventListener(e, load, { once: true, passive: true }));
       // Fallback for fully-idle users — pushed past the CLS-sensitive window.
