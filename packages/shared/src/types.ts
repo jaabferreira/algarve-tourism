@@ -24,6 +24,8 @@ export interface BrandConfig {
   };
   analytics: {
     gtag: string;
+    /** Optional GTM container id (e.g. "GTM-XXXX"). Only brands that set this load GTM. */
+    gtm?: string;
   };
   defaultLocale: Locale;
   locales: Locale[];

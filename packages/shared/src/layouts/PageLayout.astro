@@ -115,8 +115,30 @@ const heroPreloadSrcset = heroImage ? optimizeImageSrcset(heroImage, [750, 1080,
       </script>
     </>
   )}
+  {config.analytics.gtm && (
+    <>
+      {/* Google Tag Manager (Atlantis Tours only — brand-gated via config.analytics.gtm).
+          Placed after the Consent Mode v2 default above so GTM-fired tags inherit consent.
+          The container is currently EMPTY. If FareHarbor later adds a GA4 tag for
+          G-YE21ZWJNY7 inside GTM, remove the direct gtag('config') above to avoid
+          double-counting the same Measurement ID. */}
+      <script define:vars={{ gtmId: config.analytics.gtm }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    </>
+  )}
 </head>
 <body>
+  {config.analytics.gtm && (
+    <noscript>
+      <iframe src={`https://www.googletagmanager.com/ns.html?id=${config.analytics.gtm}`}
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+  )}
   <slot name="header" />
   <main>
     <slot />

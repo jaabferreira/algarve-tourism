@@ -25,6 +25,7 @@ export const config: BrandConfig = {
   },
   analytics: {
     gtag: "G-YE21ZWJNY7",
+    gtm: "GTM-MV4BLDF2",
   },
   defaultLocale: "en",
   locales: ["en", "pt", "es", "fr"],
