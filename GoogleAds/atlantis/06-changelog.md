@@ -6,6 +6,16 @@ Reverse-chronological log of every change made to the Atlantis Tours Google Ads 
 
 ---
 
+## 2026-06-09 — On-page punch-list: per-tour FAQs + schema, comparison post, title cleanup
+
+**What:** Shipped the net-new on-page items from the FareHarbor June SEO report (after a GSC re-check confirmed the report's headline "−26% organic" was a Semrush-estimate artifact, not real). On the 3 Benagil/yacht landing pages (`pk 717720` speedboat, `720028` private Cranchi yacht, `717754` sail yacht): added hand-written FAQ sections with **FAQPage** JSON-LD (new `tour-faqs.ts` + render in `tours/[slug].astro`). Published a decision-stage comparison post **"Benagil Speed Boat vs Private Yacht"** (`/en/blog/benagil-speedboat-vs-yacht/`), wired into the "Plan your trip" block on all 3 tour pages and into the Benagil pillar's FAQ. Dropped the boat model **"Cranchi"** from the `720028` SEO `<title>` (all 4 locales), leading with search intent + Portimão. EN-first; PT/ES/FR FAQ/post translations are a later pass. Not yet deployed (CF Pages deploys from `master`; this is on `feat/atlantis-content-hub`).
+
+**Why:** Strengthen non-brand "Benagil" relevance and give paid + organic visitors decision-stage content on the landing pages themselves. The verified bottleneck remains off-page authority (separate `seo-offpage` workstream); these are the on-page gaps that were genuinely still open after the May hub launch. Cleaner SERP titles improve relevance signaling on the ad destinations.
+
+**Expected effect:** FAQ rich-result eligibility on the 3 landing pages (extra SERP real estate); better Quality Score landing-page-relevance signals; more internal linking around the decision ("which Benagil boat"). No paid-campaign settings changed — this is a landing-page content change only.
+
+**Verify on/after:** 2026-07-07 — GSC Rich Results / Enhancements show FAQPage eligibility on the 3 tour pages; comparison post earning impressions for "speed boat vs private yacht / which Benagil tour" queries; landing-page CTR/ranking hold or improve.
+
 ## 2026-05-22 — Cookie consent + Google Consent Mode v2 shipped on both sites
 
 **What:** Added a custom cookie-consent banner wired to Google Consent Mode v2 across both sites (shared `CookieConsent` component). `analytics_storage`, `ad_storage`, `ad_user_data`, and `ad_personalization` now default to **denied** and only flip to `granted` when the visitor accepts. The banner offers Accept all / Reject all / Customize; the choice persists in the `aty_consent` cookie (180 days); a footer "Cookie settings" link reopens it.
