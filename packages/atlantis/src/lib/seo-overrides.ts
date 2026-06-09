@@ -71,22 +71,22 @@ const OVERRIDES: Record<number, Partial<Record<Locale, TourSeoOverride>>> = {
   // 720028 — Cranchi Yacht Cruise to the Benagil Caves (private motor-yacht charter)
   720028: {
     en: {
-      title: "Private Cranchi Yacht Cruise to the Benagil Caves",
+      title: "Private Yacht Cruise to the Benagil Caves from Portimão",
       description:
         "Private Cranchi motor-yacht charter from Portimão to the Benagil caves — swim stops, golden cliffs, your group only. Skipper and drinks included.",
     },
     pt: {
-      title: "Cruzeiro Privado de Iate Cranchi às Grutas de Benagil",
+      title: "Cruzeiro Privado de Iate às Grutas de Benagil — Portimão",
       description:
         "Iate a motor Cranchi privado, de Portimão até às grutas de Benagil — paragens para nadar, falésias douradas, só o seu grupo. Bebidas incluídas.",
     },
     es: {
-      title: "Crucero Privado en Yate Cranchi a las Cuevas de Benagil",
+      title: "Crucero Privado en Yate a las Cuevas de Benagil — Portimão",
       description:
         "Yate a motor Cranchi privado, de Portimão a las cuevas de Benagil — paradas para nadar, acantilados dorados, solo tu grupo. Patrón y bebidas incluidos.",
     },
     fr: {
-      title: "Croisière Privée en Yacht Cranchi aux Grottes de Benagil",
+      title: "Croisière Privée en Yacht aux Grottes de Benagil — Portimão",
       description:
         "Yacht à moteur Cranchi privé, de Portimão aux grottes de Benagil — pauses baignade, falaises dorées, votre groupe seul. Skipper et boissons inclus.",
     },

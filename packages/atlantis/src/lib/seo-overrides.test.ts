@@ -37,6 +37,14 @@ describe("getTourSeoOverride()", () => {
     }
   });
 
+  it("720028 titles drop the boat model 'Cranchi' and include Portimão", () => {
+    for (const loc of ALL_LOCALES) {
+      const title = getTourSeoOverride(720028, loc)?.title ?? "";
+      expect(title, `loc=${loc}`).not.toMatch(/Cranchi/i);
+      expect(title, `loc=${loc}`).toMatch(/Portim[ãa]o/);
+    }
+  });
+
   it("keeps every configured description within the meta-description limit", () => {
     for (const pk of MONEY_PAGE_PKS) {
       for (const loc of ALL_LOCALES) {
