@@ -21,6 +21,14 @@ describe("getTourRelatedGuides", () => {
     expect(getTourRelatedGuides(999999)).toEqual([]);
   });
 
+  it("surfaces the speedboat-vs-yacht comparison on all three Benagil money pages", () => {
+    for (const pk of [717720, 720028, 717754]) {
+      expect(getTourRelatedGuides(pk), `pk=${pk}`).toContain(
+        "benagil-speedboat-vs-yacht",
+      );
+    }
+  });
+
   it("every configured tour lists 1–6 unique non-empty keys and includes the pillar where Benagil-related", () => {
     for (const pk of TOUR_GUIDE_PKS) {
       const keys = getTourRelatedGuides(pk);

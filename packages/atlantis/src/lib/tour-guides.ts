@@ -20,6 +20,7 @@ const GUIDES_BY_PK: Record<number, string[]> = {
     "can-you-swim-benagil",
     "best-time-benagil",
     "dolphin-watching-algarve",
+    "benagil-speedboat-vs-yacht",
   ],
   // Cranchi Yacht Cruise to the Benagil Caves (private)
   720028: [
@@ -27,12 +28,14 @@ const GUIDES_BY_PK: Record<number, string[]> = {
     "benagil-vs-other-caves",
     "sunset-cruises-guide",
     "best-time-benagil",
+    "benagil-speedboat-vs-yacht",
   ],
   // Luxury Sail Yacht Cruise
   717754: [
     "sunset-cruises-guide",
     "algarve-spring-secret",
     "what-to-pack-boat-tour",
+    "benagil-speedboat-vs-yacht",
   ],
   // Reef Fishing Tour
   718024: [
