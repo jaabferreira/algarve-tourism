@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { Locale, NormalizedItem } from "@algarve-tourism/shared";
-import { LOCALES, t, buildBreadcrumbList, buildFHEmbedUrl, parseDescription, formatPrice, buildVideoObject, truncateAtWord, optimizeImageUrl } from "@algarve-tourism/shared";
+import { LOCALES, t, buildBreadcrumbList, buildFHEmbedUrl, parseDescription, formatPrice, buildVideoObject, truncateAtWord, optimizeImageUrl, buildFAQPage } from "@algarve-tourism/shared";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "@algarve-tourism/shared/components/Header.astro";
 import Footer from "@algarve-tourism/shared/components/Footer.astro";
@@ -13,6 +13,7 @@ import WhatsAppButton from "@algarve-tourism/shared/components/WhatsAppButton.as
 import MeetingPointMap from "@algarve-tourism/shared/components/MeetingPointMap.astro";
 import TrustBar from "@algarve-tourism/shared/components/TrustBar.astro";
 import ReviewsGrid from "@algarve-tourism/shared/components/ReviewsGrid.astro";
+import FAQ from "@algarve-tourism/shared/components/FAQ.astro";
 import VideoLightbox from "@algarve-tourism/shared/components/VideoLightbox.astro";
 import { config } from "../../../config.js";
 import { loadItems, getVariants } from "../../../data.js";
@@ -21,6 +22,7 @@ import { getTrustItems } from "../../../lib/trust-items.js";
 import { getTourVideo } from "../../../lib/videos.js";
 import { getTourSeoOverride } from "../../../lib/seo-overrides.js";
 import { getTourRelatedGuides } from "../../../lib/tour-guides.js";
+import { getTourFaqs } from "../../../lib/tour-faqs.js";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => {
@@ -41,6 +43,8 @@ const relatedItems = allItems.filter((i) => i.pk !== item.pk).slice(0, 3);
 const parsed = parseDescription(item.description_html);
 
 const seoOverride = getTourSeoOverride(item.pk, locale);
+
+const faqs = getTourFaqs(item.pk, locale);
 
 // "Plan your trip" — guide posts to surface for this tour. tour-guides.ts returns
 // translationKeys (locale-independent); we match each against bp.data.translationKey
@@ -137,6 +141,9 @@ if (tourVideo?.youtubeId && tourVideo.youtubeMetadata) {
       ...tourVideo.youtubeMetadata,
     }),
   );
+}
+if (faqs.length > 0) {
+  structuredData.push(buildFAQPage(faqs));
 }
 
 const fhUrl = buildFHEmbedUrl({
@@ -276,6 +283,12 @@ for (const loc of config.locales as Locale[]) {
           <section>
             <h3>{t(locale, "product.cancellation")}</h3>
             <div set:html={item.cancellation_policy_html} />
+          </section>
+        )}
+        {faqs.length > 0 && (
+          <section>
+            <h2>{t(locale, "product.faq")}</h2>
+            <FAQ items={faqs} />
           </section>
         )}
       </div>
