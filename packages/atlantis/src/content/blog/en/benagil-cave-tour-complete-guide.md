@@ -49,6 +49,14 @@ faqs:
   - question: "Should I book direct or through Viator or GetYourGuide?"
     answer: >
       Book direct. OTAs like Viator, GetYourGuide, and Civitatis resell the same tours with a 20 to 25 percent commission baked into the price. Direct booking gives you the operator's WhatsApp for weather updates, faster rescheduling when conditions shift, and no third-party booking fee on top. The boat, the skipper, and the route are identical either way — you're just paying less and getting a better channel to reach the people running the trip.
+  - question: "Should I do a shared speedboat or a private yacht tour to Benagil?"
+    answer: >
+      If the cave is your priority and you want the cheapest fast option, the shared
+      speedboat (from €20pp) enters the cave and takes about two hours. If you want
+      your group only, swim stops, and a relaxed pace, go private — the Cranchi motor
+      yacht also enters the cave, while the sail yacht stays outside (mast clearance)
+      for a calm cruise. We break it all down in our
+      <a href="/en/blog/benagil-speedboat-vs-yacht/">speed boat vs private yacht guide</a>.
 ---
 
 The Algar de Benagil is the single most photographed landmark on Portugal's southern coast, and the question we get most from guests is some version of "tell me honestly — how do I actually visit it?" We run the small speedboat from Portimão and the Cranchi motor yacht that clears the arch, so this guide is written from inside the cave, not from a desk. The honest answer is that getting there is straightforward; understanding what the cave has become since the 2023 access rules is where most first-time visitors get tripped up.
