@@ -16,7 +16,7 @@ interface Props {
 const { item, companyShortname, domain, locale, siteSource, variants = [] } = Astro.props;
 
 const fhUrl = (pk: number) =>
-  buildFHEmbedUrl({ companyShortname, siteSource, domain, itemPk: pk });
+  buildFHEmbedUrl({ companyShortname, siteSource, domain, itemPk: pk, language: locale });
 
 const allOptions = variants.length > 0 ? [item, ...variants] : [];
 ---

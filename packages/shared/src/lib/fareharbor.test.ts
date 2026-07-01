@@ -134,4 +134,27 @@ describe("buildFHEmbedUrl()", () => {
 
     expect(url).not.toContain("cf-");
   });
+
+  it("appends the language param when a locale is given so the modal matches the page", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "atlantis-tours",
+      domain: "atlantistours.pt",
+      itemPk: 717720,
+      language: "es",
+    });
+
+    expect(url).toContain("&language=es");
+  });
+
+  it("omits the language param when no locale is given (FareHarbor browser auto-detect)", () => {
+    const url = buildFHEmbedUrl({
+      companyShortname: "atlantistours",
+      siteSource: "atlantis-tours",
+      domain: "atlantistours.pt",
+      itemPk: 717720,
+    });
+
+    expect(url).not.toContain("language=");
+  });
 });

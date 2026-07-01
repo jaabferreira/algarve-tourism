@@ -33,6 +33,13 @@ interface FHEmbedUrlOptions {
   itemPk?: number;
   /** FareHarbor flow id, for company-wide embeds (the header "Book now" CTA). */
   flow?: string;
+  /**
+   * Page locale as a FareHarbor language code (e.g. `es`, `fr`). When set, the
+   * lightframe booking modal opens in this language to match the localized page
+   * it was launched from. The customer can still switch language in FareHarbor's
+   * own menu, so this sets the default rather than locking it.
+   */
+  language?: string;
 }
 
 /**
@@ -47,6 +54,7 @@ export function buildFHEmbedUrl({
   domain,
   itemPk,
   flow,
+  language,
 }: FHEmbedUrlOptions): string {
   const path = itemPk !== undefined ? `items/${itemPk}/` : "";
 
@@ -56,6 +64,7 @@ export function buildFHEmbedUrl({
   params.set("asn", FH_AFFILIATE_SHORTNAME[siteSource]);
   params.set("full-items", "yes");
   if (flow !== undefined) params.set("flow", flow);
+  if (language !== undefined) params.set("language", language);
 
   return `https://fareharbor.com/embeds/book/${companyShortname}/${path}?${params}`;
 }
