@@ -10,7 +10,7 @@ const atlantisShortname = process.env.FH_ATLANTIS_SHORTNAME;
 const ayShortname = process.env.FH_AY_SHORTNAME;
 
 // Languages available in FareHarbor. PT is the default (account language).
-const FH_LANGUAGES = ["pt", "en"] as const;
+const FH_LANGUAGES = ["pt", "en", "es", "fr"] as const;
 
 if (!appKey || !userKey) {
   console.error("Missing FH_APP_KEY or FH_USER_KEY environment variables");

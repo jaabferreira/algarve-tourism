@@ -7,6 +7,8 @@ import { config } from "./config.js";
 const FH_LOCALE_MAP: Record<string, string> = {
   en: "en",
   pt: "pt",
+  es: "es",
+  fr: "fr",
 };
 
 function findDataFile(locale: Locale): string | null {
