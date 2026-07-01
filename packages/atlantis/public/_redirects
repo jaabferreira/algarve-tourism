@@ -67,3 +67,13 @@
 /en/contact /en/contact/ 301
 /pt/contact /pt/contact/ 301
 /pt /pt/ 301
+
+# ES/FR tour slugs localized (2026-07-01) — old EN-fallback slug → native slug
+/es/tours/benagil-caves-speed-boat-tour/ /es/tours/circuito-de-cuevas-de-benagil/ 301
+/fr/tours/benagil-caves-speed-boat-tour/ /fr/tours/circuit-des-grottes-jusqua-benagil/ 301
+/es/tours/private-sail-yacht-cruise/ /es/tours/crucero-privado-en-yate-de-vela/ 301
+/fr/tours/private-sail-yacht-cruise/ /fr/tours/croisiere-privee-en-yacht-a-voile/ 301
+/es/tours/private-yacht-cruise-to-the-benagil-caves/ /es/tours/crucero-privado-en-yate-a-las-cuevas-de-benagil/ 301
+/fr/tours/private-yacht-cruise-to-the-benagil-caves/ /fr/tours/croisiere-privee-en-yacht-vers-les-grottes-de-benagil/ 301
+/es/tours/reef-fishing-tour/ /es/tours/pesca-de-fondo/ 301
+/fr/tours/reef-fishing-tour/ /fr/tours/peche-au-fond/ 301
