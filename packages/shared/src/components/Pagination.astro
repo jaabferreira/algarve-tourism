@@ -22,7 +22,7 @@ function getPageUrl(page: number): string {
 ---
 
 {totalPages > 1 && (
-  <nav class="pagination" aria-label="Pagination" data-brand={brand}>
+  <nav class="pagination" aria-label={t(locale, "a11y.pagination")} data-brand={brand}>
     {prevPage !== null ? (
       <a href={getPageUrl(prevPage)} class="pagination__link pagination__prev">
         &larr; {t(locale, "blog.previous")}

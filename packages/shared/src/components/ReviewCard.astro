@@ -1,14 +1,26 @@
 ---
-import type { ManualReview, Brand } from "../types.js";
+import type { ManualReview, Brand, Locale } from "../types.js";
+import type { TranslationKey } from "../i18n/types.js";
+import { t } from "../i18n/index.js";
 
 interface Props {
   review: ManualReview;
   brand: Brand;
+  locale: Locale;
 }
 
-const { review, brand } = Astro.props;
+const { review, brand, locale } = Astro.props;
 const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
 const sourceLabel = review.source === "tripadvisor" ? "TripAdvisor" : review.source === "google" ? "Google" : "";
+
+// Reviewer-type origins are platform-authored descriptors we localize; geographic
+// origins (e.g. "North Sydney, Australia") are proper nouns and fall through unchanged.
+const ORIGIN_KEYS: Record<string, TranslationKey> = {
+  "Google Local Guide": "reviews.origin_google_local_guide",
+  "Google Reviewer": "reviews.origin_google_reviewer",
+  "TripAdvisor Reviewer": "reviews.origin_tripadvisor_reviewer",
+};
+const originText = ORIGIN_KEYS[review.origin] ? t(locale, ORIGIN_KEYS[review.origin]) : review.origin;
 ---
 
 <div class="review-card" data-brand={brand} data-category={review.tourCategory || ""}>
@@ -19,8 +31,8 @@ const sourceLabel = review.source === "tripadvisor" ? "TripAdvisor" : review.sou
     <div class="review-card__author-info">
       <span class="review-card__name">{review.author}</span>
       <span class="review-card__origin">
-        {review.origin}
-        {review.tourCategory && <> · {review.tourCategory === "benagil" ? "Benagil Tour" : review.tourCategory === "yacht" ? "Yacht Cruise" : review.tourCategory === "fishing" ? "Fishing Trip" : review.tourCategory}</>}
+        {originText}
+        {review.tourCategory && <> · {review.tourCategory === "benagil" ? t(locale, "reviews.tour_benagil") : review.tourCategory === "yacht" ? t(locale, "reviews.tour_yacht") : review.tourCategory === "fishing" ? t(locale, "reviews.tour_fishing") : review.tourCategory}</>}
       </span>
     </div>
     {sourceLabel && (

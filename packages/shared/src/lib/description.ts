@@ -8,7 +8,8 @@ export interface ParsedDescription {
   disclaimers?: string;
 }
 
-const LABELS = [
+// Labels whose content we render on the tour page.
+const EMIT_LABELS = [
   "duration",
   "accessibility",
   "description",
@@ -18,7 +19,35 @@ const LABELS = [
   "disclaimers",
 ] as const;
 
-type Label = (typeof LABELS)[number];
+type Label = (typeof EMIT_LABELS)[number];
+
+// FareHarbor emits extra structural "key: value" fields we do NOT render
+// (max_age, group_size, highlights, check-in notes, …). They must still be
+// recognized as section boundaries, otherwise their raw "key: value" text
+// bleeds into an adjacent rendered section (e.g. `duration` or `itinerary`) and
+// surfaces an untranslated English field label to visitors — most visibly on
+// the localized /es/ and /fr/ pages. These are FareHarbor field identifiers
+// (language-independent), so the list is the same for every locale. We match an
+// explicit key list rather than a generic `word:` pattern so that legitimate
+// colons inside prose or menus (e.g. "Bebidas:", "Coste:") are never mistaken
+// for a boundary.
+const NON_EMIT_BOUNDARY_KEYS = [
+  "max_age",
+  "min_age",
+  "group_size",
+  "meeting_point",
+  "highlights",
+  "check_in_details",
+  "special_requirements",
+  "cancellation_summary",
+] as const;
+
+const BOUNDARY_KEYS: readonly string[] = [
+  ...EMIT_LABELS,
+  ...NON_EMIT_BOUNDARY_KEYS,
+];
+
+const EMIT_SET: ReadonlySet<string> = new Set(EMIT_LABELS);
 
 export function parseDescription(html: string): ParsedDescription {
   const text = html
@@ -32,16 +61,16 @@ export function parseDescription(html: string): ParsedDescription {
     .replace(/&nbsp;/g, " ");
 
   const positions: Array<{
-    label: Label;
+    key: string;
     matchStart: number;
     contentStart: number;
   }> = [];
 
-  for (const label of LABELS) {
-    const match = new RegExp(`(?:^|\n)\\s*${label}:\\s*`, "i").exec(text);
+  for (const key of BOUNDARY_KEYS) {
+    const match = new RegExp(`(?:^|\n)\\s*${key}:\\s*`, "i").exec(text);
     if (match) {
       positions.push({
-        label,
+        key,
         matchStart: match.index,
         contentStart: match.index + match[0].length,
       });
@@ -53,9 +82,14 @@ export function parseDescription(html: string): ParsedDescription {
   const result: ParsedDescription = {};
 
   for (let i = 0; i < positions.length; i++) {
-    const { label, contentStart } = positions[i];
+    const { key, contentStart } = positions[i];
     const end =
       i + 1 < positions.length ? positions[i + 1].matchStart : text.length;
+
+    // Non-emit keys only terminate the previous section; their content is dropped.
+    if (!EMIT_SET.has(key)) continue;
+    const label = key as Label;
+
     const raw = text.slice(contentStart, end).trim();
 
     if (label === "itinerary") {

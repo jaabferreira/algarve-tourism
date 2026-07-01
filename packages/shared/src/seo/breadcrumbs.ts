@@ -26,7 +26,7 @@ export interface PostBreadcrumbInput {
  */
 export function buildPostBreadcrumb(input: PostBreadcrumbInput): Crumb[] {
   const { locale, postTitle, postSlug, isPillar, pillar, category } = input;
-  const crumbs: Crumb[] = [{ name: "Home", path: "/" }];
+  const crumbs: Crumb[] = [{ name: t(locale, "nav.home"), path: "/" }];
 
   if (isPillar) {
     crumbs.push({ name: t(locale, "nav.blog"), path: "/blog/" });

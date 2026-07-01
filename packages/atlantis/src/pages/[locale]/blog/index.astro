@@ -37,7 +37,7 @@ const pagePosts = posts.slice(0, POSTS_PER_PAGE);
 const structuredData = [
   buildCollectionPage(config, locale, "/blog/", t(locale, "nav.blog"), t(locale, "blog.meta_description")),
   buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
+    { name: t(locale, "nav.home"), path: "/" },
     { name: t(locale, "nav.blog"), path: "/blog/" },
   ]),
 ];

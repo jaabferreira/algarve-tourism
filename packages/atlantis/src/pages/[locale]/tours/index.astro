@@ -29,7 +29,7 @@ const categorizedSections = tourCategories
 const structuredData = [
   buildItemList(config, locale, items, t(locale, "nav.tours")),
   buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
+    { name: t(locale, "nav.home"), path: "/" },
     { name: t(locale, "nav.tours"), path: "/tours/" },
   ]),
 ];

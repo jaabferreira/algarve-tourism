@@ -139,7 +139,7 @@ const formattedDate = new Date(post.data.date).toLocaleDateString(locale, {
 
   <section class="post-hero">
     <div class="post-hero__inner container">
-      <nav class="post-hero__breadcrumbs" aria-label="Breadcrumb">
+      <nav class="post-hero__breadcrumbs" aria-label={t(locale, "a11y.breadcrumb")}>
         {breadcrumbCrumbs.map((crumb, i) => (
           <>
             {i > 0 && <span class="post-hero__sep">/</span>}

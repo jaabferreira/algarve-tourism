@@ -182,7 +182,7 @@ const shareUrl = `https://www.${config.domain}${path}`;
   </section>
 
   <div class="lightbox" id="menu-lightbox" aria-hidden="true">
-    <button class="lightbox__close" aria-label="Close">&times;</button>
+    <button class="lightbox__close" aria-label={t(locale, "a11y.close")}>&times;</button>
     <div class="lightbox__content">
       <img class="lightbox__image" src={menuImage} alt="Allgarbe restaurant menu" />
     </div>

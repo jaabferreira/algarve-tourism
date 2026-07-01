@@ -1,6 +1,7 @@
 ---
 import type { NormalizedItem, Locale, Brand } from "../types.js";
 import { t } from "../i18n/index.js";
+import type { TranslationKey } from "../i18n/types.js";
 import { optimizeImageUrl, optimizeImageSrcset } from "../lib/images.js";
 import PriceDisplay from "./PriceDisplay.astro";
 import AmbientVideo from "./AmbientVideo.astro";
@@ -54,7 +55,7 @@ const { item, locale, brand, videoSrc } = Astro.props;
     {item.images.length > 1 && (
       <div class="product-hero__thumbs">
         {item.images.slice(1, 5).map((img, i) => (
-          <img src={optimizeImageUrl(img.url, 400)} alt={`${item.name} - photo ${i + 2}`} loading="lazy" width="200" height="150" data-gallery-index={i + 1} />
+          <img src={optimizeImageUrl(img.url, 400)} alt={`${item.name} - ${t(locale, "a11y.photo")} ${i + 2}`} loading="lazy" width="200" height="150" data-gallery-index={i + 1} />
         ))}
       </div>
     )}
@@ -63,11 +64,11 @@ const { item, locale, brand, videoSrc } = Astro.props;
   {/* Lightbox overlay */}
   {item.images.length > 0 && (
     <div class="lightbox" id="gallery-lightbox" aria-hidden="true">
-      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <button class="lightbox__close" aria-label={t(locale, "a11y.close")}>&times;</button>
       {item.images.length > 1 && (
         <>
-          <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous">&lsaquo;</button>
-          <button class="lightbox__nav lightbox__nav--next" aria-label="Next">&rsaquo;</button>
+          <button class="lightbox__nav lightbox__nav--prev" aria-label={t(locale, "a11y.previous")}>&lsaquo;</button>
+          <button class="lightbox__nav lightbox__nav--next" aria-label={t(locale, "a11y.next")}>&rsaquo;</button>
         </>
       )}
       <div class="lightbox__content">
@@ -78,7 +79,7 @@ const { item, locale, brand, videoSrc } = Astro.props;
   )}
 
   <div class="product-hero__info">
-    <span class="product-hero__category">{item.category}</span>
+    <span class="product-hero__category">{t(locale, `category.${item.category}` as TranslationKey)}</span>
     <h1>{item.name}</h1>
     {item.headline && <p class="product-hero__headline">{item.headline}</p>}
     <PriceDisplay cents={item.price_from_including_tax} locale={locale} size="lg" />
@@ -294,7 +295,7 @@ const { item, locale, brand, videoSrc } = Astro.props;
   }
 </style>
 
-<script define:vars={{ images: item.images.map(img => ({ url: optimizeImageUrl(img.url, 1920) })), itemName: item.name }}>
+<script define:vars={{ images: item.images.map(img => ({ url: optimizeImageUrl(img.url, 1920) })), itemName: item.name, photoLabel: t(locale, "a11y.photo") }}>
   document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('gallery-lightbox');
     if (!lightbox || !images.length) return;
@@ -309,7 +310,7 @@ const { item, locale, brand, videoSrc } = Astro.props;
     function show(index) {
       current = (index + images.length) % images.length;
       lbImage.src = images[current].url;
-      lbImage.alt = `${itemName} - photo ${current + 1}`;
+      lbImage.alt = `${itemName} - ${photoLabel} ${current + 1}`;
       if (counter) counter.textContent = `${current + 1} / ${images.length}`;
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';

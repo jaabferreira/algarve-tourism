@@ -1,11 +1,11 @@
 ---
-import type { ManualReview, Brand } from "../types.js";
+import type { ManualReview, Brand, Locale } from "../types.js";
 import ReviewCard from "./ReviewCard.astro";
 
 interface Props {
   reviews: ManualReview[];
   brand: Brand;
-  locale: string;
+  locale: Locale;
 }
 
 const { reviews, brand, locale } = Astro.props;
@@ -14,7 +14,7 @@ const { reviews, brand, locale } = Astro.props;
 <div class="reviews-grid" data-reveal-stagger>
   {reviews.map((review, i) => (
     <div class="reviews-grid__item" data-reveal style={`--reveal-delay: ${i * 40}ms`}>
-      <ReviewCard review={review} brand={brand} />
+      <ReviewCard review={review} brand={brand} locale={locale} />
     </div>
   ))}
 </div>

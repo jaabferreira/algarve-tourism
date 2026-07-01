@@ -1,13 +1,16 @@
 ---
 import { optimizeImageUrl } from "../lib/images.js";
+import { t } from "../i18n/index.js";
+import type { Locale } from "../types.js";
 
 interface Props {
   youtubeId: string;
   posterImage?: string;
   label: string;
+  locale: Locale;
 }
 
-const { youtubeId, posterImage, label } = Astro.props;
+const { youtubeId, posterImage, label, locale } = Astro.props;
 
 const poster = posterImage
   ? optimizeImageUrl(posterImage, 1200, 80)
@@ -42,7 +45,7 @@ const lightboxId = `vlb-${youtubeId}`;
 </button>
 
 <div class="video-lightbox" id={lightboxId} aria-hidden="true" role="dialog" aria-modal="true">
-  <button class="video-lightbox__close" aria-label="Close">&times;</button>
+  <button class="video-lightbox__close" aria-label={t(locale, "a11y.close")}>&times;</button>
   <div class="video-lightbox__content"></div>
 </div>
 

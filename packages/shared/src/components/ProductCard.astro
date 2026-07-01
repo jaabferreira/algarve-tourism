@@ -2,6 +2,7 @@
 import type { NormalizedItem, Brand, Locale } from "../types.js";
 import { getLocalePath } from "../config.js";
 import { t } from "../i18n/index.js";
+import type { TranslationKey } from "../i18n/types.js";
 import { formatPrice } from "../lib/prices.js";
 import { optimizeImageUrl } from "../lib/images.js";
 
@@ -31,7 +32,7 @@ const imgSrc = optimizeImageUrl(rawSrc, 640);
         height="200"
       />
       {item.category && (
-        <span class="card__badge">{item.category}</span>
+        <span class="card__badge">{t(locale, `category.${item.category}` as TranslationKey)}</span>
       )}
     </div>
     <div class="card__body">
@@ -58,7 +59,7 @@ const imgSrc = optimizeImageUrl(rawSrc, 640);
       />
       <div class="card__scrim">
         {item.category && (
-          <span class="card__label">{item.category}</span>
+          <span class="card__label">{t(locale, `category.${item.category}` as TranslationKey)}</span>
         )}
         <h3 class="card__title card__title--featured">{item.name}</h3>
         <span class="card__price card__price--featured">{priceLabel}</span>
@@ -77,7 +78,7 @@ const imgSrc = optimizeImageUrl(rawSrc, 640);
         height="220"
       />
       {item.category && (
-        <span class="card__label">{item.category}</span>
+        <span class="card__label">{t(locale, `category.${item.category}` as TranslationKey)}</span>
       )}
     </div>
     <div class="card__body">

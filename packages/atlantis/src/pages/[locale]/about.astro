@@ -78,7 +78,7 @@ const faqTitle = locale === "pt" ? "Perguntas <em>Frequentes</em>" : locale === 
 const structuredData = [
   buildLocalBusiness(config),
   buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
+    { name: t(locale, "nav.home"), path: "/" },
     { name: t(locale, "nav.about"), path: "/about/" },
   ]),
   buildFAQPage(faqItems),
@@ -143,7 +143,7 @@ const structuredData = [
   <PageFAQ label={faqLabel} title={faqTitle} items={faqItems} />
 
   <Footer slot="footer" config={config} locale={locale} />
-  <WhatsAppButton phone={config.social.whatsapp} />
+  <WhatsAppButton phone={config.social.whatsapp} locale={locale} />
 </Layout>
 
 <style>

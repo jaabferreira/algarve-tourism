@@ -31,7 +31,7 @@ const posts = allPosts
 const structuredData = [
   buildCollectionPage(config, locale, `/blog/category/${category}/`, categoryLabel, `${categoryLabel} — ${config.name}`),
   buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
+    { name: t(locale, "nav.home"), path: "/" },
     { name: t(locale, "nav.blog"), path: "/blog/" },
     { name: categoryLabel, path: `/blog/category/${category}/` },
   ]),
@@ -50,7 +50,7 @@ const structuredData = [
 
   <section class="taxonomy-hero">
     <div class="taxonomy-hero__inner container">
-      <nav class="taxonomy-hero__breadcrumbs" aria-label="Breadcrumb">
+      <nav class="taxonomy-hero__breadcrumbs" aria-label={t(locale, "a11y.breadcrumb")}>
         <a href={getLocalePath(locale, "/blog/")}>{t(locale, "nav.blog")}</a>
         <span class="taxonomy-hero__sep">/</span>
         <span>{t(locale, "blog.category")}</span>

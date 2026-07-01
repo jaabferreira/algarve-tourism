@@ -27,7 +27,7 @@ const items = loadItems(locale).filter((item) => item.category === category);
 const structuredData = [
   buildItemList(config, locale, items, categoryLabel),
   buildBreadcrumbList(config, locale, [
-    { name: "Home", path: "/" },
+    { name: t(locale, "nav.home"), path: "/" },
     { name: t(locale, "nav.tours"), path: "/tours/" },
     { name: categoryLabel, path: `/tours/${category}/` },
   ]),
